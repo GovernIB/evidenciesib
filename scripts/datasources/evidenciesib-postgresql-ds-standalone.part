@@ -1,0 +1,13 @@
+﻿<datasources>
+    ...
+    <datasource jndi-name="java:jboss/datasources/evidenciesibDS" pool-name="evidenciesibDS" enabled="true"
+                use-java-context="true">
+        <connection-url>jdbc:postgresql://localhost:5432/evidenciesib</connection-url>
+        <driver>postgresql</driver>
+        <security>
+            <user-name>evidenciesib</user-name>
+            <password>evidenciesib</password>
+        </security>
+    </datasource>
+    ...
+</datasources>

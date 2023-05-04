@@ -22,3 +22,22 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+/rungenapp/evi_evidenciesib_SCHEMA_BASE.sql
+/rungenapp/lastconfig.properties
+/version-ruleset.xml
+
+# Eclipse
+.project
+.classpath
+.settings
+
+/evidenciesib-model/target
+/evidenciesib-persistence/target
+/evidenciesib-back/target
+/evidenciesib-api-externa/target
+/evidenciesib-api-interna/target
+/evidenciesib-commons/target
+/evidenciesib-ejb/target
+/evidenciesib-ear/target
+/evidenciesib-api-interna-client/target
+/evidenciesib-api-externa-client/target
