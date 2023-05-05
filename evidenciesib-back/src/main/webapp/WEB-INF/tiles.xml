@@ -73,6 +73,17 @@
     <definition name="option2User" extends="user">
         <put-attribute name="contingut" value="/WEB-INF/jsp/user/user.jsp" />
     </definition>
+    
+    
+    <definition name="evidenciaFormUser" extends="user">
+        <put-attribute name="titol" value="evidencia.evidencia" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/evidenciaForm.jsp" />
+    </definition>
+    
+    <definition name="evidenciaListUser" extends="user">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/evidenciaList.jsp" />
+    </definition>
+    
 
     <!--  ===========  ADMIN  ================== -->
         
@@ -87,6 +98,15 @@
      
     <definition name="option2Admin" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/admin/admin.jsp" />
+    </definition>
+
+    <definition name="pluginFormAdmin" extends="admin">
+        <put-attribute name="titol" value="plugin.plugin" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginForm.jsp" />
+    </definition>
+    
+    <definition name="pluginListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginList.jsp" />
     </definition>
     
     <!--  ===========  DESENVOLUPAMENT ================== -->

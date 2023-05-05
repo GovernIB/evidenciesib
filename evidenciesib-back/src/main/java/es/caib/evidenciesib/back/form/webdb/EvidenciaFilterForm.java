@@ -3,6 +3,7 @@ package es.caib.evidenciesib.back.form.webdb;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -53,300 +54,322 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
-  private java.lang.String personanom;
+  private java.lang.String personaNom;
 
-  public java.lang.String getPersonanom() {
-    return this.personanom;
+  public java.lang.String getPersonaNom() {
+    return this.personaNom;
   }
 
-  public void setPersonanom(java.lang.String personanom) {
-    this.personanom = personanom;
-  }
-
-
-  private java.lang.String personallinatge1;
-
-  public java.lang.String getPersonallinatge1() {
-    return this.personallinatge1;
-  }
-
-  public void setPersonallinatge1(java.lang.String personallinatge1) {
-    this.personallinatge1 = personallinatge1;
+  public void setPersonaNom(java.lang.String personaNom) {
+    this.personaNom = personaNom;
   }
 
 
-  private java.lang.String personallinatge2;
+  private java.lang.String personaLlinatge1;
 
-  public java.lang.String getPersonallinatge2() {
-    return this.personallinatge2;
+  public java.lang.String getPersonaLlinatge1() {
+    return this.personaLlinatge1;
   }
 
-  public void setPersonallinatge2(java.lang.String personallinatge2) {
-    this.personallinatge2 = personallinatge2;
-  }
-
-
-  private java.lang.String personanif;
-
-  public java.lang.String getPersonanif() {
-    return this.personanif;
-  }
-
-  public void setPersonanif(java.lang.String personanif) {
-    this.personanif = personanif;
+  public void setPersonaLlinatge1(java.lang.String personaLlinatge1) {
+    this.personaLlinatge1 = personaLlinatge1;
   }
 
 
-  private java.lang.String documenthash;
+  private java.lang.String personaLlinatge2;
 
-  public java.lang.String getDocumenthash() {
-    return this.documenthash;
+  public java.lang.String getPersonaLlinatge2() {
+    return this.personaLlinatge2;
   }
 
-  public void setDocumenthash(java.lang.String documenthash) {
-    this.documenthash = documenthash;
-  }
-
-
-  private java.lang.Long documentmidaDesde;
-
-  public java.lang.Long getDocumentmidaDesde() {
-    return this.documentmidaDesde;
-  }
-
-  public void setDocumentmidaDesde(java.lang.Long documentmidaDesde) {
-    this.documentmidaDesde = documentmidaDesde;
+  public void setPersonaLlinatge2(java.lang.String personaLlinatge2) {
+    this.personaLlinatge2 = personaLlinatge2;
   }
 
 
-  private java.lang.Long documentmidaFins;
+  private java.lang.String personaNif;
 
-  public java.lang.Long getDocumentmidaFins() {
-    return this.documentmidaFins;
+  public java.lang.String getPersonaNif() {
+    return this.personaNif;
   }
 
-  public void setDocumentmidaFins(java.lang.Long documentmidaFins) {
-    this.documentmidaFins = documentmidaFins;
-  }
-
-
-  private java.sql.Timestamp datainiciDesde;
-
-  public java.sql.Timestamp getDatainiciDesde() {
-    return this.datainiciDesde;
-  }
-
-  public void setDatainiciDesde(java.sql.Timestamp datainiciDesde) {
-    this.datainiciDesde = datainiciDesde;
+  public void setPersonaNif(java.lang.String personaNif) {
+    this.personaNif = personaNif;
   }
 
 
-  private java.sql.Timestamp datainiciFins;
+  private java.lang.String personaEmail;
 
-  public java.sql.Timestamp getDatainiciFins() {
-    return this.datainiciFins;
+  public java.lang.String getPersonaEmail() {
+    return this.personaEmail;
   }
 
-  public void setDatainiciFins(java.sql.Timestamp datainiciFins) {
-    this.datainiciFins = datainiciFins;
-  }
-
-
-  private java.sql.Timestamp datafiDesde;
-
-  public java.sql.Timestamp getDatafiDesde() {
-    return this.datafiDesde;
-  }
-
-  public void setDatafiDesde(java.sql.Timestamp datafiDesde) {
-    this.datafiDesde = datafiDesde;
+  public void setPersonaEmail(java.lang.String personaEmail) {
+    this.personaEmail = personaEmail;
   }
 
 
-  private java.sql.Timestamp datafiFins;
+  private java.lang.String personaMobil;
 
-  public java.sql.Timestamp getDatafiFins() {
-    return this.datafiFins;
+  public java.lang.String getPersonaMobil() {
+    return this.personaMobil;
   }
 
-  public void setDatafiFins(java.sql.Timestamp datafiFins) {
-    this.datafiFins = datafiFins;
-  }
-
-
-  private java.lang.String usuariaplicacio;
-
-  public java.lang.String getUsuariaplicacio() {
-    return this.usuariaplicacio;
-  }
-
-  public void setUsuariaplicacio(java.lang.String usuariaplicacio) {
-    this.usuariaplicacio = usuariaplicacio;
+  public void setPersonaMobil(java.lang.String personaMobil) {
+    this.personaMobil = personaMobil;
   }
 
 
-  private java.lang.String usuaripersona;
+  private java.lang.String documentHash;
 
-  public java.lang.String getUsuaripersona() {
-    return this.usuaripersona;
+  public java.lang.String getDocumentHash() {
+    return this.documentHash;
   }
 
-  public void setUsuaripersona(java.lang.String usuaripersona) {
-    this.usuaripersona = usuaripersona;
-  }
-
-
-  private java.lang.Integer estatcodiDesde;
-
-  public java.lang.Integer getEstatcodiDesde() {
-    return this.estatcodiDesde;
-  }
-
-  public void setEstatcodiDesde(java.lang.Integer estatcodiDesde) {
-    this.estatcodiDesde = estatcodiDesde;
+  public void setDocumentHash(java.lang.String documentHash) {
+    this.documentHash = documentHash;
   }
 
 
-  private java.lang.Integer estatcodiFins;
+  private java.lang.Long documentMidaDesde;
 
-  public java.lang.Integer getEstatcodiFins() {
-    return this.estatcodiFins;
+  public java.lang.Long getDocumentMidaDesde() {
+    return this.documentMidaDesde;
   }
 
-  public void setEstatcodiFins(java.lang.Integer estatcodiFins) {
-    this.estatcodiFins = estatcodiFins;
-  }
-
-
-  private java.lang.String estaterror;
-
-  public java.lang.String getEstaterror() {
-    return this.estaterror;
-  }
-
-  public void setEstaterror(java.lang.String estaterror) {
-    this.estaterror = estaterror;
+  public void setDocumentMidaDesde(java.lang.Long documentMidaDesde) {
+    this.documentMidaDesde = documentMidaDesde;
   }
 
 
-  private java.lang.String estatexcepcio;
+  private java.lang.Long documentMidaFins;
 
-  public java.lang.String getEstatexcepcio() {
-    return this.estatexcepcio;
+  public java.lang.Long getDocumentMidaFins() {
+    return this.documentMidaFins;
   }
 
-  public void setEstatexcepcio(java.lang.String estatexcepcio) {
-    this.estatexcepcio = estatexcepcio;
-  }
-
-
-  private java.lang.String personamobil;
-
-  public java.lang.String getPersonamobil() {
-    return this.personamobil;
-  }
-
-  public void setPersonamobil(java.lang.String personamobil) {
-    this.personamobil = personamobil;
+  public void setDocumentMidaFins(java.lang.Long documentMidaFins) {
+    this.documentMidaFins = documentMidaFins;
   }
 
 
-  private java.lang.Integer logintypeDesde;
+  private java.sql.Timestamp dataIniciDesde;
 
-  public java.lang.Integer getLogintypeDesde() {
-    return this.logintypeDesde;
+  public java.sql.Timestamp getDataIniciDesde() {
+    return this.dataIniciDesde;
   }
 
-  public void setLogintypeDesde(java.lang.Integer logintypeDesde) {
-    this.logintypeDesde = logintypeDesde;
-  }
-
-
-  private java.lang.Integer logintypeFins;
-
-  public java.lang.Integer getLogintypeFins() {
-    return this.logintypeFins;
-  }
-
-  public void setLogintypeFins(java.lang.Integer logintypeFins) {
-    this.logintypeFins = logintypeFins;
+  public void setDataIniciDesde(java.sql.Timestamp dataIniciDesde) {
+    this.dataIniciDesde = dataIniciDesde;
   }
 
 
-  private java.lang.String loginid;
+  private java.sql.Timestamp dataIniciFins;
 
-  public java.lang.String getLoginid() {
-    return this.loginid;
+  public java.sql.Timestamp getDataIniciFins() {
+    return this.dataIniciFins;
   }
 
-  public void setLoginid(java.lang.String loginid) {
-    this.loginid = loginid;
-  }
-
-
-  private java.sql.Timestamp logindataDesde;
-
-  public java.sql.Timestamp getLogindataDesde() {
-    return this.logindataDesde;
-  }
-
-  public void setLogindataDesde(java.sql.Timestamp logindataDesde) {
-    this.logindataDesde = logindataDesde;
+  public void setDataIniciFins(java.sql.Timestamp dataIniciFins) {
+    this.dataIniciFins = dataIniciFins;
   }
 
 
-  private java.sql.Timestamp logindataFins;
+  private java.sql.Timestamp dataFiDesde;
 
-  public java.sql.Timestamp getLogindataFins() {
-    return this.logindataFins;
+  public java.sql.Timestamp getDataFiDesde() {
+    return this.dataFiDesde;
   }
 
-  public void setLogindataFins(java.sql.Timestamp logindataFins) {
-    this.logindataFins = logindataFins;
-  }
-
-
-  private java.lang.String localitzacioip;
-
-  public java.lang.String getLocalitzacioip() {
-    return this.localitzacioip;
-  }
-
-  public void setLocalitzacioip(java.lang.String localitzacioip) {
-    this.localitzacioip = localitzacioip;
+  public void setDataFiDesde(java.sql.Timestamp dataFiDesde) {
+    this.dataFiDesde = dataFiDesde;
   }
 
 
-  private java.lang.String localitzaciocodipostal;
+  private java.sql.Timestamp dataFiFins;
 
-  public java.lang.String getLocalitzaciocodipostal() {
-    return this.localitzaciocodipostal;
+  public java.sql.Timestamp getDataFiFins() {
+    return this.dataFiFins;
   }
 
-  public void setLocalitzaciocodipostal(java.lang.String localitzaciocodipostal) {
-    this.localitzaciocodipostal = localitzaciocodipostal;
-  }
-
-
-  private java.lang.String localitzaciocoordenades;
-
-  public java.lang.String getLocalitzaciocoordenades() {
-    return this.localitzaciocoordenades;
-  }
-
-  public void setLocalitzaciocoordenades(java.lang.String localitzaciocoordenades) {
-    this.localitzaciocoordenades = localitzaciocoordenades;
+  public void setDataFiFins(java.sql.Timestamp dataFiFins) {
+    this.dataFiFins = dataFiFins;
   }
 
 
-  private java.lang.String personaemail;
+  private java.lang.String usuariAplicacio;
 
-  public java.lang.String getPersonaemail() {
-    return this.personaemail;
+  public java.lang.String getUsuariAplicacio() {
+    return this.usuariAplicacio;
   }
 
-  public void setPersonaemail(java.lang.String personaemail) {
-    this.personaemail = personaemail;
+  public void setUsuariAplicacio(java.lang.String usuariAplicacio) {
+    this.usuariAplicacio = usuariAplicacio;
+  }
+
+
+  private java.lang.String usuariPersona;
+
+  public java.lang.String getUsuariPersona() {
+    return this.usuariPersona;
+  }
+
+  public void setUsuariPersona(java.lang.String usuariPersona) {
+    this.usuariPersona = usuariPersona;
+  }
+
+
+  private java.util.List<java.lang.Integer> estatCodiSelect;
+
+  public java.util.List<java.lang.Integer> getEstatCodiSelect() {
+    return this.estatCodiSelect;
+  }
+
+  public void setEstatCodiSelect(java.util.List<java.lang.Integer> estatCodiSelect) {
+    this.estatCodiSelect = estatCodiSelect;
+  }
+
+
+  private java.lang.String estatError;
+
+  public java.lang.String getEstatError() {
+    return this.estatError;
+  }
+
+  public void setEstatError(java.lang.String estatError) {
+    this.estatError = estatError;
+  }
+
+
+  private java.lang.String estatExcepcio;
+
+  public java.lang.String getEstatExcepcio() {
+    return this.estatExcepcio;
+  }
+
+  public void setEstatExcepcio(java.lang.String estatExcepcio) {
+    this.estatExcepcio = estatExcepcio;
+  }
+
+
+  private java.util.List<java.lang.Integer> loginTypeSelect;
+
+  public java.util.List<java.lang.Integer> getLoginTypeSelect() {
+    return this.loginTypeSelect;
+  }
+
+  public void setLoginTypeSelect(java.util.List<java.lang.Integer> loginTypeSelect) {
+    this.loginTypeSelect = loginTypeSelect;
+  }
+
+
+  private java.lang.String loginId;
+
+  public java.lang.String getLoginId() {
+    return this.loginId;
+  }
+
+  public void setLoginId(java.lang.String loginId) {
+    this.loginId = loginId;
+  }
+
+
+  private java.sql.Timestamp loginDataDesde;
+
+  public java.sql.Timestamp getLoginDataDesde() {
+    return this.loginDataDesde;
+  }
+
+  public void setLoginDataDesde(java.sql.Timestamp loginDataDesde) {
+    this.loginDataDesde = loginDataDesde;
+  }
+
+
+  private java.sql.Timestamp loginDataFins;
+
+  public java.sql.Timestamp getLoginDataFins() {
+    return this.loginDataFins;
+  }
+
+  public void setLoginDataFins(java.sql.Timestamp loginDataFins) {
+    this.loginDataFins = loginDataFins;
+  }
+
+
+  private java.lang.String localitzacioIp;
+
+  public java.lang.String getLocalitzacioIp() {
+    return this.localitzacioIp;
+  }
+
+  public void setLocalitzacioIp(java.lang.String localitzacioIp) {
+    this.localitzacioIp = localitzacioIp;
+  }
+
+
+  private java.lang.String localitzacioCodiPostal;
+
+  public java.lang.String getLocalitzacioCodiPostal() {
+    return this.localitzacioCodiPostal;
+  }
+
+  public void setLocalitzacioCodiPostal(java.lang.String localitzacioCodiPostal) {
+    this.localitzacioCodiPostal = localitzacioCodiPostal;
+  }
+
+
+  private java.lang.String localitzacioLongitud;
+
+  public java.lang.String getLocalitzacioLongitud() {
+    return this.localitzacioLongitud;
+  }
+
+  public void setLocalitzacioLongitud(java.lang.String localitzacioLongitud) {
+    this.localitzacioLongitud = localitzacioLongitud;
+  }
+
+
+  private java.lang.String localitzacioLatitud;
+
+  public java.lang.String getLocalitzacioLatitud() {
+    return this.localitzacioLatitud;
+  }
+
+  public void setLocalitzacioLatitud(java.lang.String localitzacioLatitud) {
+    this.localitzacioLatitud = localitzacioLatitud;
+  }
+
+
+  private java.lang.String localitzacioCiutat;
+
+  public java.lang.String getLocalitzacioCiutat() {
+    return this.localitzacioCiutat;
+  }
+
+  public void setLocalitzacioCiutat(java.lang.String localitzacioCiutat) {
+    this.localitzacioCiutat = localitzacioCiutat;
+  }
+
+
+  private java.lang.String localitzacioRegio;
+
+  public java.lang.String getLocalitzacioRegio() {
+    return this.localitzacioRegio;
+  }
+
+  public void setLocalitzacioRegio(java.lang.String localitzacioRegio) {
+    this.localitzacioRegio = localitzacioRegio;
+  }
+
+
+  private java.lang.String localitzacioPais;
+
+  public java.lang.String getLocalitzacioPais() {
+    return this.localitzacioPais;
+  }
+
+  public void setLocalitzacioPais(java.lang.String localitzacioPais) {
+    this.localitzacioPais = localitzacioPais;
   }
 
 
@@ -358,49 +381,53 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.evidenciaIDDesde = __toClone.evidenciaIDDesde;
     this.evidenciaIDFins = __toClone.evidenciaIDFins;
     this.nom = __toClone.nom;
-    this.personanom = __toClone.personanom;
-    this.personallinatge1 = __toClone.personallinatge1;
-    this.personallinatge2 = __toClone.personallinatge2;
-    this.personanif = __toClone.personanif;
-    this.documenthash = __toClone.documenthash;
-    this.documentmidaDesde = __toClone.documentmidaDesde;
-    this.documentmidaFins = __toClone.documentmidaFins;
-    this.datainiciDesde = __toClone.datainiciDesde;
-    this.datainiciFins = __toClone.datainiciFins;
-    this.datafiDesde = __toClone.datafiDesde;
-    this.datafiFins = __toClone.datafiFins;
-    this.usuariaplicacio = __toClone.usuariaplicacio;
-    this.usuaripersona = __toClone.usuaripersona;
-    this.estatcodiDesde = __toClone.estatcodiDesde;
-    this.estatcodiFins = __toClone.estatcodiFins;
-    this.estaterror = __toClone.estaterror;
-    this.estatexcepcio = __toClone.estatexcepcio;
-    this.personamobil = __toClone.personamobil;
-    this.logintypeDesde = __toClone.logintypeDesde;
-    this.logintypeFins = __toClone.logintypeFins;
-    this.loginid = __toClone.loginid;
-    this.logindataDesde = __toClone.logindataDesde;
-    this.logindataFins = __toClone.logindataFins;
-    this.localitzacioip = __toClone.localitzacioip;
-    this.localitzaciocodipostal = __toClone.localitzaciocodipostal;
-    this.localitzaciocoordenades = __toClone.localitzaciocoordenades;
-    this.personaemail = __toClone.personaemail;
+    this.personaNom = __toClone.personaNom;
+    this.personaLlinatge1 = __toClone.personaLlinatge1;
+    this.personaLlinatge2 = __toClone.personaLlinatge2;
+    this.personaNif = __toClone.personaNif;
+    this.personaEmail = __toClone.personaEmail;
+    this.personaMobil = __toClone.personaMobil;
+    this.documentHash = __toClone.documentHash;
+    this.documentMidaDesde = __toClone.documentMidaDesde;
+    this.documentMidaFins = __toClone.documentMidaFins;
+    this.dataIniciDesde = __toClone.dataIniciDesde;
+    this.dataIniciFins = __toClone.dataIniciFins;
+    this.dataFiDesde = __toClone.dataFiDesde;
+    this.dataFiFins = __toClone.dataFiFins;
+    this.usuariAplicacio = __toClone.usuariAplicacio;
+    this.usuariPersona = __toClone.usuariPersona;
+    this.estatCodiSelect = __toClone.estatCodiSelect;
+    this.estatError = __toClone.estatError;
+    this.estatExcepcio = __toClone.estatExcepcio;
+    this.loginTypeSelect = __toClone.loginTypeSelect;
+    this.loginId = __toClone.loginId;
+    this.loginDataDesde = __toClone.loginDataDesde;
+    this.loginDataFins = __toClone.loginDataFins;
+    this.localitzacioIp = __toClone.localitzacioIp;
+    this.localitzacioCodiPostal = __toClone.localitzacioCodiPostal;
+    this.localitzacioLongitud = __toClone.localitzacioLongitud;
+    this.localitzacioLatitud = __toClone.localitzacioLatitud;
+    this.localitzacioCiutat = __toClone.localitzacioCiutat;
+    this.localitzacioRegio = __toClone.localitzacioRegio;
+    this.localitzacioPais = __toClone.localitzacioPais;
+    this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
+    this.mapOfValuesForLoginType = __toClone.mapOfValuesForLoginType;
   }
   
   /* ========= UTILS ========== */
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM ,PERSONALLINATGE1 ,PERSONANIF ,PERSONAEMAIL ,USUARIPERSONA ,ESTATCODI ,ESTATERROR ,LOCALITZACIOIP }));
   }
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { DATAINICI ,DATAFI ,USUARIAPLICACIO }));
   }
 
 
-  protected OrderBy[] defaultOrderBy = null;
+  protected OrderBy[] defaultOrderBy = new OrderBy[] {new OrderBy(DATAINICI, org.fundaciobit.genapp.common.query.OrderType.DESC )};
 
 
   public OrderBy[] getDefaultOrderBy() {
@@ -419,6 +446,30 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfValuesForEstatCodi;
+
+  public Map<String, String> getMapOfValuesForEstatCodi() {
+    return this.mapOfValuesForEstatCodi;
+  }
+
+  public void setMapOfValuesForEstatCodi(Map<String, String> mapOfValuesForEstatCodi) {
+    this.mapOfValuesForEstatCodi = mapOfValuesForEstatCodi;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForLoginType;
+
+  public Map<String, String> getMapOfValuesForLoginType() {
+    return this.mapOfValuesForLoginType;
+  }
+
+  public void setMapOfValuesForLoginType(Map<String, String> mapOfValuesForLoginType) {
+    this.mapOfValuesForLoginType = mapOfValuesForLoginType;
+  }
+
+
+
 
    // --------------------------------
    // Camps traduibles de referencies.

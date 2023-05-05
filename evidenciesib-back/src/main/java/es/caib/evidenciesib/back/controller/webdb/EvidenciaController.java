@@ -1,5 +1,7 @@
 package es.caib.evidenciesib.back.controller.webdb;
 
+import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.utils.Utils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.GroupByItem;
@@ -176,6 +178,29 @@ public class EvidenciaController
       groupByItemsMap.put(groupByItem.getField(),groupByItem);
     }
 
+    Map<String, String> _tmp;
+    List<StringKeyValue> _listSKV;
+
+    // Field estatCodi
+    {
+      _listSKV = getReferenceListForEstatCodi(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForEstatCodi(_tmp);
+      if (filterForm.getGroupByFields().contains(ESTATCODI)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, ESTATCODI, false);
+      };
+    }
+
+    // Field loginType
+    {
+      _listSKV = getReferenceListForLoginType(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForLoginType(_tmp);
+      if (filterForm.getGroupByFields().contains(LOGINTYPE)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, LOGINTYPE, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -191,6 +216,8 @@ public class EvidenciaController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(ESTATCODI, filterForm.getMapOfValuesForEstatCodi());
+    __mapping.put(LOGINTYPE, filterForm.getMapOfValuesForLoginType());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -238,6 +265,24 @@ public class EvidenciaController
 
   public void fillReferencesForForm(EvidenciaForm evidenciaForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
+    // Comprovam si ja esta definida la llista
+    if (evidenciaForm.getListOfValuesForEstatCodi() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForEstatCodi(request, mav, evidenciaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      evidenciaForm.setListOfValuesForEstatCodi(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (evidenciaForm.getListOfValuesForLoginType() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForLoginType(request, mav, evidenciaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      evidenciaForm.setListOfValuesForLoginType(_listSKV);
+    }
     
   }
 
@@ -571,6 +616,72 @@ public java.lang.Long stringToPK(String value) {
 
   public boolean isActiveFormView() {
     return isActiveFormEdit();
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request,
+       ModelAndView mav, EvidenciaForm evidenciaForm, Where where)  throws I18NException {
+    if (evidenciaForm.isHiddenField(ESTATCODI)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForEstatCodi(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request,
+       ModelAndView mav, EvidenciaFilterForm evidenciaFilterForm,
+       List<Evidencia> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (evidenciaFilterForm.isHiddenField(ESTATCODI)
+       && !evidenciaFilterForm.isGroupByField(ESTATCODI)
+       && !evidenciaFilterForm.isFilterByField(ESTATCODI)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForEstatCodi(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("-1" , "-1"));
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForLoginType(HttpServletRequest request,
+       ModelAndView mav, EvidenciaForm evidenciaForm, Where where)  throws I18NException {
+    if (evidenciaForm.isHiddenField(LOGINTYPE)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForLoginType(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForLoginType(HttpServletRequest request,
+       ModelAndView mav, EvidenciaFilterForm evidenciaFilterForm,
+       List<Evidencia> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (evidenciaFilterForm.isHiddenField(LOGINTYPE)
+       && !evidenciaFilterForm.isGroupByField(LOGINTYPE)
+       && !evidenciaFilterForm.isFilterByField(LOGINTYPE)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForLoginType(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForLoginType(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("0" , "0"));
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    return __tmp;
   }
 
 

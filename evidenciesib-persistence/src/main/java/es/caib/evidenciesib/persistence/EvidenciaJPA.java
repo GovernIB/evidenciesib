@@ -34,73 +34,85 @@ public class EvidenciaJPA implements Evidencia {
     java.lang.String nom;
 
     @Column(name="personanom",nullable = false,length = 255)
-    java.lang.String personanom;
+    java.lang.String personaNom;
 
     @Column(name="personallinatge1",nullable = false,length = 255)
-    java.lang.String personallinatge1;
+    java.lang.String personaLlinatge1;
 
     @Column(name="personallinatge2",length = 255)
-    java.lang.String personallinatge2;
+    java.lang.String personaLlinatge2;
 
     @Column(name="personanif",nullable = false,length = 100)
-    java.lang.String personanif;
+    java.lang.String personaNif;
 
-    @Column(name="documenthash",nullable = false,length = 255)
-    java.lang.String documenthash;
+    @Column(name="personaemail",length = 255)
+    java.lang.String personaEmail;
+
+    @Column(name="personamobil",length = 100)
+    java.lang.String personaMobil;
+
+    @Column(name="documenthash",length = 255)
+    java.lang.String documentHash;
 
     @Column(name="documentfitxerid",nullable = false,length = 19)
     long documentFitxerID;
 
     @Column(name="documentmida",nullable = false,length = 19)
-    long documentmida;
+    long documentMida;
 
     @Column(name="datainici",nullable = false,length = 29,precision = 6)
-    java.sql.Timestamp datainici;
+    java.sql.Timestamp dataInici;
 
     @Column(name="datafi",length = 29,precision = 6)
-    java.sql.Timestamp datafi;
+    java.sql.Timestamp dataFi;
 
     @Column(name="usuariaplicacio",length = 255)
-    java.lang.String usuariaplicacio;
+    java.lang.String usuariAplicacio;
 
     @Column(name="usuaripersona",length = 100)
-    java.lang.String usuaripersona;
+    java.lang.String usuariPersona;
 
     @Column(name="estatcodi",nullable = false,length = 10)
-    int estatcodi;
+    int estatCodi;
 
     @Column(name="estaterror",length = 255)
-    java.lang.String estaterror;
+    java.lang.String estatError;
 
     @Column(name="estatexcepcio",length = 2147483647)
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-    java.lang.String estatexcepcio;
-
-    @Column(name="personamobil",length = 100)
-    java.lang.String personamobil;
+    java.lang.String estatExcepcio;
 
     @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="logintype",nullable = false,length = 10)
-    int logintype = 0;
+    int loginType = 0;
 
     @Column(name="loginid",length = 255)
-    java.lang.String loginid;
+    java.lang.String loginId;
 
     @Column(name="logindata",length = 29,precision = 6)
-    java.sql.Timestamp logindata;
+    java.sql.Timestamp loginData;
 
     @Column(name="localitzacioip",length = 100)
-    java.lang.String localitzacioip;
+    java.lang.String localitzacioIp;
 
     @Column(name="localitzaciocodipostal",length = 100)
-    java.lang.String localitzaciocodipostal;
+    java.lang.String localitzacioCodiPostal;
 
-    @Column(name="localitzaciocoordenades",length = 255)
-    java.lang.String localitzaciocoordenades;
+    @Column(name="localitzaciolongitud",length = 100)
+    java.lang.String localitzacioLongitud;
 
-    @Column(name="personaemail",length = 255)
-    java.lang.String personaemail;
+    @Column(name="localitzaciolatitud",length = 100)
+    java.lang.String localitzacioLatitud;
+
+    @Column(name="localitzaciociutat",length = 255)
+    java.lang.String localitzacioCiutat;
+
+    @Column(name="localitzacioregio",length = 100)
+    java.lang.String localitzacioRegio;
+
+    @Column(name="localitzaciopais",length = 100)
+    java.lang.String localitzacioPais;
 
 
 
@@ -109,97 +121,108 @@ public class EvidenciaJPA implements Evidencia {
   }
 
   /** Constructor amb tots els camps  */
-  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personanom , java.lang.String personallinatge1 , java.lang.String personallinatge2 , java.lang.String personanif , java.lang.String documenthash , long documentFitxerID , long documentmida , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.String usuariaplicacio , java.lang.String usuaripersona , int estatcodi , java.lang.String estaterror , java.lang.String estatexcepcio , java.lang.String personamobil , int logintype , java.lang.String loginid , java.sql.Timestamp logindata , java.lang.String localitzacioip , java.lang.String localitzaciocodipostal , java.lang.String localitzaciocoordenades , java.lang.String personaemail) {
+  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.lang.String documentHash , long documentFitxerID , long documentMida , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLongitud , java.lang.String localitzacioLatitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioRegio , java.lang.String localitzacioPais) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
-    this.personanom=personanom;
-    this.personallinatge1=personallinatge1;
-    this.personallinatge2=personallinatge2;
-    this.personanif=personanif;
-    this.documenthash=documenthash;
+    this.personaNom=personaNom;
+    this.personaLlinatge1=personaLlinatge1;
+    this.personaLlinatge2=personaLlinatge2;
+    this.personaNif=personaNif;
+    this.personaEmail=personaEmail;
+    this.personaMobil=personaMobil;
+    this.documentHash=documentHash;
     this.documentFitxerID=documentFitxerID;
-    this.documentmida=documentmida;
-    this.datainici=datainici;
-    this.datafi=datafi;
-    this.usuariaplicacio=usuariaplicacio;
-    this.usuaripersona=usuaripersona;
-    this.estatcodi=estatcodi;
-    this.estaterror=estaterror;
-    this.estatexcepcio=estatexcepcio;
-    this.personamobil=personamobil;
-    this.logintype=logintype;
-    this.loginid=loginid;
-    this.logindata=logindata;
-    this.localitzacioip=localitzacioip;
-    this.localitzaciocodipostal=localitzaciocodipostal;
-    this.localitzaciocoordenades=localitzaciocoordenades;
-    this.personaemail=personaemail;
+    this.documentMida=documentMida;
+    this.dataInici=dataInici;
+    this.dataFi=dataFi;
+    this.usuariAplicacio=usuariAplicacio;
+    this.usuariPersona=usuariPersona;
+    this.estatCodi=estatCodi;
+    this.estatError=estatError;
+    this.estatExcepcio=estatExcepcio;
+    this.loginType=loginType;
+    this.loginId=loginId;
+    this.loginData=loginData;
+    this.localitzacioIp=localitzacioIp;
+    this.localitzacioCodiPostal=localitzacioCodiPostal;
+    this.localitzacioLongitud=localitzacioLongitud;
+    this.localitzacioLatitud=localitzacioLatitud;
+    this.localitzacioCiutat=localitzacioCiutat;
+    this.localitzacioRegio=localitzacioRegio;
+    this.localitzacioPais=localitzacioPais;
 }
   /** Constructor sense valors autoincrementals */
-  public EvidenciaJPA(java.lang.String nom , java.lang.String personanom , java.lang.String personallinatge1 , java.lang.String personallinatge2 , java.lang.String personanif , java.lang.String documenthash , long documentFitxerID , long documentmida , java.sql.Timestamp datainici , java.sql.Timestamp datafi , java.lang.String usuariaplicacio , java.lang.String usuaripersona , int estatcodi , java.lang.String estaterror , java.lang.String estatexcepcio , java.lang.String personamobil , int logintype , java.lang.String loginid , java.sql.Timestamp logindata , java.lang.String localitzacioip , java.lang.String localitzaciocodipostal , java.lang.String localitzaciocoordenades , java.lang.String personaemail) {
+  public EvidenciaJPA(java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.lang.String documentHash , long documentFitxerID , long documentMida , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLongitud , java.lang.String localitzacioLatitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioRegio , java.lang.String localitzacioPais) {
     this.nom=nom;
-    this.personanom=personanom;
-    this.personallinatge1=personallinatge1;
-    this.personallinatge2=personallinatge2;
-    this.personanif=personanif;
-    this.documenthash=documenthash;
+    this.personaNom=personaNom;
+    this.personaLlinatge1=personaLlinatge1;
+    this.personaLlinatge2=personaLlinatge2;
+    this.personaNif=personaNif;
+    this.personaEmail=personaEmail;
+    this.personaMobil=personaMobil;
+    this.documentHash=documentHash;
     this.documentFitxerID=documentFitxerID;
-    this.documentmida=documentmida;
-    this.datainici=datainici;
-    this.datafi=datafi;
-    this.usuariaplicacio=usuariaplicacio;
-    this.usuaripersona=usuaripersona;
-    this.estatcodi=estatcodi;
-    this.estaterror=estaterror;
-    this.estatexcepcio=estatexcepcio;
-    this.personamobil=personamobil;
-    this.logintype=logintype;
-    this.loginid=loginid;
-    this.logindata=logindata;
-    this.localitzacioip=localitzacioip;
-    this.localitzaciocodipostal=localitzaciocodipostal;
-    this.localitzaciocoordenades=localitzaciocoordenades;
-    this.personaemail=personaemail;
+    this.documentMida=documentMida;
+    this.dataInici=dataInici;
+    this.dataFi=dataFi;
+    this.usuariAplicacio=usuariAplicacio;
+    this.usuariPersona=usuariPersona;
+    this.estatCodi=estatCodi;
+    this.estatError=estatError;
+    this.estatExcepcio=estatExcepcio;
+    this.loginType=loginType;
+    this.loginId=loginId;
+    this.loginData=loginData;
+    this.localitzacioIp=localitzacioIp;
+    this.localitzacioCodiPostal=localitzacioCodiPostal;
+    this.localitzacioLongitud=localitzacioLongitud;
+    this.localitzacioLatitud=localitzacioLatitud;
+    this.localitzacioCiutat=localitzacioCiutat;
+    this.localitzacioRegio=localitzacioRegio;
+    this.localitzacioPais=localitzacioPais;
 }
   /** Constructor dels valors Not Null */
-  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personanom , java.lang.String personallinatge1 , java.lang.String personanif , java.lang.String documenthash , long documentFitxerID , long documentmida , java.sql.Timestamp datainici , int estatcodi , int logintype) {
+  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaNif , long documentFitxerID , long documentMida , java.sql.Timestamp dataInici , int estatCodi , int loginType) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
-    this.personanom=personanom;
-    this.personallinatge1=personallinatge1;
-    this.personanif=personanif;
-    this.documenthash=documenthash;
+    this.personaNom=personaNom;
+    this.personaLlinatge1=personaLlinatge1;
+    this.personaNif=personaNif;
     this.documentFitxerID=documentFitxerID;
-    this.documentmida=documentmida;
-    this.datainici=datainici;
-    this.estatcodi=estatcodi;
-    this.logintype=logintype;
+    this.documentMida=documentMida;
+    this.dataInici=dataInici;
+    this.estatCodi=estatCodi;
+    this.loginType=loginType;
 }
   public EvidenciaJPA(Evidencia __bean) {
     this.setEvidenciaID(__bean.getEvidenciaID());
     this.setNom(__bean.getNom());
-    this.setPersonanom(__bean.getPersonanom());
-    this.setPersonallinatge1(__bean.getPersonallinatge1());
-    this.setPersonallinatge2(__bean.getPersonallinatge2());
-    this.setPersonanif(__bean.getPersonanif());
-    this.setDocumenthash(__bean.getDocumenthash());
+    this.setPersonaNom(__bean.getPersonaNom());
+    this.setPersonaLlinatge1(__bean.getPersonaLlinatge1());
+    this.setPersonaLlinatge2(__bean.getPersonaLlinatge2());
+    this.setPersonaNif(__bean.getPersonaNif());
+    this.setPersonaEmail(__bean.getPersonaEmail());
+    this.setPersonaMobil(__bean.getPersonaMobil());
+    this.setDocumentHash(__bean.getDocumentHash());
     this.setDocumentFitxerID(__bean.getDocumentFitxerID());
-    this.setDocumentmida(__bean.getDocumentmida());
-    this.setDatainici(__bean.getDatainici());
-    this.setDatafi(__bean.getDatafi());
-    this.setUsuariaplicacio(__bean.getUsuariaplicacio());
-    this.setUsuaripersona(__bean.getUsuaripersona());
-    this.setEstatcodi(__bean.getEstatcodi());
-    this.setEstaterror(__bean.getEstaterror());
-    this.setEstatexcepcio(__bean.getEstatexcepcio());
-    this.setPersonamobil(__bean.getPersonamobil());
-    this.setLogintype(__bean.getLogintype());
-    this.setLoginid(__bean.getLoginid());
-    this.setLogindata(__bean.getLogindata());
-    this.setLocalitzacioip(__bean.getLocalitzacioip());
-    this.setLocalitzaciocodipostal(__bean.getLocalitzaciocodipostal());
-    this.setLocalitzaciocoordenades(__bean.getLocalitzaciocoordenades());
-    this.setPersonaemail(__bean.getPersonaemail());
+    this.setDocumentMida(__bean.getDocumentMida());
+    this.setDataInici(__bean.getDataInici());
+    this.setDataFi(__bean.getDataFi());
+    this.setUsuariAplicacio(__bean.getUsuariAplicacio());
+    this.setUsuariPersona(__bean.getUsuariPersona());
+    this.setEstatCodi(__bean.getEstatCodi());
+    this.setEstatError(__bean.getEstatError());
+    this.setEstatExcepcio(__bean.getEstatExcepcio());
+    this.setLoginType(__bean.getLoginType());
+    this.setLoginId(__bean.getLoginId());
+    this.setLoginData(__bean.getLoginData());
+    this.setLocalitzacioIp(__bean.getLocalitzacioIp());
+    this.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
+    this.setLocalitzacioLongitud(__bean.getLocalitzacioLongitud());
+    this.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
+    this.setLocalitzacioCiutat(__bean.getLocalitzacioCiutat());
+    this.setLocalitzacioRegio(__bean.getLocalitzacioRegio());
+    this.setLocalitzacioPais(__bean.getLocalitzacioPais());
     // Fitxer
     this.setDocumentFitxer(FitxerJPA.toJPA(__bean.getDocumentFitxer()));
 	}
@@ -218,39 +241,53 @@ public class EvidenciaJPA implements Evidencia {
 		this.nom = _nom_;
 	};
 
-	public java.lang.String getPersonanom() {
-		return(personanom);
+	public java.lang.String getPersonaNom() {
+		return(personaNom);
 	};
-	public void setPersonanom(java.lang.String _personanom_) {
-		this.personanom = _personanom_;
-	};
-
-	public java.lang.String getPersonallinatge1() {
-		return(personallinatge1);
-	};
-	public void setPersonallinatge1(java.lang.String _personallinatge1_) {
-		this.personallinatge1 = _personallinatge1_;
+	public void setPersonaNom(java.lang.String _personaNom_) {
+		this.personaNom = _personaNom_;
 	};
 
-	public java.lang.String getPersonallinatge2() {
-		return(personallinatge2);
+	public java.lang.String getPersonaLlinatge1() {
+		return(personaLlinatge1);
 	};
-	public void setPersonallinatge2(java.lang.String _personallinatge2_) {
-		this.personallinatge2 = _personallinatge2_;
-	};
-
-	public java.lang.String getPersonanif() {
-		return(personanif);
-	};
-	public void setPersonanif(java.lang.String _personanif_) {
-		this.personanif = _personanif_;
+	public void setPersonaLlinatge1(java.lang.String _personaLlinatge1_) {
+		this.personaLlinatge1 = _personaLlinatge1_;
 	};
 
-	public java.lang.String getDocumenthash() {
-		return(documenthash);
+	public java.lang.String getPersonaLlinatge2() {
+		return(personaLlinatge2);
 	};
-	public void setDocumenthash(java.lang.String _documenthash_) {
-		this.documenthash = _documenthash_;
+	public void setPersonaLlinatge2(java.lang.String _personaLlinatge2_) {
+		this.personaLlinatge2 = _personaLlinatge2_;
+	};
+
+	public java.lang.String getPersonaNif() {
+		return(personaNif);
+	};
+	public void setPersonaNif(java.lang.String _personaNif_) {
+		this.personaNif = _personaNif_;
+	};
+
+	public java.lang.String getPersonaEmail() {
+		return(personaEmail);
+	};
+	public void setPersonaEmail(java.lang.String _personaEmail_) {
+		this.personaEmail = _personaEmail_;
+	};
+
+	public java.lang.String getPersonaMobil() {
+		return(personaMobil);
+	};
+	public void setPersonaMobil(java.lang.String _personaMobil_) {
+		this.personaMobil = _personaMobil_;
+	};
+
+	public java.lang.String getDocumentHash() {
+		return(documentHash);
+	};
+	public void setDocumentHash(java.lang.String _documentHash_) {
+		this.documentHash = _documentHash_;
 	};
 
 	public long getDocumentFitxerID() {
@@ -260,116 +297,130 @@ public class EvidenciaJPA implements Evidencia {
 		this.documentFitxerID = _documentFitxerID_;
 	};
 
-	public long getDocumentmida() {
-		return(documentmida);
+	public long getDocumentMida() {
+		return(documentMida);
 	};
-	public void setDocumentmida(long _documentmida_) {
-		this.documentmida = _documentmida_;
-	};
-
-	public java.sql.Timestamp getDatainici() {
-		return(datainici);
-	};
-	public void setDatainici(java.sql.Timestamp _datainici_) {
-		this.datainici = _datainici_;
+	public void setDocumentMida(long _documentMida_) {
+		this.documentMida = _documentMida_;
 	};
 
-	public java.sql.Timestamp getDatafi() {
-		return(datafi);
+	public java.sql.Timestamp getDataInici() {
+		return(dataInici);
 	};
-	public void setDatafi(java.sql.Timestamp _datafi_) {
-		this.datafi = _datafi_;
-	};
-
-	public java.lang.String getUsuariaplicacio() {
-		return(usuariaplicacio);
-	};
-	public void setUsuariaplicacio(java.lang.String _usuariaplicacio_) {
-		this.usuariaplicacio = _usuariaplicacio_;
+	public void setDataInici(java.sql.Timestamp _dataInici_) {
+		this.dataInici = _dataInici_;
 	};
 
-	public java.lang.String getUsuaripersona() {
-		return(usuaripersona);
+	public java.sql.Timestamp getDataFi() {
+		return(dataFi);
 	};
-	public void setUsuaripersona(java.lang.String _usuaripersona_) {
-		this.usuaripersona = _usuaripersona_;
-	};
-
-	public int getEstatcodi() {
-		return(estatcodi);
-	};
-	public void setEstatcodi(int _estatcodi_) {
-		this.estatcodi = _estatcodi_;
+	public void setDataFi(java.sql.Timestamp _dataFi_) {
+		this.dataFi = _dataFi_;
 	};
 
-	public java.lang.String getEstaterror() {
-		return(estaterror);
+	public java.lang.String getUsuariAplicacio() {
+		return(usuariAplicacio);
 	};
-	public void setEstaterror(java.lang.String _estaterror_) {
-		this.estaterror = _estaterror_;
-	};
-
-	public java.lang.String getEstatexcepcio() {
-		return(estatexcepcio);
-	};
-	public void setEstatexcepcio(java.lang.String _estatexcepcio_) {
-		this.estatexcepcio = _estatexcepcio_;
+	public void setUsuariAplicacio(java.lang.String _usuariAplicacio_) {
+		this.usuariAplicacio = _usuariAplicacio_;
 	};
 
-	public java.lang.String getPersonamobil() {
-		return(personamobil);
+	public java.lang.String getUsuariPersona() {
+		return(usuariPersona);
 	};
-	public void setPersonamobil(java.lang.String _personamobil_) {
-		this.personamobil = _personamobil_;
-	};
-
-	public int getLogintype() {
-		return(logintype);
-	};
-	public void setLogintype(int _logintype_) {
-		this.logintype = _logintype_;
+	public void setUsuariPersona(java.lang.String _usuariPersona_) {
+		this.usuariPersona = _usuariPersona_;
 	};
 
-	public java.lang.String getLoginid() {
-		return(loginid);
+	public int getEstatCodi() {
+		return(estatCodi);
 	};
-	public void setLoginid(java.lang.String _loginid_) {
-		this.loginid = _loginid_;
-	};
-
-	public java.sql.Timestamp getLogindata() {
-		return(logindata);
-	};
-	public void setLogindata(java.sql.Timestamp _logindata_) {
-		this.logindata = _logindata_;
+	public void setEstatCodi(int _estatCodi_) {
+		this.estatCodi = _estatCodi_;
 	};
 
-	public java.lang.String getLocalitzacioip() {
-		return(localitzacioip);
+	public java.lang.String getEstatError() {
+		return(estatError);
 	};
-	public void setLocalitzacioip(java.lang.String _localitzacioip_) {
-		this.localitzacioip = _localitzacioip_;
-	};
-
-	public java.lang.String getLocalitzaciocodipostal() {
-		return(localitzaciocodipostal);
-	};
-	public void setLocalitzaciocodipostal(java.lang.String _localitzaciocodipostal_) {
-		this.localitzaciocodipostal = _localitzaciocodipostal_;
+	public void setEstatError(java.lang.String _estatError_) {
+		this.estatError = _estatError_;
 	};
 
-	public java.lang.String getLocalitzaciocoordenades() {
-		return(localitzaciocoordenades);
+	public java.lang.String getEstatExcepcio() {
+		return(estatExcepcio);
 	};
-	public void setLocalitzaciocoordenades(java.lang.String _localitzaciocoordenades_) {
-		this.localitzaciocoordenades = _localitzaciocoordenades_;
+	public void setEstatExcepcio(java.lang.String _estatExcepcio_) {
+		this.estatExcepcio = _estatExcepcio_;
 	};
 
-	public java.lang.String getPersonaemail() {
-		return(personaemail);
+	public int getLoginType() {
+		return(loginType);
 	};
-	public void setPersonaemail(java.lang.String _personaemail_) {
-		this.personaemail = _personaemail_;
+	public void setLoginType(int _loginType_) {
+		this.loginType = _loginType_;
+	};
+
+	public java.lang.String getLoginId() {
+		return(loginId);
+	};
+	public void setLoginId(java.lang.String _loginId_) {
+		this.loginId = _loginId_;
+	};
+
+	public java.sql.Timestamp getLoginData() {
+		return(loginData);
+	};
+	public void setLoginData(java.sql.Timestamp _loginData_) {
+		this.loginData = _loginData_;
+	};
+
+	public java.lang.String getLocalitzacioIp() {
+		return(localitzacioIp);
+	};
+	public void setLocalitzacioIp(java.lang.String _localitzacioIp_) {
+		this.localitzacioIp = _localitzacioIp_;
+	};
+
+	public java.lang.String getLocalitzacioCodiPostal() {
+		return(localitzacioCodiPostal);
+	};
+	public void setLocalitzacioCodiPostal(java.lang.String _localitzacioCodiPostal_) {
+		this.localitzacioCodiPostal = _localitzacioCodiPostal_;
+	};
+
+	public java.lang.String getLocalitzacioLongitud() {
+		return(localitzacioLongitud);
+	};
+	public void setLocalitzacioLongitud(java.lang.String _localitzacioLongitud_) {
+		this.localitzacioLongitud = _localitzacioLongitud_;
+	};
+
+	public java.lang.String getLocalitzacioLatitud() {
+		return(localitzacioLatitud);
+	};
+	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_) {
+		this.localitzacioLatitud = _localitzacioLatitud_;
+	};
+
+	public java.lang.String getLocalitzacioCiutat() {
+		return(localitzacioCiutat);
+	};
+	public void setLocalitzacioCiutat(java.lang.String _localitzacioCiutat_) {
+		this.localitzacioCiutat = _localitzacioCiutat_;
+	};
+
+	public java.lang.String getLocalitzacioRegio() {
+		return(localitzacioRegio);
+	};
+	public void setLocalitzacioRegio(java.lang.String _localitzacioRegio_) {
+		this.localitzacioRegio = _localitzacioRegio_;
+	};
+
+	public java.lang.String getLocalitzacioPais() {
+		return(localitzacioPais);
+	};
+	public void setLocalitzacioPais(java.lang.String _localitzacioPais_) {
+		this.localitzacioPais = _localitzacioPais_;
 	};
 
 
@@ -408,28 +459,32 @@ public class EvidenciaJPA implements Evidencia {
     EvidenciaJPA __tmp = new EvidenciaJPA();
     __tmp.setEvidenciaID(__bean.getEvidenciaID());
     __tmp.setNom(__bean.getNom());
-    __tmp.setPersonanom(__bean.getPersonanom());
-    __tmp.setPersonallinatge1(__bean.getPersonallinatge1());
-    __tmp.setPersonallinatge2(__bean.getPersonallinatge2());
-    __tmp.setPersonanif(__bean.getPersonanif());
-    __tmp.setDocumenthash(__bean.getDocumenthash());
+    __tmp.setPersonaNom(__bean.getPersonaNom());
+    __tmp.setPersonaLlinatge1(__bean.getPersonaLlinatge1());
+    __tmp.setPersonaLlinatge2(__bean.getPersonaLlinatge2());
+    __tmp.setPersonaNif(__bean.getPersonaNif());
+    __tmp.setPersonaEmail(__bean.getPersonaEmail());
+    __tmp.setPersonaMobil(__bean.getPersonaMobil());
+    __tmp.setDocumentHash(__bean.getDocumentHash());
     __tmp.setDocumentFitxerID(__bean.getDocumentFitxerID());
-    __tmp.setDocumentmida(__bean.getDocumentmida());
-    __tmp.setDatainici(__bean.getDatainici());
-    __tmp.setDatafi(__bean.getDatafi());
-    __tmp.setUsuariaplicacio(__bean.getUsuariaplicacio());
-    __tmp.setUsuaripersona(__bean.getUsuaripersona());
-    __tmp.setEstatcodi(__bean.getEstatcodi());
-    __tmp.setEstaterror(__bean.getEstaterror());
-    __tmp.setEstatexcepcio(__bean.getEstatexcepcio());
-    __tmp.setPersonamobil(__bean.getPersonamobil());
-    __tmp.setLogintype(__bean.getLogintype());
-    __tmp.setLoginid(__bean.getLoginid());
-    __tmp.setLogindata(__bean.getLogindata());
-    __tmp.setLocalitzacioip(__bean.getLocalitzacioip());
-    __tmp.setLocalitzaciocodipostal(__bean.getLocalitzaciocodipostal());
-    __tmp.setLocalitzaciocoordenades(__bean.getLocalitzaciocoordenades());
-    __tmp.setPersonaemail(__bean.getPersonaemail());
+    __tmp.setDocumentMida(__bean.getDocumentMida());
+    __tmp.setDataInici(__bean.getDataInici());
+    __tmp.setDataFi(__bean.getDataFi());
+    __tmp.setUsuariAplicacio(__bean.getUsuariAplicacio());
+    __tmp.setUsuariPersona(__bean.getUsuariPersona());
+    __tmp.setEstatCodi(__bean.getEstatCodi());
+    __tmp.setEstatError(__bean.getEstatError());
+    __tmp.setEstatExcepcio(__bean.getEstatExcepcio());
+    __tmp.setLoginType(__bean.getLoginType());
+    __tmp.setLoginId(__bean.getLoginId());
+    __tmp.setLoginData(__bean.getLoginData());
+    __tmp.setLocalitzacioIp(__bean.getLocalitzacioIp());
+    __tmp.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
+    __tmp.setLocalitzacioLongitud(__bean.getLocalitzacioLongitud());
+    __tmp.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
+    __tmp.setLocalitzacioCiutat(__bean.getLocalitzacioCiutat());
+    __tmp.setLocalitzacioRegio(__bean.getLocalitzacioRegio());
+    __tmp.setLocalitzacioPais(__bean.getLocalitzacioPais());
     // Fitxer
     __tmp.setDocumentFitxer(FitxerJPA.toJPA(__bean.getDocumentFitxer()));
 		return __tmp;

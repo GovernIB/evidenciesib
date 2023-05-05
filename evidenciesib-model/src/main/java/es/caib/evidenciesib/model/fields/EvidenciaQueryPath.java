@@ -35,6 +35,14 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.PERSONANIF);
   }
 
+  public StringField PERSONAEMAIL() {
+    return new StringField(getQueryPath(), EvidenciaFields.PERSONAEMAIL);
+  }
+
+  public StringField PERSONAMOBIL() {
+    return new StringField(getQueryPath(), EvidenciaFields.PERSONAMOBIL);
+  }
+
   public StringField DOCUMENTHASH() {
     return new StringField(getQueryPath(), EvidenciaFields.DOCUMENTHASH);
   }
@@ -75,10 +83,6 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.ESTATEXCEPCIO);
   }
 
-  public StringField PERSONAMOBIL() {
-    return new StringField(getQueryPath(), EvidenciaFields.PERSONAMOBIL);
-  }
-
   public IntegerField LOGINTYPE() {
     return new IntegerField(getQueryPath(), EvidenciaFields.LOGINTYPE);
   }
@@ -99,12 +103,24 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOCODIPOSTAL);
   }
 
-  public StringField LOCALITZACIOCOORDENADES() {
-    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOCOORDENADES);
+  public StringField LOCALITZACIOLONGITUD() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOLONGITUD);
   }
 
-  public StringField PERSONAEMAIL() {
-    return new StringField(getQueryPath(), EvidenciaFields.PERSONAEMAIL);
+  public StringField LOCALITZACIOLATITUD() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOLATITUD);
+  }
+
+  public StringField LOCALITZACIOCIUTAT() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOCIUTAT);
+  }
+
+  public StringField LOCALITZACIOREGIO() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOREGIO);
+  }
+
+  public StringField LOCALITZACIOPAIS() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOPAIS);
   }
 
 

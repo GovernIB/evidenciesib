@@ -1,26 +1,6 @@
 package es.caib.evidenciesib.logic;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.annotation.Resource;
-import javax.ejb.EJB;
-
-/*
-import es.caib.evidenciesib.ejb.AnnexEJB;
-import es.caib.evidenciesib.ejb.FitxerService;
-import es.caib.evidenciesib.persistence.AnnexJPA;
-import es.caib.evidenciesib.model.entity.AnnexFirmat;
-import es.caib.evidenciesib.model.fields.AnnexFields;
-import es.caib.evidenciesib.model.fields.AnnexFirmatFields;
-
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
-*/
-
-//import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.transaction.TransactionSynchronizationRegistry;
 
 /**
  * 

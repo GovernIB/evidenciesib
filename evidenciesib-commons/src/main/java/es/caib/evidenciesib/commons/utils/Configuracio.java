@@ -1,7 +1,7 @@
 package es.caib.evidenciesib.commons.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,6 +40,17 @@ public class Configuracio implements Constants {
 		return fileProperties;
 
 	}
+    
+    
+    public static Properties getJavaAndEvidenciesIBFileProperties() {
+
+        if (fileAndSystemProperties.isEmpty()) {
+            fileAndSystemProperties.putAll(getFilesProperties());
+            fileAndSystemProperties.putAll(System.getProperties());
+        }
+        return fileAndSystemProperties;
+    }
+
 
     public static void loadPropertyFile(String property) {
 

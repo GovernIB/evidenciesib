@@ -46,10 +46,6 @@ public class EvidenciaValidator<I extends Evidencia>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONANIF)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,DOCUMENTHASH, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DOCUMENTHASH)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,DOCUMENTMIDA, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DOCUMENTMIDA)));
@@ -76,7 +72,7 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(PERSONANOM) == 0) {
-      java.lang.String __personanom = __target__.getPersonanom();
+      java.lang.String __personanom = __target__.getPersonaNom();
       if (__personanom!= null && __personanom.length() > 255) {
         __vr.rejectValue(PERSONANOM, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONANOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
@@ -84,7 +80,7 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(PERSONALLINATGE1) == 0) {
-      java.lang.String __personallinatge1 = __target__.getPersonallinatge1();
+      java.lang.String __personallinatge1 = __target__.getPersonaLlinatge1();
       if (__personallinatge1!= null && __personallinatge1.length() > 255) {
         __vr.rejectValue(PERSONALLINATGE1, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONALLINATGE1)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
@@ -92,7 +88,7 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(PERSONALLINATGE2) == 0) {
-      java.lang.String __personallinatge2 = __target__.getPersonallinatge2();
+      java.lang.String __personallinatge2 = __target__.getPersonaLlinatge2();
       if (__personallinatge2!= null && __personallinatge2.length() > 255) {
         __vr.rejectValue(PERSONALLINATGE2, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONALLINATGE2)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
@@ -100,15 +96,31 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(PERSONANIF) == 0) {
-      java.lang.String __personanif = __target__.getPersonanif();
+      java.lang.String __personanif = __target__.getPersonaNif();
       if (__personanif!= null && __personanif.length() > 100) {
         __vr.rejectValue(PERSONANIF, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONANIF)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
       }
     }
 
+    if (__vr.getFieldErrorCount(PERSONAEMAIL) == 0) {
+      java.lang.String __personaemail = __target__.getPersonaEmail();
+      if (__personaemail!= null && __personaemail.length() > 255) {
+        __vr.rejectValue(PERSONAEMAIL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONAEMAIL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(PERSONAMOBIL) == 0) {
+      java.lang.String __personamobil = __target__.getPersonaMobil();
+      if (__personamobil!= null && __personamobil.length() > 100) {
+        __vr.rejectValue(PERSONAMOBIL, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONAMOBIL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+
     if (__vr.getFieldErrorCount(DOCUMENTHASH) == 0) {
-      java.lang.String __documenthash = __target__.getDocumenthash();
+      java.lang.String __documenthash = __target__.getDocumentHash();
       if (__documenthash!= null && __documenthash.length() > 255) {
         __vr.rejectValue(DOCUMENTHASH, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DOCUMENTHASH)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
@@ -116,7 +128,7 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(USUARIAPLICACIO) == 0) {
-      java.lang.String __usuariaplicacio = __target__.getUsuariaplicacio();
+      java.lang.String __usuariaplicacio = __target__.getUsuariAplicacio();
       if (__usuariaplicacio!= null && __usuariaplicacio.length() > 255) {
         __vr.rejectValue(USUARIAPLICACIO, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USUARIAPLICACIO)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
@@ -124,7 +136,7 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(USUARIPERSONA) == 0) {
-      java.lang.String __usuaripersona = __target__.getUsuaripersona();
+      java.lang.String __usuaripersona = __target__.getUsuariPersona();
       if (__usuaripersona!= null && __usuaripersona.length() > 100) {
         __vr.rejectValue(USUARIPERSONA, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USUARIPERSONA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
@@ -132,7 +144,7 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(ESTATERROR) == 0) {
-      java.lang.String __estaterror = __target__.getEstaterror();
+      java.lang.String __estaterror = __target__.getEstatError();
       if (__estaterror!= null && __estaterror.length() > 255) {
         __vr.rejectValue(ESTATERROR, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ESTATERROR)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
@@ -140,23 +152,15 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(ESTATEXCEPCIO) == 0) {
-      java.lang.String __estatexcepcio = __target__.getEstatexcepcio();
+      java.lang.String __estatexcepcio = __target__.getEstatExcepcio();
       if (__estatexcepcio!= null && __estatexcepcio.length() > 2147483647) {
         __vr.rejectValue(ESTATEXCEPCIO, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ESTATEXCEPCIO)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
       }
     }
 
-    if (__vr.getFieldErrorCount(PERSONAMOBIL) == 0) {
-      java.lang.String __personamobil = __target__.getPersonamobil();
-      if (__personamobil!= null && __personamobil.length() > 100) {
-        __vr.rejectValue(PERSONAMOBIL, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONAMOBIL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
-      }
-    }
-
     if (__vr.getFieldErrorCount(LOGINID) == 0) {
-      java.lang.String __loginid = __target__.getLoginid();
+      java.lang.String __loginid = __target__.getLoginId();
       if (__loginid!= null && __loginid.length() > 255) {
         __vr.rejectValue(LOGINID, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
@@ -164,7 +168,7 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(LOCALITZACIOIP) == 0) {
-      java.lang.String __localitzacioip = __target__.getLocalitzacioip();
+      java.lang.String __localitzacioip = __target__.getLocalitzacioIp();
       if (__localitzacioip!= null && __localitzacioip.length() > 100) {
         __vr.rejectValue(LOCALITZACIOIP, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOIP)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
@@ -172,26 +176,50 @@ public class EvidenciaValidator<I extends Evidencia>
     }
 
     if (__vr.getFieldErrorCount(LOCALITZACIOCODIPOSTAL) == 0) {
-      java.lang.String __localitzaciocodipostal = __target__.getLocalitzaciocodipostal();
+      java.lang.String __localitzaciocodipostal = __target__.getLocalitzacioCodiPostal();
       if (__localitzaciocodipostal!= null && __localitzaciocodipostal.length() > 100) {
         __vr.rejectValue(LOCALITZACIOCODIPOSTAL, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOCODIPOSTAL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
       }
     }
 
-    if (__vr.getFieldErrorCount(LOCALITZACIOCOORDENADES) == 0) {
-      java.lang.String __localitzaciocoordenades = __target__.getLocalitzaciocoordenades();
-      if (__localitzaciocoordenades!= null && __localitzaciocoordenades.length() > 255) {
-        __vr.rejectValue(LOCALITZACIOCOORDENADES, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOCOORDENADES)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+    if (__vr.getFieldErrorCount(LOCALITZACIOLONGITUD) == 0) {
+      java.lang.String __localitzaciolongitud = __target__.getLocalitzacioLongitud();
+      if (__localitzaciolongitud!= null && __localitzaciolongitud.length() > 100) {
+        __vr.rejectValue(LOCALITZACIOLONGITUD, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOLONGITUD)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
       }
     }
 
-    if (__vr.getFieldErrorCount(PERSONAEMAIL) == 0) {
-      java.lang.String __personaemail = __target__.getPersonaemail();
-      if (__personaemail!= null && __personaemail.length() > 255) {
-        __vr.rejectValue(PERSONAEMAIL, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONAEMAIL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+    if (__vr.getFieldErrorCount(LOCALITZACIOLATITUD) == 0) {
+      java.lang.String __localitzaciolatitud = __target__.getLocalitzacioLatitud();
+      if (__localitzaciolatitud!= null && __localitzaciolatitud.length() > 100) {
+        __vr.rejectValue(LOCALITZACIOLATITUD, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOLATITUD)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOCALITZACIOCIUTAT) == 0) {
+      java.lang.String __localitzaciociutat = __target__.getLocalitzacioCiutat();
+      if (__localitzaciociutat!= null && __localitzaciociutat.length() > 255) {
+        __vr.rejectValue(LOCALITZACIOCIUTAT, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOCIUTAT)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOCALITZACIOREGIO) == 0) {
+      java.lang.String __localitzacioregio = __target__.getLocalitzacioRegio();
+      if (__localitzacioregio!= null && __localitzacioregio.length() > 100) {
+        __vr.rejectValue(LOCALITZACIOREGIO, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOREGIO)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOCALITZACIOPAIS) == 0) {
+      java.lang.String __localitzaciopais = __target__.getLocalitzacioPais();
+      if (__localitzaciopais!= null && __localitzaciopais.length() > 100) {
+        __vr.rejectValue(LOCALITZACIOPAIS, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOPAIS)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
       }
     }
 

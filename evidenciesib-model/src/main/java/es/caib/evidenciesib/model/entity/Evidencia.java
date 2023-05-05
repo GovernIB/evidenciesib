@@ -8,71 +8,83 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getNom();
 	public void setNom(java.lang.String _nom_);
 
-	public java.lang.String getPersonanom();
-	public void setPersonanom(java.lang.String _personanom_);
+	public java.lang.String getPersonaNom();
+	public void setPersonaNom(java.lang.String _personaNom_);
 
-	public java.lang.String getPersonallinatge1();
-	public void setPersonallinatge1(java.lang.String _personallinatge1_);
+	public java.lang.String getPersonaLlinatge1();
+	public void setPersonaLlinatge1(java.lang.String _personaLlinatge1_);
 
-	public java.lang.String getPersonallinatge2();
-	public void setPersonallinatge2(java.lang.String _personallinatge2_);
+	public java.lang.String getPersonaLlinatge2();
+	public void setPersonaLlinatge2(java.lang.String _personaLlinatge2_);
 
-	public java.lang.String getPersonanif();
-	public void setPersonanif(java.lang.String _personanif_);
+	public java.lang.String getPersonaNif();
+	public void setPersonaNif(java.lang.String _personaNif_);
 
-	public java.lang.String getDocumenthash();
-	public void setDocumenthash(java.lang.String _documenthash_);
+	public java.lang.String getPersonaEmail();
+	public void setPersonaEmail(java.lang.String _personaEmail_);
+
+	public java.lang.String getPersonaMobil();
+	public void setPersonaMobil(java.lang.String _personaMobil_);
+
+	public java.lang.String getDocumentHash();
+	public void setDocumentHash(java.lang.String _documentHash_);
 
 	public long getDocumentFitxerID();
 	public void setDocumentFitxerID(long _documentFitxerID_);
 
-	public long getDocumentmida();
-	public void setDocumentmida(long _documentmida_);
+	public long getDocumentMida();
+	public void setDocumentMida(long _documentMida_);
 
-	public java.sql.Timestamp getDatainici();
-	public void setDatainici(java.sql.Timestamp _datainici_);
+	public java.sql.Timestamp getDataInici();
+	public void setDataInici(java.sql.Timestamp _dataInici_);
 
-	public java.sql.Timestamp getDatafi();
-	public void setDatafi(java.sql.Timestamp _datafi_);
+	public java.sql.Timestamp getDataFi();
+	public void setDataFi(java.sql.Timestamp _dataFi_);
 
-	public java.lang.String getUsuariaplicacio();
-	public void setUsuariaplicacio(java.lang.String _usuariaplicacio_);
+	public java.lang.String getUsuariAplicacio();
+	public void setUsuariAplicacio(java.lang.String _usuariAplicacio_);
 
-	public java.lang.String getUsuaripersona();
-	public void setUsuaripersona(java.lang.String _usuaripersona_);
+	public java.lang.String getUsuariPersona();
+	public void setUsuariPersona(java.lang.String _usuariPersona_);
 
-	public int getEstatcodi();
-	public void setEstatcodi(int _estatcodi_);
+	public int getEstatCodi();
+	public void setEstatCodi(int _estatCodi_);
 
-	public java.lang.String getEstaterror();
-	public void setEstaterror(java.lang.String _estaterror_);
+	public java.lang.String getEstatError();
+	public void setEstatError(java.lang.String _estatError_);
 
-	public java.lang.String getEstatexcepcio();
-	public void setEstatexcepcio(java.lang.String _estatexcepcio_);
+	public java.lang.String getEstatExcepcio();
+	public void setEstatExcepcio(java.lang.String _estatExcepcio_);
 
-	public java.lang.String getPersonamobil();
-	public void setPersonamobil(java.lang.String _personamobil_);
+	public int getLoginType();
+	public void setLoginType(int _loginType_);
 
-	public int getLogintype();
-	public void setLogintype(int _logintype_);
+	public java.lang.String getLoginId();
+	public void setLoginId(java.lang.String _loginId_);
 
-	public java.lang.String getLoginid();
-	public void setLoginid(java.lang.String _loginid_);
+	public java.sql.Timestamp getLoginData();
+	public void setLoginData(java.sql.Timestamp _loginData_);
 
-	public java.sql.Timestamp getLogindata();
-	public void setLogindata(java.sql.Timestamp _logindata_);
+	public java.lang.String getLocalitzacioIp();
+	public void setLocalitzacioIp(java.lang.String _localitzacioIp_);
 
-	public java.lang.String getLocalitzacioip();
-	public void setLocalitzacioip(java.lang.String _localitzacioip_);
+	public java.lang.String getLocalitzacioCodiPostal();
+	public void setLocalitzacioCodiPostal(java.lang.String _localitzacioCodiPostal_);
 
-	public java.lang.String getLocalitzaciocodipostal();
-	public void setLocalitzaciocodipostal(java.lang.String _localitzaciocodipostal_);
+	public java.lang.String getLocalitzacioLongitud();
+	public void setLocalitzacioLongitud(java.lang.String _localitzacioLongitud_);
 
-	public java.lang.String getLocalitzaciocoordenades();
-	public void setLocalitzaciocoordenades(java.lang.String _localitzaciocoordenades_);
+	public java.lang.String getLocalitzacioLatitud();
+	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_);
 
-	public java.lang.String getPersonaemail();
-	public void setPersonaemail(java.lang.String _personaemail_);
+	public java.lang.String getLocalitzacioCiutat();
+	public void setLocalitzacioCiutat(java.lang.String _localitzacioCiutat_);
+
+	public java.lang.String getLocalitzacioRegio();
+	public void setLocalitzacioRegio(java.lang.String _localitzacioRegio_);
+
+	public java.lang.String getLocalitzacioPais();
+	public void setLocalitzacioPais(java.lang.String _localitzacioPais_);
 
   // Fitxer
   public <F extends Fitxer> F getDocumentFitxer();

@@ -30,6 +30,12 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONANIF)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONANIF)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONAEMAIL)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONAEMAIL)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONAMOBIL)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONAMOBIL)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DOCUMENTHASH)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.DOCUMENTHASH)}</th>
         </c:if>
@@ -60,9 +66,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.ESTATEXCEPCIO)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.ESTATEXCEPCIO)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONAMOBIL)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONAMOBIL)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINTYPE)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINTYPE)}</th>
         </c:if>
@@ -78,11 +81,20 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCODIPOSTAL)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOCODIPOSTAL)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCOORDENADES)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOCOORDENADES)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLONGITUD)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOLONGITUD)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONAEMAIL)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONAEMAIL)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOLATITUD)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOCIUTAT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOREGIO)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOREGIO)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOPAIS)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOPAIS)}</th>
         </c:if>
 
 

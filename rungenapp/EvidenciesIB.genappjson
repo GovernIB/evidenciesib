@@ -66,8 +66,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "nom",
-            "es": "nom"
+            "ca": "Nom evidència",
+            "es": "Nombre evidencia"
           },
           "javaName": "nom",
           "javaType": "java.lang.String",
@@ -75,7 +75,7 @@
           "showInWebList": true,
           "showInReferenceList": true,
           "transientField": false,
-          "filter": false,
+          "filter": true,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
@@ -91,10 +91,10 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "personanom",
-            "es": "personanom"
+            "ca": "Persona - Nom ",
+            "es": "Persona - Nombre"
           },
-          "javaName": "personanom",
+          "javaName": "personaNom",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -116,16 +116,16 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "personallinatge1",
-            "es": "personallinatge1"
+            "ca": "Persona - Llinatge1",
+            "es": "Persona - Apellido 1"
           },
-          "javaName": "personallinatge1",
+          "javaName": "personaLlinatge1",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
-          "filter": false,
+          "filter": true,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
@@ -141,10 +141,10 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "personallinatge2",
-            "es": "personallinatge2"
+            "ca": "Persona - Llinatge2",
+            "es": "Persona - Llinatge2"
           },
-          "javaName": "personallinatge2",
+          "javaName": "personaLlinatge2",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -166,10 +166,60 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "personanif",
-            "es": "personanif"
+            "ca": "Persona - NIF",
+            "es": "Persona - NIF"
           },
-          "javaName": "personanif",
+          "javaName": "personaNif",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "personaemail",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Persona - Email",
+            "es": "Persona - Email"
+          },
+          "javaName": "personaEmail",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "personamobil",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Persona - Mòbil",
+            "es": "Persona - Móvil"
+          },
+          "javaName": "personaMobil",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -189,12 +239,12 @@
           "sqlType": 12,
           "size": 255,
           "digits": 0,
-          "isNotNullable": true,
+          "isNotNullable": false,
           "labels": {
-            "ca": "documenthash",
-            "es": "documenthash"
+            "ca": "Document - Hash",
+            "es": "Documento - Hash"
           },
-          "javaName": "documenthash",
+          "javaName": "documentHash",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -217,8 +267,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "Fitxer original",
-            "es": "Fichero original"
+            "ca": "Document - Fitxer original",
+            "es": "Document - Fichero original"
           },
           "javaName": "documentFitxerID",
           "javaType": "long",
@@ -255,10 +305,10 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "documentmida",
-            "es": "documentmida"
+            "ca": "Document - Mida",
+            "es": "Documento - Tamaño"
           },
-          "javaName": "documentmida",
+          "javaName": "documentMida",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -280,18 +330,18 @@
           "digits": 6,
           "isNotNullable": true,
           "labels": {
-            "ca": "datainici",
-            "es": "datainici"
+            "ca": "Data inici",
+            "es": "Fecha inicio"
           },
-          "javaName": "datainici",
+          "javaName": "dataInici",
           "javaType": "java.sql.Timestamp",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
           "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
+          "orderBy": -1,
+          "groupBy": true,
           "webFieldInfo": {
             "webtype": 7
           },
@@ -305,10 +355,10 @@
           "digits": 6,
           "isNotNullable": false,
           "labels": {
-            "ca": "datafi",
-            "es": "datafi"
+            "ca": "Data fí",
+            "es": "Fecha fin"
           },
-          "javaName": "datafi",
+          "javaName": "dataFi",
           "javaType": "java.sql.Timestamp",
           "traduible": false,
           "showInWebList": true,
@@ -316,7 +366,7 @@
           "transientField": false,
           "filter": false,
           "orderBy": 0,
-          "groupBy": false,
+          "groupBy": true,
           "webFieldInfo": {
             "webtype": 7
           },
@@ -330,10 +380,10 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "usuariaplicacio",
-            "es": "usuariaplicacio"
+            "ca": "Usuari Aplicació",
+            "es": "Usuario Aplicación"
           },
-          "javaName": "usuariaplicacio",
+          "javaName": "usuariAplicacio",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -341,9 +391,9 @@
           "transientField": false,
           "filter": false,
           "orderBy": 0,
-          "groupBy": false,
+          "groupBy": true,
           "webFieldInfo": {
-            "webtype": 2
+            "webtype": 1
           },
           "foreignKeys": []
         },
@@ -355,16 +405,16 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "usuaripersona",
-            "es": "usuaripersona"
+            "ca": "Usuari Persona",
+            "es": "Usuario persona"
           },
-          "javaName": "usuaripersona",
+          "javaName": "usuariPersona",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
-          "filter": false,
+          "filter": true,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
@@ -380,20 +430,21 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "estatcodi",
-            "es": "estatcodi"
+            "ca": "Estat - Codi",
+            "es": "Estado - Código"
           },
-          "javaName": "estatcodi",
+          "javaName": "estatCodi",
           "javaType": "int",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
-          "filter": false,
+          "minAllowedValue": "-1,1,2,3,4",
+          "filter": true,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 14
+            "webtype": 16
           },
           "foreignKeys": []
         },
@@ -405,16 +456,16 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "estaterror",
-            "es": "estaterror"
+            "ca": "Estat - Missatge Error",
+            "es": "Estado - Mensaje Error"
           },
-          "javaName": "estaterror",
+          "javaName": "estatError",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
-          "filter": false,
+          "filter": true,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
@@ -430,10 +481,10 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "estatexcepcio",
-            "es": "estatexcepcio"
+            "ca": "Estat - Excepció",
+            "es": "Estado - Excepción"
           },
-          "javaName": "estatexcepcio",
+          "javaName": "estatExcepcio",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -449,52 +500,28 @@
         },
         {
           "isAutoIncrement": false,
-          "sqlName": "personamobil",
-          "sqlType": 12,
-          "size": 100,
-          "digits": 0,
-          "isNotNullable": false,
-          "labels": {
-            "ca": "personamobil",
-            "es": "personamobil"
-          },
-          "javaName": "personamobil",
-          "javaType": "java.lang.String",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 1
-          },
-          "foreignKeys": []
-        },
-        {
-          "isAutoIncrement": false,
           "sqlName": "logintype",
           "sqlType": 4,
           "size": 10,
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "logintype",
-            "es": "logintype"
+            "ca": "Login - Tipus",
+            "es": "Login - Tipo"
           },
-          "javaName": "logintype",
+          "javaName": "loginType",
           "javaType": "int",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
           "defaultValue": "0",
+          "minAllowedValue": "0,1,2",
           "filter": false,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 14
+            "webtype": 16
           },
           "foreignKeys": []
         },
@@ -506,10 +533,10 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "loginid",
-            "es": "loginid"
+            "ca": "Login - ID",
+            "es": "Login - ID"
           },
-          "javaName": "loginid",
+          "javaName": "loginId",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -531,10 +558,10 @@
           "digits": 6,
           "isNotNullable": false,
           "labels": {
-            "ca": "logindata",
-            "es": "logindata"
+            "ca": "Login - Data",
+            "es": "Login - Fecha"
           },
-          "javaName": "logindata",
+          "javaName": "loginData",
           "javaType": "java.sql.Timestamp",
           "traduible": false,
           "showInWebList": true,
@@ -556,16 +583,16 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "localitzacioip",
-            "es": "localitzacioip"
+            "ca": "Localització - IP",
+            "es": "Localización - IP"
           },
-          "javaName": "localitzacioip",
+          "javaName": "localitzacioIp",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
-          "filter": false,
+          "filter": true,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
@@ -581,10 +608,10 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "localitzaciocodipostal",
-            "es": "localitzaciocodipostal"
+            "ca": "Localització - Codi Postal",
+            "es": "Localización - Código Postal"
           },
-          "javaName": "localitzaciocodipostal",
+          "javaName": "localitzacioCodiPostal",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -600,16 +627,16 @@
         },
         {
           "isAutoIncrement": false,
-          "sqlName": "localitzaciocoordenades",
+          "sqlName": "localitzaciolongitud",
           "sqlType": 12,
-          "size": 255,
+          "size": 100,
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "localitzaciocoordenades",
-            "es": "localitzaciocoordenades"
+            "ca": "Localització - Longitud",
+            "es": "Localización - Longitud"
           },
-          "javaName": "localitzaciocoordenades",
+          "javaName": "localitzacioLongitud",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -625,16 +652,91 @@
         },
         {
           "isAutoIncrement": false,
-          "sqlName": "personaemail",
+          "sqlName": "localitzaciolatitud",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Localització - Latitud",
+            "es": "Localización - Latitud"
+          },
+          "javaName": "localitzacioLatitud",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "localitzaciociutat",
           "sqlType": 12,
           "size": 255,
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "personaemail",
-            "es": "personaemail"
+            "ca": "Localitzacio - Ciutat",
+            "es": "Localización - Ciudad"
           },
-          "javaName": "personaemail",
+          "javaName": "localitzacioCiutat",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "localitzacioregio",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Localització - Regió",
+            "es": "Localizacioón - Región"
+          },
+          "javaName": "localitzacioRegio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "localitzaciopais",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Localització - País",
+            "es": "Localitzación - País"
+          },
+          "javaName": "localitzacioPais",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -1010,8 +1112,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "nom",
-            "es": "nom"
+            "ca": "Nom",
+            "es": "Nombre"
           },
           "javaName": "nom",
           "javaType": "java.lang.String",
@@ -1020,7 +1122,7 @@
           "showInReferenceList": true,
           "transientField": false,
           "filter": false,
-          "orderBy": 0,
+          "orderBy": 1,
           "groupBy": false,
           "webFieldInfo": {
             "webtype": 1
@@ -1035,8 +1137,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "descripcio",
-            "es": "descripcio"
+            "ca": "Descripció",
+            "es": "Descripción"
           },
           "javaName": "descripcio",
           "javaType": "java.lang.String",
@@ -1060,8 +1162,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "classe",
-            "es": "classe"
+            "ca": "Classe Java",
+            "es": "Clase Java"
           },
           "javaName": "classe",
           "javaType": "java.lang.String",
@@ -1111,8 +1213,8 @@
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "propietats",
-            "es": "propietats"
+            "ca": "Propietats",
+            "es": "Propiedades"
           },
           "javaName": "propietats",
           "javaType": "java.lang.String",
@@ -1136,8 +1238,8 @@
           "digits": 0,
           "isNotNullable": true,
           "labels": {
-            "ca": "actiu",
-            "es": "actiu"
+            "ca": "Actiu",
+            "es": "Activo"
           },
           "javaName": "actiu",
           "javaType": "boolean",

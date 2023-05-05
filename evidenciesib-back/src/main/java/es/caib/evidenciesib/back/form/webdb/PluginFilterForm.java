@@ -126,7 +126,7 @@ public class PluginFilterForm extends EvidenciesIBBaseFilterForm implements Plug
   }
 
 
-  protected OrderBy[] defaultOrderBy = null;
+  protected OrderBy[] defaultOrderBy = new OrderBy[] {new OrderBy(NOM )};
 
 
   public OrderBy[] getDefaultOrderBy() {

@@ -1,5 +1,7 @@
 package es.caib.evidenciesib.back.controller.common;
 
+import es.caib.evidenciesib.back.controller.admin.PluginFirmaEnServidorAdminController;
+import es.caib.evidenciesib.back.controller.user.EvidenciaUserController;
 import es.caib.evidenciesib.commons.utils.Configuracio;
 
 import org.apache.log4j.Logger;
@@ -68,11 +70,11 @@ public class PrincipalController {
 			 */
 
 			if ("admin".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/admin/option1", true));
+				return new ModelAndView(new RedirectView(PluginFirmaEnServidorAdminController.CONTEXTWEB + "/list", true));
 			}
 
 			if ("user".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/user/option1", true));
+				return new ModelAndView(new RedirectView(EvidenciaUserController.CONTEXT_WEB + "/list", true));
 			}
 
 			if ("webdb".equals(pipella)) {

@@ -3,13 +3,13 @@ package es.caib.evidenciesib.back.security;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
+//import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
-import org.fundaciobit.genapp.common.i18n.I18NArgumentCode;
+//import org.fundaciobit.genapp.common.i18n.I18NArgumentCode;
 //import es.caib.evidenciesib.back.security.LoginInfo;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
@@ -28,8 +28,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-import es.caib.evidenciesib.commons.utils.Constants;
-import es.caib.evidenciesib.back.security.LoginException;
+//import es.caib.evidenciesib.commons.utils.Constants;
+//import es.caib.evidenciesib.back.security.LoginException;
 
 /**
  * 
