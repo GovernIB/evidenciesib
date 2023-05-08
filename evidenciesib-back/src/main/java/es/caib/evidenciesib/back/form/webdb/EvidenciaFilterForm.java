@@ -120,39 +120,6 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
-  private java.lang.String documentHash;
-
-  public java.lang.String getDocumentHash() {
-    return this.documentHash;
-  }
-
-  public void setDocumentHash(java.lang.String documentHash) {
-    this.documentHash = documentHash;
-  }
-
-
-  private java.lang.Long documentMidaDesde;
-
-  public java.lang.Long getDocumentMidaDesde() {
-    return this.documentMidaDesde;
-  }
-
-  public void setDocumentMidaDesde(java.lang.Long documentMidaDesde) {
-    this.documentMidaDesde = documentMidaDesde;
-  }
-
-
-  private java.lang.Long documentMidaFins;
-
-  public java.lang.Long getDocumentMidaFins() {
-    return this.documentMidaFins;
-  }
-
-  public void setDocumentMidaFins(java.lang.Long documentMidaFins) {
-    this.documentMidaFins = documentMidaFins;
-  }
-
-
   private java.sql.Timestamp dataIniciDesde;
 
   public java.sql.Timestamp getDataIniciDesde() {
@@ -329,17 +296,6 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
-  private java.lang.String localitzacioLatitud;
-
-  public java.lang.String getLocalitzacioLatitud() {
-    return this.localitzacioLatitud;
-  }
-
-  public void setLocalitzacioLatitud(java.lang.String localitzacioLatitud) {
-    this.localitzacioLatitud = localitzacioLatitud;
-  }
-
-
   private java.lang.String localitzacioCiutat;
 
   public java.lang.String getLocalitzacioCiutat() {
@@ -348,6 +304,17 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   public void setLocalitzacioCiutat(java.lang.String localitzacioCiutat) {
     this.localitzacioCiutat = localitzacioCiutat;
+  }
+
+
+  private java.lang.String localitzacioLatitud;
+
+  public java.lang.String getLocalitzacioLatitud() {
+    return this.localitzacioLatitud;
+  }
+
+  public void setLocalitzacioLatitud(java.lang.String localitzacioLatitud) {
+    this.localitzacioLatitud = localitzacioLatitud;
   }
 
 
@@ -373,6 +340,39 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
+  private java.lang.String firmaReason;
+
+  public java.lang.String getFirmaReason() {
+    return this.firmaReason;
+  }
+
+  public void setFirmaReason(java.lang.String firmaReason) {
+    this.firmaReason = firmaReason;
+  }
+
+
+  private java.util.List<java.lang.Integer> firmaTipusDocumentalSelect;
+
+  public java.util.List<java.lang.Integer> getFirmaTipusDocumentalSelect() {
+    return this.firmaTipusDocumentalSelect;
+  }
+
+  public void setFirmaTipusDocumentalSelect(java.util.List<java.lang.Integer> firmaTipusDocumentalSelect) {
+    this.firmaTipusDocumentalSelect = firmaTipusDocumentalSelect;
+  }
+
+
+  private java.lang.String firmaIdiomaDocument;
+
+  public java.lang.String getFirmaIdiomaDocument() {
+    return this.firmaIdiomaDocument;
+  }
+
+  public void setFirmaIdiomaDocument(java.lang.String firmaIdiomaDocument) {
+    this.firmaIdiomaDocument = firmaIdiomaDocument;
+  }
+
+
   public EvidenciaFilterForm() {
   }
   
@@ -387,9 +387,6 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.personaNif = __toClone.personaNif;
     this.personaEmail = __toClone.personaEmail;
     this.personaMobil = __toClone.personaMobil;
-    this.documentHash = __toClone.documentHash;
-    this.documentMidaDesde = __toClone.documentMidaDesde;
-    this.documentMidaFins = __toClone.documentMidaFins;
     this.dataIniciDesde = __toClone.dataIniciDesde;
     this.dataIniciFins = __toClone.dataIniciFins;
     this.dataFiDesde = __toClone.dataFiDesde;
@@ -406,19 +403,24 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.localitzacioIp = __toClone.localitzacioIp;
     this.localitzacioCodiPostal = __toClone.localitzacioCodiPostal;
     this.localitzacioLongitud = __toClone.localitzacioLongitud;
-    this.localitzacioLatitud = __toClone.localitzacioLatitud;
     this.localitzacioCiutat = __toClone.localitzacioCiutat;
+    this.localitzacioLatitud = __toClone.localitzacioLatitud;
     this.localitzacioRegio = __toClone.localitzacioRegio;
     this.localitzacioPais = __toClone.localitzacioPais;
+    this.firmaReason = __toClone.firmaReason;
+    this.firmaTipusDocumentalSelect = __toClone.firmaTipusDocumentalSelect;
+    this.firmaIdiomaDocument = __toClone.firmaIdiomaDocument;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
     this.mapOfValuesForLoginType = __toClone.mapOfValuesForLoginType;
+    this.mapOfValuesForFirmaTipusDocumental = __toClone.mapOfValuesForFirmaTipusDocumental;
+    this.mapOfValuesForFirmaIdiomaDocument = __toClone.mapOfValuesForFirmaIdiomaDocument;
   }
   
   /* ========= UTILS ========== */
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM ,PERSONALLINATGE1 ,PERSONANIF ,PERSONAEMAIL ,USUARIPERSONA ,ESTATCODI ,ESTATERROR ,LOCALITZACIOIP }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM ,PERSONALLINATGE1 ,PERSONANIF ,PERSONAEMAIL ,USUARIPERSONA ,ESTATCODI ,ESTATERROR ,LOCALITZACIOIP ,FIRMATIPUSDOCUMENTAL }));
   }
 
   @Override
@@ -466,6 +468,30 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   public void setMapOfValuesForLoginType(Map<String, String> mapOfValuesForLoginType) {
     this.mapOfValuesForLoginType = mapOfValuesForLoginType;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForFirmaTipusDocumental;
+
+  public Map<String, String> getMapOfValuesForFirmaTipusDocumental() {
+    return this.mapOfValuesForFirmaTipusDocumental;
+  }
+
+  public void setMapOfValuesForFirmaTipusDocumental(Map<String, String> mapOfValuesForFirmaTipusDocumental) {
+    this.mapOfValuesForFirmaTipusDocumental = mapOfValuesForFirmaTipusDocumental;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForFirmaIdiomaDocument;
+
+  public Map<String, String> getMapOfValuesForFirmaIdiomaDocument() {
+    return this.mapOfValuesForFirmaIdiomaDocument;
+  }
+
+  public void setMapOfValuesForFirmaIdiomaDocument(Map<String, String> mapOfValuesForFirmaIdiomaDocument) {
+    this.mapOfValuesForFirmaIdiomaDocument = mapOfValuesForFirmaIdiomaDocument;
   }
 
 

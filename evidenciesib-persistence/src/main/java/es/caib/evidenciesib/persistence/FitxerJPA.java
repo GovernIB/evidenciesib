@@ -122,16 +122,42 @@ public class FitxerJPA implements Fitxer {
     return __result;
   }
 
-// EXP  Field:documentfitxerid | Table: evi_evidencia | Type: 0  
+// EXP  Field:fitxeradaptatid | Table: evi_evidencia | Type: 0  
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "documentFitxerID")
-    private Set<EvidenciaJPA> evidencias = new HashSet<EvidenciaJPA>(0);
-    public  Set<EvidenciaJPA> getEvidencias() {
-    return this.evidencias;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxerAdaptatID")
+    private Set<EvidenciaJPA> evidencia_fitxeradaptatids = new HashSet<EvidenciaJPA>(0);
+    public  Set<EvidenciaJPA> getEvidencia_fitxeradaptatids() {
+    return this.evidencia_fitxeradaptatids;
   }
 
-    public void setEvidencias(Set<EvidenciaJPA> evidencias) {
-      this.evidencias = evidencias;
+    public void setEvidencia_fitxeradaptatids(Set<EvidenciaJPA> evidencia_fitxeradaptatids) {
+      this.evidencia_fitxeradaptatids = evidencia_fitxeradaptatids;
+    }
+
+
+// EXP  Field:fitxeroriginalid | Table: evi_evidencia | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxerOriginalID")
+    private Set<EvidenciaJPA> evidencia_fitxeroriginalids = new HashSet<EvidenciaJPA>(0);
+    public  Set<EvidenciaJPA> getEvidencia_fitxeroriginalids() {
+    return this.evidencia_fitxeroriginalids;
+  }
+
+    public void setEvidencia_fitxeroriginalids(Set<EvidenciaJPA> evidencia_fitxeroriginalids) {
+      this.evidencia_fitxeroriginalids = evidencia_fitxeroriginalids;
+    }
+
+
+// EXP  Field:fitxersignatid | Table: evi_evidencia | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxerSignatID")
+    private Set<EvidenciaJPA> evidencia_fitxersignatids = new HashSet<EvidenciaJPA>(0);
+    public  Set<EvidenciaJPA> getEvidencia_fitxersignatids() {
+    return this.evidencia_fitxersignatids;
+  }
+
+    public void setEvidencia_fitxersignatids(Set<EvidenciaJPA> evidencia_fitxersignatids) {
+      this.evidencia_fitxersignatids = evidencia_fitxersignatids;
     }
 
 
@@ -221,8 +247,16 @@ public class FitxerJPA implements Fitxer {
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
     if(!"EvidenciaJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.evidencias) || org.hibernate.Hibernate.isInitialized(__jpa.getEvidencias())) ) {
-      __tmp.setEvidencias(EvidenciaJPA.copyJPA(__jpa.getEvidencias(), __alreadyCopied,"FitxerJPA"));
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.evidencia_fitxeroriginalids) || org.hibernate.Hibernate.isInitialized(__jpa.getEvidencia_fitxeroriginalids())) ) {
+      __tmp.setEvidencia_fitxeroriginalids(EvidenciaJPA.copyJPA(__jpa.getEvidencia_fitxeroriginalids(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"EvidenciaJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.evidencia_fitxersignatids) || org.hibernate.Hibernate.isInitialized(__jpa.getEvidencia_fitxersignatids())) ) {
+      __tmp.setEvidencia_fitxersignatids(EvidenciaJPA.copyJPA(__jpa.getEvidencia_fitxersignatids(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"EvidenciaJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.evidencia_fitxeradaptatids) || org.hibernate.Hibernate.isInitialized(__jpa.getEvidencia_fitxeradaptatids())) ) {
+      __tmp.setEvidencia_fitxeradaptatids(EvidenciaJPA.copyJPA(__jpa.getEvidencia_fitxeradaptatids(), __alreadyCopied,"FitxerJPA"));
     }
     // Copia de beans complexes (IMP)
 

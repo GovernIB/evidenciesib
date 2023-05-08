@@ -26,15 +26,6 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getPersonaMobil();
 	public void setPersonaMobil(java.lang.String _personaMobil_);
 
-	public java.lang.String getDocumentHash();
-	public void setDocumentHash(java.lang.String _documentHash_);
-
-	public long getDocumentFitxerID();
-	public void setDocumentFitxerID(long _documentFitxerID_);
-
-	public long getDocumentMida();
-	public void setDocumentMida(long _documentMida_);
-
 	public java.sql.Timestamp getDataInici();
 	public void setDataInici(java.sql.Timestamp _dataInici_);
 
@@ -74,11 +65,11 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getLocalitzacioLongitud();
 	public void setLocalitzacioLongitud(java.lang.String _localitzacioLongitud_);
 
-	public java.lang.String getLocalitzacioLatitud();
-	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_);
-
 	public java.lang.String getLocalitzacioCiutat();
 	public void setLocalitzacioCiutat(java.lang.String _localitzacioCiutat_);
+
+	public java.lang.String getLocalitzacioLatitud();
+	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_);
 
 	public java.lang.String getLocalitzacioRegio();
 	public void setLocalitzacioRegio(java.lang.String _localitzacioRegio_);
@@ -86,8 +77,30 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getLocalitzacioPais();
 	public void setLocalitzacioPais(java.lang.String _localitzacioPais_);
 
+	public java.lang.String getFirmaReason();
+	public void setFirmaReason(java.lang.String _firmaReason_);
+
+	public int getFirmaTipusDocumental();
+	public void setFirmaTipusDocumental(int _firmaTipusDocumental_);
+
+	public java.lang.String getFirmaIdiomaDocument();
+	public void setFirmaIdiomaDocument(java.lang.String _firmaIdiomaDocument_);
+
+	public long getFitxerOriginalID();
+	public void setFitxerOriginalID(long _fitxerOriginalID_);
+
+	public java.lang.Long getFitxerAdaptatID();
+	public void setFitxerAdaptatID(java.lang.Long _fitxerAdaptatID_);
+
+	public java.lang.Long getFitxerSignatID();
+	public void setFitxerSignatID(java.lang.Long _fitxerSignatID_);
+
   // Fitxer
-  public <F extends Fitxer> F getDocumentFitxer();
+  public <F extends Fitxer> F getFitxerOriginal();
+  // Fitxer
+  public <F extends Fitxer> F getFitxerAdaptat();
+  // Fitxer
+  public <F extends Fitxer> F getFitxerSignat();
 
 
   // ======================================

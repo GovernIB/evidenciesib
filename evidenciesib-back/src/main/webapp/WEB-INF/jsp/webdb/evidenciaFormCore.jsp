@@ -128,94 +128,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.DOCUMENTHASH)}">
-        <tr id="evidencia_documentHash_rowid">
-          <td id="evidencia_documentHash_columnlabelid">
-            <label>
-              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.DOCUMENTHASH])?'evidencia.documentHash':__theForm.labels[EvidenciaFields.DOCUMENTHASH]}" />
-             </label>
-              <c:if test="${not empty __theForm.help[EvidenciaFields.DOCUMENTHASH]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.DOCUMENTHASH]}" ></i>
-              </c:if>
-            </td>
-          <td id="evidencia_documentHash_columnvalueid">
-            <form:errors path="evidencia.documentHash" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DOCUMENTHASH)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DOCUMENTHASH)? ' uneditable-input' : ''}"  style="" maxlength="255" path="evidencia.documentHash"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.DOCUMENTFITXERID)}">
-        <tr id="evidencia_documentFitxerID_rowid">
-          <td id="evidencia_documentFitxerID_columnlabelid">
-            <label>
-              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.DOCUMENTFITXERID])?'evidencia.documentFitxerID':__theForm.labels[EvidenciaFields.DOCUMENTFITXERID]}" /> &nbsp;(*)
-             </label>
-              <c:if test="${not empty __theForm.help[EvidenciaFields.DOCUMENTFITXERID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.DOCUMENTFITXERID]}" ></i>
-              </c:if>
-            </td>
-          <td id="evidencia_documentFitxerID_columnvalueid">
-              <form:errors path="evidencia.documentFitxerID" cssClass="errorField alert alert-danger" />
-            <c:if test="${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DOCUMENTFITXERID)}" >
-              <a target="_blank" href="<c:url value="${evi:fileUrl(__theForm.evidencia.documentFitxer)}"/>">${__theForm.evidencia.documentFitxer.nom}</a>
-            </c:if>
-            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DOCUMENTFITXERID)}" >
-              <div class="input-group col-md-9-optional" style="padding: 0px">
-                <div class="custom-file">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DOCUMENTFITXERID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DOCUMENTFITXERID)? ' uneditable-input' : ''}"   path="documentFitxerID" type="file" />
-                  <label class="custom-file-label" for="documentFitxerID">
-                  </label>
-                </div>
-                <c:choose>
-                <c:when test="${not empty __theForm.evidencia.documentFitxer}">
-                <div class="input-group-append">
-                  <span class="input-group-text" id="">
-                  <small>              <a target="_blank" href="<c:url value="${evi:fileUrl(__theForm.evidencia.documentFitxer)}"/>">${__theForm.evidencia.documentFitxer.nom}</a>
-</small>
-                  </span>
-                </div>
-                </c:when>
-                <c:otherwise>
-                <div class="input-group-append input-group-append-file">
-                  <span class="input-group-text" id="documentFitxerID-custom-file-label" style="display:none">
-                  <small></small>
-                  </span>
-                </div>
-                <script type="text/javascript">
-					$('#documentFitxerID').on('change', function(){
-						var ruta = $('#documentFitxerID').val(); 
-						var rutaArray = ruta.split('\\');
-						$('#documentFitxerID-custom-file-label').css('display','block');
-						$('#documentFitxerID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-					});
-				</script>                </c:otherwise>
-                </c:choose>
-              </div>
-            </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.DOCUMENTMIDA)}">
-        <tr id="evidencia_documentMida_rowid">
-          <td id="evidencia_documentMida_columnlabelid">
-            <label>
-              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.DOCUMENTMIDA])?'evidencia.documentMida':__theForm.labels[EvidenciaFields.DOCUMENTMIDA]}" /> &nbsp;(*)
-             </label>
-              <c:if test="${not empty __theForm.help[EvidenciaFields.DOCUMENTMIDA]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.DOCUMENTMIDA]}" ></i>
-              </c:if>
-            </td>
-          <td id="evidencia_documentMida_columnvalueid">
-            <form:errors path="evidencia.documentMida" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DOCUMENTMIDA)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DOCUMENTMIDA)? ' uneditable-input' : ''}"  style=""  path="evidencia.documentMida"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.DATAINICI)}">
         <tr id="evidencia_dataInici_rowid">
           <td id="evidencia_dataInici_columnlabelid">
@@ -228,7 +140,7 @@
             </td>
           <td id="evidencia_dataInici_columnvalueid">
     <form:errors path="evidencia.dataInici" cssClass="errorField alert alert-danger" />
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="evidencia_dataInici" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DATAINICI)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#evidencia_dataInici" path="evidencia.dataInici" />
                     <c:if test="${!gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DATAINICI)}" >
@@ -264,7 +176,7 @@
             </td>
           <td id="evidencia_dataFi_columnvalueid">
     <form:errors path="evidencia.dataFi" cssClass="errorField alert alert-danger" />
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="evidencia_dataFi" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DATAFI)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#evidencia_dataFi" path="evidencia.dataFi" />
                     <c:if test="${!gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DATAFI)}" >
@@ -454,30 +366,9 @@
               </c:if>
             </td>
           <td id="evidencia_loginId_columnvalueid">
-              <form:errors path="evidencia.loginId" cssClass="errorField alert alert-danger" />
-  <table style="width:100%">
-  <tr>
-  <td>
-       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOGINID)? 'true' : 'false'}" path="evidencia.loginId"  />
-   </td>
-   <td style="width:40px">
-      <div id="dropdownMenuButton_loginId" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_loginId" class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('evidencia.loginId'); ta.wrap='off';" >No Wrap</a>
-          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('evidencia.loginId'); ta.wrap='soft';">Soft Wrap</a>
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('evidencia.loginId'); ta.wrap='hard';">Hard Wrap</a>
-        </div>
-      </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_loginId').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_loginId').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_loginId').css('display', valor);
-                 return false;
-				});
-      </script>   </td>
-   </tr>
-   </table>
+            <form:errors path="evidencia.loginId" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOGINID)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOGINID)? ' uneditable-input' : ''}"  style="" maxlength="255" path="evidencia.loginId"   />
+
            </td>
         </tr>
         </c:if>
@@ -494,7 +385,7 @@
             </td>
           <td id="evidencia_loginData_columnvalueid">
     <form:errors path="evidencia.loginData" cssClass="errorField alert alert-danger" />
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="evidencia_loginData" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOGINDATA)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#evidencia_loginData" path="evidencia.loginData" />
                     <c:if test="${!gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOGINDATA)}" >
@@ -572,24 +463,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
-        <tr id="evidencia_localitzacioLatitud_rowid">
-          <td id="evidencia_localitzacioLatitud_columnlabelid">
-            <label>
-              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.LOCALITZACIOLATITUD])?'evidencia.localitzacioLatitud':__theForm.labels[EvidenciaFields.LOCALITZACIOLATITUD]}" />
-             </label>
-              <c:if test="${not empty __theForm.help[EvidenciaFields.LOCALITZACIOLATITUD]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.LOCALITZACIOLATITUD]}" ></i>
-              </c:if>
-            </td>
-          <td id="evidencia_localitzacioLatitud_columnvalueid">
-            <form:errors path="evidencia.localitzacioLatitud" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOCALITZACIOLATITUD)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOCALITZACIOLATITUD)? ' uneditable-input' : ''}"  style="" maxlength="100" path="evidencia.localitzacioLatitud"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
         <tr id="evidencia_localitzacioCiutat_rowid">
           <td id="evidencia_localitzacioCiutat_columnlabelid">
@@ -603,6 +476,24 @@
           <td id="evidencia_localitzacioCiutat_columnvalueid">
             <form:errors path="evidencia.localitzacioCiutat" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOCALITZACIOCIUTAT)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOCALITZACIOCIUTAT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="evidencia.localitzacioCiutat"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
+        <tr id="evidencia_localitzacioLatitud_rowid">
+          <td id="evidencia_localitzacioLatitud_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.LOCALITZACIOLATITUD])?'evidencia.localitzacioLatitud':__theForm.labels[EvidenciaFields.LOCALITZACIOLATITUD]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.LOCALITZACIOLATITUD]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.LOCALITZACIOLATITUD]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_localitzacioLatitud_columnvalueid">
+            <form:errors path="evidencia.localitzacioLatitud" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOCALITZACIOLATITUD)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOCALITZACIOLATITUD)? ' uneditable-input' : ''}"  style="" maxlength="100" path="evidencia.localitzacioLatitud"   />
 
            </td>
         </tr>
@@ -640,6 +531,259 @@
             <form:errors path="evidencia.localitzacioPais" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOCALITZACIOPAIS)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOCALITZACIOPAIS)? ' uneditable-input' : ''}"  style="" maxlength="100" path="evidencia.localitzacioPais"   />
 
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.FIRMAREASON)}">
+        <tr id="evidencia_firmaReason_rowid">
+          <td id="evidencia_firmaReason_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.FIRMAREASON])?'evidencia.firmaReason':__theForm.labels[EvidenciaFields.FIRMAREASON]}" /> &nbsp;(*)
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.FIRMAREASON]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.FIRMAREASON]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_firmaReason_columnvalueid">
+            <form:errors path="evidencia.firmaReason" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FIRMAREASON)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FIRMAREASON)? ' uneditable-input' : ''}"  style="" maxlength="255" path="evidencia.firmaReason"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}">
+        <tr id="evidencia_firmaTipusDocumental_rowid">
+          <td id="evidencia_firmaTipusDocumental_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.FIRMATIPUSDOCUMENTAL])?'evidencia.firmaTipusDocumental':__theForm.labels[EvidenciaFields.FIRMATIPUSDOCUMENTAL]}" /> &nbsp;(*)
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.FIRMATIPUSDOCUMENTAL]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.FIRMATIPUSDOCUMENTAL]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_firmaTipusDocumental_columnvalueid">
+          <form:errors path="evidencia.firmaTipusDocumental" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}" >
+          <form:hidden path="evidencia.firmaTipusDocumental"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.evidencia.firmaTipusDocumental,__theForm.listOfValuesForFirmaTipusDocumental)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}" >
+          <c:set var="containEmptyValue"  value="false" />
+          <form:select id="evidencia_firmaTipusDocumental"  onchange="if(typeof onChangeFirmaTipusDocumental == 'function') {  onChangeFirmaTipusDocumental(this); };"  cssClass="form-control col-md-9-optional" path="evidencia.firmaTipusDocumental">
+            <c:forEach items="${__theForm.listOfValuesForFirmaTipusDocumental}" var="tmp">
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.FIRMAIDIOMADOCUMENT)}">
+        <tr id="evidencia_firmaIdiomaDocument_rowid">
+          <td id="evidencia_firmaIdiomaDocument_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.FIRMAIDIOMADOCUMENT])?'evidencia.firmaIdiomaDocument':__theForm.labels[EvidenciaFields.FIRMAIDIOMADOCUMENT]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.FIRMAIDIOMADOCUMENT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.FIRMAIDIOMADOCUMENT]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_firmaIdiomaDocument_columnvalueid">
+          <form:errors path="evidencia.firmaIdiomaDocument" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FIRMAIDIOMADOCUMENT)}" >
+          <form:hidden path="evidencia.firmaIdiomaDocument"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.evidencia.firmaIdiomaDocument,__theForm.listOfValuesForFirmaIdiomaDocument)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FIRMAIDIOMADOCUMENT)}" >
+          <c:set var="containEmptyValue"  value="false" />
+          <form:select id="evidencia_firmaIdiomaDocument"  onchange="if(typeof onChangeFirmaIdiomaDocument == 'function') {  onChangeFirmaIdiomaDocument(this); };"  cssClass="form-control col-md-9-optional" path="evidencia.firmaIdiomaDocument">
+            <c:forEach items="${__theForm.listOfValuesForFirmaIdiomaDocument}" var="tmp">
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
+            </c:forEach>
+            <%-- El camp pot ser null, per la qual cosa afegim una entrada buida si no s'ha definit abans --%>
+            <c:if test="${not containEmptyValue}">
+              <c:if test="${empty __theForm.evidencia.firmaIdiomaDocument }">
+                  <form:option value="" selected="true" ></form:option>
+              </c:if>
+              <c:if test="${not empty __theForm.evidencia.firmaIdiomaDocument }">
+                  <form:option value="" ></form:option>
+              </c:if>
+            </c:if>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.FITXERORIGINALID)}">
+        <tr id="evidencia_fitxerOriginalID_rowid">
+          <td id="evidencia_fitxerOriginalID_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.FITXERORIGINALID])?'evidencia.fitxerOriginalID':__theForm.labels[EvidenciaFields.FITXERORIGINALID]}" /> &nbsp;(*)
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.FITXERORIGINALID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.FITXERORIGINALID]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_fitxerOriginalID_columnvalueid">
+              <form:errors path="evidencia.fitxerOriginalID" cssClass="errorField alert alert-danger" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERORIGINALID)}" >
+              <a target="_blank" href="<c:url value="${evi:fileUrl(__theForm.evidencia.fitxerOriginal)}"/>">${__theForm.evidencia.fitxerOriginal.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERORIGINALID)}" >
+              <div class="input-group col-md-9-optional" style="padding: 0px">
+                <div class="custom-file">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERORIGINALID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERORIGINALID)? ' uneditable-input' : ''}"   path="fitxerOriginalID" type="file" />
+                  <label class="custom-file-label" for="fitxerOriginalID">
+                  </label>
+                </div>
+                <c:choose>
+                <c:when test="${not empty __theForm.evidencia.fitxerOriginal}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${evi:fileUrl(__theForm.evidencia.fitxerOriginal)}"/>">${__theForm.evidencia.fitxerOriginal.nom}</a>
+</small>
+                  </span>
+                </div>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="fitxerOriginalID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#fitxerOriginalID').on('change', function(){
+						var ruta = $('#fitxerOriginalID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#fitxerOriginalID-custom-file-label').css('display','block');
+						$('#fitxerOriginalID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
+              </div>
+            </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.FITXERADAPTATID)}">
+        <tr id="evidencia_fitxerAdaptatID_rowid">
+          <td id="evidencia_fitxerAdaptatID_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.FITXERADAPTATID])?'evidencia.fitxerAdaptatID':__theForm.labels[EvidenciaFields.FITXERADAPTATID]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.FITXERADAPTATID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.FITXERADAPTATID]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_fitxerAdaptatID_columnvalueid">
+              <form:errors path="evidencia.fitxerAdaptatID" cssClass="errorField alert alert-danger" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERADAPTATID)}" >
+              <a target="_blank" href="<c:url value="${evi:fileUrl(__theForm.evidencia.fitxerAdaptat)}"/>">${__theForm.evidencia.fitxerAdaptat.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERADAPTATID)}" >
+              <div class="input-group col-md-9-optional" style="padding: 0px">
+                <div class="custom-file">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERADAPTATID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERADAPTATID)? ' uneditable-input' : ''}"   path="fitxerAdaptatID" type="file" />
+                  <label class="custom-file-label" for="fitxerAdaptatID">
+                  </label>
+                </div>
+                <c:choose>
+                <c:when test="${not empty __theForm.evidencia.fitxerAdaptat}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${evi:fileUrl(__theForm.evidencia.fitxerAdaptat)}"/>">${__theForm.evidencia.fitxerAdaptat.nom}</a>
+</small>
+                  </span>
+                  <span class="input-group-text" id="">
+                        <form:checkbox path="fitxerAdaptatIDDelete"/>
+                        <small><fmt:message key="genapp.form.file.delete"/></small>
+                  </span>
+                </div>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="fitxerAdaptatID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#fitxerAdaptatID').on('change', function(){
+						var ruta = $('#fitxerAdaptatID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#fitxerAdaptatID-custom-file-label').css('display','block');
+						$('#fitxerAdaptatID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
+              </div>
+            </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.FITXERSIGNATID)}">
+        <tr id="evidencia_fitxerSignatID_rowid">
+          <td id="evidencia_fitxerSignatID_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.FITXERSIGNATID])?'evidencia.fitxerSignatID':__theForm.labels[EvidenciaFields.FITXERSIGNATID]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.FITXERSIGNATID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.FITXERSIGNATID]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_fitxerSignatID_columnvalueid">
+              <form:errors path="evidencia.fitxerSignatID" cssClass="errorField alert alert-danger" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERSIGNATID)}" >
+              <a target="_blank" href="<c:url value="${evi:fileUrl(__theForm.evidencia.fitxerSignat)}"/>">${__theForm.evidencia.fitxerSignat.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERSIGNATID)}" >
+              <div class="input-group col-md-9-optional" style="padding: 0px">
+                <div class="custom-file">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERSIGNATID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.FITXERSIGNATID)? ' uneditable-input' : ''}"   path="fitxerSignatID" type="file" />
+                  <label class="custom-file-label" for="fitxerSignatID">
+                  </label>
+                </div>
+                <c:choose>
+                <c:when test="${not empty __theForm.evidencia.fitxerSignat}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${evi:fileUrl(__theForm.evidencia.fitxerSignat)}"/>">${__theForm.evidencia.fitxerSignat.nom}</a>
+</small>
+                  </span>
+                  <span class="input-group-text" id="">
+                        <form:checkbox path="fitxerSignatIDDelete"/>
+                        <small><fmt:message key="genapp.form.file.delete"/></small>
+                  </span>
+                </div>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="fitxerSignatID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#fitxerSignatID').on('change', function(){
+						var ruta = $('#fitxerSignatID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#fitxerSignatID-custom-file-label').css('display','block');
+						$('#fitxerSignatID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
+              </div>
+            </c:if>
            </td>
         </tr>
         </c:if>

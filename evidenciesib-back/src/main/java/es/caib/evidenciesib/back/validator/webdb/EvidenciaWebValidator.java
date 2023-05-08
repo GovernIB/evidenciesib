@@ -90,11 +90,11 @@ public class EvidenciaWebValidator extends AbstractWebValidator<EvidenciaForm, E
     if (isNou) { // Creacio
       // ================ CREATION
       // Fitxers 
-        if (!errors.hasFieldErrors(get(DOCUMENTFITXERID))){
-            CommonsMultipartFile documentFitxerID = ((EvidenciaForm)__form).getDocumentFitxerID();
-            if (documentFitxerID == null || documentFitxerID.isEmpty()) {
-                errors.rejectValue(get(DOCUMENTFITXERID), "genapp.validation.required",
-                new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(DOCUMENTFITXERID)) },
+        if (!errors.hasFieldErrors(get(FITXERORIGINALID))){
+            CommonsMultipartFile fitxerOriginalID = ((EvidenciaForm)__form).getFitxerOriginalID();
+            if (fitxerOriginalID == null || fitxerOriginalID.isEmpty()) {
+                errors.rejectValue(get(FITXERORIGINALID), "genapp.validation.required",
+                new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(FITXERORIGINALID)) },
                 null);
             }
         }

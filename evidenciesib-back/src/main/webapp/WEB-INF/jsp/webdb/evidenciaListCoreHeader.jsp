@@ -36,15 +36,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONAMOBIL)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONAMOBIL)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DOCUMENTHASH)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.DOCUMENTHASH)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DOCUMENTFITXERID)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.DOCUMENTFITXERID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DOCUMENTMIDA)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.DOCUMENTMIDA)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DATAINICI)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.DATAINICI)}</th>
         </c:if>
@@ -84,17 +75,35 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLONGITUD)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOLONGITUD)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOLATITUD)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOCIUTAT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOLATITUD)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOREGIO)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOREGIO)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOPAIS)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOPAIS)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMAREASON)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FIRMAREASON)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMAIDIOMADOCUMENT)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FIRMAIDIOMADOCUMENT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FITXERORIGINALID)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FITXERORIGINALID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FITXERADAPTATID)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FITXERADAPTATID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FITXERSIGNATID)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FITXERSIGNATID)}</th>
         </c:if>
 
 

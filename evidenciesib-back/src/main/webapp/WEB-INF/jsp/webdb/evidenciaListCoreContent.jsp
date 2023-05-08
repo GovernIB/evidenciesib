@@ -64,23 +64,6 @@
           ${evidencia.personaMobil}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DOCUMENTHASH)}">
-          <td>
-          ${evidencia.documentHash}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DOCUMENTFITXERID)}">
-          <td>
-            <c:if test="${not empty evidencia.documentFitxer}">
-              <a target="_blank" href="<c:url value="${evi:fileUrl(evidencia.documentFitxer)}"/>">${evidencia.documentFitxer.nom}</a>
-            </c:if>
-           </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DOCUMENTMIDA)}">
-          <td>
-          ${evidencia.documentMida}
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DATAINICI)}">
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${evidencia.dataInici}" /></td>
         </c:if>
@@ -146,14 +129,14 @@
           ${evidencia.localitzacioLongitud}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
-          <td>
-          ${evidencia.localitzacioLatitud}
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
           <td>
           ${evidencia.localitzacioCiutat}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
+          <td>
+          ${evidencia.localitzacioLatitud}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOREGIO)}">
@@ -165,6 +148,48 @@
           <td>
           ${evidencia.localitzacioPais}
           </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMAREASON)}">
+          <td>
+          ${evidencia.firmaReason}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}">
+          <td>
+          <c:set var="tmp">${evidencia.firmaTipusDocumental}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForFirmaTipusDocumental[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMAIDIOMADOCUMENT)}">
+          <td>
+          <c:set var="tmp">${evidencia.firmaIdiomaDocument}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForFirmaIdiomaDocument[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FITXERORIGINALID)}">
+          <td>
+            <c:if test="${not empty evidencia.fitxerOriginal}">
+              <a target="_blank" href="<c:url value="${evi:fileUrl(evidencia.fitxerOriginal)}"/>">${evidencia.fitxerOriginal.nom}</a>
+            </c:if>
+           </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FITXERADAPTATID)}">
+          <td>
+            <c:if test="${not empty evidencia.fitxerAdaptat}">
+              <a target="_blank" href="<c:url value="${evi:fileUrl(evidencia.fitxerAdaptat)}"/>">${evidencia.fitxerAdaptat.nom}</a>
+            </c:if>
+           </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FITXERSIGNATID)}">
+          <td>
+            <c:if test="${not empty evidencia.fitxerSignat}">
+              <a target="_blank" href="<c:url value="${evi:fileUrl(evidencia.fitxerSignat)}"/>">${evidencia.fitxerSignat.nom}</a>
+            </c:if>
+           </td>
         </c:if>
 
 

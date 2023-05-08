@@ -15,8 +15,16 @@ public class EvidenciaForm extends EvidenciesIBBaseForm {
   private EvidenciaJPA evidencia;
   
   
-  private CommonsMultipartFile documentFitxerID;
-  private boolean documentFitxerIDDelete;
+  private CommonsMultipartFile fitxerOriginalID;
+  private boolean fitxerOriginalIDDelete;
+  
+  
+  private CommonsMultipartFile fitxerAdaptatID;
+  private boolean fitxerAdaptatIDDelete;
+  
+  
+  private CommonsMultipartFile fitxerSignatID;
+  private boolean fitxerSignatIDDelete;
   
   public EvidenciaForm() {
   }
@@ -26,6 +34,8 @@ public class EvidenciaForm extends EvidenciesIBBaseForm {
       this.evidencia = __toClone.evidencia;
     this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
     this.listOfValuesForLoginType = __toClone.listOfValuesForLoginType;
+    this.listOfValuesForFirmaTipusDocumental = __toClone.listOfValuesForFirmaTipusDocumental;
+    this.listOfValuesForFirmaIdiomaDocument = __toClone.listOfValuesForFirmaIdiomaDocument;
   }
   
   public EvidenciaForm(EvidenciaJPA evidencia, boolean nou) {
@@ -41,19 +51,47 @@ public class EvidenciaForm extends EvidenciesIBBaseForm {
   }
   
   
-  public CommonsMultipartFile getDocumentFitxerID() {
-    return documentFitxerID;
+  public CommonsMultipartFile getFitxerOriginalID() {
+    return fitxerOriginalID;
   }
   
-   public void setDocumentFitxerID(CommonsMultipartFile documentFitxerID) {
-    this.documentFitxerID = documentFitxerID;
+   public void setFitxerOriginalID(CommonsMultipartFile fitxerOriginalID) {
+    this.fitxerOriginalID = fitxerOriginalID;
   }
-  public boolean isDocumentFitxerIDDelete() {
-    return documentFitxerIDDelete;
+  public boolean isFitxerOriginalIDDelete() {
+    return fitxerOriginalIDDelete;
   }
   
-  public void setDocumentFitxerIDDelete(boolean documentFitxerIDDelete) {
-    this.documentFitxerIDDelete = documentFitxerIDDelete;
+  public void setFitxerOriginalIDDelete(boolean fitxerOriginalIDDelete) {
+    this.fitxerOriginalIDDelete = fitxerOriginalIDDelete;
+   }
+  public CommonsMultipartFile getFitxerAdaptatID() {
+    return fitxerAdaptatID;
+  }
+  
+   public void setFitxerAdaptatID(CommonsMultipartFile fitxerAdaptatID) {
+    this.fitxerAdaptatID = fitxerAdaptatID;
+  }
+  public boolean isFitxerAdaptatIDDelete() {
+    return fitxerAdaptatIDDelete;
+  }
+  
+  public void setFitxerAdaptatIDDelete(boolean fitxerAdaptatIDDelete) {
+    this.fitxerAdaptatIDDelete = fitxerAdaptatIDDelete;
+   }
+  public CommonsMultipartFile getFitxerSignatID() {
+    return fitxerSignatID;
+  }
+  
+   public void setFitxerSignatID(CommonsMultipartFile fitxerSignatID) {
+    this.fitxerSignatID = fitxerSignatID;
+  }
+  public boolean isFitxerSignatIDDelete() {
+    return fitxerSignatIDDelete;
+  }
+  
+  public void setFitxerSignatIDDelete(boolean fitxerSignatIDDelete) {
+    this.fitxerSignatIDDelete = fitxerSignatIDDelete;
    }
   private List<StringKeyValue> listOfValuesForEstatCodi;
 
@@ -75,6 +113,30 @@ public class EvidenciaForm extends EvidenciesIBBaseForm {
 
   public void setListOfValuesForLoginType(List<StringKeyValue> listOfValuesForLoginType) {
     this.listOfValuesForLoginType = listOfValuesForLoginType;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForFirmaTipusDocumental;
+
+  public List<StringKeyValue> getListOfValuesForFirmaTipusDocumental() {
+    return this.listOfValuesForFirmaTipusDocumental;
+  }
+
+  public void setListOfValuesForFirmaTipusDocumental(List<StringKeyValue> listOfValuesForFirmaTipusDocumental) {
+    this.listOfValuesForFirmaTipusDocumental = listOfValuesForFirmaTipusDocumental;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForFirmaIdiomaDocument;
+
+  public List<StringKeyValue> getListOfValuesForFirmaIdiomaDocument() {
+    return this.listOfValuesForFirmaIdiomaDocument;
+  }
+
+  public void setListOfValuesForFirmaIdiomaDocument(List<StringKeyValue> listOfValuesForFirmaIdiomaDocument) {
+    this.listOfValuesForFirmaIdiomaDocument = listOfValuesForFirmaIdiomaDocument;
   }
 
 

@@ -184,5 +184,31 @@ public class Configuracio implements Constants {
     public static String getFileSystemManager() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "filesystemmanagerclass");
     }
+    
+    
+    
+    // ===========================================================
+    // ===========================================================
+    // ==============   API FIRMA EN SERVIDOR ====================
+    // ===========================================================
+    // ===========================================================
+    
+
+    public static String getApiFirmaEnServidorUrl() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.url");
+    }
+
+    public static String getApiFirmaEnServidorUsername() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.username");
+    }
+
+    public static String getApiFirmaEnServidorPassword() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.password");
+    }
+    
+    public static String getApiFirmaEnServidorProfile() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.profile");
+    }
+
 
 }

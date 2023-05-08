@@ -43,18 +43,6 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.PERSONAMOBIL);
   }
 
-  public StringField DOCUMENTHASH() {
-    return new StringField(getQueryPath(), EvidenciaFields.DOCUMENTHASH);
-  }
-
-  public LongField DOCUMENTFITXERID() {
-    return new LongField(getQueryPath(), EvidenciaFields.DOCUMENTFITXERID);
-  }
-
-  public LongField DOCUMENTMIDA() {
-    return new LongField(getQueryPath(), EvidenciaFields.DOCUMENTMIDA);
-  }
-
   public TimestampField DATAINICI() {
     return new TimestampField(getQueryPath(), EvidenciaFields.DATAINICI);
   }
@@ -107,12 +95,12 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOLONGITUD);
   }
 
-  public StringField LOCALITZACIOLATITUD() {
-    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOLATITUD);
-  }
-
   public StringField LOCALITZACIOCIUTAT() {
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOCIUTAT);
+  }
+
+  public StringField LOCALITZACIOLATITUD() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOLATITUD);
   }
 
   public StringField LOCALITZACIOREGIO() {
@@ -121,6 +109,30 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
 
   public StringField LOCALITZACIOPAIS() {
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOPAIS);
+  }
+
+  public StringField FIRMAREASON() {
+    return new StringField(getQueryPath(), EvidenciaFields.FIRMAREASON);
+  }
+
+  public IntegerField FIRMATIPUSDOCUMENTAL() {
+    return new IntegerField(getQueryPath(), EvidenciaFields.FIRMATIPUSDOCUMENTAL);
+  }
+
+  public StringField FIRMAIDIOMADOCUMENT() {
+    return new StringField(getQueryPath(), EvidenciaFields.FIRMAIDIOMADOCUMENT);
+  }
+
+  public LongField FITXERORIGINALID() {
+    return new LongField(getQueryPath(), EvidenciaFields.FITXERORIGINALID);
+  }
+
+  public LongField FITXERADAPTATID() {
+    return new LongField(getQueryPath(), EvidenciaFields.FITXERADAPTATID);
+  }
+
+  public LongField FITXERSIGNATID() {
+    return new LongField(getQueryPath(), EvidenciaFields.FITXERSIGNATID);
   }
 
 
@@ -132,10 +144,26 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
   }
 
 
-  public FitxerQueryPath DOCUMENTFITXER() {
+  public FitxerQueryPath FITXERORIGINAL() {
     return new FitxerQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return EvidenciaQueryPath.this.getQueryPath() + "documentFitxer" + ".";
+          return EvidenciaQueryPath.this.getQueryPath() + "fitxerOriginal" + ".";
+      }
+    });
+  }
+
+  public FitxerQueryPath FITXERADAPTAT() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EvidenciaQueryPath.this.getQueryPath() + "fitxerAdaptat" + ".";
+      }
+    });
+  }
+
+  public FitxerQueryPath FITXERSIGNAT() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EvidenciaQueryPath.this.getQueryPath() + "fitxerSignat" + ".";
       }
     });
   }

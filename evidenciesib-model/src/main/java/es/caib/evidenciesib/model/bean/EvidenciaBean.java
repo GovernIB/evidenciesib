@@ -16,9 +16,6 @@ public class EvidenciaBean implements Evidencia {
 	java.lang.String personaNif;
 	java.lang.String personaEmail;
 	java.lang.String personaMobil;
-	java.lang.String documentHash;
-	long documentFitxerID;
-	long documentMida;
 	java.sql.Timestamp dataInici;
 	java.sql.Timestamp dataFi;
 	java.lang.String usuariAplicacio;
@@ -32,10 +29,16 @@ public class EvidenciaBean implements Evidencia {
 	java.lang.String localitzacioIp;
 	java.lang.String localitzacioCodiPostal;
 	java.lang.String localitzacioLongitud;
-	java.lang.String localitzacioLatitud;
 	java.lang.String localitzacioCiutat;
+	java.lang.String localitzacioLatitud;
 	java.lang.String localitzacioRegio;
 	java.lang.String localitzacioPais;
+	java.lang.String firmaReason;
+	int firmaTipusDocumental;
+	java.lang.String firmaIdiomaDocument;
+	long fitxerOriginalID;
+	java.lang.Long fitxerAdaptatID;
+	java.lang.Long fitxerSignatID;
 
 
   /** Constructor Buit */
@@ -43,7 +46,7 @@ public class EvidenciaBean implements Evidencia {
   }
 
   /** Constructor amb tots els camps  */
-  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.lang.String documentHash , long documentFitxerID , long documentMida , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLongitud , java.lang.String localitzacioLatitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioRegio , java.lang.String localitzacioPais) {
+  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLongitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioLatitud , java.lang.String localitzacioRegio , java.lang.String localitzacioPais , java.lang.String firmaReason , int firmaTipusDocumental , java.lang.String firmaIdiomaDocument , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNom=personaNom;
@@ -52,9 +55,6 @@ public class EvidenciaBean implements Evidencia {
     this.personaNif=personaNif;
     this.personaEmail=personaEmail;
     this.personaMobil=personaMobil;
-    this.documentHash=documentHash;
-    this.documentFitxerID=documentFitxerID;
-    this.documentMida=documentMida;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.usuariAplicacio=usuariAplicacio;
@@ -68,13 +68,19 @@ public class EvidenciaBean implements Evidencia {
     this.localitzacioIp=localitzacioIp;
     this.localitzacioCodiPostal=localitzacioCodiPostal;
     this.localitzacioLongitud=localitzacioLongitud;
-    this.localitzacioLatitud=localitzacioLatitud;
     this.localitzacioCiutat=localitzacioCiutat;
+    this.localitzacioLatitud=localitzacioLatitud;
     this.localitzacioRegio=localitzacioRegio;
     this.localitzacioPais=localitzacioPais;
+    this.firmaReason=firmaReason;
+    this.firmaTipusDocumental=firmaTipusDocumental;
+    this.firmaIdiomaDocument=firmaIdiomaDocument;
+    this.fitxerOriginalID=fitxerOriginalID;
+    this.fitxerAdaptatID=fitxerAdaptatID;
+    this.fitxerSignatID=fitxerSignatID;
 }
   /** Constructor sense valors autoincrementals */
-  public EvidenciaBean(java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.lang.String documentHash , long documentFitxerID , long documentMida , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLongitud , java.lang.String localitzacioLatitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioRegio , java.lang.String localitzacioPais) {
+  public EvidenciaBean(java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLongitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioLatitud , java.lang.String localitzacioRegio , java.lang.String localitzacioPais , java.lang.String firmaReason , int firmaTipusDocumental , java.lang.String firmaIdiomaDocument , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID) {
     this.nom=nom;
     this.personaNom=personaNom;
     this.personaLlinatge1=personaLlinatge1;
@@ -82,9 +88,6 @@ public class EvidenciaBean implements Evidencia {
     this.personaNif=personaNif;
     this.personaEmail=personaEmail;
     this.personaMobil=personaMobil;
-    this.documentHash=documentHash;
-    this.documentFitxerID=documentFitxerID;
-    this.documentMida=documentMida;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.usuariAplicacio=usuariAplicacio;
@@ -98,23 +101,30 @@ public class EvidenciaBean implements Evidencia {
     this.localitzacioIp=localitzacioIp;
     this.localitzacioCodiPostal=localitzacioCodiPostal;
     this.localitzacioLongitud=localitzacioLongitud;
-    this.localitzacioLatitud=localitzacioLatitud;
     this.localitzacioCiutat=localitzacioCiutat;
+    this.localitzacioLatitud=localitzacioLatitud;
     this.localitzacioRegio=localitzacioRegio;
     this.localitzacioPais=localitzacioPais;
+    this.firmaReason=firmaReason;
+    this.firmaTipusDocumental=firmaTipusDocumental;
+    this.firmaIdiomaDocument=firmaIdiomaDocument;
+    this.fitxerOriginalID=fitxerOriginalID;
+    this.fitxerAdaptatID=fitxerAdaptatID;
+    this.fitxerSignatID=fitxerSignatID;
 }
   /** Constructor dels valors Not Null */
-  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaNif , long documentFitxerID , long documentMida , java.sql.Timestamp dataInici , int estatCodi , int loginType) {
+  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaNif , java.sql.Timestamp dataInici , int estatCodi , int loginType , java.lang.String firmaReason , int firmaTipusDocumental , long fitxerOriginalID) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNom=personaNom;
     this.personaLlinatge1=personaLlinatge1;
     this.personaNif=personaNif;
-    this.documentFitxerID=documentFitxerID;
-    this.documentMida=documentMida;
     this.dataInici=dataInici;
     this.estatCodi=estatCodi;
     this.loginType=loginType;
+    this.firmaReason=firmaReason;
+    this.firmaTipusDocumental=firmaTipusDocumental;
+    this.fitxerOriginalID=fitxerOriginalID;
 }
   public EvidenciaBean(Evidencia __bean) {
     this.setEvidenciaID(__bean.getEvidenciaID());
@@ -125,9 +135,6 @@ public class EvidenciaBean implements Evidencia {
     this.setPersonaNif(__bean.getPersonaNif());
     this.setPersonaEmail(__bean.getPersonaEmail());
     this.setPersonaMobil(__bean.getPersonaMobil());
-    this.setDocumentHash(__bean.getDocumentHash());
-    this.setDocumentFitxerID(__bean.getDocumentFitxerID());
-    this.setDocumentMida(__bean.getDocumentMida());
     this.setDataInici(__bean.getDataInici());
     this.setDataFi(__bean.getDataFi());
     this.setUsuariAplicacio(__bean.getUsuariAplicacio());
@@ -141,12 +148,22 @@ public class EvidenciaBean implements Evidencia {
     this.setLocalitzacioIp(__bean.getLocalitzacioIp());
     this.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
     this.setLocalitzacioLongitud(__bean.getLocalitzacioLongitud());
-    this.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
     this.setLocalitzacioCiutat(__bean.getLocalitzacioCiutat());
+    this.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
     this.setLocalitzacioRegio(__bean.getLocalitzacioRegio());
     this.setLocalitzacioPais(__bean.getLocalitzacioPais());
+    this.setFirmaReason(__bean.getFirmaReason());
+    this.setFirmaTipusDocumental(__bean.getFirmaTipusDocumental());
+    this.setFirmaIdiomaDocument(__bean.getFirmaIdiomaDocument());
+    this.setFitxerOriginalID(__bean.getFitxerOriginalID());
+    this.setFitxerAdaptatID(__bean.getFitxerAdaptatID());
+    this.setFitxerSignatID(__bean.getFitxerSignatID());
     // Fitxer
-    this.setDocumentFitxer(FitxerBean.toBean(__bean.getDocumentFitxer()));
+    this.setFitxerOriginal(FitxerBean.toBean(__bean.getFitxerOriginal()));
+    // Fitxer
+    this.setFitxerAdaptat(FitxerBean.toBean(__bean.getFitxerAdaptat()));
+    // Fitxer
+    this.setFitxerSignat(FitxerBean.toBean(__bean.getFitxerSignat()));
 	}
 
 	public long getEvidenciaID() {
@@ -203,27 +220,6 @@ public class EvidenciaBean implements Evidencia {
 	};
 	public void setPersonaMobil(java.lang.String _personaMobil_) {
 		this.personaMobil = _personaMobil_;
-	};
-
-	public java.lang.String getDocumentHash() {
-		return(documentHash);
-	};
-	public void setDocumentHash(java.lang.String _documentHash_) {
-		this.documentHash = _documentHash_;
-	};
-
-	public long getDocumentFitxerID() {
-		return(documentFitxerID);
-	};
-	public void setDocumentFitxerID(long _documentFitxerID_) {
-		this.documentFitxerID = _documentFitxerID_;
-	};
-
-	public long getDocumentMida() {
-		return(documentMida);
-	};
-	public void setDocumentMida(long _documentMida_) {
-		this.documentMida = _documentMida_;
 	};
 
 	public java.sql.Timestamp getDataInici() {
@@ -317,18 +313,18 @@ public class EvidenciaBean implements Evidencia {
 		this.localitzacioLongitud = _localitzacioLongitud_;
 	};
 
-	public java.lang.String getLocalitzacioLatitud() {
-		return(localitzacioLatitud);
-	};
-	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_) {
-		this.localitzacioLatitud = _localitzacioLatitud_;
-	};
-
 	public java.lang.String getLocalitzacioCiutat() {
 		return(localitzacioCiutat);
 	};
 	public void setLocalitzacioCiutat(java.lang.String _localitzacioCiutat_) {
 		this.localitzacioCiutat = _localitzacioCiutat_;
+	};
+
+	public java.lang.String getLocalitzacioLatitud() {
+		return(localitzacioLatitud);
+	};
+	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_) {
+		this.localitzacioLatitud = _localitzacioLatitud_;
 	};
 
 	public java.lang.String getLocalitzacioRegio() {
@@ -343,6 +339,48 @@ public class EvidenciaBean implements Evidencia {
 	};
 	public void setLocalitzacioPais(java.lang.String _localitzacioPais_) {
 		this.localitzacioPais = _localitzacioPais_;
+	};
+
+	public java.lang.String getFirmaReason() {
+		return(firmaReason);
+	};
+	public void setFirmaReason(java.lang.String _firmaReason_) {
+		this.firmaReason = _firmaReason_;
+	};
+
+	public int getFirmaTipusDocumental() {
+		return(firmaTipusDocumental);
+	};
+	public void setFirmaTipusDocumental(int _firmaTipusDocumental_) {
+		this.firmaTipusDocumental = _firmaTipusDocumental_;
+	};
+
+	public java.lang.String getFirmaIdiomaDocument() {
+		return(firmaIdiomaDocument);
+	};
+	public void setFirmaIdiomaDocument(java.lang.String _firmaIdiomaDocument_) {
+		this.firmaIdiomaDocument = _firmaIdiomaDocument_;
+	};
+
+	public long getFitxerOriginalID() {
+		return(fitxerOriginalID);
+	};
+	public void setFitxerOriginalID(long _fitxerOriginalID_) {
+		this.fitxerOriginalID = _fitxerOriginalID_;
+	};
+
+	public java.lang.Long getFitxerAdaptatID() {
+		return(fitxerAdaptatID);
+	};
+	public void setFitxerAdaptatID(java.lang.Long _fitxerAdaptatID_) {
+		this.fitxerAdaptatID = _fitxerAdaptatID_;
+	};
+
+	public java.lang.Long getFitxerSignatID() {
+		return(fitxerSignatID);
+	};
+	public void setFitxerSignatID(java.lang.Long _fitxerSignatID_) {
+		this.fitxerSignatID = _fitxerSignatID_;
 	};
 
 
@@ -360,9 +398,6 @@ public class EvidenciaBean implements Evidencia {
     __tmp.setPersonaNif(__bean.getPersonaNif());
     __tmp.setPersonaEmail(__bean.getPersonaEmail());
     __tmp.setPersonaMobil(__bean.getPersonaMobil());
-    __tmp.setDocumentHash(__bean.getDocumentHash());
-    __tmp.setDocumentFitxerID(__bean.getDocumentFitxerID());
-    __tmp.setDocumentMida(__bean.getDocumentMida());
     __tmp.setDataInici(__bean.getDataInici());
     __tmp.setDataFi(__bean.getDataFi());
     __tmp.setUsuariAplicacio(__bean.getUsuariAplicacio());
@@ -376,21 +411,45 @@ public class EvidenciaBean implements Evidencia {
     __tmp.setLocalitzacioIp(__bean.getLocalitzacioIp());
     __tmp.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
     __tmp.setLocalitzacioLongitud(__bean.getLocalitzacioLongitud());
-    __tmp.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
     __tmp.setLocalitzacioCiutat(__bean.getLocalitzacioCiutat());
+    __tmp.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
     __tmp.setLocalitzacioRegio(__bean.getLocalitzacioRegio());
     __tmp.setLocalitzacioPais(__bean.getLocalitzacioPais());
+    __tmp.setFirmaReason(__bean.getFirmaReason());
+    __tmp.setFirmaTipusDocumental(__bean.getFirmaTipusDocumental());
+    __tmp.setFirmaIdiomaDocument(__bean.getFirmaIdiomaDocument());
+    __tmp.setFitxerOriginalID(__bean.getFitxerOriginalID());
+    __tmp.setFitxerAdaptatID(__bean.getFitxerAdaptatID());
+    __tmp.setFitxerSignatID(__bean.getFitxerSignatID());
     // Fitxer
-    __tmp.setDocumentFitxer(FitxerBean.toBean(__bean.getDocumentFitxer()));
+    __tmp.setFitxerOriginal(FitxerBean.toBean(__bean.getFitxerOriginal()));
+    // Fitxer
+    __tmp.setFitxerAdaptat(FitxerBean.toBean(__bean.getFitxerAdaptat()));
+    // Fitxer
+    __tmp.setFitxerSignat(FitxerBean.toBean(__bean.getFitxerSignat()));
 		return __tmp;
 	}
 
-  protected FitxerBean documentFitxer;
-  public FitxerBean getDocumentFitxer() {
-    return documentFitxer;
+  protected FitxerBean fitxerOriginal;
+  public FitxerBean getFitxerOriginal() {
+    return fitxerOriginal;
   }
-  public void setDocumentFitxer(FitxerBean __field) {
-    this. documentFitxer = __field;
+  public void setFitxerOriginal(FitxerBean __field) {
+    this. fitxerOriginal = __field;
+  }
+  protected FitxerBean fitxerAdaptat;
+  public FitxerBean getFitxerAdaptat() {
+    return fitxerAdaptat;
+  }
+  public void setFitxerAdaptat(FitxerBean __field) {
+    this. fitxerAdaptat = __field;
+  }
+  protected FitxerBean fitxerSignat;
+  public FitxerBean getFitxerSignat() {
+    return fitxerSignat;
+  }
+  public void setFitxerSignat(FitxerBean __field) {
+    this. fitxerSignat = __field;
   }
 
 

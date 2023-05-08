@@ -235,95 +235,6 @@
         },
         {
           "isAutoIncrement": false,
-          "sqlName": "documenthash",
-          "sqlType": 12,
-          "size": 255,
-          "digits": 0,
-          "isNotNullable": false,
-          "labels": {
-            "ca": "Document - Hash",
-            "es": "Documento - Hash"
-          },
-          "javaName": "documentHash",
-          "javaType": "java.lang.String",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 1
-          },
-          "foreignKeys": []
-        },
-        {
-          "index": "evi_evidencia_docfitid_fk_i",
-          "isAutoIncrement": false,
-          "sqlName": "documentfitxerid",
-          "sqlType": -5,
-          "size": 19,
-          "digits": 0,
-          "isNotNullable": true,
-          "labels": {
-            "ca": "Document - Fitxer original",
-            "es": "Document - Fichero original"
-          },
-          "javaName": "documentFitxerID",
-          "javaType": "long",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 3,
-            "foreignKey": {
-              "name": "evi_evidenvia_fitxer_fk",
-              "table": "evi_fitxer",
-              "field": "fitxerid",
-              "type": 1
-            }
-          },
-          "foreignKeys": [
-            {
-              "name": "evi_evidencia_fitxer_fitdoc_fk",
-              "table": "evi_fitxer",
-              "field": "fitxerid",
-              "type": 1
-            }
-          ]
-        },
-        {
-          "isAutoIncrement": false,
-          "sqlName": "documentmida",
-          "sqlType": -5,
-          "size": 19,
-          "digits": 0,
-          "isNotNullable": true,
-          "labels": {
-            "ca": "Document - Mida",
-            "es": "Documento - Tamaño"
-          },
-          "javaName": "documentMida",
-          "javaType": "long",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 14
-          },
-          "foreignKeys": []
-        },
-        {
-          "isAutoIncrement": false,
           "sqlName": "datainici",
           "sqlType": 93,
           "size": 29,
@@ -546,7 +457,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 2
+            "webtype": 1
           },
           "foreignKeys": []
         },
@@ -652,16 +563,16 @@
         },
         {
           "isAutoIncrement": false,
-          "sqlName": "localitzaciolatitud",
+          "sqlName": "localitzaciociutat",
           "sqlType": 12,
-          "size": 100,
+          "size": 255,
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Localització - Latitud",
-            "es": "Localización - Latitud"
+            "ca": "Localitzacio - Ciutat",
+            "es": "Localización - Ciudad"
           },
-          "javaName": "localitzacioLatitud",
+          "javaName": "localitzacioCiutat",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -677,16 +588,16 @@
         },
         {
           "isAutoIncrement": false,
-          "sqlName": "localitzaciociutat",
+          "sqlName": "localitzaciolatitud",
           "sqlType": 12,
-          "size": 255,
+          "size": 100,
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Localitzacio - Ciutat",
-            "es": "Localización - Ciudad"
+            "ca": "Localització - Latitud",
+            "es": "Localización - Latitud"
           },
-          "javaName": "localitzacioCiutat",
+          "javaName": "localitzacioLatitud",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -749,6 +660,202 @@
             "webtype": 1
           },
           "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "firmareason",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Firma - Raó de la firma",
+            "es": "Firma - Razón de la firma"
+          },
+          "javaName": "firmaReason",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "\u0027Rao de la firma\u0027::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "firmatipusdocumental",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Firma - Tipus documental",
+            "es": "Firma - Tipo documental"
+          },
+          "javaName": "firmaTipusDocumental",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "99",
+          "minAllowedValue": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,99",
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "firmaidiomadocument",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Firma - Idioma Document",
+            "es": "Firma - Idioma Document"
+          },
+          "javaName": "firmaIdiomaDocument",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "es,ca,ga,eu",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "evi_evidencia_fitxerorig_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "fitxeroriginalid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Fitxer - Original",
+            "es": "Fichero - Original"
+          },
+          "javaName": "fitxerOriginalID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "evi_evidencia_fitxer_fitdoc_fk",
+              "table": "evi_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "evi_evidencia_fitxer_fitdoc_fk",
+              "table": "evi_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "evi_evidencia_fitxeradap_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "fitxeradaptatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Fitxer - Adaptat",
+            "es": "Fichero - Adaptado"
+          },
+          "javaName": "fitxerAdaptatID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "evi_evidencia_fitxer_fitada_fk",
+              "table": "evi_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "evi_evidencia_fitxer_fitada_fk",
+              "table": "evi_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "evi_evidencia_fitxersign_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "fitxersignatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Fitxer - Signat",
+            "es": "Fichero - Firmado"
+          },
+          "javaName": "fitxerSignatID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "evi_evidencia_fitxer_fitsig_fk",
+              "table": "evi_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "evi_evidencia_fitxer_fitsig_fk",
+              "table": "evi_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
         }
       ]
     },
@@ -804,9 +911,21 @@
           },
           "foreignKeys": [
             {
+              "name": "evi_evidencia_fitxer_fitada_fk",
+              "table": "evi_evidencia",
+              "field": "fitxeradaptatid",
+              "type": 0
+            },
+            {
               "name": "evi_evidencia_fitxer_fitdoc_fk",
               "table": "evi_evidencia",
-              "field": "documentfitxerid",
+              "field": "fitxeroriginalid",
+              "type": 0
+            },
+            {
+              "name": "evi_evidencia_fitxer_fitsig_fk",
+              "table": "evi_evidencia",
+              "field": "fitxersignatid",
               "type": 0
             }
           ]

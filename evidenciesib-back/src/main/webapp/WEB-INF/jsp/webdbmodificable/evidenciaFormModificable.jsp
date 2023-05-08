@@ -30,14 +30,14 @@ xhttp.onload = function() {
 
 function setValorLoc(camp, valor) {
     if (valor != undefined && valor != null && valor != '') {
-      var obj = document.getElementById('<%=EvidenciaFields._TABLE_MODEL%>.' + camp);
-      if (obj == null) {
-          console.error("El camp ]" + camp + "[ val null");
-      } else {
-          <%-- console.log("Camp ]" + camp + "[ OK"); --%>
-          obj.value = valor;
-          obj.readOnly = true;
-      }
+      var obj = document.getElementById('<%=EvidenciaFields._TABLE_MODEL%>' + '.' + camp);
+            if (obj == null) {
+                console.error("El camp ]" + camp + "[ val null");
+            } else {
+<%-- console.log("Camp ]" + camp + "[ OK"); --%>
+                obj.value = valor;
+                obj.readOnly = true;
+            }
+        }
     }
-}
 </script>

@@ -45,10 +45,38 @@ public class FitxerQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public EvidenciaQueryPath EVIDENCIAS() {
+  public EvidenciaQueryPath EVIDENCIA_FITXERADAPTATIDS() {
     return new EvidenciaQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return FitxerQueryPath.this.getQueryPath() + "evidencias" + ".";
+          return FitxerQueryPath.this.getQueryPath() + "evidencia_fitxeradaptatids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public EvidenciaQueryPath EVIDENCIA_FITXERORIGINALIDS() {
+    return new EvidenciaQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return FitxerQueryPath.this.getQueryPath() + "evidencia_fitxeroriginalids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public EvidenciaQueryPath EVIDENCIA_FITXERSIGNATIDS() {
+    return new EvidenciaQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return FitxerQueryPath.this.getQueryPath() + "evidencia_fitxersignatids" + ".";
       }
     });
   }

@@ -201,6 +201,26 @@ public class EvidenciaController
       };
     }
 
+    // Field firmaTipusDocumental
+    {
+      _listSKV = getReferenceListForFirmaTipusDocumental(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForFirmaTipusDocumental(_tmp);
+      if (filterForm.getGroupByFields().contains(FIRMATIPUSDOCUMENTAL)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, FIRMATIPUSDOCUMENTAL, false);
+      };
+    }
+
+    // Field firmaIdiomaDocument
+    {
+      _listSKV = getReferenceListForFirmaIdiomaDocument(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForFirmaIdiomaDocument(_tmp);
+      if (filterForm.getGroupByFields().contains(FIRMAIDIOMADOCUMENT)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, FIRMAIDIOMADOCUMENT, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -218,6 +238,8 @@ public class EvidenciaController
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(ESTATCODI, filterForm.getMapOfValuesForEstatCodi());
     __mapping.put(LOGINTYPE, filterForm.getMapOfValuesForLoginType());
+    __mapping.put(FIRMATIPUSDOCUMENTAL, filterForm.getMapOfValuesForFirmaTipusDocumental());
+    __mapping.put(FIRMAIDIOMADOCUMENT, filterForm.getMapOfValuesForFirmaIdiomaDocument());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -282,6 +304,24 @@ public class EvidenciaController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       evidenciaForm.setListOfValuesForLoginType(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (evidenciaForm.getListOfValuesForFirmaTipusDocumental() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForFirmaTipusDocumental(request, mav, evidenciaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      evidenciaForm.setListOfValuesForFirmaTipusDocumental(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (evidenciaForm.getListOfValuesForFirmaIdiomaDocument() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForFirmaIdiomaDocument(request, mav, evidenciaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      evidenciaForm.setListOfValuesForFirmaIdiomaDocument(_listSKV);
     }
     
   }
@@ -576,21 +616,43 @@ public java.lang.Long stringToPK(String value) {
       EvidenciaForm form) throws I18NException {
 
     FitxerJPA f;
-    f = (FitxerJPA)afm.preProcessFile(form.getDocumentFitxerID(), form.isDocumentFitxerIDDelete(),
-        form.isNou()? null : evidencia.getDocumentFitxer());
-    ((EvidenciaJPA)evidencia).setDocumentFitxer(f);
+    f = (FitxerJPA)afm.preProcessFile(form.getFitxerOriginalID(), form.isFitxerOriginalIDDelete(),
+        form.isNou()? null : evidencia.getFitxerOriginal());
+    ((EvidenciaJPA)evidencia).setFitxerOriginal(f);
     if (f != null) { 
-      evidencia.setDocumentFitxerID(f.getFitxerID());
+      evidencia.setFitxerOriginalID(f.getFitxerID());
     } else {
-      evidencia.setDocumentFitxerID(0);
+      evidencia.setFitxerOriginalID(0);
     }
+
+    f = (FitxerJPA)afm.preProcessFile(form.getFitxerAdaptatID(), form.isFitxerAdaptatIDDelete(),
+        form.isNou()? null : evidencia.getFitxerAdaptat());
+    ((EvidenciaJPA)evidencia).setFitxerAdaptat(f);
+    if (f != null) { 
+      evidencia.setFitxerAdaptatID(f.getFitxerID());
+    } else {
+      evidencia.setFitxerAdaptatID(null);
+    }
+
+
+    f = (FitxerJPA)afm.preProcessFile(form.getFitxerSignatID(), form.isFitxerSignatIDDelete(),
+        form.isNou()? null : evidencia.getFitxerSignat());
+    ((EvidenciaJPA)evidencia).setFitxerSignat(f);
+    if (f != null) { 
+      evidencia.setFitxerSignatID(f.getFitxerID());
+    } else {
+      evidencia.setFitxerSignatID(null);
+    }
+
 
   }
 
   // FILE
   @Override
   public void deleteFiles(Evidencia evidencia) {
-    deleteFile(evidencia.getDocumentFitxerID());
+    deleteFile(evidencia.getFitxerOriginalID());
+    deleteFile(evidencia.getFitxerAdaptatID());
+    deleteFile(evidencia.getFitxerSignatID());
   }
   // Mètodes a sobreescriure 
 
@@ -681,6 +743,108 @@ public java.lang.Long stringToPK(String value) {
     __tmp.add(new StringKeyValue("0" , "0"));
     __tmp.add(new StringKeyValue("1" , "1"));
     __tmp.add(new StringKeyValue("2" , "2"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForFirmaTipusDocumental(HttpServletRequest request,
+       ModelAndView mav, EvidenciaForm evidenciaForm, Where where)  throws I18NException {
+    if (evidenciaForm.isHiddenField(FIRMATIPUSDOCUMENTAL)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForFirmaTipusDocumental(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForFirmaTipusDocumental(HttpServletRequest request,
+       ModelAndView mav, EvidenciaFilterForm evidenciaFilterForm,
+       List<Evidencia> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (evidenciaFilterForm.isHiddenField(FIRMATIPUSDOCUMENTAL)
+       && !evidenciaFilterForm.isGroupByField(FIRMATIPUSDOCUMENTAL)
+       && !evidenciaFilterForm.isFilterByField(FIRMATIPUSDOCUMENTAL)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForFirmaTipusDocumental(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForFirmaTipusDocumental(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    __tmp.add(new StringKeyValue("6" , "6"));
+    __tmp.add(new StringKeyValue("7" , "7"));
+    __tmp.add(new StringKeyValue("8" , "8"));
+    __tmp.add(new StringKeyValue("9" , "9"));
+    __tmp.add(new StringKeyValue("10" , "10"));
+    __tmp.add(new StringKeyValue("11" , "11"));
+    __tmp.add(new StringKeyValue("12" , "12"));
+    __tmp.add(new StringKeyValue("13" , "13"));
+    __tmp.add(new StringKeyValue("14" , "14"));
+    __tmp.add(new StringKeyValue("15" , "15"));
+    __tmp.add(new StringKeyValue("16" , "16"));
+    __tmp.add(new StringKeyValue("17" , "17"));
+    __tmp.add(new StringKeyValue("18" , "18"));
+    __tmp.add(new StringKeyValue("19" , "19"));
+    __tmp.add(new StringKeyValue("20" , "20"));
+    __tmp.add(new StringKeyValue("51" , "51"));
+    __tmp.add(new StringKeyValue("52" , "52"));
+    __tmp.add(new StringKeyValue("53" , "53"));
+    __tmp.add(new StringKeyValue("54" , "54"));
+    __tmp.add(new StringKeyValue("55" , "55"));
+    __tmp.add(new StringKeyValue("56" , "56"));
+    __tmp.add(new StringKeyValue("57" , "57"));
+    __tmp.add(new StringKeyValue("58" , "58"));
+    __tmp.add(new StringKeyValue("59" , "59"));
+    __tmp.add(new StringKeyValue("60" , "60"));
+    __tmp.add(new StringKeyValue("61" , "61"));
+    __tmp.add(new StringKeyValue("62" , "62"));
+    __tmp.add(new StringKeyValue("63" , "63"));
+    __tmp.add(new StringKeyValue("64" , "64"));
+    __tmp.add(new StringKeyValue("65" , "65"));
+    __tmp.add(new StringKeyValue("66" , "66"));
+    __tmp.add(new StringKeyValue("67" , "67"));
+    __tmp.add(new StringKeyValue("68" , "68"));
+    __tmp.add(new StringKeyValue("69" , "69"));
+    __tmp.add(new StringKeyValue("99" , "99"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request,
+       ModelAndView mav, EvidenciaForm evidenciaForm, Where where)  throws I18NException {
+    if (evidenciaForm.isHiddenField(FIRMAIDIOMADOCUMENT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForFirmaIdiomaDocument(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request,
+       ModelAndView mav, EvidenciaFilterForm evidenciaFilterForm,
+       List<Evidencia> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (evidenciaFilterForm.isHiddenField(FIRMAIDIOMADOCUMENT)
+       && !evidenciaFilterForm.isGroupByField(FIRMAIDIOMADOCUMENT)
+       && !evidenciaFilterForm.isFilterByField(FIRMAIDIOMADOCUMENT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForFirmaIdiomaDocument(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("es" , "es"));
+    __tmp.add(new StringKeyValue("ca" , "ca"));
+    __tmp.add(new StringKeyValue("ga" , "ga"));
+    __tmp.add(new StringKeyValue("eu" , "eu"));
     return __tmp;
   }
 

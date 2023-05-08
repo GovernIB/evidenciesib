@@ -41,7 +41,9 @@ public class EvidenciaEJB extends EvidenciaJPAManager implements EvidenciaServic
             throws I18NException {
 
         java.util.ArrayList<Long> fitxers = new java.util.ArrayList<Long>();
-        fitxers.add(instance.getDocumentFitxerID());
+        fitxers.add(instance.getFitxerOriginalID());
+        fitxers.add(instance.getFitxerAdaptatID());
+        fitxers.add(instance.getFitxerSignatID());
 
         this.delete(instance);
 
