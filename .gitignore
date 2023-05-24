@@ -41,3 +41,9 @@ replay_pid*
 /evidenciesib-ear/target
 /evidenciesib-api-interna-client/target
 /evidenciesib-api-externa-client/target
+/evidenciesib-front/target
+/front.bat
+/pluginsib-login/springutils/target
+/pluginsib-login/mock/target
+/pluginsib-login/loginib/target
+/pluginsib-login/api/target

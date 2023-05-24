@@ -1,15 +1,24 @@
 package es.caib.evidenciesib.back.controller.user;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.fundaciobit.apisib.apifirmasimple.v1.ApiFirmaEnServidorSimple;
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleCommonInfo;
@@ -33,9 +42,18 @@ import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.AcroFields;
+import com.itextpdf.text.pdf.PdfFileSpecification;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 
 import es.caib.evidenciesib.back.controller.webdb.EvidenciaController;
 import es.caib.evidenciesib.back.form.webdb.EvidenciaFilterForm;
@@ -43,6 +61,8 @@ import es.caib.evidenciesib.back.form.webdb.EvidenciaForm;
 import es.caib.evidenciesib.back.security.LoginInfo;
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
+import es.caib.evidenciesib.commons.utils.StaticVersion;
+import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.entity.Fitxer;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
@@ -115,6 +135,8 @@ public class EvidenciaUserController extends EvidenciaController {
             EvidenciaJPA evi = evidenciaForm.getEvidencia();
 
             evi.setNom(I18NUtils.tradueix("evidencia.evidencia") + "_" + System.currentTimeMillis());
+
+            evidenciaForm.getEvidencia().setFirmaIdiomaDocument(LocaleContextHolder.getLocale().getLanguage());
 
             // XYZ ZZZ Falten Dades de UserInformation
             {
@@ -219,19 +241,7 @@ public class EvidenciaUserController extends EvidenciaController {
 
         try {
 
-            FirmaSimpleSignatureResult fullResults = internalSignDocument(evi);
-
-            System.err.println("  RESULT: OK");
-            printSignatureInfo(fullResults);
-
-            FirmaSimpleFile fsf = fullResults.getSignedFile();
-
-            byte[] data = fsf.getData();
-
-            Fitxer fitxer = fitxerEjb.create(fsf.getNom(), fsf.getMime(), data.length, "");
-            FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
-
-            evi.setFitxerSignatID(fitxer.getFitxerID());
+            internalSignDocument(evi);
 
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_SIGNAT);
 
@@ -252,6 +262,7 @@ public class EvidenciaUserController extends EvidenciaController {
                 }
             }
 
+            HtmlUtils.deleteMessages(request);
             HtmlUtils.saveMessageError(request, msg);
 
         } catch (Throwable th) {
@@ -263,6 +274,7 @@ public class EvidenciaUserController extends EvidenciaController {
             }
             log.error(msg, th);
 
+            HtmlUtils.deleteMessages(request);
             HtmlUtils.saveMessageError(request, msg);
         }
 
@@ -281,14 +293,17 @@ public class EvidenciaUserController extends EvidenciaController {
     protected FirmaSimpleSignatureResult internalSignDocument(EvidenciaJPA evi) throws I18NException {
 
         FirmaSimpleFile fileToSign;
-
         try {
+            Fitxer fitxerAdaptat = generarFitxerPdfAmbAnnexDeEvidencies(evi);
 
-            // TODO XYZ Attach Document XML to PDF
-
-            Fitxer fitxer = evi.getFitxerOriginal();
-            fileToSign = new FirmaSimpleFile(fitxer.getNom(), fitxer.getMime(),
-                    FileSystemManager.getFileContent(fitxer.getFitxerID()));
+            // TODO XYZ Canviar Nom per Adaptat
+            fileToSign = new FirmaSimpleFile(fitxerAdaptat.getNom(), fitxerAdaptat.getMime(),
+                    FileSystemManager.getFileContent(fitxerAdaptat.getFitxerID()));
+        } catch (DocumentException docex) {
+            // TODO XYZ ZZZ
+            String msg = "Error adaptant el PDF per afegir-hi annexes: " + docex.getMessage();
+            log.error(msg, docex);
+            throw new I18NException(docex, "genapp.comodi", new I18NArgumentString(msg));
         } catch (IOException e) {
             // TODO XYZ ZZZ
             String msg = "Error llegint el fitxer a signar: " + e.getMessage();
@@ -376,6 +391,22 @@ public class EvidenciaUserController extends EvidenciaController {
 
             case FirmaSimpleStatus.STATUS_FINAL_OK: // = 2;
             {
+
+                // TODO  XYZ ZZZ
+                log.info(FirmaSimpleSignedFileInfo.toString(fullResults.getSignedFileInfo()));
+
+                FirmaSimpleFile fsf = fullResults.getSignedFile();
+
+                byte[] data = fsf.getData();
+
+                String newname = evi.getFitxerOriginal().getNom();
+                newname = FilenameUtils.getBaseName(newname) + "_signed." + FilenameUtils.getExtension(newname);
+
+                Fitxer fitxer = fitxerEjb.create(newname, fsf.getMime(), data.length, "");
+                FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
+
+                evi.setFitxerSignatID(fitxer.getFitxerID());
+
                 return fullResults;
 
             } // Final Case Firma OK
@@ -384,9 +415,193 @@ public class EvidenciaUserController extends EvidenciaController {
         return null;
     }
 
-    protected void printSignatureInfo(FirmaSimpleSignatureResult fssr) {
-        // TODO  XYZ ZZZ
-        log.info(FirmaSimpleSignedFileInfo.toString(fssr.getSignedFileInfo()));
+    protected Fitxer generarFitxerPdfAmbAnnexDeEvidencies(EvidenciaJPA evi)
+            throws IOException, I18NException, DocumentException {
+
+        // TODO XYZ Attach JSON  to PDF
+
+        // 1. Modificar Contingut del PDF
+        // Llegir PDF
+        File original = FileSystemManager.getFile(evi.getFitxerOriginalID());
+        File fileTmp1 = File.createTempFile("evidenciesib_generarfitxeradaptat_", ".pdf");
+
+        FileOutputStream output1 = null;
+        FileInputStream readerInputStream = null;
+        PdfReader reader = null;
+        PdfStamper stamper = null;
+        try {
+
+            // File input3 = null;
+            readerInputStream = new FileInputStream(original);
+            reader = new PdfReader(readerInputStream);
+
+            output1 = new FileOutputStream(fileTmp1);
+
+            stamper = new PdfStamper(reader, output1);
+
+            // 1.3.- Attach Files
+
+            File fileEviJson = null;
+            Map<String, Object> map = new HashMap<String, Object>();
+            try {
+                String name = "evidencies.json";
+
+                fileEviJson = File.createTempFile("evidenciesib_evidencies_", ".json");
+                fileEviJson.deleteOnExit();
+
+                map.put("Nom", evi.getNom());
+                map.put("PersonaNom", evi.getPersonaNom());
+                map.put("PersonaLlinatge1", evi.getPersonaLlinatge1());
+                map.put("PersonaLlinatge2", evi.getPersonaLlinatge2());
+                map.put("PersonaNif", evi.getPersonaNif());
+                map.put("PersonaEmail", evi.getPersonaEmail());
+                map.put("PersonaMobil", evi.getPersonaMobil());
+                map.put("DataInici", evi.getDataInici());
+                map.put("DataFi", evi.getDataFi());
+                map.put("UsuariAplicacio", evi.getUsuariAplicacio());
+                map.put("UsuariPersona", evi.getUsuariPersona());
+                map.put("LoginType", evi.getLoginType());
+                map.put("LoginId", evi.getLoginId());
+                map.put("LoginData", evi.getLoginData());
+                map.put("LocalitzacioIp", evi.getLocalitzacioIp());
+                map.put("LocalitzacioCodiPostal", evi.getLocalitzacioCodiPostal());
+                map.put("LocalitzacioLongitud", evi.getLocalitzacioLongitud());
+                map.put("LocalitzacioCiutat", evi.getLocalitzacioCiutat());
+                map.put("LocalitzacioLatitud", evi.getLocalitzacioLatitud());
+                map.put("LocalitzacioRegio", evi.getLocalitzacioRegio());
+                map.put("LocalitzacioPais", evi.getLocalitzacioPais());
+                map.put("FirmaReason", evi.getFirmaReason());
+                map.put("FirmaTipusDocumental", evi.getFirmaTipusDocumental());
+                map.put("FirmaIdiomaDocument", evi.getFirmaIdiomaDocument());
+                map.put("FirmaTipusDocumental", evi.getFirmaTipusDocumental());
+                map.put("FirmaIdiomaDocument", evi.getFirmaIdiomaDocument());
+
+                // Esborram tots els valors null !!!!
+                while (map.values().remove(null))
+                    ;
+
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+                org.apache.commons.io.FileUtils.write(fileEviJson, gson.toJson(map), StandardCharsets.UTF_8);
+
+                PdfFileSpecification fs = PdfFileSpecification.fileEmbedded(stamper.getWriter(),
+                        fileEviJson.getAbsolutePath(), name, null);
+
+                // TODO XYZ ZZZ Traduir
+                stamper.getWriter().addFileAttachment("Evidències", fs);
+            } finally {
+                if (fileEviJson != null) {
+                    fileEviJson.delete();
+                }
+            }
+
+            // Afegir versió d'EvidènciesIB
+            Map<String, String> info = reader.getInfo();
+            info.put("EvidenciesIB.versio", StaticVersion.VERSION);
+
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                String key = entry.getKey();
+                Object val = entry.getValue();
+                info.put("EvidenciesIB." + key, String.valueOf(val));
+            }
+
+            stamper.setMoreInfo(info);
+
+        } finally {
+
+            // 1.3.- Guardar PDF
+            if (stamper != null) {
+                stamper.close();
+            }
+
+            if (reader != null) {
+                reader.close();
+            }
+
+            if (readerInputStream != null) {
+                readerInputStream.close();
+            }
+
+            if (output1 != null) {
+                output1.flush();
+                output1.close();
+            }
+
+        }
+
+        String newname = evi.getFitxerOriginal().getNom();
+        newname = FilenameUtils.getBaseName(newname) + "_adaptat." + FilenameUtils.getExtension(newname);
+
+        Fitxer fitxerAdaptat = fitxerEjb.create(newname, evi.getFitxerOriginal().getMime(), fileTmp1.length(), "");
+        FileSystemManager.crearFitxer(fileTmp1, fitxerAdaptat.getFitxerID());
+
+        return fitxerAdaptat;
+
+    }
+
+    /**
+     * 
+     * @param pdf
+     * @return Si el fitxer no és PDF llavors retorna 0.
+     */
+    protected int getNumberOfSignaturesInPDF(File pdf) throws I18NException {
+
+        InputStream is = null;
+        try {
+            is = new FileInputStream(pdf);
+            return getNumberOfSignaturesInPDF(is);
+        } catch (FileNotFoundException e) {
+            log.error("No s'ha trobat el fitxer " + pdf.getAbsolutePath() + ":" + e.getMessage(), e);
+            throw new I18NException("fitxer.notfound", pdf.getAbsolutePath(), e.getMessage());
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    log.error("Error tancant InputStream del fitxer " + pdf.getAbsolutePath() + ":" + e.getMessage(),
+                            e);
+                }
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param pdfis
+     * @return Si el fitxer no és PDF llavors retorna 0.
+     */
+    protected int getNumberOfSignaturesInPDF(InputStream pdfis) {
+        try {
+            PdfReader reader = new PdfReader(pdfis);
+            AcroFields fields = reader.getAcroFields();
+            return fields.getSignatureNames().size();
+        } catch (Throwable e) {
+            log.error("Error desconegut intentant obtenir numeo de firmes d'un PDF");
+            return 0;
+        }
+    }
+
+    @Override
+    public void postValidate(HttpServletRequest request, EvidenciaForm evidenciaForm, BindingResult result)
+            throws I18NException {
+
+        if (!result.hasFieldErrors(get(FITXERORIGINALID))) {
+
+            try {
+                final int originalNumberOfSigns = getNumberOfSignaturesInPDF(
+                        evidenciaForm.getFitxerOriginalID().getInputStream());
+
+                if (originalNumberOfSigns != 0) {
+                    // TODO XYZ ZZZ
+                    String msg = "El PDF d'origen no pot contenir signatures, i el PDf enviat ja té "
+                            + originalNumberOfSigns + " firma/firmes.";
+
+                    result.rejectValue(get(FITXERORIGINALID), "genapp.comodi", new Object[] { msg }, msg);
+                }
+            } catch (Exception e) {
+                log.error(e);
+            }
+        }
     }
 
     @Override
@@ -439,6 +654,7 @@ public class EvidenciaUserController extends EvidenciaController {
         return __tmp;
     }
 
+    @Override
     public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request, ModelAndView mav,
             Where where) throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
@@ -461,5 +677,11 @@ public class EvidenciaUserController extends EvidenciaController {
     public boolean isActiveFormView() {
         return true;
     }
+    
+    @Override
+    public void delete(HttpServletRequest request, Evidencia evidencia) throws I18NException {
+        evidenciaEjb.deleteIncludingFiles(evidencia, this.fitxerEjb);
+    }
+
 
 }
