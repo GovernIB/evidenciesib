@@ -26,19 +26,22 @@ public interface Constants {
     public static final String ROLE_EJB_WS_ACCESS = EVI_WS;
 
     // TIPUS DE PLUGINS
-
     public static final int PLUGIN_TIPUS_FIRMA_EN_SERVIDOR = 1;
 
     // ESTAT D'UNA EVIDENCIA
-
     public static final int EVIDENCIA_ESTAT_CODI_ERROR = -1;
-    public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES = 1;
-    public static final int EVIDENCIA_ESTAT_CODI_SIGNAT = 2;
+    public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO = 1;
+    public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN = 2;
+    public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA = 3;
+    public static final int EVIDENCIA_ESTAT_CODI_SIGNAT = 10;
 
     // TIPUS DE LOGIN D'UNA EVIDENCIA
-
-    public static final int EVIDENCIA_TIPUS_LOGIN_DESCONEGUT = 0;
-    public static final int EVIDENCIA_TIPUS_LOGIN_CLAVE = 1;
-    public static final int EVIDENCIA_TIPUS_LOGIN_SERVIDOR = 2;
+    public static final int EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN = 1;
+    public static final int EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK = 2;
+    
+    
+    // CONSTANTS ENTRE BACK I FRONT
+    public static final String MAPPING_FRONT_LOGIN_START = "/frontloginstart";
+    public static final String MAPPING_BACK_LOGIN_END = "/public/backloginend";
 
 }

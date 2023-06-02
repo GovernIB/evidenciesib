@@ -11,6 +11,7 @@ public class LoginInfo {
     public static final int NIVELL_AUTENTICACIO_MITJA = 2;
     public static final int NIVELL_AUTENTICACIO_ALT = 3;
 
+    private String loginID;
     private String username;
     private String name;
     private String surname1;
@@ -22,6 +23,9 @@ public class LoginInfo {
     private boolean business;
     private LoginInfoRepresentative representative;
 
+    public LoginInfo() {
+        super();
+    }
 
     /**
      * 
@@ -50,6 +54,14 @@ public class LoginInfo {
         this.identityProvider = identityProvider;
         this.business = business;
         this.representative = representative;
+    }
+
+    public String getLoginID() {
+        return loginID;
+    }
+
+    public void setLoginID(String loginID) {
+        this.loginID = loginID;
     }
 
     public String getUsername() {

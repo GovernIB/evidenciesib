@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,9 +39,9 @@ public class PluginLoginController {
 
     public static final String MAPPING_LOGIN = "/login";
 
-    public static final String MAPPING_OK_LOGIN = "/okLogin";
+    protected static final String MAPPING_OK_LOGIN = "/okLogin";
 
-    public static final String MAPPING_ERROR_LOGIN = "/errorLogin";
+    protected static final String MAPPING_ERROR_LOGIN = "/errorLogin";
 
     public static final String MAPPING_LOGOUT = "/logout";
 
@@ -62,24 +61,26 @@ public class PluginLoginController {
         String urlbase = request.getParameter("urlbase");
 
         if (urlbase == null) {
+            urlbase = (String) request.getSession().getAttribute(URL_BASE_LOGIN);
+            if (urlbase != null) {
+                String html = "<html><head></head>\r\n" + "<body>\n" + "<script >\n"
+                        + " var url = new URL(window.location.href);\n"
+                        + " var urlbase = url.protocol + '//' + url.host;\n" + " var newUrl = urlbase + \""
+                        + request.getContextPath() + MAPPING_PRELOGIN + "?urlbase=\" + urlbase;\n"
+                        //+ " alert('Nova url => ' + newUrl);\n"
+                        + " window.location.href = newUrl;" + "</script>\n" + "</body></html>";
+                response.setContentType("text/html");
+                response.getWriter().write(html);
+                return;
+            }
 
-            String html = "<html><head></head>\r\n" + "<body>\n" + "<script >\n"
-                    + " var url = new URL(window.location.href);\n" + " var urlbase = url.protocol + '//' + url.host;\n"
-                    + " var newUrl = urlbase + \"" + request.getContextPath() + MAPPING_PRELOGIN
-                    + "?urlbase=\" + urlbase;\n" + " alert('Nova url => ' + newUrl);\n"
-                    + " window.location.href = newUrl;" + "</script>\n" + "</body></html>";
+        }
 
-            response.setContentType("text/html");
-            response.getWriter().write(html);
-
-        } else {
-
+        {
             log.info(" XXX XYZ PRELOGIN urlbase  => ]" + urlbase + "[");
             urlbase = urlbase + request.getContextPath();
             request.getSession().setAttribute(URL_BASE_LOGIN, urlbase);
-
             response.sendRedirect(request.getContextPath() + MAPPING_LOGIN);
-
         }
 
     }
@@ -102,6 +103,11 @@ public class PluginLoginController {
 
             throw new Exception("Error de login: " + peticio.toString());
 
+        }
+
+        String redirectWhenFinish = request.getParameter("redirectwhenfinish");
+        if (redirectWhenFinish != null) {
+            request.getSession().setAttribute(SESSION_RETURN_URL_POST_LOGIN, redirectWhenFinish);
         }
 
         final SavedRequest savedRequest = loginRequestCache.getRequest(request, response);
@@ -160,15 +166,7 @@ public class PluginLoginController {
 
         printLoginInfo();
 
-        String fullUrlRedirect = (String) request.getSession().getAttribute(ConstantsLogin.SESSION_INITIAL_URL);
-
-        log.info("\nDentro de okLogin: fullUrlRedirect => ]" + fullUrlRedirect + "[\n");
-
-        if (fullUrlRedirect == null) {
-            fullUrlRedirect = "/";
-        } else {
-            request.getSession().removeAttribute(ConstantsLogin.SESSION_INITIAL_URL);
-        }
+        String fullUrlRedirect = getFinalRedirectAndClean(request);
 
         log.info("\n " + MAPPING_OK_LOGIN + " => " + fullUrlRedirect + "\n");
 
@@ -176,28 +174,37 @@ public class PluginLoginController {
 
     }
 
-    @RequestMapping(value = { MAPPING_ERROR_LOGIN }, method = RequestMethod.GET)
-    public ModelAndView error(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
+    protected String getFinalRedirectAndClean(HttpServletRequest request) {
+        String fullUrlRedirect = (String) request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
 
-        ModelAndView mav = new ModelAndView("error");
+        if (fullUrlRedirect == null) {
+            fullUrlRedirect = "/";
+        }
+
+        request.getSession().removeAttribute(SESSION_RETURN_URL_POST_LOGIN);
+        request.getSession().removeAttribute(URL_BASE_LOGIN);
+        return fullUrlRedirect;
+    }
+
+    @RequestMapping(value = { MAPPING_ERROR_LOGIN }, method = RequestMethod.GET)
+    public String error(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
 
-            Map<String, String[]> map = request.getParameterMap();
+            String error = PluginLoginManager.getPluginLogin().getError(request,
+                    LocaleContextHolder.getLocale().getLanguage());
 
-            for (Map.Entry<String, String[]> entry : map.entrySet()) {
-                String key = entry.getKey();
-                String[] val = entry.getValue();
-                log.error("KEY => ]" + key + "[ : {" + Arrays.toString(val) + "}");
-            }
-
-            mav.addObject("error", e.getMessage());
+            request.getSession().setAttribute("error", error);
 
         } catch (Throwable e1) {
             log.error("Error: " + e1.getMessage(), e1);
         }
 
-        return mav;
+        String fullUrlRedirect = getFinalRedirectAndClean(request);
+
+        log.info("\n " + MAPPING_OK_LOGIN + " => " + fullUrlRedirect + "\n");
+
+        return "redirect:" + fullUrlRedirect;
 
     }
 
@@ -310,7 +317,6 @@ public class PluginLoginController {
         final String ticketValue = tickets[0];
 
         log.info("Autenticando el ticket: " + tickets[0]);
-
 
         final String ticketName = "ticket-user-clave";
 

@@ -9,7 +9,6 @@
 <body>
 
     <!--  INICI CAPÇALERA -->
-
     <tiles:insertAttribute name="cap">
         <tiles:putAttribute name="data" value="${data}" />
     </tiles:insertAttribute>

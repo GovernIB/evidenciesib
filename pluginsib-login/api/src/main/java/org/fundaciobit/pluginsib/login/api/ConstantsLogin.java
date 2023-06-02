@@ -6,14 +6,9 @@ package org.fundaciobit.pluginsib.login.api;
  *
  */
 public interface ConstantsLogin {
-    
-    
-    public static final String  TICKET_PARAM = "ticket";
-   
-    
-    
-    public static final String SESSION_INITIAL_URL = "SESSION_INITIAL_URL";
 
-    
+    public static final String TICKET_PARAM = "ticket";
+
+    public static final String SESSION_LOGIN_ERROR = "SESSION_LOGIN_ERROR";
 
 }

@@ -30,6 +30,13 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>es.caib.evidenciesib</groupId>
+            <artifactId>evidenciesib-ejb</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- ============================================ -->
         <!-- ========== PLUGINS DE LOGIN FRONT =========== -->
@@ -176,11 +183,6 @@
         </plugins>
 
         <resources>
-            <resource>
-                <directory>${basedir}/react/src/assets</directory>
-                <targetPath>${basedir}/src/main/webapp/src/assets</targetPath>
-                <filtering>false</filtering>
-            </resource>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
                 <filtering>false</filtering>

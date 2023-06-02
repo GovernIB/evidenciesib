@@ -11,10 +11,9 @@
 function doLogin() {
     var url = new URL(window.location.href);
     var urlbase = url.protocol + '//' + url.host;
-    var newUrl = urlbase + '<%=request.getContextPath() + PluginLoginController.MAPPING_PRELOGIN + "?urlbase="%>'
-                                + urlbase;
-                        window.location.href = newUrl;
-                    }
+    var newUrl = urlbase + '<%=request.getContextPath() + PluginLoginController.MAPPING_PRELOGIN + "?urlbase="%>' + urlbase;
+    window.location.href = newUrl;
+}
 </script>
     <center>
         <br /> <br />

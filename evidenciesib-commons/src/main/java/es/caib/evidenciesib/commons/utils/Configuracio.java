@@ -115,6 +115,14 @@ public class Configuracio implements Constants {
     public static String getAppEmail() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "email.from");
     }
+    
+    public static String getFrontUrl() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "url.front");
+    }
+    
+    public static String getBackUrl() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "url.back");
+    }
 
     public static String getAppName() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "name", "EvidenciesIB");

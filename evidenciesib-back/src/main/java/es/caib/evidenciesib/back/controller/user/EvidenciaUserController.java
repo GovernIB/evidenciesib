@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -34,18 +35,22 @@ import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
+import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -119,7 +124,17 @@ public class EvidenciaUserController extends EvidenciaController {
             evidenciaFilterForm.setVisibleMultipleSelection(false);
             evidenciaFilterForm.setEditButtonVisible(false);
             evidenciaFilterForm.setViewButtonVisible(true);
-            //evidenciaFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("", text, link, type));
+            evidenciaFilterForm.setAddButtonVisible(false);
+
+            evidenciaFilterForm
+                    .addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN, "Crear Evidència des de Back",
+                            getContextWeb() + "/new?tipusLogin=" + Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK,
+                            "btn-info"));
+
+            evidenciaFilterForm
+                    .addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN, "Crear Evidència amb Cl@ve",
+                            getContextWeb() + "/new?tipusLogin=" + Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN,
+                            "btn-success"));
 
         }
 
@@ -132,22 +147,41 @@ public class EvidenciaUserController extends EvidenciaController {
         EvidenciaForm evidenciaForm = super.getEvidenciaForm(_jpa, __isView, request, mav);
 
         if (evidenciaForm.isNou()) {
+
+            String tipusLoginStr = request.getParameter("tipusLogin");
+            if (tipusLoginStr == null) {
+                // XYZ ZZZ
+                HtmlUtils.saveMessageError(request, "No s'ha passat el parametre 'tipusLogin'");
+                mav.setView(new RedirectView(getContextWeb() + "/list"));
+                return evidenciaForm;
+            }
+
+            int tipusLogin;
+            try {
+                tipusLogin = Integer.parseInt(tipusLoginStr);
+            } catch (NumberFormatException e) {
+                // XYZ ZZZ
+                HtmlUtils.saveMessageError(request,
+                        "El parametre 'tipusLogin' ha de ser de tipus numeric (" + tipusLoginStr + ")");
+                mav.setView(new RedirectView(getContextWeb() + "/list"));
+                return evidenciaForm;
+            }
+
             EvidenciaJPA evi = evidenciaForm.getEvidencia();
-
-            evi.setNom(I18NUtils.tradueix("evidencia.evidencia") + "_" + System.currentTimeMillis());
-
-            evidenciaForm.getEvidencia().setFirmaIdiomaDocument(LocaleContextHolder.getLocale().getLanguage());
+            
+            // Valors Comuns
+            UserInfo user = LoginInfo.getInstance().getUserInfo();
+            evi.setPersonaNom(user.getName());
+            evi.setPersonaLlinatge1(user.getSurname1());
+            evi.setPersonaNif(user.getAdministrationID());
 
             // XYZ ZZZ Falten Dades de UserInformation
-            {
-                UserInfo user = LoginInfo.getInstance().getUserInfo();
-
+            if (tipusLogin == Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK) {
+                
                 evi.setPersonaEmail(user.getEmail());
-                evi.setPersonaLlinatge1(user.getSurname1());
+                
                 evi.setPersonaLlinatge2(user.getSurname2());
                 evi.setPersonaMobil(user.getPhoneNumber());
-                evi.setPersonaNif(user.getAdministrationID());
-                evi.setPersonaNom(user.getName());
 
                 evidenciaForm.addReadOnlyField(PERSONAEMAIL);
                 evidenciaForm.addReadOnlyField(PERSONALLINATGE1);
@@ -155,14 +189,39 @@ public class EvidenciaUserController extends EvidenciaController {
                 evidenciaForm.addReadOnlyField(PERSONAMOBIL);
                 evidenciaForm.addReadOnlyField(PERSONANIF);
                 evidenciaForm.addReadOnlyField(PERSONANOM);
+
+                evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK);
+                evi.setLoginId(request.getRemoteUser());
+                evi.setLoginData(new Timestamp(System.currentTimeMillis()));
+            } else if (tipusLogin == Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN) {
+
+                // XYZ ZZZ
+                evidenciaForm.setSubTitleCode(
+                        "=Després de pitjar Guardar anirà a una pàgina per autenticar-se a través de Cl@ve.");
+
+                evidenciaForm.addHiddenField(PERSONAEMAIL);
+                //evidenciaForm.addHiddenField(PERSONALLINATGE1);
+                evidenciaForm.addHiddenField(PERSONALLINATGE2);
+                evidenciaForm.addHiddenField(PERSONAMOBIL);
+                //evidenciaForm.addHiddenField(PERSONANIF);
+                //evidenciaForm.addHiddenField(PERSONANOM);
+
+                evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);
+
+            } else {
+                // XYZ ZZZ
+                HtmlUtils.saveMessageError(request, "El parametre 'tipusLogin' no té un valor vàlid: " + tipusLoginStr);
+                mav.setView(new RedirectView(getContextWeb() + "/list"));
+                return evidenciaForm;
             }
+
+            evi.setNom(I18NUtils.tradueix("evidencia.evidencia") + "_" + System.currentTimeMillis());
+            evi.setFirmaIdiomaDocument(LocaleContextHolder.getLocale().getLanguage());
 
             evi.setDataInici(new Timestamp(System.currentTimeMillis()));
             evi.setUsuariPersona(request.getRemoteUser());
             evi.setUsuariAplicacio(null);
-            evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES);
-            evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_SERVIDOR);
-            evi.setLoginId(request.getRemoteUser());
+            evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO);
 
             evidenciaForm.addHiddenField(FITXERADAPTATID);
             evidenciaForm.addHiddenField(FITXERSIGNATID);
@@ -215,7 +274,12 @@ public class EvidenciaUserController extends EvidenciaController {
 
         // TODO XYZ ZZZ Traduir
         __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_ESTAT_CODI_ERROR), "ERROR"));
-        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES), "EN_PROCES"));
+        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO),
+                "EN_PROCES_DE_CREACIO"));
+        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN),
+                "EN_PROCES_DE_LOGIN"));
+        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA),
+                "EN_PROCES_DE_FIRMA"));
         __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_ESTAT_CODI_SIGNAT), "SIGNAT"));
 
         return __tmp;
@@ -226,27 +290,209 @@ public class EvidenciaUserController extends EvidenciaController {
             throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
         // TODO XYZ ZZZ Traduir
-        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_TIPUS_LOGIN_DESCONEGUT), "DESCONEGUT"));
-        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_TIPUS_LOGIN_CLAVE), "CLAVE"));
-        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_TIPUS_LOGIN_SERVIDOR), "USUARI_CONTRASENYA"));
+        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN),
+                "PLUGIN LOGIN (Cl@ve, Mock, ...)"));
+        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK),
+                "Autenticació BACK"));
 
         return __tmp;
     }
 
     @Override
-    public EvidenciaJPA create(HttpServletRequest request, EvidenciaJPA evidencia)
-            throws I18NException, I18NValidationException {
+    public String getRedirectWhenCreated(HttpServletRequest request, EvidenciaForm evidenciaForm) {
 
-        EvidenciaJPA evi = super.create(request, evidencia);
+        EvidenciaJPA evi = evidenciaForm.getEvidencia();
+        if (evidenciaForm.getEvidencia().getLoginType() == Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK) {
+            // ja podem anara a signar
+            evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA);
+            try {
+                evidenciaEjb.update(evi);
+            } catch (I18NException e) {
+                // TODO XYZ ZZZ
+                String msg = "Error actualitzant l'evidència despres de signar el document: " + I18NUtils.getMessage(e);
+                log.error(msg, e);
+                HtmlUtils.saveMessageError(request, msg);
+            }
 
-        try {
+            internalSignDocument(evi, request);
 
-            internalSignDocument(evi);
+            messagesInternalSignDocument(request, evi);
 
-            evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_SIGNAT);
+            return "redirect:" + getContextWeb() + "/list";
 
+        } else {
+            // Hem d'anar a FRONT per autenticació Cl@ve o Mock            
+
+            // XYZ ZZZ ZZZ
+            final String urlfront = Configuracio.getFrontUrl();
+
+            return "redirect:" + urlfront + Constants.MAPPING_FRONT_LOGIN_START + "/" + evi.getEvidenciaID();
+        }
+
+    }
+
+    protected void messagesInternalSignDocument(HttpServletRequest request, EvidenciaJPA evi) {
+        String error = evi.getEstatError();
+        if (error == null) {
             // TODO XYZ ZZZ
             HtmlUtils.saveMessageSuccess(request, "Generada Correctament l'evidència !!!");
+        } else {
+
+            HtmlUtils.deleteMessages(request);
+            HtmlUtils.saveMessageError(request, error);
+        }
+    }
+
+    @RequestMapping(value = "/sign/{evidenciaID}", method = RequestMethod.GET)
+    public String signEvidenciaRequest(@PathVariable("evidenciaID") java.lang.Long evidenciaID,
+            HttpServletRequest request, HttpServletResponse response) throws I18NException {
+
+        EvidenciaJPA evi = findByPrimaryKey(request, evidenciaID);
+
+        internalSignDocument(evi, request);
+
+        messagesInternalSignDocument(request, evi);
+
+        return "redirect:" + getContextWeb() + "/list";
+    }
+
+    /**
+     * 
+     * @param evi
+     * @return
+     * @throws I18NException
+     */
+    protected FirmaSimpleSignatureResult internalSignDocument(EvidenciaJPA evi, HttpServletRequest request) {
+
+        try { // Global 
+            FirmaSimpleFile fileToSign;
+            try {
+                Fitxer fitxerAdaptat = generarFitxerPdfAmbAnnexDeEvidencies(evi);
+
+                // TODO XYZ Canviar Nom per Adaptat
+                fileToSign = new FirmaSimpleFile(fitxerAdaptat.getNom(), fitxerAdaptat.getMime(),
+                        FileSystemManager.getFileContent(fitxerAdaptat.getFitxerID()));
+            } catch (DocumentException docex) {
+                // TODO XYZ ZZZ
+                String msg = "Error adaptant el PDF per afegir-hi annexes: " + docex.getMessage();
+                log.error(msg, docex);
+                throw new I18NException(docex, "genapp.comodi", new I18NArgumentString(msg));
+            } catch (IOException e) {
+                // TODO XYZ ZZZ
+                String msg = "Error llegint el fitxer a signar: " + e.getMessage();
+                log.error(msg, e);
+                throw new I18NException(e, "genapp.comodi", new I18NArgumentString(msg));
+            }
+
+            final String signID = "1";
+            final String name = fileToSign.getNom();
+            final String reason = evi.getFirmaReason();
+            final String location = evi.getLocalitzacioCiutat();
+
+            final int signNumber = 1;
+
+            // XYZ ZZZ
+            final String languageSign = evi.getFirmaIdiomaDocument();
+
+            // XYZ ZZZ
+            final long tipusDocumentalID = evi.getFirmaTipusDocumental(); // =TD99
+
+            FirmaSimpleFileInfoSignature fileInfoSignature = new FirmaSimpleFileInfoSignature(fileToSign, signID, name,
+                    reason, location, signNumber, languageSign, tipusDocumentalID);
+
+            final String languageUI = LocaleContextHolder.getLocale().getLanguage();
+
+            // Es la configuració del Servidor (deixam el valor per defecte)
+            final String certificat = null;
+
+            final String perfil = Configuracio.getApiFirmaEnServidorProfile();
+            FirmaSimpleCommonInfo commonInfo;
+            commonInfo = new FirmaSimpleCommonInfo(perfil, languageUI, certificat, evi.getPersonaNif(),
+                    evi.getPersonaEmail());
+
+            FirmaSimpleSignDocumentRequest signature;
+            signature = new FirmaSimpleSignDocumentRequest(commonInfo, fileInfoSignature);
+
+            ApiFirmaEnServidorSimple api = new ApiFirmaEnServidorSimpleJersey(Configuracio.getApiFirmaEnServidorUrl(),
+                    Configuracio.getApiFirmaEnServidorUsername(), Configuracio.getApiFirmaEnServidorPassword());
+
+            FirmaSimpleSignatureResult fullResults;
+            try {
+                fullResults = api.signDocument(signature);
+            } catch (AbstractApisIBException e) {
+                // TODO XYZ ZZZ
+                String msg = "Error signant el fitxer: " + e.getMessage() + "(" + e.getDescription() + ")";
+                throw new I18NException(e, "genapp.comodi", new I18NArgumentString(msg));
+            }
+
+            FirmaSimpleStatus transactionStatus = fullResults.getStatus();
+
+            int status = transactionStatus.getStatus();
+
+            switch (status) {
+
+                case FirmaSimpleStatus.STATUS_INITIALIZING: // = 0;
+                {
+                    // TODO XYZ ZZZ
+                    String msg = "L'estat del procés de firma ha tornat el control però encara està en estat INICIALITZANT";
+                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                }
+
+                case FirmaSimpleStatus.STATUS_IN_PROGRESS: // = 1;
+                {
+                    // TODO XYZ ZZZ
+                    String msg = "L'estat del procés de firma ha tornat el control però encara està en estat EN PROGRESS";
+                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                }
+
+                case FirmaSimpleStatus.STATUS_FINAL_ERROR: // = -1;
+                {
+                    final String msg = "Error durant la realització de les firmes: "
+                            + transactionStatus.getErrorMessage();
+                    String desc = transactionStatus.getErrorStackTrace();
+                    if (desc != null) {
+                        evi.setEstatError(desc);
+                    }
+                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                }
+
+                case FirmaSimpleStatus.STATUS_CANCELLED: // = -2;
+                {
+                    // TODO XYZ ZZZ
+                    String msg = "El procés de firma ha tornat el control amb estat CANCEL·LAT";
+                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                }
+
+                case FirmaSimpleStatus.STATUS_FINAL_OK: // = 2;
+                {
+
+                    // TODO  XYZ ZZZ
+                    log.info(FirmaSimpleSignedFileInfo.toString(fullResults.getSignedFileInfo()));
+
+                    FirmaSimpleFile fsf = fullResults.getSignedFile();
+
+                    byte[] data = fsf.getData();
+
+                    String newname = evi.getFitxerOriginal().getNom();
+                    newname = FilenameUtils.getBaseName(newname) + "_signed." + FilenameUtils.getExtension(newname);
+
+                    Fitxer fitxer = fitxerEjb.create(newname, fsf.getMime(), data.length, "");
+                    FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
+
+                    evi.setFitxerSignatID(fitxer.getFitxerID());
+
+                    evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_SIGNAT);
+
+                    return fullResults;
+
+                } // Final Case Firma OK
+
+                default: {
+                    // TODO XYZ ZZZ
+                    String msg = "L'estat del procés de firma ha tornat un estat desconegut amb valor " + status;
+                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                }
+            } // Final Switch Firma
 
         } catch (I18NException th) {
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
@@ -262,9 +508,6 @@ public class EvidenciaUserController extends EvidenciaController {
                 }
             }
 
-            HtmlUtils.deleteMessages(request);
-            HtmlUtils.saveMessageError(request, msg);
-
         } catch (Throwable th) {
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
             final String msg = "Error no controllat signant document: " + th.getMessage();
@@ -274,145 +517,20 @@ public class EvidenciaUserController extends EvidenciaController {
             }
             log.error(msg, th);
 
-            HtmlUtils.deleteMessages(request);
-            HtmlUtils.saveMessageError(request, msg);
-        }
-
-        evi.setDataFi(new Timestamp(System.currentTimeMillis()));
-        this.evidenciaEjb.update(evi);
-
-        return evi;
-    }
-
-    /**
-     * 
-     * @param evi
-     * @return
-     * @throws I18NException
-     */
-    protected FirmaSimpleSignatureResult internalSignDocument(EvidenciaJPA evi) throws I18NException {
-
-        FirmaSimpleFile fileToSign;
-        try {
-            Fitxer fitxerAdaptat = generarFitxerPdfAmbAnnexDeEvidencies(evi);
-
-            // TODO XYZ Canviar Nom per Adaptat
-            fileToSign = new FirmaSimpleFile(fitxerAdaptat.getNom(), fitxerAdaptat.getMime(),
-                    FileSystemManager.getFileContent(fitxerAdaptat.getFitxerID()));
-        } catch (DocumentException docex) {
-            // TODO XYZ ZZZ
-            String msg = "Error adaptant el PDF per afegir-hi annexes: " + docex.getMessage();
-            log.error(msg, docex);
-            throw new I18NException(docex, "genapp.comodi", new I18NArgumentString(msg));
-        } catch (IOException e) {
-            // TODO XYZ ZZZ
-            String msg = "Error llegint el fitxer a signar: " + e.getMessage();
-            log.error(msg, e);
-            throw new I18NException(e, "genapp.comodi", new I18NArgumentString(msg));
-        }
-
-        final String signID = "1";
-        final String name = fileToSign.getNom();
-        final String reason = evi.getFirmaReason();
-        final String location = evi.getLocalitzacioCiutat();
-
-        final int signNumber = 1;
-
-        // XYZ ZZZ
-        final String languageSign = evi.getFirmaIdiomaDocument();
-
-        // XYZ ZZZ
-        final long tipusDocumentalID = evi.getFirmaTipusDocumental(); // =TD99
-
-        FirmaSimpleFileInfoSignature fileInfoSignature = new FirmaSimpleFileInfoSignature(fileToSign, signID, name,
-                reason, location, signNumber, languageSign, tipusDocumentalID);
-
-        final String languageUI = LocaleContextHolder.getLocale().getLanguage();
-
-        // Es la configuració del Servidor (deixam el valor per defecte)
-        final String certificat = null;
-
-        final String perfil = Configuracio.getApiFirmaEnServidorProfile();
-        FirmaSimpleCommonInfo commonInfo;
-        commonInfo = new FirmaSimpleCommonInfo(perfil, languageUI, certificat, evi.getPersonaNif(),
-                evi.getPersonaEmail());
-
-        FirmaSimpleSignDocumentRequest signature;
-        signature = new FirmaSimpleSignDocumentRequest(commonInfo, fileInfoSignature);
-
-        ApiFirmaEnServidorSimple api = new ApiFirmaEnServidorSimpleJersey(Configuracio.getApiFirmaEnServidorUrl(),
-                Configuracio.getApiFirmaEnServidorUsername(), Configuracio.getApiFirmaEnServidorPassword());
-
-        FirmaSimpleSignatureResult fullResults;
-        try {
-            fullResults = api.signDocument(signature);
-        } catch (AbstractApisIBException e) {
-            // TODO XYZ ZZZ
-            String msg = "Error signant el fitxer: " + e.getMessage() + "(" + e.getDescription() + ")";
-            throw new I18NException(e, "genapp.comodi", new I18NArgumentString(msg));
-        }
-
-        FirmaSimpleStatus transactionStatus = fullResults.getStatus();
-
-        int status = transactionStatus.getStatus();
-
-        switch (status) {
-
-            case FirmaSimpleStatus.STATUS_INITIALIZING: // = 0;
-            {
+        } finally {
+            evi.setDataFi(new Timestamp(System.currentTimeMillis()));
+            try {
+                this.evidenciaEjb.update(evi);
+            } catch (I18NException e) {
                 // TODO XYZ ZZZ
-                String msg = "L'estat del procés de firma ha tornat el control però encara està en estat INICIALITZANT";
-                throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                String msg = "Error actualitzant l'evidència despres de signar el document: " + I18NUtils.getMessage(e);
+                log.error(msg, e);
+                HtmlUtils.saveMessageError(request, msg);
             }
-
-            case FirmaSimpleStatus.STATUS_IN_PROGRESS: // = 1;
-            {
-                // TODO XYZ ZZZ
-                String msg = "L'estat del procés de firma ha tornat el control però encara està en estat EN PROGRESS";
-                throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
-            }
-
-            case FirmaSimpleStatus.STATUS_FINAL_ERROR: // = -1;
-            {
-                final String msg = "Error durant la realització de les firmes: " + transactionStatus.getErrorMessage();
-                String desc = transactionStatus.getErrorStackTrace();
-                if (desc != null) {
-                    evi.setEstatError(desc);
-                }
-                throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
-            }
-
-            case FirmaSimpleStatus.STATUS_CANCELLED: // = -2;
-            {
-                // TODO XYZ ZZZ
-                String msg = "El procés de firma ha tornat el control amb estat CANCEL·LAT";
-                throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
-            }
-
-            case FirmaSimpleStatus.STATUS_FINAL_OK: // = 2;
-            {
-
-                // TODO  XYZ ZZZ
-                log.info(FirmaSimpleSignedFileInfo.toString(fullResults.getSignedFileInfo()));
-
-                FirmaSimpleFile fsf = fullResults.getSignedFile();
-
-                byte[] data = fsf.getData();
-
-                String newname = evi.getFitxerOriginal().getNom();
-                newname = FilenameUtils.getBaseName(newname) + "_signed." + FilenameUtils.getExtension(newname);
-
-                Fitxer fitxer = fitxerEjb.create(newname, fsf.getMime(), data.length, "");
-                FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
-
-                evi.setFitxerSignatID(fitxer.getFitxerID());
-
-                return fullResults;
-
-            } // Final Case Firma OK
-        } // Final Switch Firma
+        }
 
         return null;
+
     }
 
     protected Fitxer generarFitxerPdfAmbAnnexDeEvidencies(EvidenciaJPA evi)
@@ -677,11 +795,10 @@ public class EvidenciaUserController extends EvidenciaController {
     public boolean isActiveFormView() {
         return true;
     }
-    
+
     @Override
     public void delete(HttpServletRequest request, Evidencia evidencia) throws I18NException {
         evidenciaEjb.deleteIncludingFiles(evidencia, this.fitxerEjb);
     }
-
 
 }

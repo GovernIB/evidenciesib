@@ -1,7 +1,6 @@
 package es.caib.evidenciesib.front.controller;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class InicioController {
 
-    protected final Log log = LogFactory.getLog(getClass());
+    protected final Logger log = Logger.getLogger(this.getClass());
 
     @RequestMapping(value = { "/" })
     public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response, HttpSession session)

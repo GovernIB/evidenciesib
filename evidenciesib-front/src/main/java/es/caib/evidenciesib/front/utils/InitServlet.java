@@ -11,6 +11,8 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 
+import java.util.Properties;
+
 import javax.annotation.security.RunAs;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

@@ -102,6 +102,7 @@ try {
 %>
 <fmt:setLocale value="${locale}"/>
 <html>
+<head>
 <link href="<c:url value="/css/bootstrap.css"/>" rel="stylesheet" media="screen">
 <link href="<c:url value="/css/default.css"/>" rel="stylesheet">
 <script src="<c:url value="/js/jquery.js" />"></script>
@@ -118,7 +119,7 @@ try {
   setTimeout("location.href = '${redirect}';",3500);
 <% } %>
 </script>
-
+</head>
 <body>
  <div class="alert alert-danger">
       <c:set var="stacktrace"  value="${pageContext.exception.stackTrace}"/>

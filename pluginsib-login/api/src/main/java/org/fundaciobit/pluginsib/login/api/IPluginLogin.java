@@ -1,5 +1,7 @@
 package org.fundaciobit.pluginsib.login.api;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.fundaciobit.pluginsib.core.IPlugin;
 
 /**
@@ -8,10 +10,15 @@ import org.fundaciobit.pluginsib.core.IPlugin;
  *
  */
 public interface IPluginLogin extends IPlugin {
-    
-    
+
     public static final String PLUGIN_LOGIN_PROPERTY_BASE = IPLUGINSIB_BASE_PROPERTIES + "login.";
-     
+
+    /**
+     * 
+     * @param language
+     * @return
+     */
+    public String getName(String language);
 
     /**
      * 
@@ -40,4 +47,6 @@ public interface IPluginLogin extends IPlugin {
      * @throws Exception
      */
     public String logout(String urlCallBackLogout, String language) throws Exception;
+
+    public String getError(HttpServletRequest request, String language);
 }

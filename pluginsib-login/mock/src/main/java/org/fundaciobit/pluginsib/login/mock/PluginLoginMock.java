@@ -46,18 +46,18 @@ public class PluginLoginMock extends AbstractPluginLogin {
 
     @Override
     public LoginInfo validateAuthenticationTicket(String ticket) throws Exception {
-        
-        
+
         log.error("\n\n MOCK => class:   " + this);
         log.error("\n\n MOCK => base:   |" + this.getPropertyKeyBase() + "|");
         log.error("\n\n MOCK => propname[" + PLUGIN_MOCK_PROPERTY_BASE + "logininfo" + "]:   |" + this.getPropertyName(PLUGIN_MOCK_PROPERTY_BASE + "logininfo") + "|");
 
         String json = getPropertyRequired(PLUGIN_MOCK_PROPERTY_BASE + "logininfo");
-
         Gson gson = new GsonBuilder().create();
-
         try {
             LoginInfo logininfo = gson.fromJson(json, LoginInfo.class);
+            
+            logininfo.setLoginID("Mock_" + System.currentTimeMillis());
+            
             return logininfo;
         } catch (Exception e) {
             String msg = "Error no controlat deserialitzant una estructura json de la classe LoginInfo: "
@@ -72,6 +72,17 @@ public class PluginLoginMock extends AbstractPluginLogin {
     public String logout(String urlCallBackLogout, String language) throws Exception {
 
         return urlCallBackLogout;
+    }
+
+    @Override
+    public String getError(javax.servlet.http.HttpServletRequest request, String language) {
+        return null;
+    }
+    
+    
+    @Override
+    public String getName(String language) {        
+        return "Mock";
     }
 
 }

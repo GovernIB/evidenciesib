@@ -1,16 +1,15 @@
 package org.fundaciobit.pluginsib.login.loginib;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.pluginsib.login.api.AbstractPluginLogin;
 import org.fundaciobit.pluginsib.login.api.LoginInfo;
 import org.fundaciobit.pluginsib.login.api.LoginInfoRepresentative;
-//    import org.springframework.http.HttpEntity;
-//    import org.springframework.http.HttpHeaders;
-//    import org.springframework.http.ResponseEntity;
-//    import org.springframework.http.client.support.BasicAuthorizationInterceptor;
-//    import org.springframework.web.client.RestTemplate;
 
 import es.caib.loginib.rest.api.v1.RDatosAutenticacion;
 import es.caib.loginib.rest.api.v1.RDatosRepresentante;
@@ -232,6 +231,9 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
 
             final LoginInfo loginInfo = new LoginInfo(username, name, surname1, surname2, administrationID,
                     authenticationMethod, qaa, identityProvider, business, representative);
+            
+            // XYZ ZZZ 
+            loginInfo.setLoginID("Cl@ve_" + System.currentTimeMillis());
 
             return loginInfo;
         } catch (Exception e) {
@@ -273,6 +275,33 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
         restTemplate.getInterceptors().add(new org.springframework.http.client.support.BasicAuthorizationInterceptor(getLoginIBUser(), getLoginIBPassword()));
 
         return restTemplate;
+    }
+
+    @Override
+    public String getError(HttpServletRequest request, String language)  {
+        
+        StringBuffer errorStr = new StringBuffer();
+
+        Map<String, String[]> map = request.getParameterMap();
+
+        for (Map.Entry<String, String[]> entry : map.entrySet()) {
+            String key = entry.getKey();
+            String[] val = entry.getValue();
+            errorStr.append("KEY => ]" + key + "[ : {" + Arrays.toString(val) + "}\n");
+        }
+        
+        if (errorStr.length() == 0) {
+            return null;
+        } else {
+            log.error(errorStr.toString());
+            return errorStr.toString();
+        }
+        
+    }
+
+    @Override
+    public String getName(String language) {        
+        return "Cl@veAutenticación";
     }
 
 }
