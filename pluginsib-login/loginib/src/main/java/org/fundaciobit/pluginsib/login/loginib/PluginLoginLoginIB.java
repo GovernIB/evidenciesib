@@ -163,6 +163,9 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
 
             final RDatosAutenticacion datosAutenticacion = restTemplate
                     .getForObject(getLoginIBUrl() + "/ticket/" + ticket, RDatosAutenticacion.class);
+            
+            
+            
 
             final boolean debug = isDebugEnabled();
 
@@ -232,8 +235,7 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
             final LoginInfo loginInfo = new LoginInfo(username, name, surname1, surname2, administrationID,
                     authenticationMethod, qaa, identityProvider, business, representative);
             
-            // XYZ ZZZ 
-            loginInfo.setLoginID("Cl@ve_" + System.currentTimeMillis());
+            loginInfo.setLoginID(datosAutenticacion.getIdSesion());
 
             return loginInfo;
         } catch (Exception e) {
