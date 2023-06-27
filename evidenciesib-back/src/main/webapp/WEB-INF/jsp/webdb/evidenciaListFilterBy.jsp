@@ -365,15 +365,28 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINID)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINSUBTYPE)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="evidencia.loginId" var="loginId" />
-              <fmt:message key="genapp.form.searchby" var="cercaperloginId" >                
-                 <fmt:param value="${loginId}"/>
+              <fmt:message key="evidencia.loginSubtype" var="loginSubtype" />
+              <fmt:message key="genapp.form.searchby" var="cercaperloginSubtype" >                
+                 <fmt:param value="${loginSubtype}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${loginId}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginId}" path="loginId" />
+              <span class="add-on"><c:out value="${loginSubtype}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginSubtype}" path="loginSubtype" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINQAA)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.loginQaa" var="loginQaa" />
+              <fmt:message key="genapp.form.searchby" var="cercaperloginQaa" >                
+                 <fmt:param value="${loginQaa}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${loginQaa}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginQaa}" path="loginQaa" />
             </div>
 
 
@@ -428,6 +441,45 @@
 
     
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINID)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.loginId" var="loginId" />
+              <fmt:message key="genapp.form.searchby" var="cercaperloginId" >                
+                 <fmt:param value="${loginId}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${loginId}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginId}" path="loginId" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINAUTHMETHOD)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.loginAuthMethod" var="loginAuthMethod" />
+              <fmt:message key="genapp.form.searchby" var="cercaperloginAuthMethod" >                
+                 <fmt:param value="${loginAuthMethod}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${loginAuthMethod}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginAuthMethod}" path="loginAuthMethod" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINADDITIONALPROPERTIES)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.loginAdditionalProperties" var="loginAdditionalProperties" />
+              <fmt:message key="genapp.form.searchby" var="cercaperloginAdditionalProperties" >                
+                 <fmt:param value="${loginAdditionalProperties}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${loginAdditionalProperties}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginAdditionalProperties}" path="loginAdditionalProperties" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOCALITZACIOIP)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -454,6 +506,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOCALITZACIOLATITUD)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.localitzacioLatitud" var="localitzacioLatitud" />
+              <fmt:message key="genapp.form.searchby" var="cercaperlocalitzacioLatitud" >                
+                 <fmt:param value="${localitzacioLatitud}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${localitzacioLatitud}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperlocalitzacioLatitud}" path="localitzacioLatitud" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOCALITZACIOLONGITUD)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -476,19 +541,6 @@
               </fmt:message>
               <span class="add-on"><c:out value="${localitzacioCiutat}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperlocalitzacioCiutat}" path="localitzacioCiutat" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOCALITZACIOLATITUD)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="evidencia.localitzacioLatitud" var="localitzacioLatitud" />
-              <fmt:message key="genapp.form.searchby" var="cercaperlocalitzacioLatitud" >                
-                 <fmt:param value="${localitzacioLatitud}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${localitzacioLatitud}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperlocalitzacioLatitud}" path="localitzacioLatitud" />
             </div>
 
 
@@ -532,6 +584,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.FIRMAIDIOMADOCUMENT)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.firmaIdiomaDocument" var="firmaIdiomaDocument" />
+              <fmt:message key="genapp.form.searchby" var="cercaperfirmaIdiomaDocument" >                
+                 <fmt:param value="${firmaIdiomaDocument}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${firmaIdiomaDocument}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperfirmaIdiomaDocument}" path="firmaIdiomaDocument" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}">
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <%-- FILTRE NUMERO SELECT MULTIPLE --%>
@@ -555,19 +620,6 @@
                     $('.select2-selection__rendered').css('padding-bottom','5px');
                 });
               </script>
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.FIRMAIDIOMADOCUMENT)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="evidencia.firmaIdiomaDocument" var="firmaIdiomaDocument" />
-              <fmt:message key="genapp.form.searchby" var="cercaperfirmaIdiomaDocument" >                
-                 <fmt:param value="${firmaIdiomaDocument}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${firmaIdiomaDocument}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperfirmaIdiomaDocument}" path="firmaIdiomaDocument" />
             </div>
 
 

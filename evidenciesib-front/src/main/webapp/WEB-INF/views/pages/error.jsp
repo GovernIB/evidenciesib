@@ -53,10 +53,10 @@ request.setAttribute("stacktrace", stackTrace);
 <body>
 
     <script type="text/javascript">
-                    function tornaEnrera(path) {
-                        window.location.href = "/";
-                    }
-                </script>
+        function tornaEnrera(path) {
+            window.location.href = "/";
+        }
+    </script>
 
 
     <div class="alert alert-danger" role="alert">

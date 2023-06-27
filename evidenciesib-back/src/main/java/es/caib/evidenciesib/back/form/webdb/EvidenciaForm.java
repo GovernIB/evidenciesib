@@ -34,8 +34,8 @@ public class EvidenciaForm extends EvidenciesIBBaseForm {
       this.evidencia = __toClone.evidencia;
     this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
     this.listOfValuesForLoginType = __toClone.listOfValuesForLoginType;
-    this.listOfValuesForFirmaTipusDocumental = __toClone.listOfValuesForFirmaTipusDocumental;
     this.listOfValuesForFirmaIdiomaDocument = __toClone.listOfValuesForFirmaIdiomaDocument;
+    this.listOfValuesForFirmaTipusDocumental = __toClone.listOfValuesForFirmaTipusDocumental;
   }
   
   public EvidenciaForm(EvidenciaJPA evidencia, boolean nou) {
@@ -117,18 +117,6 @@ public class EvidenciaForm extends EvidenciesIBBaseForm {
 
 
 
-  private List<StringKeyValue> listOfValuesForFirmaTipusDocumental;
-
-  public List<StringKeyValue> getListOfValuesForFirmaTipusDocumental() {
-    return this.listOfValuesForFirmaTipusDocumental;
-  }
-
-  public void setListOfValuesForFirmaTipusDocumental(List<StringKeyValue> listOfValuesForFirmaTipusDocumental) {
-    this.listOfValuesForFirmaTipusDocumental = listOfValuesForFirmaTipusDocumental;
-  }
-
-
-
   private List<StringKeyValue> listOfValuesForFirmaIdiomaDocument;
 
   public List<StringKeyValue> getListOfValuesForFirmaIdiomaDocument() {
@@ -137,6 +125,18 @@ public class EvidenciaForm extends EvidenciesIBBaseForm {
 
   public void setListOfValuesForFirmaIdiomaDocument(List<StringKeyValue> listOfValuesForFirmaIdiomaDocument) {
     this.listOfValuesForFirmaIdiomaDocument = listOfValuesForFirmaIdiomaDocument;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForFirmaTipusDocumental;
+
+  public List<StringKeyValue> getListOfValuesForFirmaTipusDocumental() {
+    return this.listOfValuesForFirmaTipusDocumental;
+  }
+
+  public void setListOfValuesForFirmaTipusDocumental(List<StringKeyValue> listOfValuesForFirmaTipusDocumental) {
+    this.listOfValuesForFirmaTipusDocumental = listOfValuesForFirmaTipusDocumental;
   }
 
 

@@ -62,7 +62,7 @@ public class EvidenciesIBSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/public/**", "/inici",
                         // Evidencies
-                        EvidenciaLoginController.MAPPING_FRONT_LOGIN_END  + "/**", Constants.MAPPING_FRONT_LOGIN_START  + "/**",
+                        EvidenciaLoginController.MAPPING_FRONT_LOGIN_END  + "/**", Constants.MAPPING_FRONT_LOGIN_START  + "/**", "/public/setlocationpost/**",
                         // Plugin Login
                         PluginLoginController.MAPPING_PRELOGIN + "/**", PluginLoginController.MAPPING_LOGOUT, 
                         "/js/**", "/error", "/css/**", "/images/**", "/fonts/**").permitAll()

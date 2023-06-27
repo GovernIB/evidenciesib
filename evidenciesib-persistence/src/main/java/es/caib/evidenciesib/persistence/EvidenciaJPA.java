@@ -80,11 +80,25 @@ public class EvidenciaJPA implements Evidencia {
     @Column(name="logintype",nullable = false,length = 10)
     int loginType = 0;
 
-    @Column(name="loginid",length = 255)
-    java.lang.String loginId;
+    @Column(name="loginsubtype",length = 255)
+    java.lang.String loginSubtype;
+
+    @Column(name="loginqaa",length = 255)
+    java.lang.String loginQaa;
 
     @Column(name="logindata",length = 29,precision = 6)
     java.sql.Timestamp loginData;
+
+    @Column(name="loginid",length = 255)
+    java.lang.String loginId;
+
+    @Column(name="loginauthmethod",length = 255)
+    java.lang.String loginAuthMethod;
+
+    @Column(name="loginadditionalproperties",length = 2147483647)
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
+    java.lang.String loginAdditionalProperties;
 
     @Column(name="localitzacioip",length = 100)
     java.lang.String localitzacioIp;
@@ -92,14 +106,14 @@ public class EvidenciaJPA implements Evidencia {
     @Column(name="localitzaciocodipostal",length = 100)
     java.lang.String localitzacioCodiPostal;
 
+    @Column(name="localitzaciolatitud",length = 100)
+    java.lang.String localitzacioLatitud;
+
     @Column(name="localitzaciolongitud",length = 100)
     java.lang.String localitzacioLongitud;
 
     @Column(name="localitzaciociutat",length = 255)
     java.lang.String localitzacioCiutat;
-
-    @Column(name="localitzaciolatitud",length = 100)
-    java.lang.String localitzacioLatitud;
 
     @Column(name="localitzacioregio",length = 100)
     java.lang.String localitzacioRegio;
@@ -111,12 +125,12 @@ public class EvidenciaJPA implements Evidencia {
     @Column(name="firmareason",nullable = false,length = 255)
     java.lang.String firmaReason = "Rao de la firma";
 
+    @Column(name="firmaidiomadocument",length = 100)
+    java.lang.String firmaIdiomaDocument;
+
     @org.hibernate.annotations.ColumnDefault("99")
     @Column(name="firmatipusdocumental",nullable = false,length = 10)
     int firmaTipusDocumental = 99;
-
-    @Column(name="firmaidiomadocument",length = 100)
-    java.lang.String firmaIdiomaDocument;
 
     @Column(name="fitxeroriginalid",nullable = false,length = 19)
     long fitxerOriginalID;
@@ -134,7 +148,7 @@ public class EvidenciaJPA implements Evidencia {
   }
 
   /** Constructor amb tots els camps  */
-  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLongitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioLatitud , java.lang.String localitzacioRegio , java.lang.String localitzacioPais , java.lang.String firmaReason , int firmaTipusDocumental , java.lang.String firmaIdiomaDocument , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID) {
+  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginSubtype , java.lang.String loginQaa , java.sql.Timestamp loginData , java.lang.String loginId , java.lang.String loginAuthMethod , java.lang.String loginAdditionalProperties , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioRegio , java.lang.String localitzacioPais , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNom=personaNom;
@@ -151,24 +165,28 @@ public class EvidenciaJPA implements Evidencia {
     this.estatError=estatError;
     this.estatExcepcio=estatExcepcio;
     this.loginType=loginType;
-    this.loginId=loginId;
+    this.loginSubtype=loginSubtype;
+    this.loginQaa=loginQaa;
     this.loginData=loginData;
+    this.loginId=loginId;
+    this.loginAuthMethod=loginAuthMethod;
+    this.loginAdditionalProperties=loginAdditionalProperties;
     this.localitzacioIp=localitzacioIp;
     this.localitzacioCodiPostal=localitzacioCodiPostal;
+    this.localitzacioLatitud=localitzacioLatitud;
     this.localitzacioLongitud=localitzacioLongitud;
     this.localitzacioCiutat=localitzacioCiutat;
-    this.localitzacioLatitud=localitzacioLatitud;
     this.localitzacioRegio=localitzacioRegio;
     this.localitzacioPais=localitzacioPais;
     this.firmaReason=firmaReason;
-    this.firmaTipusDocumental=firmaTipusDocumental;
     this.firmaIdiomaDocument=firmaIdiomaDocument;
+    this.firmaTipusDocumental=firmaTipusDocumental;
     this.fitxerOriginalID=fitxerOriginalID;
     this.fitxerAdaptatID=fitxerAdaptatID;
     this.fitxerSignatID=fitxerSignatID;
 }
   /** Constructor sense valors autoincrementals */
-  public EvidenciaJPA(java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLongitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioLatitud , java.lang.String localitzacioRegio , java.lang.String localitzacioPais , java.lang.String firmaReason , int firmaTipusDocumental , java.lang.String firmaIdiomaDocument , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID) {
+  public EvidenciaJPA(java.lang.String nom , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaNif , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginSubtype , java.lang.String loginQaa , java.sql.Timestamp loginData , java.lang.String loginId , java.lang.String loginAuthMethod , java.lang.String loginAdditionalProperties , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioCiutat , java.lang.String localitzacioRegio , java.lang.String localitzacioPais , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID) {
     this.nom=nom;
     this.personaNom=personaNom;
     this.personaLlinatge1=personaLlinatge1;
@@ -184,18 +202,22 @@ public class EvidenciaJPA implements Evidencia {
     this.estatError=estatError;
     this.estatExcepcio=estatExcepcio;
     this.loginType=loginType;
-    this.loginId=loginId;
+    this.loginSubtype=loginSubtype;
+    this.loginQaa=loginQaa;
     this.loginData=loginData;
+    this.loginId=loginId;
+    this.loginAuthMethod=loginAuthMethod;
+    this.loginAdditionalProperties=loginAdditionalProperties;
     this.localitzacioIp=localitzacioIp;
     this.localitzacioCodiPostal=localitzacioCodiPostal;
+    this.localitzacioLatitud=localitzacioLatitud;
     this.localitzacioLongitud=localitzacioLongitud;
     this.localitzacioCiutat=localitzacioCiutat;
-    this.localitzacioLatitud=localitzacioLatitud;
     this.localitzacioRegio=localitzacioRegio;
     this.localitzacioPais=localitzacioPais;
     this.firmaReason=firmaReason;
-    this.firmaTipusDocumental=firmaTipusDocumental;
     this.firmaIdiomaDocument=firmaIdiomaDocument;
+    this.firmaTipusDocumental=firmaTipusDocumental;
     this.fitxerOriginalID=fitxerOriginalID;
     this.fitxerAdaptatID=fitxerAdaptatID;
     this.fitxerSignatID=fitxerSignatID;
@@ -231,18 +253,22 @@ public class EvidenciaJPA implements Evidencia {
     this.setEstatError(__bean.getEstatError());
     this.setEstatExcepcio(__bean.getEstatExcepcio());
     this.setLoginType(__bean.getLoginType());
-    this.setLoginId(__bean.getLoginId());
+    this.setLoginSubtype(__bean.getLoginSubtype());
+    this.setLoginQaa(__bean.getLoginQaa());
     this.setLoginData(__bean.getLoginData());
+    this.setLoginId(__bean.getLoginId());
+    this.setLoginAuthMethod(__bean.getLoginAuthMethod());
+    this.setLoginAdditionalProperties(__bean.getLoginAdditionalProperties());
     this.setLocalitzacioIp(__bean.getLocalitzacioIp());
     this.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
+    this.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
     this.setLocalitzacioLongitud(__bean.getLocalitzacioLongitud());
     this.setLocalitzacioCiutat(__bean.getLocalitzacioCiutat());
-    this.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
     this.setLocalitzacioRegio(__bean.getLocalitzacioRegio());
     this.setLocalitzacioPais(__bean.getLocalitzacioPais());
     this.setFirmaReason(__bean.getFirmaReason());
-    this.setFirmaTipusDocumental(__bean.getFirmaTipusDocumental());
     this.setFirmaIdiomaDocument(__bean.getFirmaIdiomaDocument());
+    this.setFirmaTipusDocumental(__bean.getFirmaTipusDocumental());
     this.setFitxerOriginalID(__bean.getFitxerOriginalID());
     this.setFitxerAdaptatID(__bean.getFitxerAdaptatID());
     this.setFitxerSignatID(__bean.getFitxerSignatID());
@@ -366,11 +392,18 @@ public class EvidenciaJPA implements Evidencia {
 		this.loginType = _loginType_;
 	};
 
-	public java.lang.String getLoginId() {
-		return(loginId);
+	public java.lang.String getLoginSubtype() {
+		return(loginSubtype);
 	};
-	public void setLoginId(java.lang.String _loginId_) {
-		this.loginId = _loginId_;
+	public void setLoginSubtype(java.lang.String _loginSubtype_) {
+		this.loginSubtype = _loginSubtype_;
+	};
+
+	public java.lang.String getLoginQaa() {
+		return(loginQaa);
+	};
+	public void setLoginQaa(java.lang.String _loginQaa_) {
+		this.loginQaa = _loginQaa_;
 	};
 
 	public java.sql.Timestamp getLoginData() {
@@ -378,6 +411,27 @@ public class EvidenciaJPA implements Evidencia {
 	};
 	public void setLoginData(java.sql.Timestamp _loginData_) {
 		this.loginData = _loginData_;
+	};
+
+	public java.lang.String getLoginId() {
+		return(loginId);
+	};
+	public void setLoginId(java.lang.String _loginId_) {
+		this.loginId = _loginId_;
+	};
+
+	public java.lang.String getLoginAuthMethod() {
+		return(loginAuthMethod);
+	};
+	public void setLoginAuthMethod(java.lang.String _loginAuthMethod_) {
+		this.loginAuthMethod = _loginAuthMethod_;
+	};
+
+	public java.lang.String getLoginAdditionalProperties() {
+		return(loginAdditionalProperties);
+	};
+	public void setLoginAdditionalProperties(java.lang.String _loginAdditionalProperties_) {
+		this.loginAdditionalProperties = _loginAdditionalProperties_;
 	};
 
 	public java.lang.String getLocalitzacioIp() {
@@ -394,6 +448,13 @@ public class EvidenciaJPA implements Evidencia {
 		this.localitzacioCodiPostal = _localitzacioCodiPostal_;
 	};
 
+	public java.lang.String getLocalitzacioLatitud() {
+		return(localitzacioLatitud);
+	};
+	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_) {
+		this.localitzacioLatitud = _localitzacioLatitud_;
+	};
+
 	public java.lang.String getLocalitzacioLongitud() {
 		return(localitzacioLongitud);
 	};
@@ -406,13 +467,6 @@ public class EvidenciaJPA implements Evidencia {
 	};
 	public void setLocalitzacioCiutat(java.lang.String _localitzacioCiutat_) {
 		this.localitzacioCiutat = _localitzacioCiutat_;
-	};
-
-	public java.lang.String getLocalitzacioLatitud() {
-		return(localitzacioLatitud);
-	};
-	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_) {
-		this.localitzacioLatitud = _localitzacioLatitud_;
 	};
 
 	public java.lang.String getLocalitzacioRegio() {
@@ -436,18 +490,18 @@ public class EvidenciaJPA implements Evidencia {
 		this.firmaReason = _firmaReason_;
 	};
 
-	public int getFirmaTipusDocumental() {
-		return(firmaTipusDocumental);
-	};
-	public void setFirmaTipusDocumental(int _firmaTipusDocumental_) {
-		this.firmaTipusDocumental = _firmaTipusDocumental_;
-	};
-
 	public java.lang.String getFirmaIdiomaDocument() {
 		return(firmaIdiomaDocument);
 	};
 	public void setFirmaIdiomaDocument(java.lang.String _firmaIdiomaDocument_) {
 		this.firmaIdiomaDocument = _firmaIdiomaDocument_;
+	};
+
+	public int getFirmaTipusDocumental() {
+		return(firmaTipusDocumental);
+	};
+	public void setFirmaTipusDocumental(int _firmaTipusDocumental_) {
+		this.firmaTipusDocumental = _firmaTipusDocumental_;
 	};
 
 	public long getFitxerOriginalID() {
@@ -549,18 +603,22 @@ public class EvidenciaJPA implements Evidencia {
     __tmp.setEstatError(__bean.getEstatError());
     __tmp.setEstatExcepcio(__bean.getEstatExcepcio());
     __tmp.setLoginType(__bean.getLoginType());
-    __tmp.setLoginId(__bean.getLoginId());
+    __tmp.setLoginSubtype(__bean.getLoginSubtype());
+    __tmp.setLoginQaa(__bean.getLoginQaa());
     __tmp.setLoginData(__bean.getLoginData());
+    __tmp.setLoginId(__bean.getLoginId());
+    __tmp.setLoginAuthMethod(__bean.getLoginAuthMethod());
+    __tmp.setLoginAdditionalProperties(__bean.getLoginAdditionalProperties());
     __tmp.setLocalitzacioIp(__bean.getLocalitzacioIp());
     __tmp.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
+    __tmp.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
     __tmp.setLocalitzacioLongitud(__bean.getLocalitzacioLongitud());
     __tmp.setLocalitzacioCiutat(__bean.getLocalitzacioCiutat());
-    __tmp.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
     __tmp.setLocalitzacioRegio(__bean.getLocalitzacioRegio());
     __tmp.setLocalitzacioPais(__bean.getLocalitzacioPais());
     __tmp.setFirmaReason(__bean.getFirmaReason());
-    __tmp.setFirmaTipusDocumental(__bean.getFirmaTipusDocumental());
     __tmp.setFirmaIdiomaDocument(__bean.getFirmaIdiomaDocument());
+    __tmp.setFirmaTipusDocumental(__bean.getFirmaTipusDocumental());
     __tmp.setFitxerOriginalID(__bean.getFitxerOriginalID());
     __tmp.setFitxerAdaptatID(__bean.getFitxerAdaptatID());
     __tmp.setFitxerSignatID(__bean.getFitxerSignatID());

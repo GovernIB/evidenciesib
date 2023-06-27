@@ -155,11 +155,43 @@ public class EvidenciaValidator<I extends Evidencia>
       }
     }
 
+    if (__vr.getFieldErrorCount(LOGINSUBTYPE) == 0) {
+      java.lang.String __loginsubtype = __target__.getLoginSubtype();
+      if (__loginsubtype!= null && __loginsubtype.length() > 255) {
+        __vr.rejectValue(LOGINSUBTYPE, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINSUBTYPE)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOGINQAA) == 0) {
+      java.lang.String __loginqaa = __target__.getLoginQaa();
+      if (__loginqaa!= null && __loginqaa.length() > 255) {
+        __vr.rejectValue(LOGINQAA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINQAA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
     if (__vr.getFieldErrorCount(LOGINID) == 0) {
       java.lang.String __loginid = __target__.getLoginId();
       if (__loginid!= null && __loginid.length() > 255) {
         __vr.rejectValue(LOGINID, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOGINAUTHMETHOD) == 0) {
+      java.lang.String __loginauthmethod = __target__.getLoginAuthMethod();
+      if (__loginauthmethod!= null && __loginauthmethod.length() > 255) {
+        __vr.rejectValue(LOGINAUTHMETHOD, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINAUTHMETHOD)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOGINADDITIONALPROPERTIES) == 0) {
+      java.lang.String __loginadditionalproperties = __target__.getLoginAdditionalProperties();
+      if (__loginadditionalproperties!= null && __loginadditionalproperties.length() > 2147483647) {
+        __vr.rejectValue(LOGINADDITIONALPROPERTIES, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINADDITIONALPROPERTIES)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
       }
     }
 
@@ -179,6 +211,14 @@ public class EvidenciaValidator<I extends Evidencia>
       }
     }
 
+    if (__vr.getFieldErrorCount(LOCALITZACIOLATITUD) == 0) {
+      java.lang.String __localitzaciolatitud = __target__.getLocalitzacioLatitud();
+      if (__localitzaciolatitud!= null && __localitzaciolatitud.length() > 100) {
+        __vr.rejectValue(LOCALITZACIOLATITUD, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOLATITUD)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+
     if (__vr.getFieldErrorCount(LOCALITZACIOLONGITUD) == 0) {
       java.lang.String __localitzaciolongitud = __target__.getLocalitzacioLongitud();
       if (__localitzaciolongitud!= null && __localitzaciolongitud.length() > 100) {
@@ -192,14 +232,6 @@ public class EvidenciaValidator<I extends Evidencia>
       if (__localitzaciociutat!= null && __localitzaciociutat.length() > 255) {
         __vr.rejectValue(LOCALITZACIOCIUTAT, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOCIUTAT)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-
-    if (__vr.getFieldErrorCount(LOCALITZACIOLATITUD) == 0) {
-      java.lang.String __localitzaciolatitud = __target__.getLocalitzacioLatitud();
-      if (__localitzaciolatitud!= null && __localitzaciolatitud.length() > 100) {
-        __vr.rejectValue(LOCALITZACIOLATITUD, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOLATITUD)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
       }
     }
 

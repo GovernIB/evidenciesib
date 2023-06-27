@@ -106,13 +106,33 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINSUBTYPE)}">
+          <td>
+          ${evidencia.loginSubtype}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINQAA)}">
+          <td>
+          ${evidencia.loginQaa}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINDATA)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${evidencia.loginData}" /></td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINID)}">
           <td>
           ${evidencia.loginId}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINDATA)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${evidencia.loginData}" /></td>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINAUTHMETHOD)}">
+          <td>
+          ${evidencia.loginAuthMethod}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINADDITIONALPROPERTIES)}">
+          <td>
+          ${evidencia.loginAdditionalProperties}
+          </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOIP)}">
           <td>
@@ -124,6 +144,11 @@
           ${evidencia.localitzacioCodiPostal}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
+          <td>
+          ${evidencia.localitzacioLatitud}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLONGITUD)}">
           <td>
           ${evidencia.localitzacioLongitud}
@@ -132,11 +157,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
           <td>
           ${evidencia.localitzacioCiutat}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
-          <td>
-          ${evidencia.localitzacioLatitud}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOREGIO)}">
@@ -154,19 +174,19 @@
           ${evidencia.firmaReason}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}">
-          <td>
-          <c:set var="tmp">${evidencia.firmaTipusDocumental}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForFirmaTipusDocumental[tmp]}
-          </c:if>
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMAIDIOMADOCUMENT)}">
           <td>
           <c:set var="tmp">${evidencia.firmaIdiomaDocument}</c:set>
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfValuesForFirmaIdiomaDocument[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}">
+          <td>
+          <c:set var="tmp">${evidencia.firmaTipusDocumental}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForFirmaTipusDocumental[tmp]}
           </c:if>
           </td>
         </c:if>

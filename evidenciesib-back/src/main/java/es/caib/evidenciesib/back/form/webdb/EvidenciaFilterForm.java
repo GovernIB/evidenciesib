@@ -230,14 +230,25 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
-  private java.lang.String loginId;
+  private java.lang.String loginSubtype;
 
-  public java.lang.String getLoginId() {
-    return this.loginId;
+  public java.lang.String getLoginSubtype() {
+    return this.loginSubtype;
   }
 
-  public void setLoginId(java.lang.String loginId) {
-    this.loginId = loginId;
+  public void setLoginSubtype(java.lang.String loginSubtype) {
+    this.loginSubtype = loginSubtype;
+  }
+
+
+  private java.lang.String loginQaa;
+
+  public java.lang.String getLoginQaa() {
+    return this.loginQaa;
+  }
+
+  public void setLoginQaa(java.lang.String loginQaa) {
+    this.loginQaa = loginQaa;
   }
 
 
@@ -263,6 +274,39 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
+  private java.lang.String loginId;
+
+  public java.lang.String getLoginId() {
+    return this.loginId;
+  }
+
+  public void setLoginId(java.lang.String loginId) {
+    this.loginId = loginId;
+  }
+
+
+  private java.lang.String loginAuthMethod;
+
+  public java.lang.String getLoginAuthMethod() {
+    return this.loginAuthMethod;
+  }
+
+  public void setLoginAuthMethod(java.lang.String loginAuthMethod) {
+    this.loginAuthMethod = loginAuthMethod;
+  }
+
+
+  private java.lang.String loginAdditionalProperties;
+
+  public java.lang.String getLoginAdditionalProperties() {
+    return this.loginAdditionalProperties;
+  }
+
+  public void setLoginAdditionalProperties(java.lang.String loginAdditionalProperties) {
+    this.loginAdditionalProperties = loginAdditionalProperties;
+  }
+
+
   private java.lang.String localitzacioIp;
 
   public java.lang.String getLocalitzacioIp() {
@@ -285,6 +329,17 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
+  private java.lang.String localitzacioLatitud;
+
+  public java.lang.String getLocalitzacioLatitud() {
+    return this.localitzacioLatitud;
+  }
+
+  public void setLocalitzacioLatitud(java.lang.String localitzacioLatitud) {
+    this.localitzacioLatitud = localitzacioLatitud;
+  }
+
+
   private java.lang.String localitzacioLongitud;
 
   public java.lang.String getLocalitzacioLongitud() {
@@ -304,17 +359,6 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   public void setLocalitzacioCiutat(java.lang.String localitzacioCiutat) {
     this.localitzacioCiutat = localitzacioCiutat;
-  }
-
-
-  private java.lang.String localitzacioLatitud;
-
-  public java.lang.String getLocalitzacioLatitud() {
-    return this.localitzacioLatitud;
-  }
-
-  public void setLocalitzacioLatitud(java.lang.String localitzacioLatitud) {
-    this.localitzacioLatitud = localitzacioLatitud;
   }
 
 
@@ -351,17 +395,6 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
-  private java.util.List<java.lang.Integer> firmaTipusDocumentalSelect;
-
-  public java.util.List<java.lang.Integer> getFirmaTipusDocumentalSelect() {
-    return this.firmaTipusDocumentalSelect;
-  }
-
-  public void setFirmaTipusDocumentalSelect(java.util.List<java.lang.Integer> firmaTipusDocumentalSelect) {
-    this.firmaTipusDocumentalSelect = firmaTipusDocumentalSelect;
-  }
-
-
   private java.lang.String firmaIdiomaDocument;
 
   public java.lang.String getFirmaIdiomaDocument() {
@@ -370,6 +403,17 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   public void setFirmaIdiomaDocument(java.lang.String firmaIdiomaDocument) {
     this.firmaIdiomaDocument = firmaIdiomaDocument;
+  }
+
+
+  private java.util.List<java.lang.Integer> firmaTipusDocumentalSelect;
+
+  public java.util.List<java.lang.Integer> getFirmaTipusDocumentalSelect() {
+    return this.firmaTipusDocumentalSelect;
+  }
+
+  public void setFirmaTipusDocumentalSelect(java.util.List<java.lang.Integer> firmaTipusDocumentalSelect) {
+    this.firmaTipusDocumentalSelect = firmaTipusDocumentalSelect;
   }
 
 
@@ -397,23 +441,27 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.estatError = __toClone.estatError;
     this.estatExcepcio = __toClone.estatExcepcio;
     this.loginTypeSelect = __toClone.loginTypeSelect;
-    this.loginId = __toClone.loginId;
+    this.loginSubtype = __toClone.loginSubtype;
+    this.loginQaa = __toClone.loginQaa;
     this.loginDataDesde = __toClone.loginDataDesde;
     this.loginDataFins = __toClone.loginDataFins;
+    this.loginId = __toClone.loginId;
+    this.loginAuthMethod = __toClone.loginAuthMethod;
+    this.loginAdditionalProperties = __toClone.loginAdditionalProperties;
     this.localitzacioIp = __toClone.localitzacioIp;
     this.localitzacioCodiPostal = __toClone.localitzacioCodiPostal;
+    this.localitzacioLatitud = __toClone.localitzacioLatitud;
     this.localitzacioLongitud = __toClone.localitzacioLongitud;
     this.localitzacioCiutat = __toClone.localitzacioCiutat;
-    this.localitzacioLatitud = __toClone.localitzacioLatitud;
     this.localitzacioRegio = __toClone.localitzacioRegio;
     this.localitzacioPais = __toClone.localitzacioPais;
     this.firmaReason = __toClone.firmaReason;
-    this.firmaTipusDocumentalSelect = __toClone.firmaTipusDocumentalSelect;
     this.firmaIdiomaDocument = __toClone.firmaIdiomaDocument;
+    this.firmaTipusDocumentalSelect = __toClone.firmaTipusDocumentalSelect;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
     this.mapOfValuesForLoginType = __toClone.mapOfValuesForLoginType;
-    this.mapOfValuesForFirmaTipusDocumental = __toClone.mapOfValuesForFirmaTipusDocumental;
     this.mapOfValuesForFirmaIdiomaDocument = __toClone.mapOfValuesForFirmaIdiomaDocument;
+    this.mapOfValuesForFirmaTipusDocumental = __toClone.mapOfValuesForFirmaTipusDocumental;
   }
   
   /* ========= UTILS ========== */
@@ -472,18 +520,6 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
 
 
-  private Map<String, String> mapOfValuesForFirmaTipusDocumental;
-
-  public Map<String, String> getMapOfValuesForFirmaTipusDocumental() {
-    return this.mapOfValuesForFirmaTipusDocumental;
-  }
-
-  public void setMapOfValuesForFirmaTipusDocumental(Map<String, String> mapOfValuesForFirmaTipusDocumental) {
-    this.mapOfValuesForFirmaTipusDocumental = mapOfValuesForFirmaTipusDocumental;
-  }
-
-
-
   private Map<String, String> mapOfValuesForFirmaIdiomaDocument;
 
   public Map<String, String> getMapOfValuesForFirmaIdiomaDocument() {
@@ -492,6 +528,18 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   public void setMapOfValuesForFirmaIdiomaDocument(Map<String, String> mapOfValuesForFirmaIdiomaDocument) {
     this.mapOfValuesForFirmaIdiomaDocument = mapOfValuesForFirmaIdiomaDocument;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForFirmaTipusDocumental;
+
+  public Map<String, String> getMapOfValuesForFirmaTipusDocumental() {
+    return this.mapOfValuesForFirmaTipusDocumental;
+  }
+
+  public void setMapOfValuesForFirmaTipusDocumental(Map<String, String> mapOfValuesForFirmaTipusDocumental) {
+    this.mapOfValuesForFirmaTipusDocumental = mapOfValuesForFirmaTipusDocumental;
   }
 
 

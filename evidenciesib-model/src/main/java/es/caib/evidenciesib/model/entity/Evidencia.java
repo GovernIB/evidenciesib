@@ -50,11 +50,23 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public int getLoginType();
 	public void setLoginType(int _loginType_);
 
-	public java.lang.String getLoginId();
-	public void setLoginId(java.lang.String _loginId_);
+	public java.lang.String getLoginSubtype();
+	public void setLoginSubtype(java.lang.String _loginSubtype_);
+
+	public java.lang.String getLoginQaa();
+	public void setLoginQaa(java.lang.String _loginQaa_);
 
 	public java.sql.Timestamp getLoginData();
 	public void setLoginData(java.sql.Timestamp _loginData_);
+
+	public java.lang.String getLoginId();
+	public void setLoginId(java.lang.String _loginId_);
+
+	public java.lang.String getLoginAuthMethod();
+	public void setLoginAuthMethod(java.lang.String _loginAuthMethod_);
+
+	public java.lang.String getLoginAdditionalProperties();
+	public void setLoginAdditionalProperties(java.lang.String _loginAdditionalProperties_);
 
 	public java.lang.String getLocalitzacioIp();
 	public void setLocalitzacioIp(java.lang.String _localitzacioIp_);
@@ -62,14 +74,14 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getLocalitzacioCodiPostal();
 	public void setLocalitzacioCodiPostal(java.lang.String _localitzacioCodiPostal_);
 
+	public java.lang.String getLocalitzacioLatitud();
+	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_);
+
 	public java.lang.String getLocalitzacioLongitud();
 	public void setLocalitzacioLongitud(java.lang.String _localitzacioLongitud_);
 
 	public java.lang.String getLocalitzacioCiutat();
 	public void setLocalitzacioCiutat(java.lang.String _localitzacioCiutat_);
-
-	public java.lang.String getLocalitzacioLatitud();
-	public void setLocalitzacioLatitud(java.lang.String _localitzacioLatitud_);
 
 	public java.lang.String getLocalitzacioRegio();
 	public void setLocalitzacioRegio(java.lang.String _localitzacioRegio_);
@@ -80,11 +92,11 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getFirmaReason();
 	public void setFirmaReason(java.lang.String _firmaReason_);
 
-	public int getFirmaTipusDocumental();
-	public void setFirmaTipusDocumental(int _firmaTipusDocumental_);
-
 	public java.lang.String getFirmaIdiomaDocument();
 	public void setFirmaIdiomaDocument(java.lang.String _firmaIdiomaDocument_);
+
+	public int getFirmaTipusDocumental();
+	public void setFirmaTipusDocumental(int _firmaTipusDocumental_);
 
 	public long getFitxerOriginalID();
 	public void setFitxerOriginalID(long _fitxerOriginalID_);

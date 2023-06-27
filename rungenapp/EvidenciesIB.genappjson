@@ -438,16 +438,41 @@
         },
         {
           "isAutoIncrement": false,
-          "sqlName": "loginid",
+          "sqlName": "loginsubtype",
           "sqlType": 12,
           "size": 255,
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Login - ID",
-            "es": "Login - ID"
+            "ca": "Login - Subtipus",
+            "es": "Login - Subtipo"
           },
-          "javaName": "loginId",
+          "javaName": "loginSubtype",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "loginqaa",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Login - QAA",
+            "es": "Login - QAA"
+          },
+          "javaName": "loginQaa",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -483,6 +508,81 @@
           "groupBy": false,
           "webFieldInfo": {
             "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "loginid",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Login - ID",
+            "es": "Login - ID"
+          },
+          "javaName": "loginId",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "loginauthmethod",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Login - Mètode d´Autenticació",
+            "es": "Login - Método de Autenticación"
+          },
+          "javaName": "loginAuthMethod",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "loginadditionalproperties",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Login - Propietats Addicionals",
+            "es": "Login - Propiedades Adicionales"
+          },
+          "javaName": "loginAdditionalProperties",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
           },
           "foreignKeys": []
         },
@@ -538,6 +638,31 @@
         },
         {
           "isAutoIncrement": false,
+          "sqlName": "localitzaciolatitud",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Localització - Latitud",
+            "es": "Localización - Latitud"
+          },
+          "javaName": "localitzacioLatitud",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
           "sqlName": "localitzaciolongitud",
           "sqlType": 12,
           "size": 100,
@@ -573,31 +698,6 @@
             "es": "Localización - Ciudad"
           },
           "javaName": "localitzacioCiutat",
-          "javaType": "java.lang.String",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 1
-          },
-          "foreignKeys": []
-        },
-        {
-          "isAutoIncrement": false,
-          "sqlName": "localitzaciolatitud",
-          "sqlType": 12,
-          "size": 100,
-          "digits": 0,
-          "isNotNullable": false,
-          "labels": {
-            "ca": "Localització - Latitud",
-            "es": "Localización - Latitud"
-          },
-          "javaName": "localitzacioLatitud",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -689,6 +789,32 @@
         },
         {
           "isAutoIncrement": false,
+          "sqlName": "firmaidiomadocument",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Firma - Idioma Document",
+            "es": "Firma - Idioma Document"
+          },
+          "javaName": "firmaIdiomaDocument",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "es,ca,ga,eu",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
           "sqlName": "firmatipusdocumental",
           "sqlType": 4,
           "size": 10,
@@ -707,32 +833,6 @@
           "defaultValue": "99",
           "minAllowedValue": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,99",
           "filter": true,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 16
-          },
-          "foreignKeys": []
-        },
-        {
-          "isAutoIncrement": false,
-          "sqlName": "firmaidiomadocument",
-          "sqlType": 12,
-          "size": 100,
-          "digits": 0,
-          "isNotNullable": false,
-          "labels": {
-            "ca": "Firma - Idioma Document",
-            "es": "Firma - Idioma Document"
-          },
-          "javaName": "firmaIdiomaDocument",
-          "javaType": "java.lang.String",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "minAllowedValue": "es,ca,ga,eu",
-          "filter": false,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
@@ -1573,5 +1673,6 @@
     "es"
   ],
   "generateBack": true,
+  "generateFront": false,
   "generateWS": true
 }

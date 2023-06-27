@@ -75,12 +75,28 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new IntegerField(getQueryPath(), EvidenciaFields.LOGINTYPE);
   }
 
-  public StringField LOGINID() {
-    return new StringField(getQueryPath(), EvidenciaFields.LOGINID);
+  public StringField LOGINSUBTYPE() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOGINSUBTYPE);
+  }
+
+  public StringField LOGINQAA() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOGINQAA);
   }
 
   public TimestampField LOGINDATA() {
     return new TimestampField(getQueryPath(), EvidenciaFields.LOGINDATA);
+  }
+
+  public StringField LOGINID() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOGINID);
+  }
+
+  public StringField LOGINAUTHMETHOD() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOGINAUTHMETHOD);
+  }
+
+  public StringField LOGINADDITIONALPROPERTIES() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOGINADDITIONALPROPERTIES);
   }
 
   public StringField LOCALITZACIOIP() {
@@ -91,16 +107,16 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOCODIPOSTAL);
   }
 
+  public StringField LOCALITZACIOLATITUD() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOLATITUD);
+  }
+
   public StringField LOCALITZACIOLONGITUD() {
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOLONGITUD);
   }
 
   public StringField LOCALITZACIOCIUTAT() {
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOCIUTAT);
-  }
-
-  public StringField LOCALITZACIOLATITUD() {
-    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOLATITUD);
   }
 
   public StringField LOCALITZACIOREGIO() {
@@ -115,12 +131,12 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.FIRMAREASON);
   }
 
-  public IntegerField FIRMATIPUSDOCUMENTAL() {
-    return new IntegerField(getQueryPath(), EvidenciaFields.FIRMATIPUSDOCUMENTAL);
-  }
-
   public StringField FIRMAIDIOMADOCUMENT() {
     return new StringField(getQueryPath(), EvidenciaFields.FIRMAIDIOMADOCUMENT);
+  }
+
+  public IntegerField FIRMATIPUSDOCUMENTAL() {
+    return new IntegerField(getQueryPath(), EvidenciaFields.FIRMATIPUSDOCUMENTAL);
   }
 
   public LongField FITXERORIGINALID() {

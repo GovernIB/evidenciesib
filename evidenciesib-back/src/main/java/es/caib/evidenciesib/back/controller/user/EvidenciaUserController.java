@@ -193,6 +193,8 @@ public class EvidenciaUserController extends EvidenciaController {
                 evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK);
                 evi.setLoginId(request.getRemoteUser());
                 evi.setLoginData(new Timestamp(System.currentTimeMillis()));
+                
+                
             } else if (tipusLogin == Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN) {
 
                 // XYZ ZZZ
@@ -207,6 +209,8 @@ public class EvidenciaUserController extends EvidenciaController {
                 //evidenciaForm.addHiddenField(PERSONANOM);
 
                 evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);
+                
+                
 
             } else {
                 // XYZ ZZZ
@@ -223,6 +227,27 @@ public class EvidenciaUserController extends EvidenciaController {
             evi.setUsuariAplicacio(null);
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO);
 
+            
+            
+            Set<Field<?>> hiddenFields = new HashSet<Field<?>>();
+            
+            hiddenFields.addAll(Arrays.asList(EvidenciaFields.ALL_EVIDENCIA_FIELDS));
+            
+            
+            hiddenFields.remove(EvidenciaFields.NOM);
+            hiddenFields.remove(EvidenciaFields.PERSONANOM);
+            hiddenFields.remove(EvidenciaFields.PERSONALLINATGE1);
+            hiddenFields.remove(EvidenciaFields.PERSONALLINATGE2);
+            hiddenFields.remove(EvidenciaFields.PERSONANIF);            
+            
+            hiddenFields.remove(EvidenciaFields.FIRMAREASON);
+            hiddenFields.remove(EvidenciaFields.FIRMAIDIOMADOCUMENT);
+            hiddenFields.remove(EvidenciaFields.FIRMATIPUSDOCUMENTAL);
+            hiddenFields.remove(EvidenciaFields.FITXERORIGINALID);
+
+            evidenciaForm.setHiddenFields(hiddenFields);
+            
+            /*
             evidenciaForm.addHiddenField(FITXERADAPTATID);
             evidenciaForm.addHiddenField(FITXERSIGNATID);
             evidenciaForm.addHiddenField(DATAINICI);
@@ -237,8 +262,14 @@ public class EvidenciaUserController extends EvidenciaController {
             evidenciaForm.addHiddenField(LOGINDATA);
             evidenciaForm.addHiddenField(LOGINTYPE);
             evidenciaForm.addHiddenField(LOGINID);
-
-            evidenciaForm.setAttachedAdditionalJspCode(true);
+            evidenciaForm.addHiddenField(LOGINSUBTYPE);
+            evidenciaForm.addHiddenField(LOGINQAA);
+            evidenciaForm.addHiddenField(LOGINAUTHMETHOD);
+            evidenciaForm.addHiddenField(LOGINADDITIONALPROPERTIES);
+*/
+            
+            
+            
 
         } else if (__isView) {
 

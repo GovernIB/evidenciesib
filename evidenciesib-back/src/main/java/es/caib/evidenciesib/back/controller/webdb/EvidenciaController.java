@@ -201,16 +201,6 @@ public class EvidenciaController
       };
     }
 
-    // Field firmaTipusDocumental
-    {
-      _listSKV = getReferenceListForFirmaTipusDocumental(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForFirmaTipusDocumental(_tmp);
-      if (filterForm.getGroupByFields().contains(FIRMATIPUSDOCUMENTAL)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, FIRMATIPUSDOCUMENTAL, false);
-      };
-    }
-
     // Field firmaIdiomaDocument
     {
       _listSKV = getReferenceListForFirmaIdiomaDocument(request, mav, filterForm, list, groupByItemsMap, null);
@@ -218,6 +208,16 @@ public class EvidenciaController
       filterForm.setMapOfValuesForFirmaIdiomaDocument(_tmp);
       if (filterForm.getGroupByFields().contains(FIRMAIDIOMADOCUMENT)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, FIRMAIDIOMADOCUMENT, false);
+      };
+    }
+
+    // Field firmaTipusDocumental
+    {
+      _listSKV = getReferenceListForFirmaTipusDocumental(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForFirmaTipusDocumental(_tmp);
+      if (filterForm.getGroupByFields().contains(FIRMATIPUSDOCUMENTAL)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, FIRMATIPUSDOCUMENTAL, false);
       };
     }
 
@@ -238,8 +238,8 @@ public class EvidenciaController
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(ESTATCODI, filterForm.getMapOfValuesForEstatCodi());
     __mapping.put(LOGINTYPE, filterForm.getMapOfValuesForLoginType());
-    __mapping.put(FIRMATIPUSDOCUMENTAL, filterForm.getMapOfValuesForFirmaTipusDocumental());
     __mapping.put(FIRMAIDIOMADOCUMENT, filterForm.getMapOfValuesForFirmaIdiomaDocument());
+    __mapping.put(FIRMATIPUSDOCUMENTAL, filterForm.getMapOfValuesForFirmaTipusDocumental());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -306,15 +306,6 @@ public class EvidenciaController
       evidenciaForm.setListOfValuesForLoginType(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (evidenciaForm.getListOfValuesForFirmaTipusDocumental() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForFirmaTipusDocumental(request, mav, evidenciaForm, null);
-
-      if(_listSKV != null && !_listSKV.isEmpty()) { 
-          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      }
-      evidenciaForm.setListOfValuesForFirmaTipusDocumental(_listSKV);
-    }
-    // Comprovam si ja esta definida la llista
     if (evidenciaForm.getListOfValuesForFirmaIdiomaDocument() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForFirmaIdiomaDocument(request, mav, evidenciaForm, null);
 
@@ -322,6 +313,15 @@ public class EvidenciaController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       evidenciaForm.setListOfValuesForFirmaIdiomaDocument(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (evidenciaForm.getListOfValuesForFirmaTipusDocumental() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForFirmaTipusDocumental(request, mav, evidenciaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      evidenciaForm.setListOfValuesForFirmaTipusDocumental(_listSKV);
     }
     
   }
@@ -747,6 +747,39 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request,
+       ModelAndView mav, EvidenciaForm evidenciaForm, Where where)  throws I18NException {
+    if (evidenciaForm.isHiddenField(FIRMAIDIOMADOCUMENT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForFirmaIdiomaDocument(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request,
+       ModelAndView mav, EvidenciaFilterForm evidenciaFilterForm,
+       List<Evidencia> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (evidenciaFilterForm.isHiddenField(FIRMAIDIOMADOCUMENT)
+       && !evidenciaFilterForm.isGroupByField(FIRMAIDIOMADOCUMENT)
+       && !evidenciaFilterForm.isFilterByField(FIRMAIDIOMADOCUMENT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForFirmaIdiomaDocument(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("es" , "es"));
+    __tmp.add(new StringKeyValue("ca" , "ca"));
+    __tmp.add(new StringKeyValue("ga" , "ga"));
+    __tmp.add(new StringKeyValue("eu" , "eu"));
+    return __tmp;
+  }
+
+
   public List<StringKeyValue> getReferenceListForFirmaTipusDocumental(HttpServletRequest request,
        ModelAndView mav, EvidenciaForm evidenciaForm, Where where)  throws I18NException {
     if (evidenciaForm.isHiddenField(FIRMATIPUSDOCUMENTAL)) {
@@ -816,39 +849,6 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request,
-       ModelAndView mav, EvidenciaForm evidenciaForm, Where where)  throws I18NException {
-    if (evidenciaForm.isHiddenField(FIRMAIDIOMADOCUMENT)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    return getReferenceListForFirmaIdiomaDocument(request, mav, where);
-  }
-
-
-  public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request,
-       ModelAndView mav, EvidenciaFilterForm evidenciaFilterForm,
-       List<Evidencia> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (evidenciaFilterForm.isHiddenField(FIRMAIDIOMADOCUMENT)
-       && !evidenciaFilterForm.isGroupByField(FIRMAIDIOMADOCUMENT)
-       && !evidenciaFilterForm.isFilterByField(FIRMAIDIOMADOCUMENT)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    return getReferenceListForFirmaIdiomaDocument(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForFirmaIdiomaDocument(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("es" , "es"));
-    __tmp.add(new StringKeyValue("ca" , "ca"));
-    __tmp.add(new StringKeyValue("ga" , "ga"));
-    __tmp.add(new StringKeyValue("eu" , "eu"));
-    return __tmp;
-  }
-
-
   @Override
   /** Ha de ser igual que el RequestMapping de la Classe */
   public String getContextWeb() {
@@ -897,7 +897,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "EvidenciaWebDB_FilterForm";
+    return "Evidencia_FilterForm_" + this.getClass().getName();
   }
 
 

@@ -60,11 +60,23 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINTYPE)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINTYPE)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINID)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINID)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINSUBTYPE)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINSUBTYPE)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINQAA)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINQAA)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINDATA)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINDATA)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINID)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINAUTHMETHOD)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINAUTHMETHOD)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINADDITIONALPROPERTIES)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINADDITIONALPROPERTIES)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOIP)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOIP)}</th>
@@ -72,14 +84,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCODIPOSTAL)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOCODIPOSTAL)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOLATITUD)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLONGITUD)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOLONGITUD)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOCIUTAT)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLATITUD)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOLATITUD)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOREGIO)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOREGIO)}</th>
@@ -90,11 +102,11 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMAREASON)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FIRMAREASON)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMAIDIOMADOCUMENT)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FIRMAIDIOMADOCUMENT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FIRMATIPUSDOCUMENTAL)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FITXERORIGINALID)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FITXERORIGINALID)}</th>
