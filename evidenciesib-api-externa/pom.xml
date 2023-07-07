@@ -147,7 +147,7 @@
                                 <dateLibrary>joda</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
-								<artifactDescription>GenAppSqlTutorial - API Rest - Externa Client</artifactDescription>
+								<artifactDescription>EvidenciesIB - API Rest - Externa Client</artifactDescription>
                             </configOptions>
 
                             <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->

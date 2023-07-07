@@ -911,12 +911,12 @@ img {
 
 /*Se aplican cuando el width es menor que 1128px*/
 @media only screen and (max-width: 1128px), only screen and (max-device-width: 1128px) {
-.mRapidGlobal{
-	/*padding-left: 4em !important;*/
-}
-.opcionesAcceso {
-	width: 220px !important;
-}
+    .mRapidGlobal{
+    	/*padding-left: 4em !important;*/
+    }
+    .opcionesAcceso {
+    	width: 220px !important;
+    }
 }
 
 /*Se aplican cuando el width es menor que 992px*/
@@ -1410,8 +1410,6 @@ body {
 }
 .page-link{
 	font-size: 1.5em!important;
-}
-font-size: 1.2em;
 }
 .textTramitacioApp{
 	font-size: 1em!important;

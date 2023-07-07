@@ -10,6 +10,10 @@
         <version>1.0.0</version>
         <artifactId>pluginsib-login</artifactId>
     </parent>
+    
+    <properties>
+       <client.default.package>org.fundaciobit.pluginsib.login.loginib.evidenciesapiclient</client.default.package>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -23,6 +27,12 @@
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
             <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.2.redhat-5</version>
         </dependency>
 
         <dependency>
@@ -73,6 +83,55 @@
             <version>${spring.version}</version>
             <scope>provided</scope>
         </dependency>
-
+        
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Genera el Client Rest per Java a partir del fitxer openapi.json -->
+            <!-- https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/README.md#general-configuration-parameters -->
+            <!--
+            <plugin>
+                <groupId>io.swagger.codegen.v3</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>3.0.27</version>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <inputSpec>${project.basedir}/openapi_evidencies_swagger2.json</inputSpec>
+                            <language>java</language>
+                            <configHelp>java</configHelp>
+                            <library>resteasy</library>
+                            <configOptions>
+                                <groupId>org.fundaciobit.pluginsib.login</groupId>
+                                <artifactId>pluginsib-login-loginib-evidenciesib-api-client</artifactId>
+                                <artifactVersion>1.0.0-SNAPSHOT</artifactVersion>
+                                <dateLibrary>joda</dateLibrary>
+                                <useTags>true</useTags>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <artifactDescription>LoginIB - EvidenciesIB API Client</artifactDescription>
+                            </configOptions>
+
+                            <addCompileSourceRoot>false</addCompileSourceRoot>
+                            <output>${project.basedir}/../loginib-evidenciesibapi-client</output>
+                            <apiPackage>${client.default.package}.api</apiPackage>
+                            <modelPackage>${client.default.package}.model</modelPackage>
+                            <invokerPackage>${client.default.package}.services</invokerPackage>
+                            <variableNamingConvention>camelCase</variableNamingConvention>
+                            
+                            <fullJavaUtil>true</fullJavaUtil>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+        </plugins>
+
+    </build>
+
 </project>

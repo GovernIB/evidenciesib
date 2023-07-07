@@ -1,7 +1,11 @@
 package es.caib.evidenciesib.front.controller;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.Map;
+import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.GsonBuilder;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
@@ -138,32 +144,58 @@ public class EvidenciaLoginController {
                         PluginLoginManager.getPluginLogin().getName(lang) + " - " + li.getIdentityProvider());
                 evi.setLoginQaa(String.valueOf(li.getQaa()));
 
+                Map<String, String> additional = li.getAdditionalProperties();
+                if (additional != null) {
+
+                    Properties props = new Properties();
+
+                    props.putAll(additional);
+
+                    evi.setLoginAdditionalProperties(getPropertyAsString(props));
+
+                }
+
                 evidenciaLogicaEjb.update(evi);
 
             }
         }
-/*
+        /*
         String r = "redirect:" + MAPPING_PUBLIC_SET_LOCATION_GET + "/" + evidenciaID;
         log.info("Login Correcte. Redirect a location => " + r);
-
+        
         return r;
-    }
-
-    public static final String MAPPING_PUBLIC_SET_LOCATION_GET = "/public/setlocationget";
-
-    @RequestMapping(name=MAPPING_PUBLIC_SET_LOCATION_GET + "{evidenciaID}", method = RequestMethod.GET)
-    public ModelAndView setLocationGet(HttpServletRequest request, HttpServletResponse response,
+            }
+        
+            public static final String MAPPING_PUBLIC_SET_LOCATION_GET = "/public/setlocationget";
+        
+            @RequestMapping(name=MAPPING_PUBLIC_SET_LOCATION_GET + "{evidenciaID}", method = RequestMethod.GET)
+            public ModelAndView setLocationGet(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
-*/
+        */
         ModelAndView mav = new ModelAndView("location");
         mav.addObject("evidenciaID", evidenciaID);
 
         return mav;
     }
 
+    /**
+     * 
+     * @param prop
+     * @return
+     */
+    public static String getPropertyAsString(Properties prop) throws Exception {
+        StringWriter writer = new StringWriter();
+
+        prop.store(writer, "");
+
+        return writer.getBuffer().toString();
+    }
+
     public static final String MAPPING_PUBLIC_SET_LOCATION_POST = "/public/setlocationpost";
 
-    @RequestMapping(value=MAPPING_PUBLIC_SET_LOCATION_POST + "/{evidenciaID}", method = { RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(
+            value = MAPPING_PUBLIC_SET_LOCATION_POST + "/{evidenciaID}",
+            method = { RequestMethod.POST, RequestMethod.GET })
     public String setLocationPost(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
 
@@ -181,16 +213,14 @@ public class EvidenciaLoginController {
             //Guardar dades de Login dins BBDD
 
             log.info("setLocationPost:: Posant valors de UBICACIO a Taula Evidència per ID ]" + evidenciaID + "[");
-            
+
             Enumeration<String> ubis = request.getParameterNames();
-            
-            while(ubis.hasMoreElements()) {
+
+            while (ubis.hasMoreElements()) {
                 String name = ubis.nextElement();
                 log.info("PARAMETRE[" + name + "] => " + request.getParameter(name));
-                
+
             }
-            
-            
 
             String ciutat = request
                     .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCIUTAT.javaName);

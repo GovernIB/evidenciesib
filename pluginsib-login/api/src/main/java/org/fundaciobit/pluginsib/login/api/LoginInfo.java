@@ -1,5 +1,7 @@
 package org.fundaciobit.pluginsib.login.api;
 
+import java.util.Map;
+
 /**
  * 
  * @author anadal
@@ -22,6 +24,7 @@ public class LoginInfo {
     private String identityProvider;
     private boolean business;
     private LoginInfoRepresentative representative;
+    private Map<String, String> additionalProperties = null;
 
     public LoginInfo() {
         super();
@@ -142,6 +145,14 @@ public class LoginInfo {
 
     public void setRepresentative(LoginInfoRepresentative representative) {
         this.representative = representative;
+    }
+
+    public Map<String, String> getAdditionalProperties() {
+        return additionalProperties;
+    }
+
+    public void setAdditionalProperties(Map<String, String> additionalProperties) {
+        this.additionalProperties = additionalProperties;
     }
 
 }

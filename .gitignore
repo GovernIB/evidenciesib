@@ -47,3 +47,4 @@ replay_pid*
 /pluginsib-login/mock/target
 /pluginsib-login/loginib/target
 /pluginsib-login/api/target
+/pluginsib-login/loginib/test.properties

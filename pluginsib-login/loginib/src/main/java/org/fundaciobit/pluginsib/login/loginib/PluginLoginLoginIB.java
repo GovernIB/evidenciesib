@@ -1,6 +1,7 @@
 package org.fundaciobit.pluginsib.login.loginib;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
@@ -11,8 +12,12 @@ import org.fundaciobit.pluginsib.login.api.AbstractPluginLogin;
 import org.fundaciobit.pluginsib.login.api.LoginInfo;
 import org.fundaciobit.pluginsib.login.api.LoginInfoRepresentative;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import es.caib.loginib.rest.api.v1.RDatosAutenticacion;
 import es.caib.loginib.rest.api.v1.RDatosRepresentante;
+import es.caib.loginib.rest.api.v1.REvidenciasAutenticacion;
 import es.caib.loginib.rest.api.v1.RLoginParams;
 import es.caib.loginib.rest.api.v1.RLogoutParams;
 
@@ -129,16 +134,20 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
         param.setMetodosAutenticacion(getLoginIBMethodAuth());
         param.setAplicacion(getLoginIBAplicacionCode());
         param.setInicioClaveAutomatico(true);
+        param.setAuditar(true);
 
         /* RestTemplate Spring */
         final org.springframework.web.client.RestTemplate restTemplate = getLoginIbRestTemplate();
 
         final org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
         headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
+
+        log.info("\n\n\nAUDITAR TRUE !!!!!!!!!!!!!! \n\n\n");
+
         final org.springframework.http.HttpEntity<RLoginParams> peticion;
         peticion = new org.springframework.http.HttpEntity<>(param, headers);
-        final org.springframework.http.ResponseEntity<String> responseLoginIB = restTemplate.postForEntity(getLoginIBUrl() + "/login", peticion,
-                String.class);
+        final org.springframework.http.ResponseEntity<String> responseLoginIB = restTemplate
+                .postForEntity(getLoginIBUrl() + "/login", peticion, String.class);
 
         if (isDebugEnabled()) {
             log.info("LoginIB: response: " + responseLoginIB.toString());
@@ -163,9 +172,6 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
 
             final RDatosAutenticacion datosAutenticacion = restTemplate
                     .getForObject(getLoginIBUrl() + "/ticket/" + ticket, RDatosAutenticacion.class);
-            
-            
-            
 
             final boolean debug = isDebugEnabled();
 
@@ -234,8 +240,28 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
 
             final LoginInfo loginInfo = new LoginInfo(username, name, surname1, surname2, administrationID,
                     authenticationMethod, qaa, identityProvider, business, representative);
-            
-            loginInfo.setLoginID(datosAutenticacion.getIdSesion());
+
+            final String sessionID = datosAutenticacion.getIdSesion();
+            loginInfo.setLoginID(sessionID);
+
+            REvidenciasAutenticacion evis = this.getEvidencies(sessionID);
+
+            if (evis != null) {
+
+                if (evis.getEvidencias() == null && evis.getHuellaElectronica() == null) {
+                    // No feim res
+                } else {
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+                    if (loginInfo.getAdditionalProperties() == null) {
+                        loginInfo.setAdditionalProperties(new HashMap<String, String>());
+                    }
+
+                    loginInfo.getAdditionalProperties().put("evidencies", gson.toJson(evis));
+
+                }
+
+            }
 
             return loginInfo;
         } catch (Exception e) {
@@ -259,8 +285,8 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
 
         final org.springframework.http.HttpEntity<RLogoutParams> request;
         request = new org.springframework.http.HttpEntity<>(param, headers);
-        final org.springframework.http.ResponseEntity<String> responseTramite = restTemplate.postForEntity(getLoginIBUrl() + "/logout", request,
-                String.class);
+        final org.springframework.http.ResponseEntity<String> responseTramite = restTemplate
+                .postForEntity(getLoginIBUrl() + "/logout", request, String.class);
 
         String url = responseTramite.getBody();
 
@@ -274,14 +300,15 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
     private org.springframework.web.client.RestTemplate getLoginIbRestTemplate() throws Exception {
 
         final org.springframework.web.client.RestTemplate restTemplate = new org.springframework.web.client.RestTemplate();
-        restTemplate.getInterceptors().add(new org.springframework.http.client.support.BasicAuthorizationInterceptor(getLoginIBUser(), getLoginIBPassword()));
+        restTemplate.getInterceptors().add(new org.springframework.http.client.support.BasicAuthorizationInterceptor(
+                getLoginIBUser(), getLoginIBPassword()));
 
         return restTemplate;
     }
 
     @Override
-    public String getError(HttpServletRequest request, String language)  {
-        
+    public String getError(HttpServletRequest request, String language) {
+
         StringBuffer errorStr = new StringBuffer();
 
         Map<String, String[]> map = request.getParameterMap();
@@ -291,19 +318,34 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
             String[] val = entry.getValue();
             errorStr.append("KEY => ]" + key + "[ : {" + Arrays.toString(val) + "}\n");
         }
-        
+
         if (errorStr.length() == 0) {
             return null;
         } else {
             log.error(errorStr.toString());
             return errorStr.toString();
         }
-        
+
     }
 
     @Override
-    public String getName(String language) {        
+    public String getName(String language) {
         return "Cl@veAutenticación";
+    }
+
+    public REvidenciasAutenticacion getEvidencies(String sessionID) throws Exception {
+
+        final org.springframework.web.client.RestTemplate restTemplate = getLoginIbRestTemplate();
+
+        final org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
+
+        final REvidenciasAutenticacion responseEvi;
+        responseEvi = restTemplate.getForObject(getLoginIBUrl() + "/evidencias/" + sessionID,
+                REvidenciasAutenticacion.class);
+
+        return responseEvi;
+
     }
 
 }
