@@ -1,7 +1,6 @@
 package es.caib.evidenciesib.back.controller.all;
 
 import javax.annotation.security.RunAs;
-import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -13,7 +12,6 @@ import es.caib.evidenciesib.back.controller.user.EvidenciaUserController;
 import es.caib.evidenciesib.back.form.webdb.EvidenciaFilterForm;
 import es.caib.evidenciesib.back.form.webdb.EvidenciaForm;
 import es.caib.evidenciesib.commons.utils.Constants;
-import es.caib.evidenciesib.logic.EvidenciaLogicaService;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 
 /**

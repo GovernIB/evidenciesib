@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.ws.rs.Produces;
 import javax.ws.rs.ext.Provider;
 

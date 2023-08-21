@@ -307,111 +307,111 @@ components:
     Evidencia:
       type: object
       properties:
-        localitzacioRegio:
+        personaLlinatge2:
           type: string
-        localitzacioLatitud:
+        fitxerOriginalID:
+          type: integer
+          format: int64
+        firmaIdiomaDocument:
+          type: string
+        personaLlinatge1:
+          type: string
+        personaMobil:
+          type: string
+        dataFi:
+          type: string
+          format: date-time
+        estatCodi:
+          type: integer
+          format: int32
+        estatError:
+          type: string
+        estatExcepcio:
+          type: string
+        dataInici:
+          type: string
+          format: date-time
+        usuariPersona:
+          type: string
+        loginType:
+          type: integer
+          format: int32
+        fitxerOriginal:
+          $ref: '#/components/schemas/Fitxer'
+        fitxerAdaptat:
+          $ref: '#/components/schemas/Fitxer'
+        firmaReason:
+          type: string
+        fitxerSignat:
+          $ref: '#/components/schemas/Fitxer'
+        usuariAplicacio:
+          type: string
+        loginSubtype:
+          type: string
+        evidenciaID:
+          type: integer
+          format: int64
+        nom:
+          type: string
+        fitxerAdaptatID:
+          type: integer
+          format: int64
+        fitxerSignatID:
+          type: integer
+          format: int64
+        callBackUrl:
+          type: string
+        personaNom:
           type: string
         localitzacioCodiPostal:
           type: string
+        localitzacioLongitud:
+          type: string
+        loginAdditionalProperties:
+          type: string
+        localitzacioLatitud:
+          type: string
         localitzacioCiutat:
           type: string
-        localitzacioLongitud:
+        localitzacioRegio:
           type: string
         localitzacioPais:
           type: string
         firmaTipusDocumental:
           type: integer
           format: int32
-        loginAdditionalProperties:
-          type: string
-        firmaIdiomaDocument:
-          type: string
-        nom:
-          type: string
-        loginType:
-          type: integer
-          format: int32
-        evidenciaID:
-          type: integer
-          format: int64
-        usuariPersona:
-          type: string
-        personaNom:
-          type: string
-        firmaReason:
-          type: string
-        dataInici:
-          type: string
-          format: date-time
-        personaNif:
-          type: string
-        estatCodi:
-          type: integer
-          format: int32
-        fitxerSignatID:
-          type: integer
-          format: int64
-        fitxerAdaptat:
-          $ref: '#/components/schemas/Fitxer'
-        fitxerOriginal:
-          $ref: '#/components/schemas/Fitxer'
-        fitxerSignat:
-          $ref: '#/components/schemas/Fitxer'
-        callBackUrl:
-          type: string
-        usuariAplicacio:
-          type: string
-        personaEmail:
-          type: string
-        fitxerAdaptatID:
-          type: integer
-          format: int64
-        loginSubtype:
-          type: string
-        dataFi:
-          type: string
-          format: date-time
-        loginData:
-          type: string
-          format: date-time
-        personaMobil:
-          type: string
-        loginQaa:
+        loginAuthMethod:
           type: string
         localitzacioIp:
           type: string
-        estatError:
+        loginData:
           type: string
-        loginAuthMethod:
+          format: date-time
+        loginQaa:
           type: string
         loginId:
           type: string
-        estatExcepcio:
+        personaNif:
           type: string
-        personaLlinatge2:
-          type: string
-        fitxerOriginalID:
-          type: integer
-          format: int64
-        personaLlinatge1:
+        personaEmail:
           type: string
     Fitxer:
       type: object
       properties:
-        descripcio:
-          type: string
-        mime:
-          type: string
-        nom:
-          type: string
         encryptedFileID:
           type: string
-        fitxerID:
-          type: integer
-          format: int64
         tamany:
           type: integer
           format: int64
+        fitxerID:
+          type: integer
+          format: int64
+        mime:
+          type: string
+        descripcio:
+          type: string
+        nom:
+          type: string
     EvidenciaFile:
       type: object
       properties:

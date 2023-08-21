@@ -1,11 +1,9 @@
 package es.caib.evidenciesib.logic;
 
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Local;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
-import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 
