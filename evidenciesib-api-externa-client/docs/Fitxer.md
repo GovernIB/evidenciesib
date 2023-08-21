@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tamany** | **Long** |  |  [optional]
-**fitxerID** | **Long** |  |  [optional]
-**nom** | **String** |  |  [optional]
-**mime** | **String** |  |  [optional]
 **descripcio** | **String** |  |  [optional]
+**mime** | **String** |  |  [optional]
+**nom** | **String** |  |  [optional]
 **encryptedFileID** | **String** |  |  [optional]
+**fitxerID** | **Long** |  |  [optional]
+**tamany** | **Long** |  |  [optional]

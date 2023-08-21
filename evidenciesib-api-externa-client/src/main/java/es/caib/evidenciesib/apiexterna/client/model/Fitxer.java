@@ -24,76 +24,40 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 public class Fitxer {
-  @JsonProperty("tamany")
-  private Long tamany = null;
-
-  @JsonProperty("fitxerID")
-  private Long fitxerID = null;
-
-  @JsonProperty("nom")
-  private String nom = null;
+  @JsonProperty("descripcio")
+  private String descripcio = null;
 
   @JsonProperty("mime")
   private String mime = null;
 
-  @JsonProperty("descripcio")
-  private String descripcio = null;
+  @JsonProperty("nom")
+  private String nom = null;
 
   @JsonProperty("encryptedFileID")
   private String encryptedFileID = null;
 
-  public Fitxer tamany(Long tamany) {
-    this.tamany = tamany;
+  @JsonProperty("fitxerID")
+  private Long fitxerID = null;
+
+  @JsonProperty("tamany")
+  private Long tamany = null;
+
+  public Fitxer descripcio(String descripcio) {
+    this.descripcio = descripcio;
     return this;
   }
 
    /**
-   * Get tamany
-   * @return tamany
+   * Get descripcio
+   * @return descripcio
   **/
   @Schema(description = "")
-  public Long getTamany() {
-    return tamany;
+  public String getDescripcio() {
+    return descripcio;
   }
 
-  public void setTamany(Long tamany) {
-    this.tamany = tamany;
-  }
-
-  public Fitxer fitxerID(Long fitxerID) {
-    this.fitxerID = fitxerID;
-    return this;
-  }
-
-   /**
-   * Get fitxerID
-   * @return fitxerID
-  **/
-  @Schema(description = "")
-  public Long getFitxerID() {
-    return fitxerID;
-  }
-
-  public void setFitxerID(Long fitxerID) {
-    this.fitxerID = fitxerID;
-  }
-
-  public Fitxer nom(String nom) {
-    this.nom = nom;
-    return this;
-  }
-
-   /**
-   * Get nom
-   * @return nom
-  **/
-  @Schema(description = "")
-  public String getNom() {
-    return nom;
-  }
-
-  public void setNom(String nom) {
-    this.nom = nom;
+  public void setDescripcio(String descripcio) {
+    this.descripcio = descripcio;
   }
 
   public Fitxer mime(String mime) {
@@ -114,22 +78,22 @@ public class Fitxer {
     this.mime = mime;
   }
 
-  public Fitxer descripcio(String descripcio) {
-    this.descripcio = descripcio;
+  public Fitxer nom(String nom) {
+    this.nom = nom;
     return this;
   }
 
    /**
-   * Get descripcio
-   * @return descripcio
+   * Get nom
+   * @return nom
   **/
   @Schema(description = "")
-  public String getDescripcio() {
-    return descripcio;
+  public String getNom() {
+    return nom;
   }
 
-  public void setDescripcio(String descripcio) {
-    this.descripcio = descripcio;
+  public void setNom(String nom) {
+    this.nom = nom;
   }
 
   public Fitxer encryptedFileID(String encryptedFileID) {
@@ -150,6 +114,42 @@ public class Fitxer {
     this.encryptedFileID = encryptedFileID;
   }
 
+  public Fitxer fitxerID(Long fitxerID) {
+    this.fitxerID = fitxerID;
+    return this;
+  }
+
+   /**
+   * Get fitxerID
+   * @return fitxerID
+  **/
+  @Schema(description = "")
+  public Long getFitxerID() {
+    return fitxerID;
+  }
+
+  public void setFitxerID(Long fitxerID) {
+    this.fitxerID = fitxerID;
+  }
+
+  public Fitxer tamany(Long tamany) {
+    this.tamany = tamany;
+    return this;
+  }
+
+   /**
+   * Get tamany
+   * @return tamany
+  **/
+  @Schema(description = "")
+  public Long getTamany() {
+    return tamany;
+  }
+
+  public void setTamany(Long tamany) {
+    this.tamany = tamany;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -160,17 +160,17 @@ public class Fitxer {
       return false;
     }
     Fitxer fitxer = (Fitxer) o;
-    return Objects.equals(this.tamany, fitxer.tamany) &&
-        Objects.equals(this.fitxerID, fitxer.fitxerID) &&
-        Objects.equals(this.nom, fitxer.nom) &&
+    return Objects.equals(this.descripcio, fitxer.descripcio) &&
         Objects.equals(this.mime, fitxer.mime) &&
-        Objects.equals(this.descripcio, fitxer.descripcio) &&
-        Objects.equals(this.encryptedFileID, fitxer.encryptedFileID);
+        Objects.equals(this.nom, fitxer.nom) &&
+        Objects.equals(this.encryptedFileID, fitxer.encryptedFileID) &&
+        Objects.equals(this.fitxerID, fitxer.fitxerID) &&
+        Objects.equals(this.tamany, fitxer.tamany);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tamany, fitxerID, nom, mime, descripcio, encryptedFileID);
+    return Objects.hash(descripcio, mime, nom, encryptedFileID, fitxerID, tamany);
   }
 
 
@@ -179,12 +179,12 @@ public class Fitxer {
     StringBuilder sb = new StringBuilder();
     sb.append("class Fitxer {\n");
     
-    sb.append("    tamany: ").append(toIndentedString(tamany)).append("\n");
-    sb.append("    fitxerID: ").append(toIndentedString(fitxerID)).append("\n");
-    sb.append("    nom: ").append(toIndentedString(nom)).append("\n");
-    sb.append("    mime: ").append(toIndentedString(mime)).append("\n");
     sb.append("    descripcio: ").append(toIndentedString(descripcio)).append("\n");
+    sb.append("    mime: ").append(toIndentedString(mime)).append("\n");
+    sb.append("    nom: ").append(toIndentedString(nom)).append("\n");
     sb.append("    encryptedFileID: ").append(toIndentedString(encryptedFileID)).append("\n");
+    sb.append("    fitxerID: ").append(toIndentedString(fitxerID)).append("\n");
+    sb.append("    tamany: ").append(toIndentedString(tamany)).append("\n");
     sb.append("}");
     return sb.toString();
   }

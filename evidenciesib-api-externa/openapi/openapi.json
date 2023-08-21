@@ -445,43 +445,33 @@
       "Evidencia" : {
         "type" : "object",
         "properties" : {
-          "localitzacioCiutat" : {
-            "type" : "string"
-          },
-          "loginAdditionalProperties" : {
-            "type" : "string"
-          },
-          "localitzacioCodiPostal" : {
+          "localitzacioRegio" : {
             "type" : "string"
           },
           "localitzacioLatitud" : {
             "type" : "string"
           },
+          "localitzacioCodiPostal" : {
+            "type" : "string"
+          },
+          "localitzacioCiutat" : {
+            "type" : "string"
+          },
           "localitzacioLongitud" : {
+            "type" : "string"
+          },
+          "localitzacioPais" : {
             "type" : "string"
           },
           "firmaTipusDocumental" : {
             "type" : "integer",
             "format" : "int32"
           },
+          "loginAdditionalProperties" : {
+            "type" : "string"
+          },
           "firmaIdiomaDocument" : {
             "type" : "string"
-          },
-          "localitzacioRegio" : {
-            "type" : "string"
-          },
-          "localitzacioPais" : {
-            "type" : "string"
-          },
-          "personaNom" : {
-            "type" : "string"
-          },
-          "personaNif" : {
-            "type" : "string"
-          },
-          "evidenciaID" : {
-            "type" : "integer",
-            "format" : "int64"
           },
           "nom" : {
             "type" : "string"
@@ -490,68 +480,69 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "usuariAplicacio" : {
-            "type" : "string"
-          },
-          "personaEmail" : {
-            "type" : "string"
-          },
-          "callBackUrl" : {
-            "type" : "string"
+          "evidenciaID" : {
+            "type" : "integer",
+            "format" : "int64"
           },
           "usuariPersona" : {
             "type" : "string"
           },
+          "personaNom" : {
+            "type" : "string"
+          },
           "firmaReason" : {
+            "type" : "string"
+          },
+          "dataInici" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "personaNif" : {
             "type" : "string"
           },
           "estatCodi" : {
             "type" : "integer",
             "format" : "int32"
           },
-          "dataInici" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
           "fitxerSignatID" : {
             "type" : "integer",
             "format" : "int64"
           },
+          "fitxerAdaptat" : {
+            "$ref" : "#/components/schemas/Fitxer"
+          },
           "fitxerOriginal" : {
             "$ref" : "#/components/schemas/Fitxer"
+          },
+          "fitxerSignat" : {
+            "$ref" : "#/components/schemas/Fitxer"
+          },
+          "callBackUrl" : {
+            "type" : "string"
+          },
+          "usuariAplicacio" : {
+            "type" : "string"
+          },
+          "personaEmail" : {
+            "type" : "string"
           },
           "fitxerAdaptatID" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "fitxerSignat" : {
-            "$ref" : "#/components/schemas/Fitxer"
-          },
-          "fitxerAdaptat" : {
-            "$ref" : "#/components/schemas/Fitxer"
-          },
-          "fitxerOriginalID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "personaLlinatge1" : {
-            "type" : "string"
-          },
-          "personaLlinatge2" : {
-            "type" : "string"
-          },
-          "loginId" : {
-            "type" : "string"
-          },
-          "loginAuthMethod" : {
-            "type" : "string"
-          },
           "loginSubtype" : {
             "type" : "string"
+          },
+          "dataFi" : {
+            "type" : "string",
+            "format" : "date-time"
           },
           "loginData" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "personaMobil" : {
+            "type" : "string"
           },
           "loginQaa" : {
             "type" : "string"
@@ -559,17 +550,26 @@
           "localitzacioIp" : {
             "type" : "string"
           },
+          "estatError" : {
+            "type" : "string"
+          },
+          "loginAuthMethod" : {
+            "type" : "string"
+          },
+          "loginId" : {
+            "type" : "string"
+          },
           "estatExcepcio" : {
             "type" : "string"
           },
-          "dataFi" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "personaMobil" : {
+          "personaLlinatge2" : {
             "type" : "string"
           },
-          "estatError" : {
+          "fitxerOriginalID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "personaLlinatge1" : {
             "type" : "string"
           }
         }
@@ -577,25 +577,25 @@
       "Fitxer" : {
         "type" : "object",
         "properties" : {
-          "tamany" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "fitxerID" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "nom" : {
+          "descripcio" : {
             "type" : "string"
           },
           "mime" : {
             "type" : "string"
           },
-          "descripcio" : {
+          "nom" : {
             "type" : "string"
           },
           "encryptedFileID" : {
             "type" : "string"
+          },
+          "fitxerID" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "tamany" : {
+            "type" : "integer",
+            "format" : "int64"
           }
         }
       },

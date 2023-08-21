@@ -26,41 +26,32 @@ import org.joda.time.DateTime;
 
 
 public class Evidencia {
-  @JsonProperty("localitzacioCiutat")
-  private String localitzacioCiutat = null;
-
-  @JsonProperty("loginAdditionalProperties")
-  private String loginAdditionalProperties = null;
-
-  @JsonProperty("localitzacioCodiPostal")
-  private String localitzacioCodiPostal = null;
+  @JsonProperty("localitzacioRegio")
+  private String localitzacioRegio = null;
 
   @JsonProperty("localitzacioLatitud")
   private String localitzacioLatitud = null;
 
+  @JsonProperty("localitzacioCodiPostal")
+  private String localitzacioCodiPostal = null;
+
+  @JsonProperty("localitzacioCiutat")
+  private String localitzacioCiutat = null;
+
   @JsonProperty("localitzacioLongitud")
   private String localitzacioLongitud = null;
-
-  @JsonProperty("firmaTipusDocumental")
-  private Integer firmaTipusDocumental = null;
-
-  @JsonProperty("firmaIdiomaDocument")
-  private String firmaIdiomaDocument = null;
-
-  @JsonProperty("localitzacioRegio")
-  private String localitzacioRegio = null;
 
   @JsonProperty("localitzacioPais")
   private String localitzacioPais = null;
 
-  @JsonProperty("personaNom")
-  private String personaNom = null;
+  @JsonProperty("firmaTipusDocumental")
+  private Integer firmaTipusDocumental = null;
 
-  @JsonProperty("personaNif")
-  private String personaNif = null;
+  @JsonProperty("loginAdditionalProperties")
+  private String loginAdditionalProperties = null;
 
-  @JsonProperty("evidenciaID")
-  private Long evidenciaID = null;
+  @JsonProperty("firmaIdiomaDocument")
+  private String firmaIdiomaDocument = null;
 
   @JsonProperty("nom")
   private String nom = null;
@@ -68,62 +59,62 @@ public class Evidencia {
   @JsonProperty("loginType")
   private Integer loginType = null;
 
+  @JsonProperty("evidenciaID")
+  private Long evidenciaID = null;
+
+  @JsonProperty("usuariPersona")
+  private String usuariPersona = null;
+
+  @JsonProperty("personaNom")
+  private String personaNom = null;
+
+  @JsonProperty("firmaReason")
+  private String firmaReason = null;
+
+  @JsonProperty("dataInici")
+  private DateTime dataInici = null;
+
+  @JsonProperty("personaNif")
+  private String personaNif = null;
+
+  @JsonProperty("estatCodi")
+  private Integer estatCodi = null;
+
+  @JsonProperty("fitxerSignatID")
+  private Long fitxerSignatID = null;
+
+  @JsonProperty("fitxerAdaptat")
+  private Fitxer fitxerAdaptat = null;
+
+  @JsonProperty("fitxerOriginal")
+  private Fitxer fitxerOriginal = null;
+
+  @JsonProperty("fitxerSignat")
+  private Fitxer fitxerSignat = null;
+
+  @JsonProperty("callBackUrl")
+  private String callBackUrl = null;
+
   @JsonProperty("usuariAplicacio")
   private String usuariAplicacio = null;
 
   @JsonProperty("personaEmail")
   private String personaEmail = null;
 
-  @JsonProperty("callBackUrl")
-  private String callBackUrl = null;
-
-  @JsonProperty("usuariPersona")
-  private String usuariPersona = null;
-
-  @JsonProperty("firmaReason")
-  private String firmaReason = null;
-
-  @JsonProperty("estatCodi")
-  private Integer estatCodi = null;
-
-  @JsonProperty("dataInici")
-  private DateTime dataInici = null;
-
-  @JsonProperty("fitxerSignatID")
-  private Long fitxerSignatID = null;
-
-  @JsonProperty("fitxerOriginal")
-  private Fitxer fitxerOriginal = null;
-
   @JsonProperty("fitxerAdaptatID")
   private Long fitxerAdaptatID = null;
-
-  @JsonProperty("fitxerSignat")
-  private Fitxer fitxerSignat = null;
-
-  @JsonProperty("fitxerAdaptat")
-  private Fitxer fitxerAdaptat = null;
-
-  @JsonProperty("fitxerOriginalID")
-  private Long fitxerOriginalID = null;
-
-  @JsonProperty("personaLlinatge1")
-  private String personaLlinatge1 = null;
-
-  @JsonProperty("personaLlinatge2")
-  private String personaLlinatge2 = null;
-
-  @JsonProperty("loginId")
-  private String loginId = null;
-
-  @JsonProperty("loginAuthMethod")
-  private String loginAuthMethod = null;
 
   @JsonProperty("loginSubtype")
   private String loginSubtype = null;
 
+  @JsonProperty("dataFi")
+  private DateTime dataFi = null;
+
   @JsonProperty("loginData")
   private DateTime loginData = null;
+
+  @JsonProperty("personaMobil")
+  private String personaMobil = null;
 
   @JsonProperty("loginQaa")
   private String loginQaa = null;
@@ -131,70 +122,43 @@ public class Evidencia {
   @JsonProperty("localitzacioIp")
   private String localitzacioIp = null;
 
-  @JsonProperty("estatExcepcio")
-  private String estatExcepcio = null;
-
-  @JsonProperty("dataFi")
-  private DateTime dataFi = null;
-
-  @JsonProperty("personaMobil")
-  private String personaMobil = null;
-
   @JsonProperty("estatError")
   private String estatError = null;
 
-  public Evidencia localitzacioCiutat(String localitzacioCiutat) {
-    this.localitzacioCiutat = localitzacioCiutat;
+  @JsonProperty("loginAuthMethod")
+  private String loginAuthMethod = null;
+
+  @JsonProperty("loginId")
+  private String loginId = null;
+
+  @JsonProperty("estatExcepcio")
+  private String estatExcepcio = null;
+
+  @JsonProperty("personaLlinatge2")
+  private String personaLlinatge2 = null;
+
+  @JsonProperty("fitxerOriginalID")
+  private Long fitxerOriginalID = null;
+
+  @JsonProperty("personaLlinatge1")
+  private String personaLlinatge1 = null;
+
+  public Evidencia localitzacioRegio(String localitzacioRegio) {
+    this.localitzacioRegio = localitzacioRegio;
     return this;
   }
 
    /**
-   * Get localitzacioCiutat
-   * @return localitzacioCiutat
+   * Get localitzacioRegio
+   * @return localitzacioRegio
   **/
   @Schema(description = "")
-  public String getLocalitzacioCiutat() {
-    return localitzacioCiutat;
+  public String getLocalitzacioRegio() {
+    return localitzacioRegio;
   }
 
-  public void setLocalitzacioCiutat(String localitzacioCiutat) {
-    this.localitzacioCiutat = localitzacioCiutat;
-  }
-
-  public Evidencia loginAdditionalProperties(String loginAdditionalProperties) {
-    this.loginAdditionalProperties = loginAdditionalProperties;
-    return this;
-  }
-
-   /**
-   * Get loginAdditionalProperties
-   * @return loginAdditionalProperties
-  **/
-  @Schema(description = "")
-  public String getLoginAdditionalProperties() {
-    return loginAdditionalProperties;
-  }
-
-  public void setLoginAdditionalProperties(String loginAdditionalProperties) {
-    this.loginAdditionalProperties = loginAdditionalProperties;
-  }
-
-  public Evidencia localitzacioCodiPostal(String localitzacioCodiPostal) {
-    this.localitzacioCodiPostal = localitzacioCodiPostal;
-    return this;
-  }
-
-   /**
-   * Get localitzacioCodiPostal
-   * @return localitzacioCodiPostal
-  **/
-  @Schema(description = "")
-  public String getLocalitzacioCodiPostal() {
-    return localitzacioCodiPostal;
-  }
-
-  public void setLocalitzacioCodiPostal(String localitzacioCodiPostal) {
-    this.localitzacioCodiPostal = localitzacioCodiPostal;
+  public void setLocalitzacioRegio(String localitzacioRegio) {
+    this.localitzacioRegio = localitzacioRegio;
   }
 
   public Evidencia localitzacioLatitud(String localitzacioLatitud) {
@@ -215,6 +179,42 @@ public class Evidencia {
     this.localitzacioLatitud = localitzacioLatitud;
   }
 
+  public Evidencia localitzacioCodiPostal(String localitzacioCodiPostal) {
+    this.localitzacioCodiPostal = localitzacioCodiPostal;
+    return this;
+  }
+
+   /**
+   * Get localitzacioCodiPostal
+   * @return localitzacioCodiPostal
+  **/
+  @Schema(description = "")
+  public String getLocalitzacioCodiPostal() {
+    return localitzacioCodiPostal;
+  }
+
+  public void setLocalitzacioCodiPostal(String localitzacioCodiPostal) {
+    this.localitzacioCodiPostal = localitzacioCodiPostal;
+  }
+
+  public Evidencia localitzacioCiutat(String localitzacioCiutat) {
+    this.localitzacioCiutat = localitzacioCiutat;
+    return this;
+  }
+
+   /**
+   * Get localitzacioCiutat
+   * @return localitzacioCiutat
+  **/
+  @Schema(description = "")
+  public String getLocalitzacioCiutat() {
+    return localitzacioCiutat;
+  }
+
+  public void setLocalitzacioCiutat(String localitzacioCiutat) {
+    this.localitzacioCiutat = localitzacioCiutat;
+  }
+
   public Evidencia localitzacioLongitud(String localitzacioLongitud) {
     this.localitzacioLongitud = localitzacioLongitud;
     return this;
@@ -231,60 +231,6 @@ public class Evidencia {
 
   public void setLocalitzacioLongitud(String localitzacioLongitud) {
     this.localitzacioLongitud = localitzacioLongitud;
-  }
-
-  public Evidencia firmaTipusDocumental(Integer firmaTipusDocumental) {
-    this.firmaTipusDocumental = firmaTipusDocumental;
-    return this;
-  }
-
-   /**
-   * Get firmaTipusDocumental
-   * @return firmaTipusDocumental
-  **/
-  @Schema(description = "")
-  public Integer getFirmaTipusDocumental() {
-    return firmaTipusDocumental;
-  }
-
-  public void setFirmaTipusDocumental(Integer firmaTipusDocumental) {
-    this.firmaTipusDocumental = firmaTipusDocumental;
-  }
-
-  public Evidencia firmaIdiomaDocument(String firmaIdiomaDocument) {
-    this.firmaIdiomaDocument = firmaIdiomaDocument;
-    return this;
-  }
-
-   /**
-   * Get firmaIdiomaDocument
-   * @return firmaIdiomaDocument
-  **/
-  @Schema(description = "")
-  public String getFirmaIdiomaDocument() {
-    return firmaIdiomaDocument;
-  }
-
-  public void setFirmaIdiomaDocument(String firmaIdiomaDocument) {
-    this.firmaIdiomaDocument = firmaIdiomaDocument;
-  }
-
-  public Evidencia localitzacioRegio(String localitzacioRegio) {
-    this.localitzacioRegio = localitzacioRegio;
-    return this;
-  }
-
-   /**
-   * Get localitzacioRegio
-   * @return localitzacioRegio
-  **/
-  @Schema(description = "")
-  public String getLocalitzacioRegio() {
-    return localitzacioRegio;
-  }
-
-  public void setLocalitzacioRegio(String localitzacioRegio) {
-    this.localitzacioRegio = localitzacioRegio;
   }
 
   public Evidencia localitzacioPais(String localitzacioPais) {
@@ -305,58 +251,58 @@ public class Evidencia {
     this.localitzacioPais = localitzacioPais;
   }
 
-  public Evidencia personaNom(String personaNom) {
-    this.personaNom = personaNom;
+  public Evidencia firmaTipusDocumental(Integer firmaTipusDocumental) {
+    this.firmaTipusDocumental = firmaTipusDocumental;
     return this;
   }
 
    /**
-   * Get personaNom
-   * @return personaNom
+   * Get firmaTipusDocumental
+   * @return firmaTipusDocumental
   **/
   @Schema(description = "")
-  public String getPersonaNom() {
-    return personaNom;
+  public Integer getFirmaTipusDocumental() {
+    return firmaTipusDocumental;
   }
 
-  public void setPersonaNom(String personaNom) {
-    this.personaNom = personaNom;
+  public void setFirmaTipusDocumental(Integer firmaTipusDocumental) {
+    this.firmaTipusDocumental = firmaTipusDocumental;
   }
 
-  public Evidencia personaNif(String personaNif) {
-    this.personaNif = personaNif;
+  public Evidencia loginAdditionalProperties(String loginAdditionalProperties) {
+    this.loginAdditionalProperties = loginAdditionalProperties;
     return this;
   }
 
    /**
-   * Get personaNif
-   * @return personaNif
+   * Get loginAdditionalProperties
+   * @return loginAdditionalProperties
   **/
   @Schema(description = "")
-  public String getPersonaNif() {
-    return personaNif;
+  public String getLoginAdditionalProperties() {
+    return loginAdditionalProperties;
   }
 
-  public void setPersonaNif(String personaNif) {
-    this.personaNif = personaNif;
+  public void setLoginAdditionalProperties(String loginAdditionalProperties) {
+    this.loginAdditionalProperties = loginAdditionalProperties;
   }
 
-  public Evidencia evidenciaID(Long evidenciaID) {
-    this.evidenciaID = evidenciaID;
+  public Evidencia firmaIdiomaDocument(String firmaIdiomaDocument) {
+    this.firmaIdiomaDocument = firmaIdiomaDocument;
     return this;
   }
 
    /**
-   * Get evidenciaID
-   * @return evidenciaID
+   * Get firmaIdiomaDocument
+   * @return firmaIdiomaDocument
   **/
   @Schema(description = "")
-  public Long getEvidenciaID() {
-    return evidenciaID;
+  public String getFirmaIdiomaDocument() {
+    return firmaIdiomaDocument;
   }
 
-  public void setEvidenciaID(Long evidenciaID) {
-    this.evidenciaID = evidenciaID;
+  public void setFirmaIdiomaDocument(String firmaIdiomaDocument) {
+    this.firmaIdiomaDocument = firmaIdiomaDocument;
   }
 
   public Evidencia nom(String nom) {
@@ -395,6 +341,222 @@ public class Evidencia {
     this.loginType = loginType;
   }
 
+  public Evidencia evidenciaID(Long evidenciaID) {
+    this.evidenciaID = evidenciaID;
+    return this;
+  }
+
+   /**
+   * Get evidenciaID
+   * @return evidenciaID
+  **/
+  @Schema(description = "")
+  public Long getEvidenciaID() {
+    return evidenciaID;
+  }
+
+  public void setEvidenciaID(Long evidenciaID) {
+    this.evidenciaID = evidenciaID;
+  }
+
+  public Evidencia usuariPersona(String usuariPersona) {
+    this.usuariPersona = usuariPersona;
+    return this;
+  }
+
+   /**
+   * Get usuariPersona
+   * @return usuariPersona
+  **/
+  @Schema(description = "")
+  public String getUsuariPersona() {
+    return usuariPersona;
+  }
+
+  public void setUsuariPersona(String usuariPersona) {
+    this.usuariPersona = usuariPersona;
+  }
+
+  public Evidencia personaNom(String personaNom) {
+    this.personaNom = personaNom;
+    return this;
+  }
+
+   /**
+   * Get personaNom
+   * @return personaNom
+  **/
+  @Schema(description = "")
+  public String getPersonaNom() {
+    return personaNom;
+  }
+
+  public void setPersonaNom(String personaNom) {
+    this.personaNom = personaNom;
+  }
+
+  public Evidencia firmaReason(String firmaReason) {
+    this.firmaReason = firmaReason;
+    return this;
+  }
+
+   /**
+   * Get firmaReason
+   * @return firmaReason
+  **/
+  @Schema(description = "")
+  public String getFirmaReason() {
+    return firmaReason;
+  }
+
+  public void setFirmaReason(String firmaReason) {
+    this.firmaReason = firmaReason;
+  }
+
+  public Evidencia dataInici(DateTime dataInici) {
+    this.dataInici = dataInici;
+    return this;
+  }
+
+   /**
+   * Get dataInici
+   * @return dataInici
+  **/
+  @Schema(description = "")
+  public DateTime getDataInici() {
+    return dataInici;
+  }
+
+  public void setDataInici(DateTime dataInici) {
+    this.dataInici = dataInici;
+  }
+
+  public Evidencia personaNif(String personaNif) {
+    this.personaNif = personaNif;
+    return this;
+  }
+
+   /**
+   * Get personaNif
+   * @return personaNif
+  **/
+  @Schema(description = "")
+  public String getPersonaNif() {
+    return personaNif;
+  }
+
+  public void setPersonaNif(String personaNif) {
+    this.personaNif = personaNif;
+  }
+
+  public Evidencia estatCodi(Integer estatCodi) {
+    this.estatCodi = estatCodi;
+    return this;
+  }
+
+   /**
+   * Get estatCodi
+   * @return estatCodi
+  **/
+  @Schema(description = "")
+  public Integer getEstatCodi() {
+    return estatCodi;
+  }
+
+  public void setEstatCodi(Integer estatCodi) {
+    this.estatCodi = estatCodi;
+  }
+
+  public Evidencia fitxerSignatID(Long fitxerSignatID) {
+    this.fitxerSignatID = fitxerSignatID;
+    return this;
+  }
+
+   /**
+   * Get fitxerSignatID
+   * @return fitxerSignatID
+  **/
+  @Schema(description = "")
+  public Long getFitxerSignatID() {
+    return fitxerSignatID;
+  }
+
+  public void setFitxerSignatID(Long fitxerSignatID) {
+    this.fitxerSignatID = fitxerSignatID;
+  }
+
+  public Evidencia fitxerAdaptat(Fitxer fitxerAdaptat) {
+    this.fitxerAdaptat = fitxerAdaptat;
+    return this;
+  }
+
+   /**
+   * Get fitxerAdaptat
+   * @return fitxerAdaptat
+  **/
+  @Schema(description = "")
+  public Fitxer getFitxerAdaptat() {
+    return fitxerAdaptat;
+  }
+
+  public void setFitxerAdaptat(Fitxer fitxerAdaptat) {
+    this.fitxerAdaptat = fitxerAdaptat;
+  }
+
+  public Evidencia fitxerOriginal(Fitxer fitxerOriginal) {
+    this.fitxerOriginal = fitxerOriginal;
+    return this;
+  }
+
+   /**
+   * Get fitxerOriginal
+   * @return fitxerOriginal
+  **/
+  @Schema(description = "")
+  public Fitxer getFitxerOriginal() {
+    return fitxerOriginal;
+  }
+
+  public void setFitxerOriginal(Fitxer fitxerOriginal) {
+    this.fitxerOriginal = fitxerOriginal;
+  }
+
+  public Evidencia fitxerSignat(Fitxer fitxerSignat) {
+    this.fitxerSignat = fitxerSignat;
+    return this;
+  }
+
+   /**
+   * Get fitxerSignat
+   * @return fitxerSignat
+  **/
+  @Schema(description = "")
+  public Fitxer getFitxerSignat() {
+    return fitxerSignat;
+  }
+
+  public void setFitxerSignat(Fitxer fitxerSignat) {
+    this.fitxerSignat = fitxerSignat;
+  }
+
+  public Evidencia callBackUrl(String callBackUrl) {
+    this.callBackUrl = callBackUrl;
+    return this;
+  }
+
+   /**
+   * Get callBackUrl
+   * @return callBackUrl
+  **/
+  @Schema(description = "")
+  public String getCallBackUrl() {
+    return callBackUrl;
+  }
+
+  public void setCallBackUrl(String callBackUrl) {
+    this.callBackUrl = callBackUrl;
+  }
+
   public Evidencia usuariAplicacio(String usuariAplicacio) {
     this.usuariAplicacio = usuariAplicacio;
     return this;
@@ -431,132 +593,6 @@ public class Evidencia {
     this.personaEmail = personaEmail;
   }
 
-  public Evidencia callBackUrl(String callBackUrl) {
-    this.callBackUrl = callBackUrl;
-    return this;
-  }
-
-   /**
-   * Get callBackUrl
-   * @return callBackUrl
-  **/
-  @Schema(description = "")
-  public String getCallBackUrl() {
-    return callBackUrl;
-  }
-
-  public void setCallBackUrl(String callBackUrl) {
-    this.callBackUrl = callBackUrl;
-  }
-
-  public Evidencia usuariPersona(String usuariPersona) {
-    this.usuariPersona = usuariPersona;
-    return this;
-  }
-
-   /**
-   * Get usuariPersona
-   * @return usuariPersona
-  **/
-  @Schema(description = "")
-  public String getUsuariPersona() {
-    return usuariPersona;
-  }
-
-  public void setUsuariPersona(String usuariPersona) {
-    this.usuariPersona = usuariPersona;
-  }
-
-  public Evidencia firmaReason(String firmaReason) {
-    this.firmaReason = firmaReason;
-    return this;
-  }
-
-   /**
-   * Get firmaReason
-   * @return firmaReason
-  **/
-  @Schema(description = "")
-  public String getFirmaReason() {
-    return firmaReason;
-  }
-
-  public void setFirmaReason(String firmaReason) {
-    this.firmaReason = firmaReason;
-  }
-
-  public Evidencia estatCodi(Integer estatCodi) {
-    this.estatCodi = estatCodi;
-    return this;
-  }
-
-   /**
-   * Get estatCodi
-   * @return estatCodi
-  **/
-  @Schema(description = "")
-  public Integer getEstatCodi() {
-    return estatCodi;
-  }
-
-  public void setEstatCodi(Integer estatCodi) {
-    this.estatCodi = estatCodi;
-  }
-
-  public Evidencia dataInici(DateTime dataInici) {
-    this.dataInici = dataInici;
-    return this;
-  }
-
-   /**
-   * Get dataInici
-   * @return dataInici
-  **/
-  @Schema(description = "")
-  public DateTime getDataInici() {
-    return dataInici;
-  }
-
-  public void setDataInici(DateTime dataInici) {
-    this.dataInici = dataInici;
-  }
-
-  public Evidencia fitxerSignatID(Long fitxerSignatID) {
-    this.fitxerSignatID = fitxerSignatID;
-    return this;
-  }
-
-   /**
-   * Get fitxerSignatID
-   * @return fitxerSignatID
-  **/
-  @Schema(description = "")
-  public Long getFitxerSignatID() {
-    return fitxerSignatID;
-  }
-
-  public void setFitxerSignatID(Long fitxerSignatID) {
-    this.fitxerSignatID = fitxerSignatID;
-  }
-
-  public Evidencia fitxerOriginal(Fitxer fitxerOriginal) {
-    this.fitxerOriginal = fitxerOriginal;
-    return this;
-  }
-
-   /**
-   * Get fitxerOriginal
-   * @return fitxerOriginal
-  **/
-  @Schema(description = "")
-  public Fitxer getFitxerOriginal() {
-    return fitxerOriginal;
-  }
-
-  public void setFitxerOriginal(Fitxer fitxerOriginal) {
-    this.fitxerOriginal = fitxerOriginal;
-  }
-
   public Evidencia fitxerAdaptatID(Long fitxerAdaptatID) {
     this.fitxerAdaptatID = fitxerAdaptatID;
     return this;
@@ -573,132 +609,6 @@ public class Evidencia {
 
   public void setFitxerAdaptatID(Long fitxerAdaptatID) {
     this.fitxerAdaptatID = fitxerAdaptatID;
-  }
-
-  public Evidencia fitxerSignat(Fitxer fitxerSignat) {
-    this.fitxerSignat = fitxerSignat;
-    return this;
-  }
-
-   /**
-   * Get fitxerSignat
-   * @return fitxerSignat
-  **/
-  @Schema(description = "")
-  public Fitxer getFitxerSignat() {
-    return fitxerSignat;
-  }
-
-  public void setFitxerSignat(Fitxer fitxerSignat) {
-    this.fitxerSignat = fitxerSignat;
-  }
-
-  public Evidencia fitxerAdaptat(Fitxer fitxerAdaptat) {
-    this.fitxerAdaptat = fitxerAdaptat;
-    return this;
-  }
-
-   /**
-   * Get fitxerAdaptat
-   * @return fitxerAdaptat
-  **/
-  @Schema(description = "")
-  public Fitxer getFitxerAdaptat() {
-    return fitxerAdaptat;
-  }
-
-  public void setFitxerAdaptat(Fitxer fitxerAdaptat) {
-    this.fitxerAdaptat = fitxerAdaptat;
-  }
-
-  public Evidencia fitxerOriginalID(Long fitxerOriginalID) {
-    this.fitxerOriginalID = fitxerOriginalID;
-    return this;
-  }
-
-   /**
-   * Get fitxerOriginalID
-   * @return fitxerOriginalID
-  **/
-  @Schema(description = "")
-  public Long getFitxerOriginalID() {
-    return fitxerOriginalID;
-  }
-
-  public void setFitxerOriginalID(Long fitxerOriginalID) {
-    this.fitxerOriginalID = fitxerOriginalID;
-  }
-
-  public Evidencia personaLlinatge1(String personaLlinatge1) {
-    this.personaLlinatge1 = personaLlinatge1;
-    return this;
-  }
-
-   /**
-   * Get personaLlinatge1
-   * @return personaLlinatge1
-  **/
-  @Schema(description = "")
-  public String getPersonaLlinatge1() {
-    return personaLlinatge1;
-  }
-
-  public void setPersonaLlinatge1(String personaLlinatge1) {
-    this.personaLlinatge1 = personaLlinatge1;
-  }
-
-  public Evidencia personaLlinatge2(String personaLlinatge2) {
-    this.personaLlinatge2 = personaLlinatge2;
-    return this;
-  }
-
-   /**
-   * Get personaLlinatge2
-   * @return personaLlinatge2
-  **/
-  @Schema(description = "")
-  public String getPersonaLlinatge2() {
-    return personaLlinatge2;
-  }
-
-  public void setPersonaLlinatge2(String personaLlinatge2) {
-    this.personaLlinatge2 = personaLlinatge2;
-  }
-
-  public Evidencia loginId(String loginId) {
-    this.loginId = loginId;
-    return this;
-  }
-
-   /**
-   * Get loginId
-   * @return loginId
-  **/
-  @Schema(description = "")
-  public String getLoginId() {
-    return loginId;
-  }
-
-  public void setLoginId(String loginId) {
-    this.loginId = loginId;
-  }
-
-  public Evidencia loginAuthMethod(String loginAuthMethod) {
-    this.loginAuthMethod = loginAuthMethod;
-    return this;
-  }
-
-   /**
-   * Get loginAuthMethod
-   * @return loginAuthMethod
-  **/
-  @Schema(description = "")
-  public String getLoginAuthMethod() {
-    return loginAuthMethod;
-  }
-
-  public void setLoginAuthMethod(String loginAuthMethod) {
-    this.loginAuthMethod = loginAuthMethod;
   }
 
   public Evidencia loginSubtype(String loginSubtype) {
@@ -719,6 +629,24 @@ public class Evidencia {
     this.loginSubtype = loginSubtype;
   }
 
+  public Evidencia dataFi(DateTime dataFi) {
+    this.dataFi = dataFi;
+    return this;
+  }
+
+   /**
+   * Get dataFi
+   * @return dataFi
+  **/
+  @Schema(description = "")
+  public DateTime getDataFi() {
+    return dataFi;
+  }
+
+  public void setDataFi(DateTime dataFi) {
+    this.dataFi = dataFi;
+  }
+
   public Evidencia loginData(DateTime loginData) {
     this.loginData = loginData;
     return this;
@@ -735,6 +663,24 @@ public class Evidencia {
 
   public void setLoginData(DateTime loginData) {
     this.loginData = loginData;
+  }
+
+  public Evidencia personaMobil(String personaMobil) {
+    this.personaMobil = personaMobil;
+    return this;
+  }
+
+   /**
+   * Get personaMobil
+   * @return personaMobil
+  **/
+  @Schema(description = "")
+  public String getPersonaMobil() {
+    return personaMobil;
+  }
+
+  public void setPersonaMobil(String personaMobil) {
+    this.personaMobil = personaMobil;
   }
 
   public Evidencia loginQaa(String loginQaa) {
@@ -773,60 +719,6 @@ public class Evidencia {
     this.localitzacioIp = localitzacioIp;
   }
 
-  public Evidencia estatExcepcio(String estatExcepcio) {
-    this.estatExcepcio = estatExcepcio;
-    return this;
-  }
-
-   /**
-   * Get estatExcepcio
-   * @return estatExcepcio
-  **/
-  @Schema(description = "")
-  public String getEstatExcepcio() {
-    return estatExcepcio;
-  }
-
-  public void setEstatExcepcio(String estatExcepcio) {
-    this.estatExcepcio = estatExcepcio;
-  }
-
-  public Evidencia dataFi(DateTime dataFi) {
-    this.dataFi = dataFi;
-    return this;
-  }
-
-   /**
-   * Get dataFi
-   * @return dataFi
-  **/
-  @Schema(description = "")
-  public DateTime getDataFi() {
-    return dataFi;
-  }
-
-  public void setDataFi(DateTime dataFi) {
-    this.dataFi = dataFi;
-  }
-
-  public Evidencia personaMobil(String personaMobil) {
-    this.personaMobil = personaMobil;
-    return this;
-  }
-
-   /**
-   * Get personaMobil
-   * @return personaMobil
-  **/
-  @Schema(description = "")
-  public String getPersonaMobil() {
-    return personaMobil;
-  }
-
-  public void setPersonaMobil(String personaMobil) {
-    this.personaMobil = personaMobil;
-  }
-
   public Evidencia estatError(String estatError) {
     this.estatError = estatError;
     return this;
@@ -845,6 +737,114 @@ public class Evidencia {
     this.estatError = estatError;
   }
 
+  public Evidencia loginAuthMethod(String loginAuthMethod) {
+    this.loginAuthMethod = loginAuthMethod;
+    return this;
+  }
+
+   /**
+   * Get loginAuthMethod
+   * @return loginAuthMethod
+  **/
+  @Schema(description = "")
+  public String getLoginAuthMethod() {
+    return loginAuthMethod;
+  }
+
+  public void setLoginAuthMethod(String loginAuthMethod) {
+    this.loginAuthMethod = loginAuthMethod;
+  }
+
+  public Evidencia loginId(String loginId) {
+    this.loginId = loginId;
+    return this;
+  }
+
+   /**
+   * Get loginId
+   * @return loginId
+  **/
+  @Schema(description = "")
+  public String getLoginId() {
+    return loginId;
+  }
+
+  public void setLoginId(String loginId) {
+    this.loginId = loginId;
+  }
+
+  public Evidencia estatExcepcio(String estatExcepcio) {
+    this.estatExcepcio = estatExcepcio;
+    return this;
+  }
+
+   /**
+   * Get estatExcepcio
+   * @return estatExcepcio
+  **/
+  @Schema(description = "")
+  public String getEstatExcepcio() {
+    return estatExcepcio;
+  }
+
+  public void setEstatExcepcio(String estatExcepcio) {
+    this.estatExcepcio = estatExcepcio;
+  }
+
+  public Evidencia personaLlinatge2(String personaLlinatge2) {
+    this.personaLlinatge2 = personaLlinatge2;
+    return this;
+  }
+
+   /**
+   * Get personaLlinatge2
+   * @return personaLlinatge2
+  **/
+  @Schema(description = "")
+  public String getPersonaLlinatge2() {
+    return personaLlinatge2;
+  }
+
+  public void setPersonaLlinatge2(String personaLlinatge2) {
+    this.personaLlinatge2 = personaLlinatge2;
+  }
+
+  public Evidencia fitxerOriginalID(Long fitxerOriginalID) {
+    this.fitxerOriginalID = fitxerOriginalID;
+    return this;
+  }
+
+   /**
+   * Get fitxerOriginalID
+   * @return fitxerOriginalID
+  **/
+  @Schema(description = "")
+  public Long getFitxerOriginalID() {
+    return fitxerOriginalID;
+  }
+
+  public void setFitxerOriginalID(Long fitxerOriginalID) {
+    this.fitxerOriginalID = fitxerOriginalID;
+  }
+
+  public Evidencia personaLlinatge1(String personaLlinatge1) {
+    this.personaLlinatge1 = personaLlinatge1;
+    return this;
+  }
+
+   /**
+   * Get personaLlinatge1
+   * @return personaLlinatge1
+  **/
+  @Schema(description = "")
+  public String getPersonaLlinatge1() {
+    return personaLlinatge1;
+  }
+
+  public void setPersonaLlinatge1(String personaLlinatge1) {
+    this.personaLlinatge1 = personaLlinatge1;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -855,50 +855,50 @@ public class Evidencia {
       return false;
     }
     Evidencia evidencia = (Evidencia) o;
-    return Objects.equals(this.localitzacioCiutat, evidencia.localitzacioCiutat) &&
-        Objects.equals(this.loginAdditionalProperties, evidencia.loginAdditionalProperties) &&
-        Objects.equals(this.localitzacioCodiPostal, evidencia.localitzacioCodiPostal) &&
+    return Objects.equals(this.localitzacioRegio, evidencia.localitzacioRegio) &&
         Objects.equals(this.localitzacioLatitud, evidencia.localitzacioLatitud) &&
+        Objects.equals(this.localitzacioCodiPostal, evidencia.localitzacioCodiPostal) &&
+        Objects.equals(this.localitzacioCiutat, evidencia.localitzacioCiutat) &&
         Objects.equals(this.localitzacioLongitud, evidencia.localitzacioLongitud) &&
-        Objects.equals(this.firmaTipusDocumental, evidencia.firmaTipusDocumental) &&
-        Objects.equals(this.firmaIdiomaDocument, evidencia.firmaIdiomaDocument) &&
-        Objects.equals(this.localitzacioRegio, evidencia.localitzacioRegio) &&
         Objects.equals(this.localitzacioPais, evidencia.localitzacioPais) &&
-        Objects.equals(this.personaNom, evidencia.personaNom) &&
-        Objects.equals(this.personaNif, evidencia.personaNif) &&
-        Objects.equals(this.evidenciaID, evidencia.evidenciaID) &&
+        Objects.equals(this.firmaTipusDocumental, evidencia.firmaTipusDocumental) &&
+        Objects.equals(this.loginAdditionalProperties, evidencia.loginAdditionalProperties) &&
+        Objects.equals(this.firmaIdiomaDocument, evidencia.firmaIdiomaDocument) &&
         Objects.equals(this.nom, evidencia.nom) &&
         Objects.equals(this.loginType, evidencia.loginType) &&
+        Objects.equals(this.evidenciaID, evidencia.evidenciaID) &&
+        Objects.equals(this.usuariPersona, evidencia.usuariPersona) &&
+        Objects.equals(this.personaNom, evidencia.personaNom) &&
+        Objects.equals(this.firmaReason, evidencia.firmaReason) &&
+        Objects.equals(this.dataInici, evidencia.dataInici) &&
+        Objects.equals(this.personaNif, evidencia.personaNif) &&
+        Objects.equals(this.estatCodi, evidencia.estatCodi) &&
+        Objects.equals(this.fitxerSignatID, evidencia.fitxerSignatID) &&
+        Objects.equals(this.fitxerAdaptat, evidencia.fitxerAdaptat) &&
+        Objects.equals(this.fitxerOriginal, evidencia.fitxerOriginal) &&
+        Objects.equals(this.fitxerSignat, evidencia.fitxerSignat) &&
+        Objects.equals(this.callBackUrl, evidencia.callBackUrl) &&
         Objects.equals(this.usuariAplicacio, evidencia.usuariAplicacio) &&
         Objects.equals(this.personaEmail, evidencia.personaEmail) &&
-        Objects.equals(this.callBackUrl, evidencia.callBackUrl) &&
-        Objects.equals(this.usuariPersona, evidencia.usuariPersona) &&
-        Objects.equals(this.firmaReason, evidencia.firmaReason) &&
-        Objects.equals(this.estatCodi, evidencia.estatCodi) &&
-        Objects.equals(this.dataInici, evidencia.dataInici) &&
-        Objects.equals(this.fitxerSignatID, evidencia.fitxerSignatID) &&
-        Objects.equals(this.fitxerOriginal, evidencia.fitxerOriginal) &&
         Objects.equals(this.fitxerAdaptatID, evidencia.fitxerAdaptatID) &&
-        Objects.equals(this.fitxerSignat, evidencia.fitxerSignat) &&
-        Objects.equals(this.fitxerAdaptat, evidencia.fitxerAdaptat) &&
-        Objects.equals(this.fitxerOriginalID, evidencia.fitxerOriginalID) &&
-        Objects.equals(this.personaLlinatge1, evidencia.personaLlinatge1) &&
-        Objects.equals(this.personaLlinatge2, evidencia.personaLlinatge2) &&
-        Objects.equals(this.loginId, evidencia.loginId) &&
-        Objects.equals(this.loginAuthMethod, evidencia.loginAuthMethod) &&
         Objects.equals(this.loginSubtype, evidencia.loginSubtype) &&
+        Objects.equals(this.dataFi, evidencia.dataFi) &&
         Objects.equals(this.loginData, evidencia.loginData) &&
+        Objects.equals(this.personaMobil, evidencia.personaMobil) &&
         Objects.equals(this.loginQaa, evidencia.loginQaa) &&
         Objects.equals(this.localitzacioIp, evidencia.localitzacioIp) &&
+        Objects.equals(this.estatError, evidencia.estatError) &&
+        Objects.equals(this.loginAuthMethod, evidencia.loginAuthMethod) &&
+        Objects.equals(this.loginId, evidencia.loginId) &&
         Objects.equals(this.estatExcepcio, evidencia.estatExcepcio) &&
-        Objects.equals(this.dataFi, evidencia.dataFi) &&
-        Objects.equals(this.personaMobil, evidencia.personaMobil) &&
-        Objects.equals(this.estatError, evidencia.estatError);
+        Objects.equals(this.personaLlinatge2, evidencia.personaLlinatge2) &&
+        Objects.equals(this.fitxerOriginalID, evidencia.fitxerOriginalID) &&
+        Objects.equals(this.personaLlinatge1, evidencia.personaLlinatge1);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(localitzacioCiutat, loginAdditionalProperties, localitzacioCodiPostal, localitzacioLatitud, localitzacioLongitud, firmaTipusDocumental, firmaIdiomaDocument, localitzacioRegio, localitzacioPais, personaNom, personaNif, evidenciaID, nom, loginType, usuariAplicacio, personaEmail, callBackUrl, usuariPersona, firmaReason, estatCodi, dataInici, fitxerSignatID, fitxerOriginal, fitxerAdaptatID, fitxerSignat, fitxerAdaptat, fitxerOriginalID, personaLlinatge1, personaLlinatge2, loginId, loginAuthMethod, loginSubtype, loginData, loginQaa, localitzacioIp, estatExcepcio, dataFi, personaMobil, estatError);
+    return Objects.hash(localitzacioRegio, localitzacioLatitud, localitzacioCodiPostal, localitzacioCiutat, localitzacioLongitud, localitzacioPais, firmaTipusDocumental, loginAdditionalProperties, firmaIdiomaDocument, nom, loginType, evidenciaID, usuariPersona, personaNom, firmaReason, dataInici, personaNif, estatCodi, fitxerSignatID, fitxerAdaptat, fitxerOriginal, fitxerSignat, callBackUrl, usuariAplicacio, personaEmail, fitxerAdaptatID, loginSubtype, dataFi, loginData, personaMobil, loginQaa, localitzacioIp, estatError, loginAuthMethod, loginId, estatExcepcio, personaLlinatge2, fitxerOriginalID, personaLlinatge1);
   }
 
 
@@ -907,45 +907,45 @@ public class Evidencia {
     StringBuilder sb = new StringBuilder();
     sb.append("class Evidencia {\n");
     
-    sb.append("    localitzacioCiutat: ").append(toIndentedString(localitzacioCiutat)).append("\n");
-    sb.append("    loginAdditionalProperties: ").append(toIndentedString(loginAdditionalProperties)).append("\n");
-    sb.append("    localitzacioCodiPostal: ").append(toIndentedString(localitzacioCodiPostal)).append("\n");
-    sb.append("    localitzacioLatitud: ").append(toIndentedString(localitzacioLatitud)).append("\n");
-    sb.append("    localitzacioLongitud: ").append(toIndentedString(localitzacioLongitud)).append("\n");
-    sb.append("    firmaTipusDocumental: ").append(toIndentedString(firmaTipusDocumental)).append("\n");
-    sb.append("    firmaIdiomaDocument: ").append(toIndentedString(firmaIdiomaDocument)).append("\n");
     sb.append("    localitzacioRegio: ").append(toIndentedString(localitzacioRegio)).append("\n");
+    sb.append("    localitzacioLatitud: ").append(toIndentedString(localitzacioLatitud)).append("\n");
+    sb.append("    localitzacioCodiPostal: ").append(toIndentedString(localitzacioCodiPostal)).append("\n");
+    sb.append("    localitzacioCiutat: ").append(toIndentedString(localitzacioCiutat)).append("\n");
+    sb.append("    localitzacioLongitud: ").append(toIndentedString(localitzacioLongitud)).append("\n");
     sb.append("    localitzacioPais: ").append(toIndentedString(localitzacioPais)).append("\n");
-    sb.append("    personaNom: ").append(toIndentedString(personaNom)).append("\n");
-    sb.append("    personaNif: ").append(toIndentedString(personaNif)).append("\n");
-    sb.append("    evidenciaID: ").append(toIndentedString(evidenciaID)).append("\n");
+    sb.append("    firmaTipusDocumental: ").append(toIndentedString(firmaTipusDocumental)).append("\n");
+    sb.append("    loginAdditionalProperties: ").append(toIndentedString(loginAdditionalProperties)).append("\n");
+    sb.append("    firmaIdiomaDocument: ").append(toIndentedString(firmaIdiomaDocument)).append("\n");
     sb.append("    nom: ").append(toIndentedString(nom)).append("\n");
     sb.append("    loginType: ").append(toIndentedString(loginType)).append("\n");
+    sb.append("    evidenciaID: ").append(toIndentedString(evidenciaID)).append("\n");
+    sb.append("    usuariPersona: ").append(toIndentedString(usuariPersona)).append("\n");
+    sb.append("    personaNom: ").append(toIndentedString(personaNom)).append("\n");
+    sb.append("    firmaReason: ").append(toIndentedString(firmaReason)).append("\n");
+    sb.append("    dataInici: ").append(toIndentedString(dataInici)).append("\n");
+    sb.append("    personaNif: ").append(toIndentedString(personaNif)).append("\n");
+    sb.append("    estatCodi: ").append(toIndentedString(estatCodi)).append("\n");
+    sb.append("    fitxerSignatID: ").append(toIndentedString(fitxerSignatID)).append("\n");
+    sb.append("    fitxerAdaptat: ").append(toIndentedString(fitxerAdaptat)).append("\n");
+    sb.append("    fitxerOriginal: ").append(toIndentedString(fitxerOriginal)).append("\n");
+    sb.append("    fitxerSignat: ").append(toIndentedString(fitxerSignat)).append("\n");
+    sb.append("    callBackUrl: ").append(toIndentedString(callBackUrl)).append("\n");
     sb.append("    usuariAplicacio: ").append(toIndentedString(usuariAplicacio)).append("\n");
     sb.append("    personaEmail: ").append(toIndentedString(personaEmail)).append("\n");
-    sb.append("    callBackUrl: ").append(toIndentedString(callBackUrl)).append("\n");
-    sb.append("    usuariPersona: ").append(toIndentedString(usuariPersona)).append("\n");
-    sb.append("    firmaReason: ").append(toIndentedString(firmaReason)).append("\n");
-    sb.append("    estatCodi: ").append(toIndentedString(estatCodi)).append("\n");
-    sb.append("    dataInici: ").append(toIndentedString(dataInici)).append("\n");
-    sb.append("    fitxerSignatID: ").append(toIndentedString(fitxerSignatID)).append("\n");
-    sb.append("    fitxerOriginal: ").append(toIndentedString(fitxerOriginal)).append("\n");
     sb.append("    fitxerAdaptatID: ").append(toIndentedString(fitxerAdaptatID)).append("\n");
-    sb.append("    fitxerSignat: ").append(toIndentedString(fitxerSignat)).append("\n");
-    sb.append("    fitxerAdaptat: ").append(toIndentedString(fitxerAdaptat)).append("\n");
-    sb.append("    fitxerOriginalID: ").append(toIndentedString(fitxerOriginalID)).append("\n");
-    sb.append("    personaLlinatge1: ").append(toIndentedString(personaLlinatge1)).append("\n");
-    sb.append("    personaLlinatge2: ").append(toIndentedString(personaLlinatge2)).append("\n");
-    sb.append("    loginId: ").append(toIndentedString(loginId)).append("\n");
-    sb.append("    loginAuthMethod: ").append(toIndentedString(loginAuthMethod)).append("\n");
     sb.append("    loginSubtype: ").append(toIndentedString(loginSubtype)).append("\n");
+    sb.append("    dataFi: ").append(toIndentedString(dataFi)).append("\n");
     sb.append("    loginData: ").append(toIndentedString(loginData)).append("\n");
+    sb.append("    personaMobil: ").append(toIndentedString(personaMobil)).append("\n");
     sb.append("    loginQaa: ").append(toIndentedString(loginQaa)).append("\n");
     sb.append("    localitzacioIp: ").append(toIndentedString(localitzacioIp)).append("\n");
-    sb.append("    estatExcepcio: ").append(toIndentedString(estatExcepcio)).append("\n");
-    sb.append("    dataFi: ").append(toIndentedString(dataFi)).append("\n");
-    sb.append("    personaMobil: ").append(toIndentedString(personaMobil)).append("\n");
     sb.append("    estatError: ").append(toIndentedString(estatError)).append("\n");
+    sb.append("    loginAuthMethod: ").append(toIndentedString(loginAuthMethod)).append("\n");
+    sb.append("    loginId: ").append(toIndentedString(loginId)).append("\n");
+    sb.append("    estatExcepcio: ").append(toIndentedString(estatExcepcio)).append("\n");
+    sb.append("    personaLlinatge2: ").append(toIndentedString(personaLlinatge2)).append("\n");
+    sb.append("    fitxerOriginalID: ").append(toIndentedString(fitxerOriginalID)).append("\n");
+    sb.append("    personaLlinatge1: ").append(toIndentedString(personaLlinatge1)).append("\n");
     sb.append("}");
     return sb.toString();
   }
