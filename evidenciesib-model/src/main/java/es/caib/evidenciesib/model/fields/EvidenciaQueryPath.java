@@ -151,6 +151,10 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new LongField(getQueryPath(), EvidenciaFields.FITXERSIGNATID);
   }
 
+  public StringField CALLBACKURL() {
+    return new StringField(getQueryPath(), EvidenciaFields.CALLBACKURL);
+  }
+
 
 
   @Override

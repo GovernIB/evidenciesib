@@ -52,45 +52,39 @@
             <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- XYZ ZZZ
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+        -->
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+        </dependency>
+
+
         <!-- Anotacions de documentació de openapi -->
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>2.1.13</version>
+            <scope>provided</scope>
         </dependency>
-        <!-- Dependències de test -->
+
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <artifactId>pluginsib-utils-rest</artifactId>
+            <groupId>org.fundaciobit.pluginsib.utils</groupId>
+            <version>2.0.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <!-- Esta en LIB de l'EAR -->
+                    <groupId>org.fundaciobit.pluginsib.core</groupId>
+                    <artifactId>pluginsib-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        <!-- Llibreries necessàries implementació client JAX-RS Només són 
-            necessàries perquè al test el client s'executa fora del servidor d'aplicacions. -->
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-client</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-json-binding-provider</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>commons-logging-jboss-logging</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- Per tests amb Arquillian -->
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
     </dependencies>
 
@@ -106,7 +100,7 @@
                 <version>2.2.0</version>
                 <configuration>
                     <outputFileName>openapi</outputFileName>
-                    <outputPath>${project.build.directory}/openapi/</outputPath>
+                    <outputPath>${project.basedir}/openapi/</outputPath>
                     <outputFormat>JSONANDYAML</outputFormat>
                     <resourcePackages>
                         <package>es.caib.evidenciesib.api.externa</package>
@@ -136,7 +130,7 @@
                         </goals>
                         <phase>install</phase>
                         <configuration>
-                            <inputSpec>${project.basedir}/target/openapi/openapi.json</inputSpec>
+                            <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
                             <language>java</language>
                             <configHelp>java</configHelp>
                             <library>resteasy</library>
@@ -147,7 +141,8 @@
                                 <dateLibrary>joda</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
-								<artifactDescription>EvidenciesIB - API Rest - Externa Client</artifactDescription>
+                                <artifactDescription>EvidenciesIB - API Rest - Externa Client</artifactDescription>
+                                <java11>true</java11>
                             </configOptions>
 
                             <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
@@ -230,7 +225,7 @@
                             <directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
                         </resource>
                         <resource>
-                            <directory>${project.build.directory}/openapi</directory>
+                            <directory>${project.basedir}/openapi</directory>
                         </resource>
                     </webResources>
                 </configuration>

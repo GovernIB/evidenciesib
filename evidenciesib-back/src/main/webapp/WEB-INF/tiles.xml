@@ -109,6 +109,16 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginList.jsp" />
     </definition>
     
+    
+    <definition name="evidenciaFormAdmin" extends="admin">
+        <put-attribute name="titol" value="evidencia.evidencia" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/evidenciaForm.jsp" />
+    </definition>
+    
+    <definition name="evidenciaListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/evidenciaList.jsp" />
+    </definition>
+    
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">

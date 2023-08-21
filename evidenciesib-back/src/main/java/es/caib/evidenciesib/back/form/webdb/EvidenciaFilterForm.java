@@ -417,6 +417,17 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
+  private java.lang.String callBackUrl;
+
+  public java.lang.String getCallBackUrl() {
+    return this.callBackUrl;
+  }
+
+  public void setCallBackUrl(java.lang.String callBackUrl) {
+    this.callBackUrl = callBackUrl;
+  }
+
+
   public EvidenciaFilterForm() {
   }
   
@@ -458,6 +469,7 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.firmaReason = __toClone.firmaReason;
     this.firmaIdiomaDocument = __toClone.firmaIdiomaDocument;
     this.firmaTipusDocumentalSelect = __toClone.firmaTipusDocumentalSelect;
+    this.callBackUrl = __toClone.callBackUrl;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
     this.mapOfValuesForLoginType = __toClone.mapOfValuesForLoginType;
     this.mapOfValuesForFirmaIdiomaDocument = __toClone.mapOfValuesForFirmaIdiomaDocument;

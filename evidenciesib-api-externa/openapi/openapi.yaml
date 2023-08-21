@@ -1,0 +1,519 @@
+openapi: 3.0.1
+info:
+  title: API REST EXTERNA de EvidenciesIB
+  description: Conjunt de Serveis REST de EvidenciesIB per ser accedits des de l'exterior
+  contact:
+    name: Departament de Govern Digital a la Fundació Bit
+    url: http://governdigital.fundaciobit.org
+    email: governdigital@fundaciobit.org
+  license:
+    name: License Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 1.0.0
+externalDocs:
+  description: Java Client (GovernIB Github)
+  url: https://github.com/GovernIB/evidenciesib/tree/evidenciesib-1.0/evidenciesib-api-externa-client
+servers:
+- url: /evidenciesibapi/externa
+  variables: {}
+- url: http://localhost:8080/evidenciesibapi/externa
+  variables: {}
+- url: https://dev.caib.es/evidenciesibapi/externa
+  variables: {}
+- url: https://proves.caib.es/evidenciesibapi/externa
+  variables: {}
+- url: https://se.caib.es/evidenciesibapi/externa
+  variables: {}
+- url: https://www.caib.es/evidenciesibapi/externa
+  variables: {}
+tags:
+- name: Evidencies
+  description: Realització d'Evidències via API REST
+paths:
+  /secure/evidencies/get/{evidenciaID}:
+    get:
+      tags:
+      - Evidencies
+      summary: Retorna informació d'una evidència a partir del seu id
+      operationId: get
+      parameters:
+      - name: evidenciaID
+        in: path
+        description: Identificador de l'evidència de la que volem informació
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: language
+        in: query
+        description: Idioma en que s'han de retornar les dades i errors(Només suportat
+          'ca' o 'es')
+        schema:
+          type: string
+        examples:
+          Català:
+            description: Català
+            value: ca
+          Castellano:
+            description: Castellano
+            value: es
+        example: ca
+      responses:
+        "400":
+          description: Paràmetres incorrectes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+        "401":
+          description: No Autenticat
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          description: No Autoritzat
+          content:
+            application/json:
+              schema:
+                type: string
+        "500":
+          description: Error no controlat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+        "200":
+          description: Retornada correctament la informació de l'evidència
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evidencia'
+      security:
+      - BasicAuth: []
+  /secure/evidencies/getfile/{evidenciaID}/{encryptedFileID}:
+    get:
+      tags:
+      - Evidencies
+      summary: Retorna informació d'una evidència a partir del seu id
+      operationId: getfile
+      parameters:
+      - name: evidenciaID
+        in: path
+        description: Identificador de l'evidència de la que volem informació
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: encryptedFileID
+        in: path
+        description: Identificador encriptat del fitxer que volem descarregar.
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: query
+        description: Idioma en que s'han de retornar les dades i errors(Només suportat
+          'ca' o 'es')
+        schema:
+          type: string
+        examples:
+          Català:
+            description: Català
+            value: ca
+          Castellano:
+            description: Castellano
+            value: es
+        example: ca
+      responses:
+        "400":
+          description: Paràmetres incorrectes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+        "401":
+          description: No Autenticat
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          description: No Autoritzat
+          content:
+            application/json:
+              schema:
+                type: string
+        "500":
+          description: Error no controlat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+        "200":
+          description: Retornada correctament la informació de l'evidència
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenciaFile'
+      security:
+      - BasicAuth: []
+  /secure/evidencies/list:
+    get:
+      tags:
+      - Evidencies
+      summary: 'Retorna un llistat de les evidencies '
+      operationId: list
+      parameters:
+      - name: inici
+        in: query
+        description: "Data d'inici, en format yyyy-MM-dd (ISO 8601), a partir de la\
+          \ qual volem obtenir dades"
+        schema:
+          type: string
+        example: 2022-08-29
+      - name: fi
+        in: query
+        description: "Data fi, en format yyyy-MM-dd (ISO 8601), fins la qual volem\
+          \ tenir dades"
+        schema:
+          type: string
+        example: 2023-12-31
+      - name: page
+        in: query
+        description: Pàgina de la que es volen obtenir les dades
+        schema:
+          type: integer
+          format: int32
+        example: 1
+      - name: pagesize
+        in: query
+        description: Quantitat d'elements a retornar
+        schema:
+          type: integer
+          format: int32
+        example: 10
+      - name: language
+        in: query
+        description: Idioma en que s'han de retornar les dades(Només suportat 'ca'
+          o 'es')
+        schema:
+          type: string
+        examples:
+          Català:
+            description: Català
+            value: ca
+          Castellano:
+            description: Castellano
+            value: es
+        example: ca
+      responses:
+        "400":
+          description: "EFIB: Paràmetres incorrectes"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+        "401":
+          description: "EFIB: No Autenticat"
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          description: "EFIB: No Autoritzat"
+          content:
+            application/json:
+              schema:
+                type: string
+        "500":
+          description: "EFIB: Error durant la consulta de les dades obertes"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+        "200":
+          description: "EFIB: Retornades dades obertes correctament"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenciesPaginacio'
+      security:
+      - BasicAuth: []
+  /secure/evidencies/start:
+    post:
+      tags:
+      - Evidencies
+      summary: Primera cridada a realitzar per iniciar un procés d'evidències
+      operationId: start
+      requestBody:
+        description: Estructura de dades inicials per iniciar un procés d'evidències
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenciaStartRequest'
+      responses:
+        "400":
+          description: Paràmetres incorrectes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+        "401":
+          description: No Autenticat
+          content:
+            application/json:
+              schema:
+                type: string
+        "403":
+          description: No Autoritzat
+          content:
+            application/json:
+              schema:
+                type: string
+        "500":
+          description: Error no controlat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+        "200":
+          description: Procés de recolecció d'evidències inciaciat correctament
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenciaStartResponse'
+      security:
+      - BasicAuth: []
+components:
+  schemas:
+    RestExceptionInfo:
+      required:
+      - code
+      - errorMessage
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+        stackTrace:
+          type: string
+        causeException:
+          type: string
+        causeStackTrace:
+          type: string
+    Evidencia:
+      type: object
+      properties:
+        localitzacioCiutat:
+          type: string
+        loginAdditionalProperties:
+          type: string
+        localitzacioCodiPostal:
+          type: string
+        localitzacioLatitud:
+          type: string
+        localitzacioLongitud:
+          type: string
+        firmaTipusDocumental:
+          type: integer
+          format: int32
+        firmaIdiomaDocument:
+          type: string
+        localitzacioRegio:
+          type: string
+        localitzacioPais:
+          type: string
+        personaNom:
+          type: string
+        personaNif:
+          type: string
+        evidenciaID:
+          type: integer
+          format: int64
+        nom:
+          type: string
+        loginType:
+          type: integer
+          format: int32
+        usuariAplicacio:
+          type: string
+        personaEmail:
+          type: string
+        callBackUrl:
+          type: string
+        usuariPersona:
+          type: string
+        firmaReason:
+          type: string
+        estatCodi:
+          type: integer
+          format: int32
+        dataInici:
+          type: string
+          format: date-time
+        fitxerSignatID:
+          type: integer
+          format: int64
+        fitxerOriginal:
+          $ref: '#/components/schemas/Fitxer'
+        fitxerAdaptatID:
+          type: integer
+          format: int64
+        fitxerSignat:
+          $ref: '#/components/schemas/Fitxer'
+        fitxerAdaptat:
+          $ref: '#/components/schemas/Fitxer'
+        fitxerOriginalID:
+          type: integer
+          format: int64
+        personaLlinatge1:
+          type: string
+        personaLlinatge2:
+          type: string
+        loginId:
+          type: string
+        loginAuthMethod:
+          type: string
+        loginSubtype:
+          type: string
+        loginData:
+          type: string
+          format: date-time
+        loginQaa:
+          type: string
+        localitzacioIp:
+          type: string
+        estatExcepcio:
+          type: string
+        dataFi:
+          type: string
+          format: date-time
+        personaMobil:
+          type: string
+        estatError:
+          type: string
+    Fitxer:
+      type: object
+      properties:
+        tamany:
+          type: integer
+          format: int64
+        fitxerID:
+          type: integer
+          format: int64
+        nom:
+          type: string
+        mime:
+          type: string
+        descripcio:
+          type: string
+        encryptedFileID:
+          type: string
+    EvidenciaFile:
+      type: object
+      properties:
+        document:
+          type: string
+          format: byte
+        nom:
+          type: string
+        mime:
+          type: string
+        tamany:
+          type: integer
+          format: int64
+        descripcio:
+          type: string
+    EvidenciesPaginacio:
+      type: object
+      properties:
+        pagesize:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        totalpages:
+          type: integer
+          format: int32
+        totalcount:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Evidencia'
+    EvidenciaStartRequest:
+      required:
+      - callBackUrl
+      - documentASignar
+      - documentASignarMime
+      - documentASignarNom
+      - languageDocument
+      - languageUI
+      - personaLlinatge1
+      - personaLlinatge2
+      - personaNif
+      - personaNom
+      - raoDeLaFirma
+      - titolEvidencia
+      type: object
+      properties:
+        titolEvidencia:
+          type: string
+          description: Titol descriptiu de l'evidencia que es durà a terme
+        personaNom:
+          type: string
+        personaLlinatge1:
+          type: string
+        personaLlinatge2:
+          type: string
+        personaNif:
+          type: string
+        personaEmail:
+          type: string
+        raoDeLaFirma:
+          type: string
+        languageDocument:
+          type: string
+          description: Idioma del document en ISO 639-1. Valors permesos 'ca' i 'es'
+          example: ca
+          default: ca
+        documentASignarMime:
+          type: string
+        documentASignarNom:
+          type: string
+        documentASignar:
+          type: string
+          format: byte
+        callBackUrl:
+          type: string
+          description: "URL de retorn quan el proces d'evidències hagi acabat. A la\
+            \ URL la cadena {0} es substituirà per l'identificador de l'evidència\
+            \ (evidenciaID)"
+          example: "http://host:port/myappback/mycallbackcontroller/callbackevidencies?evidenciaid={0}"
+        languageUI:
+          type: string
+          description: Idioma del missatges d'error en format ISO 639-1. Valors permesos
+            'ca' i 'es'
+          example: ca
+          default: ca
+    EvidenciaStartResponse:
+      required:
+      - evidenciaID
+      - evidenciaUrlRedirect
+      type: object
+      properties:
+        evidenciaID:
+          type: integer
+          format: int64
+        evidenciaUrlRedirect:
+          type: string
+          format: uri
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

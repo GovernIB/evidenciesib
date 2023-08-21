@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -67,6 +68,7 @@ import es.caib.evidenciesib.back.security.LoginInfo;
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.commons.utils.StaticVersion;
+import es.caib.evidenciesib.logic.EvidenciaLogicaService;
 import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.entity.Fitxer;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
@@ -84,6 +86,9 @@ public class EvidenciaUserController extends EvidenciaController {
 
     public static final String CONTEXT_WEB = "/user/evidencia";
 
+    @EJB(mappedName = EvidenciaLogicaService.JNDI_NAME)
+    protected EvidenciaLogicaService evidenciaLogicaEjb;
+
     @Override
     public String getTileForm() {
         return "evidenciaFormUser";
@@ -96,12 +101,16 @@ public class EvidenciaUserController extends EvidenciaController {
 
     @Override
     public String getSessionAttributeFilterForm() {
-        return "EvidenciaUser_FilterForm";
+        return this.getClass().getName() + "_FilterForm";
     }
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-        return Where.AND(USUARIPERSONA.equal(request.getRemoteUser()), USUARIAPLICACIO.isNull());
+        if (isAdmin()) {
+            return USUARIAPLICACIO.isNotNull();
+        } else {
+            return Where.AND(USUARIPERSONA.equal(request.getRemoteUser()), USUARIAPLICACIO.isNull());
+        }
     }
 
     @Override
@@ -117,6 +126,14 @@ public class EvidenciaUserController extends EvidenciaController {
             hidden.remove(DATAFI);
             hidden.remove(ESTATCODI);
             hidden.remove(FITXERSIGNATID);
+            if (isAdmin()) {
+                hidden.remove(USUARIAPLICACIO);
+            } else {
+
+                List<Field<?>> list = evidenciaFilterForm.getDefaultGroupByFields();
+                list.remove(USUARIAPLICACIO);
+                evidenciaFilterForm.setGroupByFields(list);
+            }
 
             evidenciaFilterForm.setHiddenFields(hidden);
 
@@ -126,15 +143,18 @@ public class EvidenciaUserController extends EvidenciaController {
             evidenciaFilterForm.setViewButtonVisible(true);
             evidenciaFilterForm.setAddButtonVisible(false);
 
-            evidenciaFilterForm
-                    .addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN, "Crear Evidència des de Back",
-                            getContextWeb() + "/new?tipusLogin=" + Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK,
-                            "btn-info"));
+            if (!isAdmin()) {
 
-            evidenciaFilterForm
-                    .addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN, "Crear Evidència amb Cl@ve",
-                            getContextWeb() + "/new?tipusLogin=" + Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN,
-                            "btn-success"));
+                evidenciaFilterForm.addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN,
+                        "Crear Evidència des de Back",
+                        getContextWeb() + "/new?tipusLogin=" + Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK,
+                        "btn-info"));
+
+                evidenciaFilterForm
+                        .addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN, "Crear Evidència amb Cl@ve",
+                                getContextWeb() + "/new?tipusLogin=" + Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN,
+                                "btn-success"));
+            }
 
         }
 
@@ -217,12 +237,15 @@ public class EvidenciaUserController extends EvidenciaController {
             }
 
             evi.setNom(I18NUtils.tradueix("evidencia.evidencia") + "_" + System.currentTimeMillis());
+
+            // XYZ ZZZ TODO 
             evi.setFirmaIdiomaDocument(LocaleContextHolder.getLocale().getLanguage());
 
             evi.setDataInici(new Timestamp(System.currentTimeMillis()));
             evi.setUsuariPersona(request.getRemoteUser());
             evi.setUsuariAplicacio(null);
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO);
+            evi.setCallBackUrl(getContextWeb() + "/list");
 
             Set<Field<?>> hiddenFields = new HashSet<Field<?>>();
 
@@ -373,9 +396,12 @@ public class EvidenciaUserController extends EvidenciaController {
 
         internalSignDocument(evi, request);
 
-        messagesInternalSignDocument(request, evi);
+        final String redirect = evi.getCallBackUrl().replace("{0}", String.valueOf(evi.getEvidenciaID()));
 
-        return "redirect:" + getContextWeb() + "/list";
+        log.info(" Callback[" + evi.getEvidenciaID() + "]  => " + redirect);
+
+        return "redirect:" + redirect;
+
     }
 
     /**
@@ -542,7 +568,7 @@ public class EvidenciaUserController extends EvidenciaController {
         } finally {
             evi.setDataFi(new Timestamp(System.currentTimeMillis()));
             try {
-                this.evidenciaEjb.update(evi);
+                this.evidenciaLogicaEjb.update(evi);
             } catch (I18NException e) {
                 // TODO XYZ ZZZ
                 String msg = "Error actualitzant l'evidència despres de signar el document: " + I18NUtils.getMessage(e);
@@ -821,6 +847,14 @@ public class EvidenciaUserController extends EvidenciaController {
     @Override
     public void delete(HttpServletRequest request, Evidencia evidencia) throws I18NException {
         evidenciaEjb.deleteIncludingFiles(evidencia, this.fitxerEjb);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean isAdmin() {
+        return false;
     }
 
 }

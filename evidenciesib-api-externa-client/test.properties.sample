@@ -1,0 +1,8 @@
+host=http://anadal:8888/evidenciesibapi/externa
+username=myusername
+password=mypassword
+
+test.pdftosign=manual.pdf
+test.nif=12345678Z
+test.language=ca
+test.evidenciaid=1037

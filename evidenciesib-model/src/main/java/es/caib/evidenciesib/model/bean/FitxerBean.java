@@ -2,8 +2,9 @@
 package es.caib.evidenciesib.model.bean;
 
 import es.caib.evidenciesib.model.entity.Fitxer;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-
+// XYZ ZZZ @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class FitxerBean implements Fitxer {
 
 
@@ -101,9 +102,14 @@ public class FitxerBean implements Fitxer {
 	}
 
 
-
+  @Schema(hidden = true)
+//  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+//  @javax.persistence.Transient
   javax.activation.DataHandler data;
 
+//  @Schema(hidden = true)
+//  @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+//  @javax.persistence.Transient
   public javax.activation.DataHandler getData() {
     return data;
   }

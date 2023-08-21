@@ -117,6 +117,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FITXERSIGNATID)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FITXERSIGNATID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.CALLBACKURL)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.CALLBACKURL)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

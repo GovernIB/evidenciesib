@@ -881,3 +881,21 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.CALLBACKURL)}">
+        <tr id="evidencia_callBackUrl_rowid">
+          <td id="evidencia_callBackUrl_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.CALLBACKURL])?'evidencia.callBackUrl':__theForm.labels[EvidenciaFields.CALLBACKURL]}" /> &nbsp;(*)
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.CALLBACKURL]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.CALLBACKURL]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_callBackUrl_columnvalueid">
+            <form:errors path="evidencia.callBackUrl" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.CALLBACKURL)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.CALLBACKURL)? ' uneditable-input' : ''}"  style="" maxlength="255" path="evidencia.callBackUrl"   />
+
+           </td>
+        </tr>
+        </c:if>
+        

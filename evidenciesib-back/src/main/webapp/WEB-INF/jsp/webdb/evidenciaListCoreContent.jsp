@@ -211,6 +211,11 @@
             </c:if>
            </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.CALLBACKURL)}">
+          <td>
+          ${evidencia.callBackUrl}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

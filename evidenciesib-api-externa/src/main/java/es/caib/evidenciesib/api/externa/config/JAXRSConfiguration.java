@@ -1,4 +1,4 @@
-package es.caib.evidenciesib.api.externa;
+package es.caib.evidenciesib.api.externa.config;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -6,6 +6,9 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.servers.Server;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.ApplicationPath;
@@ -28,12 +31,12 @@ import org.apache.log4j.Logger;
                         url = "http://www.apache.org/licenses/LICENSE-2.0"),
                 contact = @Contact(
                         name = "Departament de Govern Digital a la Fundació Bit",
-                        email = "otae@fundaciobit.org",
-                        url = "http://otae.fundaciobit.org")
+                        email = "governdigital@fundaciobit.org",
+                        url = "http://governdigital.fundaciobit.org")
 
         ),
         servers = {
-                @Server(url = "../../evidenciesibapi/externa"),
+                @Server(url = "/evidenciesibapi/externa"),
                 @Server(url = "http://localhost:8080/evidenciesibapi/externa"),
                 @Server(url = "https://dev.caib.es/evidenciesibapi/externa"),
                 @Server(url = "https://proves.caib.es/evidenciesibapi/externa"),
@@ -62,5 +65,34 @@ public class JAXRSConfiguration extends Application {
     private void init() {
         log.info("Iniciant API REST EXTERNA de EvidenciesIB");
     }
+    
+    
+    /* XYZ ZZZ
+    
+    @Bean
+    public OpenAPI customOpenAPI() {
+        Schema newUserSchema = new Schema<Map<String, Object>>()
+                .addProperties("name",new StringSchema().example("John123"))
+                .addProperties("password",new StringSchema().example("P4SSW0RD"))
+                .addProperties("image",new StringSchema().example("https://robohash.org/John123.png"));
+
+        return new OpenAPI()
+                //.servers(servers)
+                .info(new Info()
+                        .title("Your app title")
+                        .description("App description")
+                        .version("1.0")
+                        .license(new License().name("GNU/GPL").url("https://www.gnu.org/licenses/gpl-3.0.html"))
+                )
+                .components(new Components()
+                        .addSchemas("NewUserBody" , newUserSchema)
+                );
+    }
+    */
+    
+
+    
+
+    
 
 }

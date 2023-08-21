@@ -5,10 +5,17 @@
         <fmt:message key="menu.admin" />
     </h5>
     <ul class="tree" style="margin: 3px; padding: 0px;">
-    <%-- 
+    
+    
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/evidencia/list"/>">
+        <span style="${(fn:contains(url, '/admin/evidencia'))? "font-weight: bold;" : ""}"><fmt:message key="evidencia.evidencia.plural" /></span>
+      </a>
+    </li>
+
     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
-    --%>
-        <li style="list-style-type: disc; list-style-position: inside;"><a
+
+    <li style="list-style-type: disc; list-style-position: inside;"><a
             href="<c:url value="/admin/pluginfirmaenservidor/list"/>"> <span
                 style="${(fn:contains(url, '/admin/pluginfirmaenservidor'))? " font-weight:bold;" : ""}"><fmt:message
                         key="menu.pluginfirma" /> </span>

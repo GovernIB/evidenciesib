@@ -46,7 +46,7 @@ import es.caib.evidenciesib.apiexterna.client.services.auth.OAuth;
 
 public class ApiClient {
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
-  private String basePath = "../../evidenciesibapi/externa";
+  private String basePath = "/evidenciesibapi/externa";
   private boolean debugging = false;
 
   private Client httpClient;

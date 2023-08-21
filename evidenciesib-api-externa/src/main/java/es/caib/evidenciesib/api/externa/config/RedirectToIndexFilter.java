@@ -1,4 +1,4 @@
-package es.caib.evidenciesib.api.externa;
+package es.caib.evidenciesib.api.externa.config;
 
 import java.io.IOException;
 

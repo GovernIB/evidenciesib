@@ -48,3 +48,5 @@ replay_pid*
 /pluginsib-login/loginib/target
 /pluginsib-login/api/target
 /pluginsib-login/loginib/test.properties
+/evidenciesib-api-externa-client/test.properties
+/evidenciesib-api-externa-client/manual.pdf

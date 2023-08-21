@@ -1,6 +1,6 @@
 # VersiApi
 
-All URIs are relative to *../../evidenciesibapi/externa*
+All URIs are relative to */evidenciesibapi/externa*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

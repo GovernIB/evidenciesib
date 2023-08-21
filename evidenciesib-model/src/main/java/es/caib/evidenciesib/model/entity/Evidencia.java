@@ -107,6 +107,9 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.Long getFitxerSignatID();
 	public void setFitxerSignatID(java.lang.Long _fitxerSignatID_);
 
+	public java.lang.String getCallBackUrl();
+	public void setCallBackUrl(java.lang.String _callBackUrl_);
+
   // Fitxer
   public <F extends Fitxer> F getFitxerOriginal();
   // Fitxer

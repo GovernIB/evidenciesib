@@ -27,6 +27,17 @@
 			<artifactId>activation</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Anotacions de documentació de openapi -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+        </dependency>
 
 
 	</dependencies>
