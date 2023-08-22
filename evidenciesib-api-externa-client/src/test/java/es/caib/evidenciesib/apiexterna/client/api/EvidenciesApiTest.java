@@ -14,11 +14,11 @@ package es.caib.evidenciesib.apiexterna.client.api;
 
 import es.caib.evidenciesib.apiexterna.client.services.ApiClient;
 import es.caib.evidenciesib.apiexterna.client.services.ApiException;
-import es.caib.evidenciesib.apiexterna.client.model.Evidencia;
+import es.caib.evidenciesib.apiexterna.client.model.EvidenciaWs;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaFile;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartRequest;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartResponse;
-import es.caib.evidenciesib.apiexterna.client.model.EvidenciesPaginacio;
+import es.caib.evidenciesib.apiexterna.client.model.EvidenciaWsPaginacio;
 import org.junit.Test;
 import org.apache.commons.io.FileUtils;
 import org.junit.Ignore;
@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -108,7 +109,7 @@ public class EvidenciesApiTest {
         final Long evidenciaID = Long.parseLong(props.getProperty("test.evidenciaid"));
 
         final String language = props.getProperty("test.language");
-        Evidencia evi = api.get(evidenciaID, language);
+        EvidenciaWs evi = api.get(evidenciaID, language);
 
         System.out.println(evi);
         /*
@@ -122,7 +123,7 @@ public class EvidenciesApiTest {
 
             EvidenciaFile file = api.getfile(evidenciaID, evi.getFitxerSignat().getEncryptedFileID(), language);
 
-            File f = new File("EVI_" + evi.getEvidenciaID() + "_" + file.getNom());
+            File f = new File("EVI_" + evi.getEvidenciaID() + "_" + file.getName());
 
             FileOutputStream fos = new FileOutputStream(f);
             fos.write(file.getDocument());
@@ -150,7 +151,6 @@ public class EvidenciesApiTest {
         final String returnUrl = "http://localhost:" + port + "/returnurl/{0}";
 
         final String language = props.getProperty("test.language");
-        ;
 
         EvidenciaStartRequest start = new EvidenciaStartRequest();
 
@@ -160,9 +160,15 @@ public class EvidenciesApiTest {
 
         byte[] docToSign = FileUtils.readFileToByteArray(f);
 
-        start.setDocumentASignar(docToSign);
-        start.setDocumentASignarNom(f.getName());
-        start.setDocumentASignarMime(MIME_APPLICATION_PDF);
+        EvidenciaFile ef = new EvidenciaFile();
+        ef.setDescription(null);
+        ef.setDocument(docToSign);
+        ef.setEncryptedFileID(null);
+        ef.setMime(MIME_APPLICATION_PDF);
+        ef.setName(f.getName());
+        ef.setSize((long) docToSign.length);
+
+        start.setDocumentASignar(ef);
         start.setLanguageDocument(language);
         start.setLanguageUI(language);
         start.setPersonaLlinatge1("Gonella");
@@ -190,13 +196,42 @@ public class EvidenciesApiTest {
         readFromSocket(port);
 
         // TODO: test validations
+        Long evidenciaID = response.getEvidenciaID();
 
-        Evidencia evi = api.get(response.getEvidenciaID(), redirectUrl);
+        EvidenciaWs evi = api.get(evidenciaID, language);
 
         System.out.println(evi);
 
-        System.out.println("Falta DESCARREGAR FITXERS !!!!");
+        if (evi.getEstatCodi() == 10) {
 
+            guardaFitxer(api, language, evidenciaID, evi.getFitxerOriginal(), "FitxerOriginal");
+            guardaFitxer(api, language, evidenciaID, evi.getFitxerSignat(), "FitxerSignat");
+
+        }
+
+    }
+
+    protected File guardaFitxer(EvidenciesApi api, final String language, Long evidenciaID, EvidenciaFile efile,
+            String fileType) throws ApiException, FileNotFoundException, IOException {
+
+        if (efile == null) {
+
+            return null;
+        }
+
+        String encryptedFile = efile.getEncryptedFileID();
+
+        EvidenciaFile file = api.getfile(evidenciaID, encryptedFile, language);
+
+        File f = new File("EVI_" + evidenciaID + "_" + fileType + "_" + file.getName());
+
+        FileOutputStream fos = new FileOutputStream(f);
+        fos.write(file.getDocument());
+        fos.flush();
+        fos.close();
+
+        System.out.println("Gardat Fitxer " + fileType + " a " + f.getName());
+        return f;
     }
 
     /**
@@ -214,7 +249,7 @@ public class EvidenciesApiTest {
         Integer page = null;
         Integer pagesize = null;
         String language = null;
-        EvidenciesPaginacio response = api.list(inici, fi, page, pagesize, language);
+        EvidenciaWsPaginacio response = api.list(inici, fi, page, pagesize, language);
 
         System.out.println(response);
 

@@ -17,16 +17,16 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import es.caib.evidenciesib.apiexterna.client.model.Evidencia;
+import es.caib.evidenciesib.apiexterna.client.model.EvidenciaWs;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * EvidenciesPaginacio
+ * EvidenciaWsPaginacio
  */
 
 
-public class EvidenciesPaginacio {
+public class EvidenciaWsPaginacio {
   @JsonProperty("pagesize")
   private Integer pagesize = null;
 
@@ -40,18 +40,18 @@ public class EvidenciesPaginacio {
   private Integer totalcount = null;
 
   @JsonProperty("data")
-  private List<Evidencia> data = null;
+  private List<EvidenciaWs> data = new ArrayList<EvidenciaWs>();
 
-  public EvidenciesPaginacio pagesize(Integer pagesize) {
+  public EvidenciaWsPaginacio pagesize(Integer pagesize) {
     this.pagesize = pagesize;
     return this;
   }
 
    /**
-   * Get pagesize
+   * Mida de pàgina
    * @return pagesize
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "Mida de pàgina")
   public Integer getPagesize() {
     return pagesize;
   }
@@ -60,16 +60,16 @@ public class EvidenciesPaginacio {
     this.pagesize = pagesize;
   }
 
-  public EvidenciesPaginacio page(Integer page) {
+  public EvidenciaWsPaginacio page(Integer page) {
     this.page = page;
     return this;
   }
 
    /**
-   * Get page
+   * Número pàgina. Comença per 1.
    * @return page
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "Número pàgina. Comença per 1.")
   public Integer getPage() {
     return page;
   }
@@ -78,16 +78,16 @@ public class EvidenciesPaginacio {
     this.page = page;
   }
 
-  public EvidenciesPaginacio totalpages(Integer totalpages) {
+  public EvidenciaWsPaginacio totalpages(Integer totalpages) {
     this.totalpages = totalpages;
     return this;
   }
 
    /**
-   * Get totalpages
+   * Número total de pàgines
    * @return totalpages
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "Número total de pàgines")
   public Integer getTotalpages() {
     return totalpages;
   }
@@ -96,16 +96,16 @@ public class EvidenciesPaginacio {
     this.totalpages = totalpages;
   }
 
-  public EvidenciesPaginacio totalcount(Integer totalcount) {
+  public EvidenciaWsPaginacio totalcount(Integer totalcount) {
     this.totalcount = totalcount;
     return this;
   }
 
    /**
-   * Get totalcount
+   * Numero total d&#x27;elements
    * @return totalcount
   **/
-  @Schema(description = "")
+  @Schema(required = true, description = "Numero total d'elements")
   public Integer getTotalcount() {
     return totalcount;
   }
@@ -114,29 +114,26 @@ public class EvidenciesPaginacio {
     this.totalcount = totalcount;
   }
 
-  public EvidenciesPaginacio data(List<Evidencia> data) {
+  public EvidenciaWsPaginacio data(List<EvidenciaWs> data) {
     this.data = data;
     return this;
   }
 
-  public EvidenciesPaginacio addDataItem(Evidencia dataItem) {
-    if (this.data == null) {
-      this.data = new ArrayList<Evidencia>();
-    }
+  public EvidenciaWsPaginacio addDataItem(EvidenciaWs dataItem) {
     this.data.add(dataItem);
     return this;
   }
 
    /**
-   * Get data
+   * Elements retornats
    * @return data
   **/
-  @Schema(description = "")
-  public List<Evidencia> getData() {
+  @Schema(required = true, description = "Elements retornats")
+  public List<EvidenciaWs> getData() {
     return data;
   }
 
-  public void setData(List<Evidencia> data) {
+  public void setData(List<EvidenciaWs> data) {
     this.data = data;
   }
 
@@ -149,12 +146,12 @@ public class EvidenciesPaginacio {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EvidenciesPaginacio evidenciesPaginacio = (EvidenciesPaginacio) o;
-    return Objects.equals(this.pagesize, evidenciesPaginacio.pagesize) &&
-        Objects.equals(this.page, evidenciesPaginacio.page) &&
-        Objects.equals(this.totalpages, evidenciesPaginacio.totalpages) &&
-        Objects.equals(this.totalcount, evidenciesPaginacio.totalcount) &&
-        Objects.equals(this.data, evidenciesPaginacio.data);
+    EvidenciaWsPaginacio evidenciaWsPaginacio = (EvidenciaWsPaginacio) o;
+    return Objects.equals(this.pagesize, evidenciaWsPaginacio.pagesize) &&
+        Objects.equals(this.page, evidenciaWsPaginacio.page) &&
+        Objects.equals(this.totalpages, evidenciaWsPaginacio.totalpages) &&
+        Objects.equals(this.totalcount, evidenciaWsPaginacio.totalcount) &&
+        Objects.equals(this.data, evidenciaWsPaginacio.data);
   }
 
   @Override
@@ -166,7 +163,7 @@ public class EvidenciesPaginacio {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EvidenciesPaginacio {\n");
+    sb.append("class EvidenciaWsPaginacio {\n");
     
     sb.append("    pagesize: ").append(toIndentedString(pagesize)).append("\n");
     sb.append("    page: ").append(toIndentedString(page)).append("\n");

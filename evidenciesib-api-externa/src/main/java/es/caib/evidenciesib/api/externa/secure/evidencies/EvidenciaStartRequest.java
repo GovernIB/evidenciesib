@@ -7,27 +7,31 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author anadal
  *
  */
+@Schema(description = "Estructura de dades a enviar al servidor per iniciar un procés d'Evidències")
 public class EvidenciaStartRequest {
 
-    @Schema(required = true, description = "Titol descriptiu de l'evidencia que es durà a terme")
+    @Schema(required = true, description = "Titol descriptiu de l'evidència que es durà a terme")
     protected java.lang.String titolEvidencia;
 
-    @Schema(required = true)
+    @Schema(required = true, description = "Nom de la persona")
     protected java.lang.String personaNom;
 
-    @Schema(required = true)
+    @Schema(required = true, description = "Primer llinatge de la persona")
     protected java.lang.String personaLlinatge1;
 
-    @Schema(required = true)
+    @Schema(required = true, description = "Segon llintge de la persona")
     protected java.lang.String personaLlinatge2;
 
-    @Schema(required = true)
+    @Schema(required = true, description = "Nif de la persona")
     protected java.lang.String personaNif;
 
-    @Schema(required = false)
+    @Schema(required = false, description = "Correu electrònic de la persona")
     protected java.lang.String personaEmail;
+    
+    @Schema(required = false, description = "Mòbil de la persona")
+    java.lang.String personaMobil;
 
-    @Schema(required = true)
+    @Schema(required = true, description = "Raó per la qual es requereix aquesta signatura")
     protected java.lang.String raoDeLaFirma;
 
     @Schema(
@@ -37,14 +41,8 @@ public class EvidenciaStartRequest {
             description = "Idioma del document en ISO 639-1. Valors permesos 'ca' i 'es'")
     protected java.lang.String languageDocument;
 
-    @Schema(required = true)
-    protected String documentASignarMime;
-
-    @Schema(required = true)
-    protected String documentASignarNom;
-
-    @Schema(required = true, type = "string", format = "byte")
-    protected byte[] documentASignar;
+    @Schema(required = true, description = "Informació del fitxer a signar")
+    protected EvidenciaFile documentASignar;
 
     @Schema(
             required = true,
@@ -116,14 +114,6 @@ public class EvidenciaStartRequest {
         this.languageDocument = languageDocument;
     }
 
-    public byte[] getDocumentASignar() {
-        return documentASignar;
-    }
-
-    public void setDocumentASignar(byte[] documentASignar) {
-        this.documentASignar = documentASignar;
-    }
-
     public String getCallBackUrl() {
         return callBackUrl;
     }
@@ -140,14 +130,6 @@ public class EvidenciaStartRequest {
         this.languageUI = languageUI;
     }
 
-    public String getDocumentASignarNom() {
-        return documentASignarNom;
-    }
-
-    public void setDocumentASignarNom(String documentASignarNom) {
-        this.documentASignarNom = documentASignarNom;
-    }
-
     public java.lang.String getPersonaEmail() {
         return personaEmail;
     }
@@ -156,12 +138,20 @@ public class EvidenciaStartRequest {
         this.personaEmail = personaEmail;
     }
 
-    public String getDocumentASignarMime() {
-        return documentASignarMime;
+    public EvidenciaFile getDocumentASignar() {
+        return documentASignar;
     }
 
-    public void setDocumentASignarMime(String documentASignarMime) {
-        this.documentASignarMime = documentASignarMime;
+    public void setDocumentASignar(EvidenciaFile documentASignar) {
+        this.documentASignar = documentASignar;
+    }
+
+    public java.lang.String getPersonaMobil() {
+        return personaMobil;
+    }
+
+    public void setPersonaMobil(java.lang.String personaMobil) {
+        this.personaMobil = personaMobil;
     }
 
 }

@@ -88,7 +88,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Evidencia'
+                $ref: '#/components/schemas/EvidenciaWs'
       security:
       - BasicAuth: []
   /secure/evidencies/getfile/{evidenciaID}/{encryptedFileID}:
@@ -237,7 +237,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EvidenciesPaginacio'
+                $ref: '#/components/schemas/EvidenciaWsPaginacio'
       security:
       - BasicAuth: []
   /secure/evidencies/start:
@@ -295,163 +295,221 @@ components:
       properties:
         code:
           type: integer
+          description: Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
           format: int32
         errorMessage:
           type: string
+          description: Missatge de l'error
         stackTrace:
           type: string
+          description: Stacktrace de l'excepció si n'hi hagués.
         causeException:
           type: string
+          description: Tipus de l'excepció origen (cause) si n'hi hagués.
         causeStackTrace:
           type: string
-    Evidencia:
-      type: object
-      properties:
-        personaLlinatge2:
-          type: string
-        fitxerOriginalID:
-          type: integer
-          format: int64
-        firmaIdiomaDocument:
-          type: string
-        personaLlinatge1:
-          type: string
-        personaMobil:
-          type: string
-        dataFi:
-          type: string
-          format: date-time
-        estatCodi:
-          type: integer
-          format: int32
-        estatError:
-          type: string
-        estatExcepcio:
-          type: string
-        dataInici:
-          type: string
-          format: date-time
-        usuariPersona:
-          type: string
-        loginType:
-          type: integer
-          format: int32
-        fitxerOriginal:
-          $ref: '#/components/schemas/Fitxer'
-        fitxerAdaptat:
-          $ref: '#/components/schemas/Fitxer'
-        firmaReason:
-          type: string
-        fitxerSignat:
-          $ref: '#/components/schemas/Fitxer'
-        usuariAplicacio:
-          type: string
-        loginSubtype:
-          type: string
-        evidenciaID:
-          type: integer
-          format: int64
-        nom:
-          type: string
-        fitxerAdaptatID:
-          type: integer
-          format: int64
-        fitxerSignatID:
-          type: integer
-          format: int64
-        callBackUrl:
-          type: string
-        personaNom:
-          type: string
-        localitzacioCodiPostal:
-          type: string
-        localitzacioLongitud:
-          type: string
-        loginAdditionalProperties:
-          type: string
-        localitzacioLatitud:
-          type: string
-        localitzacioCiutat:
-          type: string
-        localitzacioRegio:
-          type: string
-        localitzacioPais:
-          type: string
-        firmaTipusDocumental:
-          type: integer
-          format: int32
-        loginAuthMethod:
-          type: string
-        localitzacioIp:
-          type: string
-        loginData:
-          type: string
-          format: date-time
-        loginQaa:
-          type: string
-        loginId:
-          type: string
-        personaNif:
-          type: string
-        personaEmail:
-          type: string
-    Fitxer:
-      type: object
-      properties:
-        encryptedFileID:
-          type: string
-        tamany:
-          type: integer
-          format: int64
-        fitxerID:
-          type: integer
-          format: int64
-        mime:
-          type: string
-        descripcio:
-          type: string
-        nom:
-          type: string
+          description: Stacktrace de l'excepció origen (cause) si n'hi hagués.
+      description: Estructura de dades utilitzada per passar informació d'un error
     EvidenciaFile:
       type: object
       properties:
-        document:
+        name:
           type: string
-          format: byte
-        nom:
-          type: string
+          description: Nom del fitxer
         mime:
           type: string
-        tamany:
+          description: Tipus MIME del Fitxer
+        size:
           type: integer
+          description: Mida en bytes del document
           format: int64
-        descripcio:
+        description:
           type: string
-    EvidenciesPaginacio:
+          description: Descripció del Fitxer
+        encryptedFileID:
+          type: string
+          description: Identificar del fitxer per poder-ho recuperar en una segona
+            fase. Només apareix en llistats per no incloure el contingut del fitxer.
+        document:
+          type: string
+          description: Contingut del fitxer. En llistats aquest camp vendrà buit.
+          format: byte
+      description: Objecte per enviar i rebre fitxers així com la informació associada
+        a aquest.
+    EvidenciaWs:
+      required:
+      - dataInici
+      - firmaIdiomaDocument
+      - firmaReason
+      - firmaTipusDocumental
+      - firmaTipusDocumentalDescripcio
+      - fitxerOriginal
+      - loginData
+      - loginId
+      - loginQaa
+      - loginSubtype
+      - loginType
+      - loginTypeDescription
+      - personaLlinatge1
+      - personaLlinatge2
+      - personaNif
+      - personaNom
+      type: object
+      properties:
+        evidenciaID:
+          type: integer
+          description: Identificador únic de l'evidència.
+          format: int64
+        nom:
+          type: string
+          description: Nom descriptiu de l'evidència.
+        personaNom:
+          type: string
+          description: Nom de la persona
+        personaLlinatge1:
+          type: string
+          description: Primer llinatge de la persona
+        personaLlinatge2:
+          type: string
+          description: Segon llintge de la persona
+        personaNif:
+          type: string
+          description: Nif de la persona
+        personaEmail:
+          type: string
+          description: Email de la persona
+        personaMobil:
+          type: string
+          description: Mòbil de la persona
+        dataInici:
+          pattern: yyyy-MM-dd'T'HH:mm:ss
+          type: string
+          description: Data de creació de l'evidència
+          format: date-time
+        dataFi:
+          type: string
+          description: Data final de l'evidència
+          format: date-time
+        estatCodi:
+          type: integer
+          description: "Estat en que ha finalitzat l'evidència. Posibles estats:\r\
+            \n    public static final int EVIDENCIA_ESTAT_CODI_ERROR = -1;\r\n   \
+            \ public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO =\
+            \ 1;\r\n    public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN\
+            \ = 2;\r\n    public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA\
+            \ = 3;\r\n    public static final int EVIDENCIA_ESTAT_CODI_SIGNAT = 10;"
+          format: int32
+        estatCodiDescripcio:
+          type: string
+          description: Descripció del camp estatCodi
+        estatError:
+          type: string
+          description: Missatge de l'error
+        estatExcepcio:
+          type: string
+          description: Stacktrace de l'excepció si n'hi hagues
+        loginType:
+          type: integer
+          description: Codi del Tipus de Login
+          format: int32
+        loginTypeDescription:
+          type: string
+          description: Descripció del tipus de login
+        loginSubtype:
+          type: string
+          description: Subtipus de login
+        loginQaa:
+          type: string
+          description: Nivell des eguretat de login
+        loginData:
+          type: string
+          description: Data de realització del login
+          format: date-time
+        loginId:
+          type: string
+          description: Identificador del login realitzat.
+        loginAuthMethod:
+          type: string
+        loginAdditionalProperties:
+          type: string
+        localitzacioIp:
+          type: string
+          description: IP des d'on està connectat el ciutadà
+        localitzacioCodiPostal:
+          type: string
+          description: Codi postal des d'on està connectat el ciutadà.
+        localitzacioLatitud:
+          type: string
+          description: Latitud des d'on està connectat el ciutadà.
+        localitzacioLongitud:
+          type: string
+          description: Longitud des d'on està connectat el ciutadà.
+        localitzacioCiutat:
+          type: string
+          description: Localitat des d'on està connectat el ciutadà.
+        localitzacioRegio:
+          type: string
+          description: Regió (Si és Espanya Comunitat Autonoma) des d'on està connectat
+            el ciutadà.
+        localitzacioPais:
+          type: string
+          description: Pais des d'on està connectat el ciutadà.
+        firmaReason:
+          type: string
+          description: Raó de firma.
+        firmaIdiomaDocument:
+          type: string
+          description: Idioma en que està escrit el document.
+        firmaTipusDocumental:
+          type: integer
+          description: Tipus documental de la Firma. Veure https://administracionelectronica.gob.es/pae_Home/dam/jcr:26d90313-7af0-4f69-9d62-c853d55d7627/Esquema_Metadatos_e-EMGDE_2016.pdf
+          format: int32
+        firmaTipusDocumentalDescripcio:
+          type: string
+          description: DescripcioTipus documental de la Firma.Per exemple per 1 retorna
+            'Resolución(TD01)'
+          example: "1"
+        fitxerOriginal:
+          $ref: '#/components/schemas/EvidenciaFile'
+        fitxerAdaptat:
+          $ref: '#/components/schemas/EvidenciaFile'
+        fitxerSignat:
+          $ref: '#/components/schemas/EvidenciaFile'
+      description: Elements retornats
+    EvidenciaWsPaginacio:
+      required:
+      - data
+      - page
+      - pagesize
+      - totalcount
+      - totalpages
       type: object
       properties:
         pagesize:
           type: integer
+          description: Mida de pàgina
           format: int32
         page:
           type: integer
+          description: Número pàgina. Comença per 1.
           format: int32
         totalpages:
           type: integer
+          description: Número total de pàgines
           format: int32
         totalcount:
           type: integer
+          description: Numero total d'elements
           format: int32
         data:
           type: array
+          description: Elements retornats
           items:
-            $ref: '#/components/schemas/Evidencia'
+            $ref: '#/components/schemas/EvidenciaWs'
     EvidenciaStartRequest:
       required:
       - callBackUrl
       - documentASignar
-      - documentASignarMime
-      - documentASignarNom
       - languageDocument
       - languageUI
       - personaLlinatge1
@@ -464,31 +522,35 @@ components:
       properties:
         titolEvidencia:
           type: string
-          description: Titol descriptiu de l'evidencia que es durà a terme
+          description: Titol descriptiu de l'evidència que es durà a terme
         personaNom:
           type: string
+          description: Nom de la persona
         personaLlinatge1:
           type: string
+          description: Primer llinatge de la persona
         personaLlinatge2:
           type: string
+          description: Segon llintge de la persona
         personaNif:
           type: string
+          description: Nif de la persona
         personaEmail:
           type: string
+          description: Correu electrònic de la persona
+        personaMobil:
+          type: string
+          description: Mòbil de la persona
         raoDeLaFirma:
           type: string
+          description: Raó per la qual es requereix aquesta signatura
         languageDocument:
           type: string
           description: Idioma del document en ISO 639-1. Valors permesos 'ca' i 'es'
           example: ca
           default: ca
-        documentASignarMime:
-          type: string
-        documentASignarNom:
-          type: string
         documentASignar:
-          type: string
-          format: byte
+          $ref: '#/components/schemas/EvidenciaFile'
         callBackUrl:
           type: string
           description: "URL de retorn quan el proces d'evidències hagi acabat. A la\
@@ -501,6 +563,8 @@ components:
             'ca' i 'es'
           example: ca
           default: ca
+      description: Estructura de dades a enviar al servidor per iniciar un procés
+        d'Evidències
     EvidenciaStartResponse:
       required:
       - evidenciaID
@@ -509,9 +573,12 @@ components:
       properties:
         evidenciaID:
           type: integer
+          description: Identificador del nou procés de recolecció d'evidències
           format: int64
         evidenciaUrlRedirect:
           type: string
+          description: Adreça a on redirigir el navegador del client per iniciar la
+            recolecció d'evidències
           format: uri
   securitySchemes:
     BasicAuth:

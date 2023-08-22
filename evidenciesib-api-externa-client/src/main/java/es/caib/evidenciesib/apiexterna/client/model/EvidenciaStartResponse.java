@@ -36,10 +36,10 @@ public class EvidenciaStartResponse {
   }
 
    /**
-   * Get evidenciaID
+   * Identificador del nou procés de recolecció d&#x27;evidències
    * @return evidenciaID
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Identificador del nou procés de recolecció d'evidències")
   public Long getEvidenciaID() {
     return evidenciaID;
   }
@@ -54,10 +54,10 @@ public class EvidenciaStartResponse {
   }
 
    /**
-   * Get evidenciaUrlRedirect
+   * Adreça a on redirigir el navegador del client per iniciar la recolecció d&#x27;evidències
    * @return evidenciaUrlRedirect
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Adreça a on redirigir el navegador del client per iniciar la recolecció d'evidències")
   public String getEvidenciaUrlRedirect() {
     return evidenciaUrlRedirect;
   }

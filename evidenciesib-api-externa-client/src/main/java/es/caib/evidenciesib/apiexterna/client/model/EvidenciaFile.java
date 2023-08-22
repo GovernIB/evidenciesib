@@ -19,60 +19,45 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 /**
- * EvidenciaFile
+ * Objecte per enviar i rebre fitxers així com la informació associada a aquest.
  */
-
+@Schema(description = "Objecte per enviar i rebre fitxers així com la informació associada a aquest.")
 
 public class EvidenciaFile {
-  @JsonProperty("document")
-  private byte[] document = null;
-
-  @JsonProperty("nom")
-  private String nom = null;
+  @JsonProperty("name")
+  private String name = null;
 
   @JsonProperty("mime")
   private String mime = null;
 
-  @JsonProperty("tamany")
-  private Long tamany = null;
+  @JsonProperty("size")
+  private Long size = null;
 
-  @JsonProperty("descripcio")
-  private String descripcio = null;
+  @JsonProperty("description")
+  private String description = null;
 
-  public EvidenciaFile document(byte[] document) {
-    this.document = document;
+  @JsonProperty("encryptedFileID")
+  private String encryptedFileID = null;
+
+  @JsonProperty("document")
+  private byte[] document = null;
+
+  public EvidenciaFile name(String name) {
+    this.name = name;
     return this;
   }
 
    /**
-   * Get document
-   * @return document
+   * Nom del fitxer
+   * @return name
   **/
-  @Schema(description = "")
-  public byte[] getDocument() {
-    return document;
+  @Schema(description = "Nom del fitxer")
+  public String getName() {
+    return name;
   }
 
-  public void setDocument(byte[] document) {
-    this.document = document;
-  }
-
-  public EvidenciaFile nom(String nom) {
-    this.nom = nom;
-    return this;
-  }
-
-   /**
-   * Get nom
-   * @return nom
-  **/
-  @Schema(description = "")
-  public String getNom() {
-    return nom;
-  }
-
-  public void setNom(String nom) {
-    this.nom = nom;
+  public void setName(String name) {
+    this.name = name;
   }
 
   public EvidenciaFile mime(String mime) {
@@ -81,10 +66,10 @@ public class EvidenciaFile {
   }
 
    /**
-   * Get mime
+   * Tipus MIME del Fitxer
    * @return mime
   **/
-  @Schema(description = "")
+  @Schema(description = "Tipus MIME del Fitxer")
   public String getMime() {
     return mime;
   }
@@ -93,40 +78,76 @@ public class EvidenciaFile {
     this.mime = mime;
   }
 
-  public EvidenciaFile tamany(Long tamany) {
-    this.tamany = tamany;
+  public EvidenciaFile size(Long size) {
+    this.size = size;
     return this;
   }
 
    /**
-   * Get tamany
-   * @return tamany
+   * Mida en bytes del document
+   * @return size
   **/
-  @Schema(description = "")
-  public Long getTamany() {
-    return tamany;
+  @Schema(description = "Mida en bytes del document")
+  public Long getSize() {
+    return size;
   }
 
-  public void setTamany(Long tamany) {
-    this.tamany = tamany;
+  public void setSize(Long size) {
+    this.size = size;
   }
 
-  public EvidenciaFile descripcio(String descripcio) {
-    this.descripcio = descripcio;
+  public EvidenciaFile description(String description) {
+    this.description = description;
     return this;
   }
 
    /**
-   * Get descripcio
-   * @return descripcio
+   * Descripció del Fitxer
+   * @return description
   **/
-  @Schema(description = "")
-  public String getDescripcio() {
-    return descripcio;
+  @Schema(description = "Descripció del Fitxer")
+  public String getDescription() {
+    return description;
   }
 
-  public void setDescripcio(String descripcio) {
-    this.descripcio = descripcio;
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public EvidenciaFile encryptedFileID(String encryptedFileID) {
+    this.encryptedFileID = encryptedFileID;
+    return this;
+  }
+
+   /**
+   * Identificar del fitxer per poder-ho recuperar en una segona fase. Només apareix en llistats per no incloure el contingut del fitxer.
+   * @return encryptedFileID
+  **/
+  @Schema(description = "Identificar del fitxer per poder-ho recuperar en una segona fase. Només apareix en llistats per no incloure el contingut del fitxer.")
+  public String getEncryptedFileID() {
+    return encryptedFileID;
+  }
+
+  public void setEncryptedFileID(String encryptedFileID) {
+    this.encryptedFileID = encryptedFileID;
+  }
+
+  public EvidenciaFile document(byte[] document) {
+    this.document = document;
+    return this;
+  }
+
+   /**
+   * Contingut del fitxer. En llistats aquest camp vendrà buit.
+   * @return document
+  **/
+  @Schema(description = "Contingut del fitxer. En llistats aquest camp vendrà buit.")
+  public byte[] getDocument() {
+    return document;
+  }
+
+  public void setDocument(byte[] document) {
+    this.document = document;
   }
 
 
@@ -139,16 +160,17 @@ public class EvidenciaFile {
       return false;
     }
     EvidenciaFile evidenciaFile = (EvidenciaFile) o;
-    return Arrays.equals(this.document, evidenciaFile.document) &&
-        Objects.equals(this.nom, evidenciaFile.nom) &&
+    return Objects.equals(this.name, evidenciaFile.name) &&
         Objects.equals(this.mime, evidenciaFile.mime) &&
-        Objects.equals(this.tamany, evidenciaFile.tamany) &&
-        Objects.equals(this.descripcio, evidenciaFile.descripcio);
+        Objects.equals(this.size, evidenciaFile.size) &&
+        Objects.equals(this.description, evidenciaFile.description) &&
+        Objects.equals(this.encryptedFileID, evidenciaFile.encryptedFileID) &&
+        Arrays.equals(this.document, evidenciaFile.document);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(Arrays.hashCode(document), nom, mime, tamany, descripcio);
+    return Objects.hash(name, mime, size, description, encryptedFileID, Arrays.hashCode(document));
   }
 
 
@@ -157,11 +179,12 @@ public class EvidenciaFile {
     StringBuilder sb = new StringBuilder();
     sb.append("class EvidenciaFile {\n");
     
-    sb.append("    document: ").append(toIndentedString(document)).append("\n");
-    sb.append("    nom: ").append(toIndentedString(nom)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    mime: ").append(toIndentedString(mime)).append("\n");
-    sb.append("    tamany: ").append(toIndentedString(tamany)).append("\n");
-    sb.append("    descripcio: ").append(toIndentedString(descripcio)).append("\n");
+    sb.append("    size: ").append(toIndentedString(size)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    encryptedFileID: ").append(toIndentedString(encryptedFileID)).append("\n");
+    sb.append("    document: ").append(toIndentedString(document)).append("\n");
     sb.append("}");
     return sb.toString();
   }

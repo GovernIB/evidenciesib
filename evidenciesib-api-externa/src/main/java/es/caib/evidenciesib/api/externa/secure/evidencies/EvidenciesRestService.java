@@ -4,8 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
@@ -44,7 +46,6 @@ import es.caib.evidenciesib.ejb.FitxerService;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.utils.I18NLogicUtils;
 import es.caib.evidenciesib.model.entity.Evidencia;
-import es.caib.evidenciesib.model.entity.Fitxer;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 import es.caib.evidenciesib.persistence.FitxerJPA;
@@ -80,6 +81,99 @@ public class EvidenciesRestService extends RestUtils {
     protected static final String TAG_NAME = "Evidencies";
 
     protected static final String SECURITY_NAME = "BasicAuth";
+    
+
+
+    protected static final Map<String, String> MAP_TIPUS_DOCUMENTAL = new HashMap<String, String>();
+    
+
+    static {
+        
+        // 
+
+        MAP_TIPUS_DOCUMENTAL.put("1_ca", "Resolució");
+        MAP_TIPUS_DOCUMENTAL.put("2_ca", "Acord");
+        MAP_TIPUS_DOCUMENTAL.put("3_ca", "Contracte");
+        MAP_TIPUS_DOCUMENTAL.put("4_ca", "Conveni");
+        MAP_TIPUS_DOCUMENTAL.put("5_ca", "Declaració");
+        MAP_TIPUS_DOCUMENTAL.put("6_ca", "Comunicació");
+        MAP_TIPUS_DOCUMENTAL.put("7_ca", "Notificació");
+        MAP_TIPUS_DOCUMENTAL.put("8_ca", "Publicació");
+        MAP_TIPUS_DOCUMENTAL.put("9_ca", "Justificant de recepció");
+        MAP_TIPUS_DOCUMENTAL.put("10_ca", "Acta");
+        MAP_TIPUS_DOCUMENTAL.put("11_ca", "Certificat");
+        MAP_TIPUS_DOCUMENTAL.put("12_ca", "Diligència");
+        MAP_TIPUS_DOCUMENTAL.put("13_ca", "Informe");
+        MAP_TIPUS_DOCUMENTAL.put("14_ca", "Sol·licitud");
+        MAP_TIPUS_DOCUMENTAL.put("15_ca", "Denúncia");
+        MAP_TIPUS_DOCUMENTAL.put("16_ca", "Al·legació");
+        MAP_TIPUS_DOCUMENTAL.put("17_ca", "Recursos");
+        MAP_TIPUS_DOCUMENTAL.put("18_ca", "Comunicació ciutadà");
+        MAP_TIPUS_DOCUMENTAL.put("19_ca", "Factura");
+        MAP_TIPUS_DOCUMENTAL.put("20_ca", "Uns altres confiscats");
+        MAP_TIPUS_DOCUMENTAL.put("51_ca", "Llei");
+        MAP_TIPUS_DOCUMENTAL.put("52_ca", "Moció");
+        MAP_TIPUS_DOCUMENTAL.put("53_ca", "Instrucció");
+        MAP_TIPUS_DOCUMENTAL.put("54_ca", "Convocatòria");
+        MAP_TIPUS_DOCUMENTAL.put("55_ca", "Ordre del dia");
+        MAP_TIPUS_DOCUMENTAL.put("56_ca", "Informe de Ponència");
+        MAP_TIPUS_DOCUMENTAL.put("57_ca", "Dictamen de Comissió");
+        MAP_TIPUS_DOCUMENTAL.put("58_ca", "Iniciativa legislativa");
+        MAP_TIPUS_DOCUMENTAL.put("59_ca", "Pregunta");
+        MAP_TIPUS_DOCUMENTAL.put("60_ca", "Interpel·lació");
+        MAP_TIPUS_DOCUMENTAL.put("61_ca", "Resposta");
+        MAP_TIPUS_DOCUMENTAL.put("62_ca", "Proposició no de llei");
+        MAP_TIPUS_DOCUMENTAL.put("63_ca", "Esmena");
+        MAP_TIPUS_DOCUMENTAL.put("64_ca", "Proposada de resolució");
+        MAP_TIPUS_DOCUMENTAL.put("65_ca", "Compareixença");
+        MAP_TIPUS_DOCUMENTAL.put("66_ca", "Sol·licitud d'informació");
+        MAP_TIPUS_DOCUMENTAL.put("67_ca", "Escrit");
+        MAP_TIPUS_DOCUMENTAL.put("68_ca", "Iniciativa legislativa");
+        MAP_TIPUS_DOCUMENTAL.put("69_ca", "Petició");
+        MAP_TIPUS_DOCUMENTAL.put("99_ca", "Altres tipus de documents");
+
+        MAP_TIPUS_DOCUMENTAL.put("1_es", "Resolución");
+        MAP_TIPUS_DOCUMENTAL.put("2_es", "Acuerdo");
+        MAP_TIPUS_DOCUMENTAL.put("3_es", "Contrato");
+        MAP_TIPUS_DOCUMENTAL.put("4_es", "Convenio");
+        MAP_TIPUS_DOCUMENTAL.put("5_es", "Declaración");
+        MAP_TIPUS_DOCUMENTAL.put("6_es", "Comunicación");
+        MAP_TIPUS_DOCUMENTAL.put("7_es", "Notificación");
+        MAP_TIPUS_DOCUMENTAL.put("8_es", "Publicación");
+        MAP_TIPUS_DOCUMENTAL.put("9_es", "Justificante de recepción");
+        MAP_TIPUS_DOCUMENTAL.put("10_es", "Acta");
+        MAP_TIPUS_DOCUMENTAL.put("11_es", "Certificado");
+        MAP_TIPUS_DOCUMENTAL.put("12_es", "Diligencia");
+        MAP_TIPUS_DOCUMENTAL.put("13_es", "Informe");
+        MAP_TIPUS_DOCUMENTAL.put("14_es", "Solicitud");
+        MAP_TIPUS_DOCUMENTAL.put("15_es", "Denuncia");
+        MAP_TIPUS_DOCUMENTAL.put("16_es", "Alegación");
+        MAP_TIPUS_DOCUMENTAL.put("17_es", "Recursos");
+        MAP_TIPUS_DOCUMENTAL.put("18_es", "Comunicación ciudadano");
+        MAP_TIPUS_DOCUMENTAL.put("19_es", "Factura");
+        MAP_TIPUS_DOCUMENTAL.put("20_es", "Otros incautados");
+        MAP_TIPUS_DOCUMENTAL.put("51_es", "Ley");
+        MAP_TIPUS_DOCUMENTAL.put("52_es", "Moción");
+        MAP_TIPUS_DOCUMENTAL.put("53_es", "Instrucción");
+        MAP_TIPUS_DOCUMENTAL.put("54_es", "Convocatoria");
+        MAP_TIPUS_DOCUMENTAL.put("55_es", "Orden del día");
+        MAP_TIPUS_DOCUMENTAL.put("56_es", "Informe de Ponencia");
+        MAP_TIPUS_DOCUMENTAL.put("57_es", "Dictamen de Comisión");
+        MAP_TIPUS_DOCUMENTAL.put("58_es", "Iniciativa legislativa");
+        MAP_TIPUS_DOCUMENTAL.put("59_es", "Pregunta");
+        MAP_TIPUS_DOCUMENTAL.put("60_es", "Interpelación");
+        MAP_TIPUS_DOCUMENTAL.put("61_es", "Respuesta");
+        MAP_TIPUS_DOCUMENTAL.put("62_es", "Proposición no de ley");
+        MAP_TIPUS_DOCUMENTAL.put("63_es", "Enmienda");
+        MAP_TIPUS_DOCUMENTAL.put("64_es", "Propuesta de resolución");
+        MAP_TIPUS_DOCUMENTAL.put("65_es", "Comparecencia");
+        MAP_TIPUS_DOCUMENTAL.put("66_es", "Solicitud de información");
+        MAP_TIPUS_DOCUMENTAL.put("67_es", "Escrito");
+        MAP_TIPUS_DOCUMENTAL.put("68_es", "Iniciativa legislativa");
+        MAP_TIPUS_DOCUMENTAL.put("69_es", "Petición");
+        MAP_TIPUS_DOCUMENTAL.put("99_es", "Otros tipos de documentos");
+
+    }
 
     protected static Logger log = Logger.getLogger(EvidenciesRestService.class);
 
@@ -157,18 +251,18 @@ public class EvidenciesRestService extends RestUtils {
             // XYZ ZZZ Això s'ha de moure a EJB !!!!
 
             // Crear fitxer en BBDD
-            byte[] fileToSignBytes = evidenciaStartRequest.getDocumentASignar();
+            EvidenciaFile fileToSign = evidenciaStartRequest.getDocumentASignar();
 
             FitxerJPA fitxer = new FitxerJPA();
-            fitxer.setDescripcio(null);
-            fitxer.setMime(evidenciaStartRequest.getDocumentASignarMime());
-            fitxer.setNom(evidenciaStartRequest.getDocumentASignarNom());
-            fitxer.setTamany(fileToSignBytes.length);
+            fitxer.setDescripcio(fileToSign.getDescription());
+            fitxer.setMime(fileToSign.getMime());
+            fitxer.setNom(fileToSign.getName());
+            fitxer.setTamany(fileToSign.getSize());
 
             fitxerEjb.create(fitxer);
 
             // Guardar fitxer físic en Disc Dur
-            FileSystemManager.crearFitxer(new ByteArrayInputStream(fileToSignBytes), fitxer.getFitxerID());
+            FileSystemManager.crearFitxer(new ByteArrayInputStream(fileToSign.getDocument()), fitxer.getFitxerID());
 
             // Crear Evidència
             EvidenciaJPA evi = new EvidenciaJPA();
@@ -196,6 +290,7 @@ public class EvidenciesRestService extends RestUtils {
             evi.setPersonaEmail(evidenciaStartRequest.getPersonaEmail());
 
             evi.setPersonaNif(evidenciaStartRequest.getPersonaNif());
+            evi.setPersonaMobil(evidenciaStartRequest.getPersonaMobil());
             evi.setFirmaReason(evidenciaStartRequest.getRaoDeLaFirma());
             evi.setNom(evidenciaStartRequest.getTitolEvidencia());
 
@@ -279,8 +374,8 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Retornada correctament la informació de l'evidència",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = Evidencia.class)) }) })
-    public Evidencia get(
+                            schema = @Schema(implementation = EvidenciaWs.class)) }) })
+    public EvidenciaWs get(
 
             @Parameter(
                     name = "evidenciaID",
@@ -314,24 +409,22 @@ public class EvidenciesRestService extends RestUtils {
 
         try {
 
-            Evidencia evi = evidenciaEjb.findByPrimaryKey(evidenciaID);
+            Evidencia eviBBDD = evidenciaEjb.findByPrimaryKey(evidenciaID);
 
             // Check username aplication
-            if (!request.getRemoteUser().equals(evi.getUsuariAplicacio())) {
+            if (eviBBDD == null) {
+                // XYZ ZZZ Segons idioma
+                throw new RestException("L'evidència amb ID " + evidenciaID + " no existeix.", Status.BAD_REQUEST);
+            }
+
+            // Check username aplication
+            if (!request.getRemoteUser().equals(eviBBDD.getUsuariAplicacio())) {
                 // XYZ ZZZ Segons idioma
                 throw new RestException("L'aplicació " + request.getRemoteUser()
                         + " no és la propietària de l'evidència amb ID " + evidenciaID, Status.BAD_REQUEST);
             }
 
-            evi.getFitxerOriginal().setEncryptedFileID(HibernateFileUtil.encryptFileID(evi.getFitxerOriginalID()));
-
-            if (evi.getFitxerAdaptatID() != null) {
-                evi.getFitxerAdaptat().setEncryptedFileID(HibernateFileUtil.encryptFileID(evi.getFitxerAdaptatID()));
-            }
-
-            if (evi.getFitxerSignatID() != null) {
-                evi.getFitxerSignat().setEncryptedFileID(HibernateFileUtil.encryptFileID(evi.getFitxerSignatID()));
-            }
+            EvidenciaWs evi = new EvidenciaWs(eviBBDD, language);
 
             return evi;
 
@@ -395,8 +488,8 @@ public class EvidenciesRestService extends RestUtils {
                     description = "EFIB: Retornades dades obertes correctament",
                     content = { @Content(
                             mediaType = RestUtils.MIME_APPLICATION_JSON,
-                            schema = @Schema(implementation = EvidenciesPaginacio.class)) }) })
-    public EvidenciesPaginacio list(@Parameter(
+                            schema = @Schema(implementation = EvidenciaWsPaginacio.class)) }) })
+    public EvidenciaWsPaginacio list(@Parameter(
             description = "Data d'inici, en format yyyy-MM-dd (ISO 8601), a partir de la qual volem obtenir dades",
             in = ParameterIn.QUERY,
             required = false,
@@ -466,8 +559,10 @@ public class EvidenciesRestService extends RestUtils {
             final Where w = Where.AND(w1, w2);
             final OrderBy orderBy = new OrderBy(EvidenciaFields.DATAINICI, OrderType.DESC);
 
-            EvidenciesPaginacio paginacio = createRestPagination(EvidenciesPaginacio.class, this.evidenciaEjb, page,
+            EvidenciaPaginacio paginacioOrig = createRestPagination(EvidenciaPaginacio.class, this.evidenciaEjb, page,
                     pagesize, w, orderBy);
+
+            EvidenciaWsPaginacio paginacio = new EvidenciaWsPaginacio(paginacioOrig, language);
 
             /*
             final int firstResult = (page - 1) * pagesize;
@@ -555,7 +650,7 @@ public class EvidenciesRestService extends RestUtils {
         final int totalPages = (int) (countTotal / pagesize) + ((countTotal % pagesize == 0) ? 0 : 1);
 
         P paginacio = classe.getConstructor().newInstance();
-        paginacio.setPage(pageSizeOutput);
+        paginacio.setPagesize(pageSizeOutput);
         paginacio.setPage(pageOutput);
         paginacio.setTotalpages(totalPages);
         paginacio.setTotalcount((int) countTotal);
@@ -637,37 +732,36 @@ public class EvidenciesRestService extends RestUtils {
 
         log.info("Entra a getFile ...[" + request.getRemoteUser() + "]");
 
-        Evidencia evi = get(evidenciaID, language, request);
+        EvidenciaWs evi = get(evidenciaID, language, request);
 
         try {
 
-            Long fileID = HibernateFileUtil.decryptFileID(encryptedFileID);
+            // TODO XYZ ZZZ Check encryptedFileID  null o buit
 
-            Fitxer file;
+            EvidenciaFile file;
 
-            if (fileID.equals(evi.getFitxerOriginalID())) {
+            if (encryptedFileID.equals(evi.getFitxerOriginal().getEncryptedFileID())) {
                 file = evi.getFitxerOriginal();
-            } else if (fileID.equals(evi.getFitxerAdaptatID())) {
+            } else if (evi.getFitxerAdaptat() != null
+                    && encryptedFileID.equals(evi.getFitxerAdaptat().getEncryptedFileID())) {
                 file = evi.getFitxerAdaptat();
-            } else if (fileID.equals(evi.getFitxerSignatID())) {
+            } else if (evi.getFitxerSignat() != null
+                    && encryptedFileID.equals(evi.getFitxerSignat().getEncryptedFileID())) {
                 file = evi.getFitxerSignat();
             } else {
+                // TODO XYZ ZZZ Traduir
                 final String msg = "El fitxer amb encryptedFileID igual a " + encryptedFileID
                         + " no es troba en l'evidència amb ID " + evidenciaID;
                 throw new RestException(msg, Status.BAD_REQUEST);
             }
 
-            EvidenciaFile ef = new EvidenciaFile();
+            Long fileID = HibernateFileUtil.decryptFileID(encryptedFileID);
 
             File f = FileSystemManager.getFile(fileID);
-            ef.setDocument(FileSystemManager.readFileToByteArray(f));
+            file.setDocument(FileSystemManager.readFileToByteArray(f));
+            file.setSize(f.length());
 
-            ef.setNom(file.getNom());
-            ef.setDescripcio(file.getDescripcio());
-            ef.setMime(file.getMime());
-            ef.setTamany(f.length());
-
-            return ef;
+            return file;
 
         } catch (RestException oae) {
             log.error("Obtenint fitxer: " + oae.getMessage(), oae);
@@ -685,6 +779,13 @@ public class EvidenciesRestService extends RestUtils {
             throw new RestException(msg, th, Status.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    protected static class EvidenciaPaginacio extends RestPagination<Evidencia> {
+
+        public EvidenciaPaginacio() {
+            super();
+        }
     }
 
 }

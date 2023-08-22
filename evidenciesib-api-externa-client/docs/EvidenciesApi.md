@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="get"></a>
 # **get**
-> Evidencia get(evidenciaID, language)
+> EvidenciaWs get(evidenciaID, language)
 
 Retorna informació d&#x27;una evidència a partir del seu id
 
@@ -34,7 +34,7 @@ EvidenciesApi apiInstance = new EvidenciesApi();
 Long evidenciaID = 789L; // Long | Identificador de l'evidència de la que volem informació
 String language = "language_example"; // String | Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')
 try {
-    Evidencia result = apiInstance.get(evidenciaID, language);
+    EvidenciaWs result = apiInstance.get(evidenciaID, language);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EvidenciesApi#get");
@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Evidencia**](Evidencia.md)
+[**EvidenciaWs**](EvidenciaWs.md)
 
 ### Authorization
 
@@ -119,7 +119,7 @@ Name | Type | Description  | Notes
 
 <a name="list"></a>
 # **list**
-> EvidenciesPaginacio list(inici, fi, page, pagesize, language)
+> EvidenciaWsPaginacio list(inici, fi, page, pagesize, language)
 
 Retorna un llistat de les evidencies 
 
@@ -145,7 +145,7 @@ Integer page = 56; // Integer | Pàgina de la que es volen obtenir les dades
 Integer pagesize = 56; // Integer | Quantitat d'elements a retornar
 String language = "language_example"; // String | Idioma en que s'han de retornar les dades(Només suportat 'ca' o 'es')
 try {
-    EvidenciesPaginacio result = apiInstance.list(inici, fi, page, pagesize, language);
+    EvidenciaWsPaginacio result = apiInstance.list(inici, fi, page, pagesize, language);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EvidenciesApi#list");
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EvidenciesPaginacio**](EvidenciesPaginacio.md)
+[**EvidenciaWsPaginacio**](EvidenciaWsPaginacio.md)
 
 ### Authorization
 

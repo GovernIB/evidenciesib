@@ -19,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 /**
- * RestExceptionInfo
+ * Estructura de dades utilitzada per passar informació d&#x27;un error
  */
-
+@Schema(description = "Estructura de dades utilitzada per passar informació d'un error")
 
 public class RestExceptionInfo {
   @JsonProperty("code")
@@ -45,10 +45,10 @@ public class RestExceptionInfo {
   }
 
    /**
-   * Get code
+   * Codi de HTTP de l&#x27;error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
    * @return code
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.")
   public Integer getCode() {
     return code;
   }
@@ -63,10 +63,10 @@ public class RestExceptionInfo {
   }
 
    /**
-   * Get errorMessage
+   * Missatge de l&#x27;error
    * @return errorMessage
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Missatge de l'error")
   public String getErrorMessage() {
     return errorMessage;
   }
@@ -81,10 +81,10 @@ public class RestExceptionInfo {
   }
 
    /**
-   * Get stackTrace
+   * Stacktrace de l&#x27;excepció si n&#x27;hi hagués.
    * @return stackTrace
   **/
-  @Schema(description = "")
+  @Schema(description = "Stacktrace de l'excepció si n'hi hagués.")
   public String getStackTrace() {
     return stackTrace;
   }
@@ -99,10 +99,10 @@ public class RestExceptionInfo {
   }
 
    /**
-   * Get causeException
+   * Tipus de l&#x27;excepció origen (cause) si n&#x27;hi hagués.
    * @return causeException
   **/
-  @Schema(description = "")
+  @Schema(description = "Tipus de l'excepció origen (cause) si n'hi hagués.")
   public String getCauseException() {
     return causeException;
   }
@@ -117,10 +117,10 @@ public class RestExceptionInfo {
   }
 
    /**
-   * Get causeStackTrace
+   * Stacktrace de l&#x27;excepció origen (cause) si n&#x27;hi hagués.
    * @return causeStackTrace
   **/
-  @Schema(description = "")
+  @Schema(description = "Stacktrace de l'excepció origen (cause) si n'hi hagués.")
   public String getCauseStackTrace() {
     return causeStackTrace;
   }

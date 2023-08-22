@@ -17,11 +17,12 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import es.caib.evidenciesib.apiexterna.client.model.EvidenciaFile;
 import io.swagger.v3.oas.annotations.media.Schema;
 /**
- * EvidenciaStartRequest
+ * Estructura de dades a enviar al servidor per iniciar un procés d&#x27;Evidències
  */
-
+@Schema(description = "Estructura de dades a enviar al servidor per iniciar un procés d'Evidències")
 
 public class EvidenciaStartRequest {
   @JsonProperty("titolEvidencia")
@@ -42,20 +43,17 @@ public class EvidenciaStartRequest {
   @JsonProperty("personaEmail")
   private String personaEmail = null;
 
+  @JsonProperty("personaMobil")
+  private String personaMobil = null;
+
   @JsonProperty("raoDeLaFirma")
   private String raoDeLaFirma = null;
 
   @JsonProperty("languageDocument")
   private String languageDocument = "ca";
 
-  @JsonProperty("documentASignarMime")
-  private String documentASignarMime = null;
-
-  @JsonProperty("documentASignarNom")
-  private String documentASignarNom = null;
-
   @JsonProperty("documentASignar")
-  private byte[] documentASignar = null;
+  private EvidenciaFile documentASignar = null;
 
   @JsonProperty("callBackUrl")
   private String callBackUrl = null;
@@ -69,10 +67,10 @@ public class EvidenciaStartRequest {
   }
 
    /**
-   * Titol descriptiu de l&#x27;evidencia que es durà a terme
+   * Titol descriptiu de l&#x27;evidència que es durà a terme
    * @return titolEvidencia
   **/
-  @Schema(required = true, description = "Titol descriptiu de l'evidencia que es durà a terme")
+  @Schema(required = true, description = "Titol descriptiu de l'evidència que es durà a terme")
   public String getTitolEvidencia() {
     return titolEvidencia;
   }
@@ -87,10 +85,10 @@ public class EvidenciaStartRequest {
   }
 
    /**
-   * Get personaNom
+   * Nom de la persona
    * @return personaNom
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Nom de la persona")
   public String getPersonaNom() {
     return personaNom;
   }
@@ -105,10 +103,10 @@ public class EvidenciaStartRequest {
   }
 
    /**
-   * Get personaLlinatge1
+   * Primer llinatge de la persona
    * @return personaLlinatge1
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Primer llinatge de la persona")
   public String getPersonaLlinatge1() {
     return personaLlinatge1;
   }
@@ -123,10 +121,10 @@ public class EvidenciaStartRequest {
   }
 
    /**
-   * Get personaLlinatge2
+   * Segon llintge de la persona
    * @return personaLlinatge2
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Segon llintge de la persona")
   public String getPersonaLlinatge2() {
     return personaLlinatge2;
   }
@@ -141,10 +139,10 @@ public class EvidenciaStartRequest {
   }
 
    /**
-   * Get personaNif
+   * Nif de la persona
    * @return personaNif
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Nif de la persona")
   public String getPersonaNif() {
     return personaNif;
   }
@@ -159,10 +157,10 @@ public class EvidenciaStartRequest {
   }
 
    /**
-   * Get personaEmail
+   * Correu electrònic de la persona
    * @return personaEmail
   **/
-  @Schema(description = "")
+  @Schema(description = "Correu electrònic de la persona")
   public String getPersonaEmail() {
     return personaEmail;
   }
@@ -171,16 +169,34 @@ public class EvidenciaStartRequest {
     this.personaEmail = personaEmail;
   }
 
+  public EvidenciaStartRequest personaMobil(String personaMobil) {
+    this.personaMobil = personaMobil;
+    return this;
+  }
+
+   /**
+   * Mòbil de la persona
+   * @return personaMobil
+  **/
+  @Schema(description = "Mòbil de la persona")
+  public String getPersonaMobil() {
+    return personaMobil;
+  }
+
+  public void setPersonaMobil(String personaMobil) {
+    this.personaMobil = personaMobil;
+  }
+
   public EvidenciaStartRequest raoDeLaFirma(String raoDeLaFirma) {
     this.raoDeLaFirma = raoDeLaFirma;
     return this;
   }
 
    /**
-   * Get raoDeLaFirma
+   * Raó per la qual es requereix aquesta signatura
    * @return raoDeLaFirma
   **/
-  @Schema(required = true, description = "")
+  @Schema(required = true, description = "Raó per la qual es requereix aquesta signatura")
   public String getRaoDeLaFirma() {
     return raoDeLaFirma;
   }
@@ -207,43 +223,7 @@ public class EvidenciaStartRequest {
     this.languageDocument = languageDocument;
   }
 
-  public EvidenciaStartRequest documentASignarMime(String documentASignarMime) {
-    this.documentASignarMime = documentASignarMime;
-    return this;
-  }
-
-   /**
-   * Get documentASignarMime
-   * @return documentASignarMime
-  **/
-  @Schema(required = true, description = "")
-  public String getDocumentASignarMime() {
-    return documentASignarMime;
-  }
-
-  public void setDocumentASignarMime(String documentASignarMime) {
-    this.documentASignarMime = documentASignarMime;
-  }
-
-  public EvidenciaStartRequest documentASignarNom(String documentASignarNom) {
-    this.documentASignarNom = documentASignarNom;
-    return this;
-  }
-
-   /**
-   * Get documentASignarNom
-   * @return documentASignarNom
-  **/
-  @Schema(required = true, description = "")
-  public String getDocumentASignarNom() {
-    return documentASignarNom;
-  }
-
-  public void setDocumentASignarNom(String documentASignarNom) {
-    this.documentASignarNom = documentASignarNom;
-  }
-
-  public EvidenciaStartRequest documentASignar(byte[] documentASignar) {
+  public EvidenciaStartRequest documentASignar(EvidenciaFile documentASignar) {
     this.documentASignar = documentASignar;
     return this;
   }
@@ -253,11 +233,11 @@ public class EvidenciaStartRequest {
    * @return documentASignar
   **/
   @Schema(required = true, description = "")
-  public byte[] getDocumentASignar() {
+  public EvidenciaFile getDocumentASignar() {
     return documentASignar;
   }
 
-  public void setDocumentASignar(byte[] documentASignar) {
+  public void setDocumentASignar(EvidenciaFile documentASignar) {
     this.documentASignar = documentASignar;
   }
 
@@ -313,18 +293,17 @@ public class EvidenciaStartRequest {
         Objects.equals(this.personaLlinatge2, evidenciaStartRequest.personaLlinatge2) &&
         Objects.equals(this.personaNif, evidenciaStartRequest.personaNif) &&
         Objects.equals(this.personaEmail, evidenciaStartRequest.personaEmail) &&
+        Objects.equals(this.personaMobil, evidenciaStartRequest.personaMobil) &&
         Objects.equals(this.raoDeLaFirma, evidenciaStartRequest.raoDeLaFirma) &&
         Objects.equals(this.languageDocument, evidenciaStartRequest.languageDocument) &&
-        Objects.equals(this.documentASignarMime, evidenciaStartRequest.documentASignarMime) &&
-        Objects.equals(this.documentASignarNom, evidenciaStartRequest.documentASignarNom) &&
-        Arrays.equals(this.documentASignar, evidenciaStartRequest.documentASignar) &&
+        Objects.equals(this.documentASignar, evidenciaStartRequest.documentASignar) &&
         Objects.equals(this.callBackUrl, evidenciaStartRequest.callBackUrl) &&
         Objects.equals(this.languageUI, evidenciaStartRequest.languageUI);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(titolEvidencia, personaNom, personaLlinatge1, personaLlinatge2, personaNif, personaEmail, raoDeLaFirma, languageDocument, documentASignarMime, documentASignarNom, Arrays.hashCode(documentASignar), callBackUrl, languageUI);
+    return Objects.hash(titolEvidencia, personaNom, personaLlinatge1, personaLlinatge2, personaNif, personaEmail, personaMobil, raoDeLaFirma, languageDocument, documentASignar, callBackUrl, languageUI);
   }
 
 
@@ -339,10 +318,9 @@ public class EvidenciaStartRequest {
     sb.append("    personaLlinatge2: ").append(toIndentedString(personaLlinatge2)).append("\n");
     sb.append("    personaNif: ").append(toIndentedString(personaNif)).append("\n");
     sb.append("    personaEmail: ").append(toIndentedString(personaEmail)).append("\n");
+    sb.append("    personaMobil: ").append(toIndentedString(personaMobil)).append("\n");
     sb.append("    raoDeLaFirma: ").append(toIndentedString(raoDeLaFirma)).append("\n");
     sb.append("    languageDocument: ").append(toIndentedString(languageDocument)).append("\n");
-    sb.append("    documentASignarMime: ").append(toIndentedString(documentASignarMime)).append("\n");
-    sb.append("    documentASignarNom: ").append(toIndentedString(documentASignarNom)).append("\n");
     sb.append("    documentASignar: ").append(toIndentedString(documentASignar)).append("\n");
     sb.append("    callBackUrl: ").append(toIndentedString(callBackUrl)).append("\n");
     sb.append("    languageUI: ").append(toIndentedString(languageUI)).append("\n");

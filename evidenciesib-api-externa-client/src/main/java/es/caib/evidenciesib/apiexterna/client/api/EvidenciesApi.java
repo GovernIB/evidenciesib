@@ -7,11 +7,11 @@ import es.caib.evidenciesib.apiexterna.client.services.Pair;
 
 import javax.ws.rs.core.GenericType;
 
-import es.caib.evidenciesib.apiexterna.client.model.Evidencia;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaFile;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartRequest;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartResponse;
-import es.caib.evidenciesib.apiexterna.client.model.EvidenciesPaginacio;
+import es.caib.evidenciesib.apiexterna.client.model.EvidenciaWs;
+import es.caib.evidenciesib.apiexterna.client.model.EvidenciaWsPaginacio;
 import es.caib.evidenciesib.apiexterna.client.model.RestExceptionInfo;
 
 import java.util.ArrayList;
@@ -43,10 +43,10 @@ public class EvidenciesApi {
    * 
    * @param evidenciaID Identificador de l&#x27;evidència de la que volem informació (required)
    * @param language Idioma en que s&#x27;han de retornar les dades i errors(Només suportat &#x27;ca&#x27; o &#x27;es&#x27;) (optional)
-   * @return Evidencia
+   * @return EvidenciaWs
    * @throws ApiException if fails to make API call
    */
-  public Evidencia get(Long evidenciaID, String language) throws ApiException {
+  public EvidenciaWs get(Long evidenciaID, String language) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'evidenciaID' is set
     if (evidenciaID == null) {
@@ -76,7 +76,7 @@ public class EvidenciesApi {
 
     String[] localVarAuthNames = new String[] { "BasicAuth" };
 
-    GenericType<Evidencia> localVarReturnType = new GenericType<Evidencia>() {};
+    GenericType<EvidenciaWs> localVarReturnType = new GenericType<EvidenciaWs>() {};
     return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
   }
   /**
@@ -134,10 +134,10 @@ public class EvidenciesApi {
    * @param page Pàgina de la que es volen obtenir les dades (optional)
    * @param pagesize Quantitat d&#x27;elements a retornar (optional)
    * @param language Idioma en que s&#x27;han de retornar les dades(Només suportat &#x27;ca&#x27; o &#x27;es&#x27;) (optional)
-   * @return EvidenciesPaginacio
+   * @return EvidenciaWsPaginacio
    * @throws ApiException if fails to make API call
    */
-  public EvidenciesPaginacio list(String inici, String fi, Integer page, Integer pagesize, String language) throws ApiException {
+  public EvidenciaWsPaginacio list(String inici, String fi, Integer page, Integer pagesize, String language) throws ApiException {
     Object localVarPostBody = null;
     // create path and map variables
     String localVarPath = "/secure/evidencies/list".replaceAll("\\{format\\}","json");
@@ -166,7 +166,7 @@ public class EvidenciesApi {
 
     String[] localVarAuthNames = new String[] { "BasicAuth" };
 
-    GenericType<EvidenciesPaginacio> localVarReturnType = new GenericType<EvidenciesPaginacio>() {};
+    GenericType<EvidenciaWsPaginacio> localVarReturnType = new GenericType<EvidenciaWsPaginacio>() {};
     return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
   }
   /**
