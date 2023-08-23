@@ -7,6 +7,7 @@ import es.caib.evidenciesib.apiexterna.client.services.Pair;
 
 import javax.ws.rs.core.GenericType;
 
+import es.caib.evidenciesib.apiexterna.client.model.ConstantsWs;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaFile;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartRequest;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartResponse;
@@ -202,5 +203,38 @@ public class EvidenciesApi {
 
     GenericType<EvidenciaStartResponse> localVarReturnType = new GenericType<EvidenciaStartResponse>() {};
     return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+  }
+  /**
+   * Retorna la versió d&#x27;aquest Servei
+   * 
+   * @return String
+   * @throws ApiException if fails to make API call
+   */
+  public String versio() throws ApiException {
+    Object localVarPostBody = null;
+    // create path and map variables
+    String localVarPath = "/secure/evidencies/versio".replaceAll("\\{format\\}","json");
+
+    // query params
+    List<Pair> localVarQueryParams = new ArrayList<Pair>();
+    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+
+    
+    final String[] localVarAccepts = {
+      "application/json"
+    };
+    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+    final String[] localVarContentTypes = {
+      
+    };
+    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+    String[] localVarAuthNames = new String[] { "BasicAuth" };
+
+    GenericType<String> localVarReturnType = new GenericType<String>() {};
+    return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
   }
 }

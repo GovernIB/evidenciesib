@@ -416,6 +416,68 @@
           "BasicAuth" : [ ]
         } ]
       }
+    },
+    "/secure/evidencies/versio" : {
+      "get" : {
+        "tags" : [ "Evidencies" ],
+        "summary" : "Retorna la versió d'aquest Servei",
+        "operationId" : "versio",
+        "responses" : {
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "666" : {
+            "description" : "No Existeix. Només s'utilitza per crear enumeració de constants...",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ConstantsWs"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Retornada correctament la versió d'aquest Servei",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
     }
   },
   "components" : {
@@ -633,7 +695,7 @@
             "$ref" : "#/components/schemas/EvidenciaFile"
           }
         },
-        "description" : "Elements retornats"
+        "description" : "Estructura que inclou tota la informació de l'evidència."
       },
       "EvidenciaWsPaginacio" : {
         "required" : [ "data", "page", "pagesize", "totalcount", "totalpages" ],
@@ -740,6 +802,47 @@
             "type" : "string",
             "description" : "Adreça a on redirigir el navegador del client per iniciar la recolecció d'evidències",
             "format" : "uri"
+          }
+        }
+      },
+      "ConstantsWs" : {
+        "required" : [ "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN", "EVIDENCIA_ESTAT_CODI_ERROR", "EVIDENCIA_ESTAT_CODI_SIGNAT" ],
+        "type" : "object",
+        "properties" : {
+          "EVIDENCIA_ESTAT_CODI_ERROR" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica un error",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : -1
+          },
+          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica que esta en procés de creació",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 1
+          },
+          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica que esta realitzant el login",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 2
+          },
+          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica que esta realitzant la firma del document",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 3
+          },
+          "EVIDENCIA_ESTAT_CODI_SIGNAT" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica que ha finalitzat correctament",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 10
           }
         }
       }

@@ -81,14 +81,11 @@ public class EvidenciesRestService extends RestUtils {
     protected static final String TAG_NAME = "Evidencies";
 
     protected static final String SECURITY_NAME = "BasicAuth";
-    
-
 
     protected static final Map<String, String> MAP_TIPUS_DOCUMENTAL = new HashMap<String, String>();
-    
 
     static {
-        
+
         // 
 
         MAP_TIPUS_DOCUMENTAL.put("1_ca", "Resolució");
@@ -183,6 +180,59 @@ public class EvidenciesRestService extends RestUtils {
     @EJB(mappedName = FitxerService.JNDI_NAME)
     protected FitxerService fitxerEjb;
 
+    /** obtenir versió d'aquest Servei Rest
+     *  
+     * @return
+     */
+    @Path("/versio")
+    @GET
+    @RolesAllowed({ Constants.EVI_WS })
+    @SecurityRequirement(name = SECURITY_NAME)
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Operation(tags = { TAG_NAME }, operationId = "versio", summary = "Retorna la versió d'aquest Servei")
+    @ApiResponses({
+
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "No Autenticat",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = String.class)) }),
+            @ApiResponse(
+                    responseCode = "666",
+                    description = "No Existeix. Només s'utilitza per crear enumeració de constants...",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ConstantsWs.class)) }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "No Autoritzat",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = String.class)) }),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Error no controlat",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Retornada correctament la versió d'aquest Servei",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = String.class)) }) })
+    public String versio() {
+        return "1.0";
+    }
+
+    /**
+     * 
+     * @param evidenciaStartRequest
+     * @param request
+     * @return
+     */
     @Path("/start")
     @POST
     @RolesAllowed({ Constants.EVI_WS })

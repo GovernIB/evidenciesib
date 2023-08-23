@@ -1,5 +1,7 @@
 package es.caib.evidenciesib.api.externa.secure.evidencies;
 
+
+
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.model.entity.Evidencia;
@@ -10,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author anadal
  *
  */
+@Schema(description = "Estructura que inclou tota la informació de l'evidència.")
 public class EvidenciaWs {
 
     @Schema(description = "Identificador únic de l'evidència.")

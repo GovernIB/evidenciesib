@@ -54,7 +54,6 @@
                 <updatePolicy>never</updatePolicy>
             </snapshots>
         </repository>
-
     </repositories>
     <dependencies>
         <dependency>
@@ -112,7 +111,6 @@
         <version_txt_template_file>./scripts/templates/versio.txt.template</version_txt_template_file>
         <pluginsib.userinformation.api.version>3.0.0</pluginsib.userinformation.api.version>
         <pluginsib.userinformation.impl.version>3.0.0-SNAPSHOT</pluginsib.userinformation.impl.version>
-
         <pluginsib.firmaenservidor.api.version>3.1.0-SNAPSHOT</pluginsib.firmaenservidor.api.version>
         <pluginsib.firmaenservidor.impl.version>3.1.0-SNAPSHOT</pluginsib.firmaenservidor.impl.version>
     </properties>
@@ -160,11 +158,11 @@
                 <version>${slf4j.version}</version>
             </dependency>
             <dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
-				<scope>provided</scope>
-			</dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>org.keycloak</groupId>
                 <artifactId>keycloak-core</artifactId>
@@ -446,42 +444,82 @@
                         <!-- Per detectar problemes de dependències -->
                         <banDuplicatePomDependencyVersions/>
                         <dependencyConvergence/>
-                </rules>
-            </configuration>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>enforce</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>com.google.code.maven-replacer-plugin</groupId>
-            <artifactId>maven-replacer-plugin</artifactId>
-            <version>1.4.0</version>
-            <inherited>false</inherited>
-            <executions>
-                <execution>
-                    <phase>process-sources</phase>
-                    <goals>
-                        <goal>replace</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <file>${version_txt_template_file}</file>
-                <outputFile>versio.txt</outputFile>
-                <replacements>
-                    <replacement>
-                        <token>@project.version@</token>
-                        <value>${project.version}</value>
-                    </replacement>
-                </replacements>
-            </configuration>
-        </plugin>
-    </plugins>
+                    </rules>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>maven-replacer-plugin</artifactId>
+                <version>1.4.0</version>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <file>${version_txt_template_file}</file>
+                    <outputFile>versio.txt</outputFile>
+                    <replacements>
+                        <replacement>
+                            <token>@project.version@</token>
+                            <value>${project.version}</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <!-- git commit message -->
+                    <message>Maven artifacts for ${project.version}</message>
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <noJekyll>true</noJekyll>
+                    <!-- remote branch name -->
+                    <branch>refs/heads/gh-pages</branch>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <path>maven</path>
+                    <!-- github repo name -->
+                    <repositoryName>maven</repositoryName>
+                    <!-- github username or organization  -->
+                    <repositoryOwner>GovernIB</repositoryOwner>
+                    <server>github_governib_maven</server>
+                    <merge>true</merge>
+                    <dryRun>false</dryRun>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>github_governib_maven</id>
+            <name>GitHub GovernIB Maven Repository</name>
+            <url>file://${project.build.directory}/mvn-repo</url>
+        </repository>
+    </distributionManagement>
+
     <profiles>
         <profile>
             <id>revisionnumber</id>

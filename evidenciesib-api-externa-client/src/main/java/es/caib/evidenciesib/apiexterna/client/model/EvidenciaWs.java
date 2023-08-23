@@ -21,9 +21,9 @@ import es.caib.evidenciesib.apiexterna.client.model.EvidenciaFile;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.joda.time.DateTime;
 /**
- * Elements retornats
+ * Estructura que inclou tota la informació de l&#x27;evidència.
  */
-@Schema(description = "Elements retornats")
+@Schema(description = "Estructura que inclou tota la informació de l'evidència.")
 
 public class EvidenciaWs {
   @JsonProperty("evidenciaID")

@@ -15,6 +15,7 @@ package es.caib.evidenciesib.apiexterna.client.api;
 import es.caib.evidenciesib.apiexterna.client.services.ApiClient;
 import es.caib.evidenciesib.apiexterna.client.services.ApiException;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaWs;
+import es.caib.evidenciesib.apiexterna.client.model.ConstantsWs;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaFile;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartRequest;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartResponse;
@@ -43,7 +44,7 @@ import java.util.Properties;
  * API tests for EvidenciesApi
  */
 @Ignore
-public class EvidenciesApiTest {
+public class EvidenciesApiTest extends ConstantsWs {
 
     public static final String MIME_APPLICATION_PDF = "application/pdf";
 
@@ -119,7 +120,7 @@ public class EvidenciesApiTest {
         public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA = 3;
         public static final int EVIDENCIA_ESTAT_CODI_SIGNAT = 10;
          */
-        if (evi.getEstatCodi() == 10) {
+        if (evi.getEstatCodi() == getEVIDENCIAESTATCODISIGNAT()) {
 
             EvidenciaFile file = api.getfile(evidenciaID, evi.getFitxerSignat().getEncryptedFileID(), language);
 

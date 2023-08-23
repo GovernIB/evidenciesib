@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**getfile**](EvidenciesApi.md#getfile) | **GET** /secure/evidencies/getfile/{evidenciaID}/{encryptedFileID} | Retorna informació d&#x27;una evidència a partir del seu id
 [**list**](EvidenciesApi.md#list) | **GET** /secure/evidencies/list | Retorna un llistat de les evidencies 
 [**start**](EvidenciesApi.md#start) | **POST** /secure/evidencies/start | Primera cridada a realitzar per iniciar un procés d&#x27;evidències
+[**versio**](EvidenciesApi.md#versio) | **GET** /secure/evidencies/versio | Retorna la versió d&#x27;aquest Servei
 
 <a name="get"></a>
 # **get**
@@ -225,5 +226,52 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="versio"></a>
+# **versio**
+> String versio()
+
+Retorna la versió d&#x27;aquest Servei
+
+### Example
+```java
+// Import classes:
+//import es.caib.evidenciesib.apiexterna.client.services.ApiClient;
+//import es.caib.evidenciesib.apiexterna.client.services.ApiException;
+//import es.caib.evidenciesib.apiexterna.client.services.Configuration;
+//import es.caib.evidenciesib.apiexterna.client.services.auth.*;
+//import es.caib.evidenciesib.apiexterna.client.api.EvidenciesApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+// Configure HTTP basic authorization: BasicAuth
+HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
+BasicAuth.setUsername("YOUR USERNAME");
+BasicAuth.setPassword("YOUR PASSWORD");
+
+EvidenciesApi apiInstance = new EvidenciesApi();
+try {
+    String result = apiInstance.versio();
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling EvidenciesApi#versio");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**String**
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
