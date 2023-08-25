@@ -95,9 +95,10 @@
                 el posarem l'arrel del WAR -->
             <!-- https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-maven-plugin -->
             <plugin>
+
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
-                <version>2.2.0</version>
+                <version>2.2.15</version>
                 <configuration>
                     <outputFileName>openapi</outputFileName>
                     <outputPath>${project.basedir}/openapi/</outputPath>
@@ -119,50 +120,71 @@
             <!-- Genera el Client Rest per Java a partir del fitxer openapi.json -->
             <!-- https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/README.md#general-configuration-parameters -->
             <plugin>
+                <!--
                 <groupId>io.swagger.codegen.v3</groupId>
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
                 <version>3.0.27</version>
+-->
+                <!-- https://openapi-generator.tech/docs/generators/java/ -->
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>6.6.0</version>
 
+                <configuration>
+                    <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
+
+                    <generatorName>java</generatorName>
+                    <skipValidateSpec>true</skipValidateSpec>
+
+                    <language>java</language>
+                    <configHelp>java</configHelp>
+                    <!--<library>okhttp-gson</library>-->
+                    <library>resteasy</library>
+                    <configOptions>
+                        <groupId>es.caib.evidenciesib</groupId>
+                        <artifactId>evidenciesib-api-externa-client</artifactId>
+                        <artifactVersion>1.0</artifactVersion>
+                        <!-- <dateLibrary>joda</dateLibrary> -->
+                        <dateLibrary>java8</dateLibrary>
+
+                        <useTags>true</useTags>
+                        <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                        <artifactDescription>EvidenciesIB - API Rest - Externa Client</artifactDescription>
+                        <java11>true</java11>
+                    </configOptions>
+
+                    <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
+                    <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
+                    <!-- <configHelp>true</configHelp> -->
+                    <!--<library>jersey2</library>  -->
+                    <!--<library>resttemplate</library>  -->
+                    <!--<configOptions>  -->
+                    <!--    <dateLibrary>joda</dateLibrary>  -->
+                    <!--</configOptions>  -->
+                    <!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
+                    <addCompileSourceRoot>false</addCompileSourceRoot>
+                    <output>${project.basedir}/../evidenciesib-api-externa-client</output>
+                    <apiPackage>${client.default.package}.api</apiPackage>
+                    <modelPackage>${client.default.package}.model</modelPackage>
+                    <invokerPackage>${client.default.package}.services</invokerPackage>
+                    <variableNamingConvention>camelCase</variableNamingConvention>
+                    <!-- <serializableModel>true</serializableModel> -->
+                    <fullJavaUtil>true</fullJavaUtil>
+                </configuration>
                 <executions>
                     <execution>
+                        <!--    <phase>compile</phase>
+                        <goals>
+                            <goal>resolve</goal>
+                        </goals>
+                        
+                         -->
+                        <phase>install</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <phase>install</phase>
-                        <configuration>
-                            <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
-                            <language>java</language>
-                            <configHelp>java</configHelp>
-                            <library>resteasy</library>
-                            <configOptions>
-                                <groupId>es.caib.evidenciesib</groupId>
-                                <artifactId>evidenciesib-api-externa-client</artifactId>
-                                <artifactVersion>1.0</artifactVersion>
-                                <dateLibrary>joda</dateLibrary>
-                                <useTags>true</useTags>
-                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                <artifactDescription>EvidenciesIB - API Rest - Externa Client</artifactDescription>
-                                <java11>true</java11>
-                            </configOptions>
 
-                            <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
-                            <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
-                            <!-- <configHelp>true</configHelp> -->
-                            <!--<library>jersey2</library>  -->
-                            <!--<library>resttemplate</library>  -->
-                            <!--<configOptions>  -->
-                            <!--    <dateLibrary>joda</dateLibrary>  -->
-                            <!--</configOptions>  -->
-                            <!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
-                            <addCompileSourceRoot>false</addCompileSourceRoot>
-                            <output>${project.basedir}/../evidenciesib-api-externa-client</output>
-                            <apiPackage>${client.default.package}.api</apiPackage>
-                            <modelPackage>${client.default.package}.model</modelPackage>
-                            <invokerPackage>${client.default.package}.services</invokerPackage>
-                            <variableNamingConvention>camelCase</variableNamingConvention>
-                            <!-- <serializableModel>true</serializableModel> -->
-                            <fullJavaUtil>true</fullJavaUtil>
-                        </configuration>
+
                     </execution>
                 </executions>
             </plugin>

@@ -3,6 +3,7 @@ package es.caib.evidenciesib.api.externa.secure.evidencies;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.sql.Timestamp;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -200,8 +201,8 @@ public class EvidenciesRestService extends RestUtils {
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = String.class)) }),
             @ApiResponse(
-                    responseCode = "666",
-                    description = "No Existeix. Només s'utilitza per crear enumeració de constants...",
+                    responseCode = "510",
+                    description = "Només s'utilitza per crear fitxer de constants...",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = ConstantsWs.class)) }),
@@ -720,7 +721,7 @@ public class EvidenciesRestService extends RestUtils {
     @Operation(
             tags = { TAG_NAME },
             operationId = "getfile",
-            summary = "Retorna informació d'una evidència a partir del seu id")
+            summary = "Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID")
     @ApiResponses({
             @ApiResponse(
                     responseCode = "400",
@@ -812,6 +813,131 @@ public class EvidenciesRestService extends RestUtils {
             file.setSize(f.length());
 
             return file;
+
+        } catch (RestException oae) {
+            log.error("Obtenint fitxer: " + oae.getMessage(), oae);
+            throw oae;
+        } catch (Throwable th) {
+
+            String msg;
+            if (th instanceof I18NException) {
+                msg = I18NCommonUtils.getMessage((I18NException) th, new Locale(language));
+            } else {
+                msg = th.getMessage();
+            }
+            msg = "Error desconegut obtenint fitxers: " + msg;
+            log.error(msg, th);
+            throw new RestException(msg, th, Status.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+    
+    
+ // obtenir fitxer de evidencia
+    @Path("/getfilebase64/{evidenciaID}/{encryptedFileID}")
+    @GET
+    @RolesAllowed({ Constants.EVI_WS })
+    @SecurityRequirement(name = SECURITY_NAME)
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Operation(
+            tags = { TAG_NAME },
+            operationId = "getfilebase64",
+            summary = "Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Paràmetres incorrectes",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "No Autenticat",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = String.class)) }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "No Autoritzat",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = String.class)) }),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Error no controlat",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Retornada correctament la informació de l'evidència",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = EvidenciaFileBase64.class)) }) })
+    public EvidenciaFileBase64 getFileBase64(
+
+            @Parameter(
+                    name = "evidenciaID",
+                    description = "Identificador de l'evidència de la que volem informació",
+                    required = true,
+                    in = ParameterIn.PATH,
+                    schema = @Schema(implementation = Long.class)) @PathParam("evidenciaID") Long evidenciaID,
+
+            @Parameter(
+                    name = "encryptedFileID",
+                    description = "Identificador encriptat del fitxer que volem descarregar.",
+                    required = true,
+                    in = ParameterIn.PATH,
+                    schema = @Schema(
+                            implementation = String.class)) @PathParam("encryptedFileID") String encryptedFileID,
+
+            @Parameter(
+                    name = "language",
+                    description = "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
+                    in = ParameterIn.QUERY,
+                    required = false,
+                    example = "ca",
+                    examples = { @ExampleObject(name = "Català", value = "ca"),
+                            @ExampleObject(name = "Castellano", value = "es") },
+                    schema = @Schema(implementation = String.class)) @QueryParam("language") String language,
+            @Parameter(hidden = true) @Context HttpServletRequest request) {
+
+        log.info("Entra a getFile ...[" + request.getRemoteUser() + "]");
+
+        EvidenciaWs evi = get(evidenciaID, language, request);
+
+        try {
+
+            // TODO XYZ ZZZ Check encryptedFileID  null o buit
+
+            EvidenciaFile file;
+
+            if (encryptedFileID.equals(evi.getFitxerOriginal().getEncryptedFileID())) {
+                file = evi.getFitxerOriginal();
+            } else if (evi.getFitxerAdaptat() != null
+                    && encryptedFileID.equals(evi.getFitxerAdaptat().getEncryptedFileID())) {
+                file = evi.getFitxerAdaptat();
+            } else if (evi.getFitxerSignat() != null
+                    && encryptedFileID.equals(evi.getFitxerSignat().getEncryptedFileID())) {
+                file = evi.getFitxerSignat();
+            } else {
+                // TODO XYZ ZZZ Traduir
+                final String msg = "El fitxer amb encryptedFileID igual a " + encryptedFileID
+                        + " no es troba en l'evidència amb ID " + evidenciaID;
+                throw new RestException(msg, Status.BAD_REQUEST);
+            }
+            
+            EvidenciaFileBase64 filebase64 = new EvidenciaFileBase64(file);
+
+            Long fileID = HibernateFileUtil.decryptFileID(encryptedFileID);
+
+            File f = FileSystemManager.getFile(fileID);
+            byte[] bytes = FileSystemManager.readFileToByteArray(f);
+            filebase64.setDocumentBase64(Base64.getEncoder().encodeToString(bytes));
+            filebase64.setSize(f.length());
+
+            return filebase64;
 
         } catch (RestException oae) {
             log.error("Obtenint fitxer: " + oae.getMessage(), oae);

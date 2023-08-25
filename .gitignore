@@ -50,3 +50,7 @@ replay_pid*
 /pluginsib-login/loginib/test.properties
 /evidenciesib-api-externa-client/test.properties
 /evidenciesib-api-externa-client/manual.pdf
+/server-generator
+/evidenciesib-api-externa-client/api
+/evidenciesib-api-externa-client/.github/workflows/maven.yml
+/evidenciesib-api-externa-client/.openapi-generator-ignore

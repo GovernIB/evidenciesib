@@ -19,23 +19,17 @@
     "url" : "https://github.com/GovernIB/evidenciesib/tree/evidenciesib-1.0/evidenciesib-api-externa-client"
   },
   "servers" : [ {
-    "url" : "/evidenciesibapi/externa",
-    "variables" : { }
+    "url" : "/evidenciesibapi/externa"
   }, {
-    "url" : "http://localhost:8080/evidenciesibapi/externa",
-    "variables" : { }
+    "url" : "http://localhost:8080/evidenciesibapi/externa"
   }, {
-    "url" : "https://dev.caib.es/evidenciesibapi/externa",
-    "variables" : { }
+    "url" : "https://dev.caib.es/evidenciesibapi/externa"
   }, {
-    "url" : "https://proves.caib.es/evidenciesibapi/externa",
-    "variables" : { }
+    "url" : "https://proves.caib.es/evidenciesibapi/externa"
   }, {
-    "url" : "https://se.caib.es/evidenciesibapi/externa",
-    "variables" : { }
+    "url" : "https://se.caib.es/evidenciesibapi/externa"
   }, {
-    "url" : "https://www.caib.es/evidenciesibapi/externa",
-    "variables" : { }
+    "url" : "https://www.caib.es/evidenciesibapi/externa"
   } ],
   "tags" : [ {
     "name" : "Evidencies",
@@ -135,7 +129,7 @@
     "/secure/evidencies/getfile/{evidenciaID}/{encryptedFileID}" : {
       "get" : {
         "tags" : [ "Evidencies" ],
-        "summary" : "Retorna informació d'una evidència a partir del seu id",
+        "summary" : "Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID",
         "operationId" : "getfile",
         "parameters" : [ {
           "name" : "evidenciaID",
@@ -220,6 +214,104 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/EvidenciaFile"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/evidencies/getfilebase64/{evidenciaID}/{encryptedFileID}" : {
+      "get" : {
+        "tags" : [ "Evidencies" ],
+        "summary" : "Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID",
+        "operationId" : "getfilebase64",
+        "parameters" : [ {
+          "name" : "evidenciaID",
+          "in" : "path",
+          "description" : "Identificador de l'evidència de la que volem informació",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "encryptedFileID",
+          "in" : "path",
+          "description" : "Identificador encriptat del fitxer que volem descarregar.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "language",
+          "in" : "query",
+          "description" : "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
+          "schema" : {
+            "type" : "string"
+          },
+          "examples" : {
+            "Català" : {
+              "description" : "Català",
+              "value" : "ca"
+            },
+            "Castellano" : {
+              "description" : "Castellano",
+              "value" : "es"
+            }
+          },
+          "example" : "ca"
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "No Autenticat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "No Autoritzat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "Retornada correctament la informació de l'evidència",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EvidenciaFileBase64"
                 }
               }
             }
@@ -433,8 +525,8 @@
               }
             }
           },
-          "666" : {
-            "description" : "No Existeix. Només s'utilitza per crear enumeració de constants...",
+          "510" : {
+            "description" : "Només s'utilitza per crear fitxer de constants...",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -586,6 +678,7 @@
             "format" : "date-time"
           },
           "dataFi" : {
+            "pattern" : "yyyy-MM-dd'T'HH:mm:ss",
             "type" : "string",
             "description" : "Data final de l'evidència",
             "format" : "date-time"
@@ -625,6 +718,7 @@
             "description" : "Nivell des eguretat de login"
           },
           "loginData" : {
+            "pattern" : "yyyy-MM-dd'T'HH:mm:ss",
             "type" : "string",
             "description" : "Data de realització del login",
             "format" : "date-time"
@@ -696,6 +790,37 @@
           }
         },
         "description" : "Estructura que inclou tota la informació de l'evidència."
+      },
+      "EvidenciaFileBase64" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Nom del fitxer"
+          },
+          "mime" : {
+            "type" : "string",
+            "description" : "Tipus MIME del Fitxer"
+          },
+          "size" : {
+            "type" : "integer",
+            "description" : "Mida en bytes del document",
+            "format" : "int64"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "Descripció del Fitxer"
+          },
+          "encryptedFileID" : {
+            "type" : "string",
+            "description" : "Identificar del fitxer per poder-ho recuperar en una segona fase. Només apareix en llistats per no incloure el contingut del fitxer."
+          },
+          "documentBase64" : {
+            "type" : "string",
+            "description" : "Contingut del fitxer en Base64. En llistats aquest camp vendrà buit."
+          }
+        },
+        "description" : "Objecte per enviar i rebre fitxers així com la informació associada a aquest.\nNo utilitza byte[] que falla dins del JBoss7 sinó que utilitza un String per enviar el fitxer en Base64"
       },
       "EvidenciaWsPaginacio" : {
         "required" : [ "data", "page", "pagesize", "totalcount", "totalpages" ],

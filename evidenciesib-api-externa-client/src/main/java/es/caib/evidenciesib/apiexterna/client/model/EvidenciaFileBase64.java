@@ -24,18 +24,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * Objecte per enviar i rebre fitxers així com la informació associada a aquest.
+ * Objecte per enviar i rebre fitxers així com la informació associada a aquest. No utilitza byte[] que falla dins del JBoss7 sinó que utilitza un String per enviar el fitxer en Base64
  */
 @JsonPropertyOrder({
-  EvidenciaFile.JSON_PROPERTY_NAME,
-  EvidenciaFile.JSON_PROPERTY_MIME,
-  EvidenciaFile.JSON_PROPERTY_SIZE,
-  EvidenciaFile.JSON_PROPERTY_DESCRIPTION,
-  EvidenciaFile.JSON_PROPERTY_ENCRYPTED_FILE_I_D,
-  EvidenciaFile.JSON_PROPERTY_DOCUMENT
+  EvidenciaFileBase64.JSON_PROPERTY_NAME,
+  EvidenciaFileBase64.JSON_PROPERTY_MIME,
+  EvidenciaFileBase64.JSON_PROPERTY_SIZE,
+  EvidenciaFileBase64.JSON_PROPERTY_DESCRIPTION,
+  EvidenciaFileBase64.JSON_PROPERTY_ENCRYPTED_FILE_I_D,
+  EvidenciaFileBase64.JSON_PROPERTY_DOCUMENT_BASE64
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class EvidenciaFile {
+public class EvidenciaFileBase64 {
   public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
@@ -51,13 +51,13 @@ public class EvidenciaFile {
   public static final String JSON_PROPERTY_ENCRYPTED_FILE_I_D = "encryptedFileID";
   private String encryptedFileID;
 
-  public static final String JSON_PROPERTY_DOCUMENT = "document";
-  private byte[] document;
+  public static final String JSON_PROPERTY_DOCUMENT_BASE64 = "documentBase64";
+  private String documentBase64;
 
-  public EvidenciaFile() {
+  public EvidenciaFileBase64() {
   }
 
-  public EvidenciaFile name(String name) {
+  public EvidenciaFileBase64 name(String name) {
     
     this.name = name;
     return this;
@@ -83,7 +83,7 @@ public class EvidenciaFile {
   }
 
 
-  public EvidenciaFile mime(String mime) {
+  public EvidenciaFileBase64 mime(String mime) {
     
     this.mime = mime;
     return this;
@@ -109,7 +109,7 @@ public class EvidenciaFile {
   }
 
 
-  public EvidenciaFile size(Long size) {
+  public EvidenciaFileBase64 size(Long size) {
     
     this.size = size;
     return this;
@@ -135,7 +135,7 @@ public class EvidenciaFile {
   }
 
 
-  public EvidenciaFile description(String description) {
+  public EvidenciaFileBase64 description(String description) {
     
     this.description = description;
     return this;
@@ -161,7 +161,7 @@ public class EvidenciaFile {
   }
 
 
-  public EvidenciaFile encryptedFileID(String encryptedFileID) {
+  public EvidenciaFileBase64 encryptedFileID(String encryptedFileID) {
     
     this.encryptedFileID = encryptedFileID;
     return this;
@@ -187,29 +187,29 @@ public class EvidenciaFile {
   }
 
 
-  public EvidenciaFile document(byte[] document) {
+  public EvidenciaFileBase64 documentBase64(String documentBase64) {
     
-    this.document = document;
+    this.documentBase64 = documentBase64;
     return this;
   }
 
    /**
-   * Contingut del fitxer. En llistats aquest camp vendrà buit.
-   * @return document
+   * Contingut del fitxer en Base64. En llistats aquest camp vendrà buit.
+   * @return documentBase64
   **/
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_DOCUMENT)
+  @JsonProperty(JSON_PROPERTY_DOCUMENT_BASE64)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public byte[] getDocument() {
-    return document;
+  public String getDocumentBase64() {
+    return documentBase64;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_DOCUMENT)
+  @JsonProperty(JSON_PROPERTY_DOCUMENT_BASE64)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDocument(byte[] document) {
-    this.document = document;
+  public void setDocumentBase64(String documentBase64) {
+    this.documentBase64 = documentBase64;
   }
 
   @Override
@@ -220,30 +220,30 @@ public class EvidenciaFile {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EvidenciaFile evidenciaFile = (EvidenciaFile) o;
-    return Objects.equals(this.name, evidenciaFile.name) &&
-        Objects.equals(this.mime, evidenciaFile.mime) &&
-        Objects.equals(this.size, evidenciaFile.size) &&
-        Objects.equals(this.description, evidenciaFile.description) &&
-        Objects.equals(this.encryptedFileID, evidenciaFile.encryptedFileID) &&
-        Arrays.equals(this.document, evidenciaFile.document);
+    EvidenciaFileBase64 evidenciaFileBase64 = (EvidenciaFileBase64) o;
+    return Objects.equals(this.name, evidenciaFileBase64.name) &&
+        Objects.equals(this.mime, evidenciaFileBase64.mime) &&
+        Objects.equals(this.size, evidenciaFileBase64.size) &&
+        Objects.equals(this.description, evidenciaFileBase64.description) &&
+        Objects.equals(this.encryptedFileID, evidenciaFileBase64.encryptedFileID) &&
+        Objects.equals(this.documentBase64, evidenciaFileBase64.documentBase64);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, mime, size, description, encryptedFileID, Arrays.hashCode(document));
+    return Objects.hash(name, mime, size, description, encryptedFileID, documentBase64);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EvidenciaFile {\n");
+    sb.append("class EvidenciaFileBase64 {\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    mime: ").append(toIndentedString(mime)).append("\n");
     sb.append("    size: ").append(toIndentedString(size)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    encryptedFileID: ").append(toIndentedString(encryptedFileID)).append("\n");
-    sb.append("    document: ").append(toIndentedString(document)).append("\n");
+    sb.append("    documentBase64: ").append(toIndentedString(documentBase64)).append("\n");
     sb.append("}");
     return sb.toString();
   }

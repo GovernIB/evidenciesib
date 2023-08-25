@@ -15,6 +15,7 @@ import org.fundaciobit.pluginsib.utils.rest.ISO8601TimestampSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 
 
@@ -35,6 +36,7 @@ public class ObjectMapperConfiguration extends JacksonJaxbJsonProvider {
         SimpleModule modul = new SimpleModule();
         modul.addSerializer(Timestamp.class, new ISO8601TimestampSerializer());
         modul.addSerializer(Date.class, new ISO8601DateTimeSerializer());
+        modul.addSerializer(byte[].class, new ByteArraySerializer());
         MAPPER.registerModule(modul);
 
         // allow only non-null fields to be serialized
@@ -44,7 +46,7 @@ public class ObjectMapperConfiguration extends JacksonJaxbJsonProvider {
 
     public ObjectMapperConfiguration() {
         
-        log.debug("\n\n\n ObjectMapperConfiguration  \n\n\n");
+        log.info("\n\n\n ObjectMapperConfiguration  \n\n\n");
         
         super.setMapper(MAPPER);
     }

@@ -8,8 +8,38 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author anadal
  *
  */
-@Schema(description = "Objecte per enviar i rebre fitxers així com la informació associada a aquest.")
-public class EvidenciaFile {
+@Schema(description = "Objecte per enviar i rebre fitxers així com la informació associada a aquest.\n"
+        + "No utilitza byte[] que falla dins del JBoss7 sinó que utilitza un String per enviar el fitxer en Base64")
+public class EvidenciaFileBase64 {
+    
+    
+    
+    
+    
+
+    public EvidenciaFileBase64() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+    
+    
+    
+    
+    
+
+    public EvidenciaFileBase64(EvidenciaFile evi) {
+        super();
+        this.name = evi.getName();
+        this.mime = evi.getMime();
+        this.size = evi.getSize();
+        this.description = evi.getDescription();
+        this.encryptedFileID = evi.getEncryptedFileID();
+    }
+
+
+
+
+
 
     @Schema(description = "Nom del fitxer")
     private String name = null;
@@ -29,11 +59,9 @@ public class EvidenciaFile {
     private String encryptedFileID;
 
     @Schema(
-            description = "Contingut del fitxer. En llistats aquest camp vendrà buit.",
-            required = false,
-            type = "string",
-            format = "byte")
-    protected byte[] document;
+            description = "Contingut del fitxer en Base64. En llistats aquest camp vendrà buit.",
+            required = false)
+    protected String documentBase64;
 
     public String getName() {
         return name;
@@ -49,6 +77,14 @@ public class EvidenciaFile {
 
     public void setMime(String mime) {
         this.mime = mime;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     public String getDescription() {
@@ -67,27 +103,24 @@ public class EvidenciaFile {
         this.encryptedFileID = encryptedFileID;
     }
 
-    public byte[] getDocument() {
-        return document;
+
+    public String getDocumentBase64() {
+        return documentBase64;
     }
 
-    public void setDocument(byte[] document) {
-        this.document = document;
-    }
-
-    public long getSize() {
-        return size;
+    public void setDocumentBase64(String documentBase64) {
+        this.documentBase64 = documentBase64;
     }
 
     public void setSize(long size) {
         this.size = size;
     }
 
-    public static EvidenciaFile toBean(Fitxer __bean) {
+    public static EvidenciaFileBase64 toBean(Fitxer __bean) {
         if (__bean == null) {
             return null;
         }
-        EvidenciaFile __tmp = new EvidenciaFile();
+        EvidenciaFileBase64 __tmp = new EvidenciaFileBase64();
         __tmp.setName(__bean.getNom());
         __tmp.setMime(__bean.getMime());
         __tmp.setSize(__bean.getTamany());

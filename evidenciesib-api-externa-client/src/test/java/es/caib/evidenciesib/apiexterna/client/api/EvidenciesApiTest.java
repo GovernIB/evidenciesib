@@ -17,11 +17,14 @@ import es.caib.evidenciesib.apiexterna.client.services.ApiException;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaWs;
 import es.caib.evidenciesib.apiexterna.client.model.ConstantsWs;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaFile;
+import es.caib.evidenciesib.apiexterna.client.model.EvidenciaFileBase64;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartRequest;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaStartResponse;
 import es.caib.evidenciesib.apiexterna.client.model.EvidenciaWsPaginacio;
 import org.junit.Test;
-import org.apache.commons.io.FileUtils;
+
+
+import org.apache.commons.codec.binary.Base64;
 import org.junit.Ignore;
 
 import java.awt.Desktop;
@@ -38,6 +41,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.Properties;
 
 /**
@@ -64,6 +72,8 @@ public class EvidenciesApiTest extends ConstantsWs {
 
             //test.startTest(api, props);
 
+            //test.versioTest(api);
+
             System.out.println("FINAL");
 
         } catch (ApiException e) {
@@ -84,6 +94,10 @@ public class EvidenciesApiTest extends ConstantsWs {
 
         ApiClient apiclient = new ApiClient();
 
+        //        SimpleModule modul = new SimpleModule();
+        //        modul.addDeserializer(byte[].class, new MyByteArraySerializer());
+        //        apiclient.getJSON().getContext(null).registerModule(modul);
+
         apiclient.setBasePath(props.getProperty("host"));
 
         apiclient.setUsername(props.getProperty("username"));
@@ -95,6 +109,22 @@ public class EvidenciesApiTest extends ConstantsWs {
 
         return api;
     }
+
+    /*
+    public static class MyByteArraySerializer extends com.fasterxml.jackson.databind.JsonDeserializer<byte[]> {
+        @Override
+        public byte[] deserialize(JsonParser p, DeserializationContext ctx) throws IOException, JacksonException {
+            
+            
+            System.out.println("\n\nMyByteArraySerializer ==> PASSA !!!!\n\n");
+            
+            String str = p.getText();
+            
+           return  Base64.decodeBase64(str);
+            
+        }
+    }
+    */
 
     /**
      * Retorna informació d&#x27;una evidència a partir del seu id
@@ -113,6 +143,13 @@ public class EvidenciesApiTest extends ConstantsWs {
         EvidenciaWs evi = api.get(evidenciaID, language);
 
         System.out.println(evi);
+
+        System.out.println(" ------------- CHECK DATES ---------------");
+
+        System.out.println("dataInici: " + evi.getDataInici());
+        System.out.println("dataInici(Local Time " + ZoneId.systemDefault() + "): "
+                + formatOffsetDateTimeToLocalTime(evi.getDataInici()));
+
         /*
         public static final int EVIDENCIA_ESTAT_CODI_ERROR = -1;
         public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO = 1;
@@ -120,21 +157,55 @@ public class EvidenciesApiTest extends ConstantsWs {
         public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA = 3;
         public static final int EVIDENCIA_ESTAT_CODI_SIGNAT = 10;
          */
+        EvidenciaFile evifile;
+        String type;
         if (evi.getEstatCodi() == getEVIDENCIAESTATCODISIGNAT()) {
 
-            EvidenciaFile file = api.getfile(evidenciaID, evi.getFitxerSignat().getEncryptedFileID(), language);
-
-            File f = new File("EVI_" + evi.getEvidenciaID() + "_" + file.getName());
-
-            FileOutputStream fos = new FileOutputStream(f);
-            fos.write(file.getDocument());
-            fos.flush();
-            fos.close();
-
-            System.out.println("Gardat Fitxer a " + f.getName());
-
+            System.out.println(" ------------- DOWNLOAD SIGNED FILE ---------------");
+            evifile = evi.getFitxerSignat();
+            type = "SIGNED";
+        } else {
+            System.out.println(" ------------- DOWNLOAD ORIGINAL  FILE ---------------");
+            evifile = evi.getFitxerOriginal();
+            type = "ORIGINAL";
         }
 
+        guardaFitxer(api, language, evidenciaID, evifile, type);
+
+        /*
+        
+        
+        File f = new File("EVI_" + evi.getEvidenciaID() + "_" + file.getName());
+        
+        FileOutputStream fos = new FileOutputStream(f);
+        fos.write(Base64.decodeBase64(file.getDocumentBase64()));
+        fos.flush();
+        fos.close();
+        System.out.println("Guardat Fitxer a " + f.getName());
+        */
+
+    }
+
+    /**
+     * NOTA: Mètode Copiat de la classe RestUtils de "PluginsIB-Utils::rest" 
+     * @param odt
+     * @return
+     */
+    public static String formatOffsetDateTimeToLocalTime(OffsetDateTime odt) {
+
+        if (odt == null) {
+            return null;
+        }
+
+        return odt.atZoneSameInstant(java.time.ZoneId.systemDefault()).toLocalDateTime().toString();
+    }
+
+    @Test
+    public void versioTest(EvidenciesApi api) throws ApiException, Exception {
+
+        String v = api.versio();
+
+        System.out.println(v);
     }
 
     /**
@@ -159,7 +230,11 @@ public class EvidenciesApiTest extends ConstantsWs {
 
         File f = new File(props.getProperty("test.pdftosign"));
 
-        byte[] docToSign = FileUtils.readFileToByteArray(f);
+        Path path = Paths.get(f.getAbsolutePath());
+
+        byte[] docToSign = Files.readAllBytes(path);
+
+        //byte[] docToSign = FileUtils.readFileToByteArray(f);
 
         EvidenciaFile ef = new EvidenciaFile();
         ef.setDescription(null);
@@ -184,12 +259,12 @@ public class EvidenciesApiTest extends ConstantsWs {
 
         System.out.println("EvidenciaID => " + response.getEvidenciaID());
 
-        String redirectUrl = response.getEvidenciaUrlRedirect();
+        URI redirectUrl = response.getEvidenciaUrlRedirect();
 
         System.out.println("RedirectUrl = " + redirectUrl);
 
         if (Desktop.isDesktopSupported()) {
-            Desktop.getDesktop().browse(new URI(redirectUrl));
+            Desktop.getDesktop().browse(redirectUrl);
         } else {
             System.out.println("Per favor obri un Navegador i copia-li la URL anterior ...");
         }
@@ -222,12 +297,12 @@ public class EvidenciesApiTest extends ConstantsWs {
 
         String encryptedFile = efile.getEncryptedFileID();
 
-        EvidenciaFile file = api.getfile(evidenciaID, encryptedFile, language);
+        EvidenciaFileBase64 file = api.getfilebase64(evidenciaID, encryptedFile, language);
 
         File f = new File("EVI_" + evidenciaID + "_" + fileType + "_" + file.getName());
 
         FileOutputStream fos = new FileOutputStream(f);
-        fos.write(file.getDocument());
+        fos.write(Base64.decodeBase64(file.getDocumentBase64()));
         fos.flush();
         fos.close();
 
@@ -250,7 +325,7 @@ public class EvidenciesApiTest extends ConstantsWs {
         Integer page = null;
         Integer pagesize = null;
         String language = null;
-        EvidenciaWsPaginacio response = api.list(inici, fi, page, pagesize, language);
+        EvidenciaWsPaginacio response = api.callList(inici, fi, page, pagesize, language);
 
         System.out.println(response);
 

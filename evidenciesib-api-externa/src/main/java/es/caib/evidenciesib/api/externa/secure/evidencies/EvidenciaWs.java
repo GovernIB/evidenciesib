@@ -2,6 +2,8 @@ package es.caib.evidenciesib.api.externa.secure.evidencies;
 
 
 
+import java.util.Date;
+
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.model.entity.Evidencia;
@@ -39,10 +41,10 @@ public class EvidenciaWs {
     @Schema(required = false, description = "Mòbil de la persona")
     java.lang.String personaMobil;
 
-    @Schema(required = true, description = "Data de creació de l'evidència", pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Schema(required = true, description = "Data de creació de l'evidència",  type="string",format="date-time", pattern = "yyyy-MM-dd'T'HH:mm:ss")
     java.sql.Timestamp dataInici;
 
-    @Schema(required = false, description = "Data final de l'evidència")
+    @Schema(required = false, description = "Data final de l'evidència",  type="string", format="date-time", pattern = "yyyy-MM-dd'T'HH:mm:ss")
     java.sql.Timestamp dataFi;
 
     @Schema(
@@ -74,7 +76,7 @@ public class EvidenciaWs {
     @Schema(required = true, description = "Nivell des eguretat de login")
     java.lang.String loginQaa;
 
-    @Schema(required = true, description = "Data de realització del login")
+    @Schema(required = true, description = "Data de realització del login", type="string", format="date-time", pattern = "yyyy-MM-dd'T'HH:mm:ss")
     java.sql.Timestamp loginData;
 
     @Schema(required = true, description = "Identificador del login realitzat.")
