@@ -8,6 +8,12 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getNom();
 	public void setNom(java.lang.String _nom_);
 
+	public java.lang.String getPersonaNif();
+	public void setPersonaNif(java.lang.String _personaNif_);
+
+	public java.lang.String getPersonaUsername();
+	public void setPersonaUsername(java.lang.String _personaUsername_);
+
 	public java.lang.String getPersonaNom();
 	public void setPersonaNom(java.lang.String _personaNom_);
 
@@ -16,9 +22,6 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 
 	public java.lang.String getPersonaLlinatge2();
 	public void setPersonaLlinatge2(java.lang.String _personaLlinatge2_);
-
-	public java.lang.String getPersonaNif();
-	public void setPersonaNif(java.lang.String _personaNif_);
 
 	public java.lang.String getPersonaEmail();
 	public void setPersonaEmail(java.lang.String _personaEmail_);
@@ -80,11 +83,11 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getLocalitzacioLongitud();
 	public void setLocalitzacioLongitud(java.lang.String _localitzacioLongitud_);
 
-	public java.lang.String getLocalitzacioCiutat();
-	public void setLocalitzacioCiutat(java.lang.String _localitzacioCiutat_);
-
 	public java.lang.String getLocalitzacioRegio();
 	public void setLocalitzacioRegio(java.lang.String _localitzacioRegio_);
+
+	public java.lang.String getLocalitzacioCiutat();
+	public void setLocalitzacioCiutat(java.lang.String _localitzacioCiutat_);
 
 	public java.lang.String getLocalitzacioPais();
 	public void setLocalitzacioPais(java.lang.String _localitzacioPais_);

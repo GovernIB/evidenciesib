@@ -9,10 +9,11 @@ Estructura de dades a enviar al servidor per iniciar un procés d'Evidències
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**titolEvidencia** | **String** | Titol descriptiu de l&#39;evidència que es durà a terme |  |
-|**personaNom** | **String** | Nom de la persona |  |
-|**personaLlinatge1** | **String** | Primer llinatge de la persona |  |
-|**personaLlinatge2** | **String** | Segon llintge de la persona |  |
 |**personaNif** | **String** | Nif de la persona |  |
+|**personaUsername** | **String** | Username de la persona |  [optional] |
+|**personaNom** | **String** | Nom de la persona |  [optional] |
+|**personaLlinatge1** | **String** | Primer llinatge de la persona |  [optional] |
+|**personaLlinatge2** | **String** | Segon llintge de la persona |  [optional] |
 |**personaEmail** | **String** | Correu electrònic de la persona |  [optional] |
 |**personaMobil** | **String** | Mòbil de la persona |  [optional] |
 |**raoDeLaFirma** | **String** | Raó per la qual es requereix aquesta signatura |  |

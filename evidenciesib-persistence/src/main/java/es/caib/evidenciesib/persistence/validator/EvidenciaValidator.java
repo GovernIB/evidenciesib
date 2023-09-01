@@ -34,14 +34,6 @@ public class EvidenciaValidator<I extends Evidencia>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,PERSONANOM, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONANOM)));
-
-    __vr.rejectIfEmptyOrWhitespace(__target__,PERSONALLINATGE1, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONALLINATGE1)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,PERSONANIF, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONANIF)));
@@ -79,6 +71,22 @@ public class EvidenciaValidator<I extends Evidencia>
       }
     }
 
+    if (__vr.getFieldErrorCount(PERSONANIF) == 0) {
+      java.lang.String __personanif = __target__.getPersonaNif();
+      if (__personanif!= null && __personanif.length() > 100) {
+        __vr.rejectValue(PERSONANIF, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONANIF)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(PERSONAUSERNAME) == 0) {
+      java.lang.String __personausername = __target__.getPersonaUsername();
+      if (__personausername!= null && __personausername.length() > 255) {
+        __vr.rejectValue(PERSONAUSERNAME, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONAUSERNAME)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
     if (__vr.getFieldErrorCount(PERSONANOM) == 0) {
       java.lang.String __personanom = __target__.getPersonaNom();
       if (__personanom!= null && __personanom.length() > 255) {
@@ -100,14 +108,6 @@ public class EvidenciaValidator<I extends Evidencia>
       if (__personallinatge2!= null && __personallinatge2.length() > 255) {
         __vr.rejectValue(PERSONALLINATGE2, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONALLINATGE2)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-
-    if (__vr.getFieldErrorCount(PERSONANIF) == 0) {
-      java.lang.String __personanif = __target__.getPersonaNif();
-      if (__personanif!= null && __personanif.length() > 100) {
-        __vr.rejectValue(PERSONANIF, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(PERSONANIF)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
       }
     }
 
@@ -231,19 +231,19 @@ public class EvidenciaValidator<I extends Evidencia>
       }
     }
 
-    if (__vr.getFieldErrorCount(LOCALITZACIOCIUTAT) == 0) {
-      java.lang.String __localitzaciociutat = __target__.getLocalitzacioCiutat();
-      if (__localitzaciociutat!= null && __localitzaciociutat.length() > 255) {
-        __vr.rejectValue(LOCALITZACIOCIUTAT, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOCIUTAT)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-
     if (__vr.getFieldErrorCount(LOCALITZACIOREGIO) == 0) {
       java.lang.String __localitzacioregio = __target__.getLocalitzacioRegio();
       if (__localitzacioregio!= null && __localitzacioregio.length() > 100) {
         __vr.rejectValue(LOCALITZACIOREGIO, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOREGIO)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOCALITZACIOCIUTAT) == 0) {
+      java.lang.String __localitzaciociutat = __target__.getLocalitzacioCiutat();
+      if (__localitzaciociutat!= null && __localitzaciociutat.length() > 255) {
+        __vr.rejectValue(LOCALITZACIOCIUTAT, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOCALITZACIOCIUTAT)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
 

@@ -14,10 +14,11 @@ public interface EvidenciaFields extends java.io.Serializable {
 
 	 public static final LongField EVIDENCIAID = new LongField(_TABLE_MODEL, "evidenciaID", "evidenciaid");  // PK
 	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
+	 public static final StringField PERSONANIF = new StringField(_TABLE_MODEL, "personaNif", "personanif");
+	 public static final StringField PERSONAUSERNAME = new StringField(_TABLE_MODEL, "personaUsername", "personausername");
 	 public static final StringField PERSONANOM = new StringField(_TABLE_MODEL, "personaNom", "personanom");
 	 public static final StringField PERSONALLINATGE1 = new StringField(_TABLE_MODEL, "personaLlinatge1", "personallinatge1");
 	 public static final StringField PERSONALLINATGE2 = new StringField(_TABLE_MODEL, "personaLlinatge2", "personallinatge2");
-	 public static final StringField PERSONANIF = new StringField(_TABLE_MODEL, "personaNif", "personanif");
 	 public static final StringField PERSONAEMAIL = new StringField(_TABLE_MODEL, "personaEmail", "personaemail");
 	 public static final StringField PERSONAMOBIL = new StringField(_TABLE_MODEL, "personaMobil", "personamobil");
 	 public static final TimestampField DATAINICI = new TimestampField(_TABLE_MODEL, "dataInici", "datainici");
@@ -38,8 +39,8 @@ public interface EvidenciaFields extends java.io.Serializable {
 	 public static final StringField LOCALITZACIOCODIPOSTAL = new StringField(_TABLE_MODEL, "localitzacioCodiPostal", "localitzaciocodipostal");
 	 public static final StringField LOCALITZACIOLATITUD = new StringField(_TABLE_MODEL, "localitzacioLatitud", "localitzaciolatitud");
 	 public static final StringField LOCALITZACIOLONGITUD = new StringField(_TABLE_MODEL, "localitzacioLongitud", "localitzaciolongitud");
-	 public static final StringField LOCALITZACIOCIUTAT = new StringField(_TABLE_MODEL, "localitzacioCiutat", "localitzaciociutat");
 	 public static final StringField LOCALITZACIOREGIO = new StringField(_TABLE_MODEL, "localitzacioRegio", "localitzacioregio");
+	 public static final StringField LOCALITZACIOCIUTAT = new StringField(_TABLE_MODEL, "localitzacioCiutat", "localitzaciociutat");
 	 public static final StringField LOCALITZACIOPAIS = new StringField(_TABLE_MODEL, "localitzacioPais", "localitzaciopais");
 	 public static final StringField FIRMAREASON = new StringField(_TABLE_MODEL, "firmaReason", "firmareason");
 	 public static final StringField FIRMAIDIOMADOCUMENT = new StringField(_TABLE_MODEL, "firmaIdiomaDocument", "firmaidiomadocument");
@@ -53,10 +54,11 @@ public interface EvidenciaFields extends java.io.Serializable {
   public static final Field<?>[] ALL_EVIDENCIA_FIELDS = {
     EVIDENCIAID,
     NOM,
+    PERSONANIF,
+    PERSONAUSERNAME,
     PERSONANOM,
     PERSONALLINATGE1,
     PERSONALLINATGE2,
-    PERSONANIF,
     PERSONAEMAIL,
     PERSONAMOBIL,
     DATAINICI,
@@ -77,8 +79,8 @@ public interface EvidenciaFields extends java.io.Serializable {
     LOCALITZACIOCODIPOSTAL,
     LOCALITZACIOLATITUD,
     LOCALITZACIOLONGITUD,
-    LOCALITZACIOCIUTAT,
     LOCALITZACIOREGIO,
+    LOCALITZACIOCIUTAT,
     LOCALITZACIOPAIS,
     FIRMAREASON,
     FIRMAIDIOMADOCUMENT,

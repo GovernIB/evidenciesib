@@ -18,6 +18,12 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.NOM)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.NOM)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONANIF)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONANIF)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONAUSERNAME)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONAUSERNAME)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONANOM)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONANOM)}</th>
         </c:if>
@@ -26,9 +32,6 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONALLINATGE2)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONALLINATGE2)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONANIF)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONANIF)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONAEMAIL)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.PERSONAEMAIL)}</th>
@@ -90,11 +93,11 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOLONGITUD)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOLONGITUD)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOCIUTAT)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOREGIO)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOREGIO)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOCIUTAT)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOPAIS)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOPAIS)}</th>

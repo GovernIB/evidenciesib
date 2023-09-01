@@ -85,11 +85,61 @@
         },
         {
           "isAutoIncrement": false,
+          "sqlName": "personanif",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Persona - NIF",
+            "es": "Persona - NIF"
+          },
+          "javaName": "personaNif",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "personausername",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Persona - Username",
+            "es": "Persona - Username"
+          },
+          "javaName": "personaUsername",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
           "sqlName": "personanom",
           "sqlType": 12,
           "size": 255,
           "digits": 0,
-          "isNotNullable": true,
+          "isNotNullable": false,
           "labels": {
             "ca": "Persona - Nom ",
             "es": "Persona - Nombre"
@@ -114,7 +164,7 @@
           "sqlType": 12,
           "size": 255,
           "digits": 0,
-          "isNotNullable": true,
+          "isNotNullable": false,
           "labels": {
             "ca": "Persona - Llinatge1",
             "es": "Persona - Apellido 1"
@@ -151,31 +201,6 @@
           "showInReferenceList": false,
           "transientField": false,
           "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 1
-          },
-          "foreignKeys": []
-        },
-        {
-          "isAutoIncrement": false,
-          "sqlName": "personanif",
-          "sqlType": 12,
-          "size": 100,
-          "digits": 0,
-          "isNotNullable": true,
-          "labels": {
-            "ca": "Persona - NIF",
-            "es": "Persona - NIF"
-          },
-          "javaName": "personaNif",
-          "javaType": "java.lang.String",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": true,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
@@ -688,16 +713,16 @@
         },
         {
           "isAutoIncrement": false,
-          "sqlName": "localitzaciociutat",
+          "sqlName": "localitzacioregio",
           "sqlType": 12,
-          "size": 255,
+          "size": 100,
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Localitzacio - Ciutat",
-            "es": "Localización - Ciudad"
+            "ca": "Localització - Regió",
+            "es": "Localizacioón - Región"
           },
-          "javaName": "localitzacioCiutat",
+          "javaName": "localitzacioRegio",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -713,16 +738,16 @@
         },
         {
           "isAutoIncrement": false,
-          "sqlName": "localitzacioregio",
+          "sqlName": "localitzaciociutat",
           "sqlType": 12,
-          "size": 100,
+          "size": 255,
           "digits": 0,
           "isNotNullable": false,
           "labels": {
-            "ca": "Localització - Regió",
-            "es": "Localizacioón - Región"
+            "ca": "Localitzacio - Ciutat",
+            "es": "Localización - Ciudad"
           },
-          "javaName": "localitzacioRegio",
+          "javaName": "localitzacioCiutat",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,

@@ -34,6 +34,16 @@
           ${evidencia.nom}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONANIF)}">
+          <td>
+          ${evidencia.personaNif}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONAUSERNAME)}">
+          <td>
+          ${evidencia.personaUsername}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONANOM)}">
           <td>
           ${evidencia.personaNom}
@@ -47,11 +57,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONALLINATGE2)}">
           <td>
           ${evidencia.personaLlinatge2}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONANIF)}">
-          <td>
-          ${evidencia.personaNif}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.PERSONAEMAIL)}">
@@ -154,14 +159,14 @@
           ${evidencia.localitzacioLongitud}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
-          <td>
-          ${evidencia.localitzacioCiutat}
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOREGIO)}">
           <td>
           ${evidencia.localitzacioRegio}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOCIUTAT)}">
+          <td>
+          ${evidencia.localitzacioCiutat}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOPAIS)}">

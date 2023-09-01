@@ -54,6 +54,28 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
+  private java.lang.String personaNif;
+
+  public java.lang.String getPersonaNif() {
+    return this.personaNif;
+  }
+
+  public void setPersonaNif(java.lang.String personaNif) {
+    this.personaNif = personaNif;
+  }
+
+
+  private java.lang.String personaUsername;
+
+  public java.lang.String getPersonaUsername() {
+    return this.personaUsername;
+  }
+
+  public void setPersonaUsername(java.lang.String personaUsername) {
+    this.personaUsername = personaUsername;
+  }
+
+
   private java.lang.String personaNom;
 
   public java.lang.String getPersonaNom() {
@@ -84,17 +106,6 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   public void setPersonaLlinatge2(java.lang.String personaLlinatge2) {
     this.personaLlinatge2 = personaLlinatge2;
-  }
-
-
-  private java.lang.String personaNif;
-
-  public java.lang.String getPersonaNif() {
-    return this.personaNif;
-  }
-
-  public void setPersonaNif(java.lang.String personaNif) {
-    this.personaNif = personaNif;
   }
 
 
@@ -351,17 +362,6 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
-  private java.lang.String localitzacioCiutat;
-
-  public java.lang.String getLocalitzacioCiutat() {
-    return this.localitzacioCiutat;
-  }
-
-  public void setLocalitzacioCiutat(java.lang.String localitzacioCiutat) {
-    this.localitzacioCiutat = localitzacioCiutat;
-  }
-
-
   private java.lang.String localitzacioRegio;
 
   public java.lang.String getLocalitzacioRegio() {
@@ -370,6 +370,17 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   public void setLocalitzacioRegio(java.lang.String localitzacioRegio) {
     this.localitzacioRegio = localitzacioRegio;
+  }
+
+
+  private java.lang.String localitzacioCiutat;
+
+  public java.lang.String getLocalitzacioCiutat() {
+    return this.localitzacioCiutat;
+  }
+
+  public void setLocalitzacioCiutat(java.lang.String localitzacioCiutat) {
+    this.localitzacioCiutat = localitzacioCiutat;
   }
 
 
@@ -436,10 +447,11 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.evidenciaIDDesde = __toClone.evidenciaIDDesde;
     this.evidenciaIDFins = __toClone.evidenciaIDFins;
     this.nom = __toClone.nom;
+    this.personaNif = __toClone.personaNif;
+    this.personaUsername = __toClone.personaUsername;
     this.personaNom = __toClone.personaNom;
     this.personaLlinatge1 = __toClone.personaLlinatge1;
     this.personaLlinatge2 = __toClone.personaLlinatge2;
-    this.personaNif = __toClone.personaNif;
     this.personaEmail = __toClone.personaEmail;
     this.personaMobil = __toClone.personaMobil;
     this.dataIniciDesde = __toClone.dataIniciDesde;
@@ -463,8 +475,8 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.localitzacioCodiPostal = __toClone.localitzacioCodiPostal;
     this.localitzacioLatitud = __toClone.localitzacioLatitud;
     this.localitzacioLongitud = __toClone.localitzacioLongitud;
-    this.localitzacioCiutat = __toClone.localitzacioCiutat;
     this.localitzacioRegio = __toClone.localitzacioRegio;
+    this.localitzacioCiutat = __toClone.localitzacioCiutat;
     this.localitzacioPais = __toClone.localitzacioPais;
     this.firmaReason = __toClone.firmaReason;
     this.firmaIdiomaDocument = __toClone.firmaIdiomaDocument;
@@ -480,7 +492,7 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM ,PERSONALLINATGE1 ,PERSONANIF ,PERSONAEMAIL ,USUARIPERSONA ,ESTATCODI ,ESTATERROR ,LOCALITZACIOIP ,FIRMATIPUSDOCUMENTAL }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM ,PERSONANIF ,PERSONAUSERNAME ,PERSONALLINATGE1 ,PERSONAEMAIL ,USUARIPERSONA ,ESTATCODI ,ESTATERROR ,LOCALITZACIOIP ,FIRMATIPUSDOCUMENTAL }));
   }
 
   @Override

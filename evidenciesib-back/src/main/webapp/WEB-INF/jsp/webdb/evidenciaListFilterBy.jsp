@@ -81,6 +81,32 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.PERSONANIF)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.personaNif" var="personaNif" />
+              <fmt:message key="genapp.form.searchby" var="cercaperpersonaNif" >                
+                 <fmt:param value="${personaNif}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${personaNif}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperpersonaNif}" path="personaNif" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.PERSONAUSERNAME)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.personaUsername" var="personaUsername" />
+              <fmt:message key="genapp.form.searchby" var="cercaperpersonaUsername" >                
+                 <fmt:param value="${personaUsername}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${personaUsername}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperpersonaUsername}" path="personaUsername" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.PERSONANOM)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -116,19 +142,6 @@
               </fmt:message>
               <span class="add-on"><c:out value="${personaLlinatge2}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperpersonaLlinatge2}" path="personaLlinatge2" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.PERSONANIF)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="evidencia.personaNif" var="personaNif" />
-              <fmt:message key="genapp.form.searchby" var="cercaperpersonaNif" >                
-                 <fmt:param value="${personaNif}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${personaNif}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperpersonaNif}" path="personaNif" />
             </div>
 
 
@@ -532,19 +545,6 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOCALITZACIOCIUTAT)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="evidencia.localitzacioCiutat" var="localitzacioCiutat" />
-              <fmt:message key="genapp.form.searchby" var="cercaperlocalitzacioCiutat" >                
-                 <fmt:param value="${localitzacioCiutat}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${localitzacioCiutat}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperlocalitzacioCiutat}" path="localitzacioCiutat" />
-            </div>
-
-
-        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOCALITZACIOREGIO)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -554,6 +554,19 @@
               </fmt:message>
               <span class="add-on"><c:out value="${localitzacioRegio}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperlocalitzacioRegio}" path="localitzacioRegio" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOCALITZACIOCIUTAT)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.localitzacioCiutat" var="localitzacioCiutat" />
+              <fmt:message key="genapp.form.searchby" var="cercaperlocalitzacioCiutat" >                
+                 <fmt:param value="${localitzacioCiutat}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${localitzacioCiutat}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperlocalitzacioCiutat}" path="localitzacioCiutat" />
             </div>
 
 

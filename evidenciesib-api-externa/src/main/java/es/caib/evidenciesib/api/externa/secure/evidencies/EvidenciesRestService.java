@@ -333,17 +333,18 @@ public class EvidenciesRestService extends RestUtils {
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO);
 
             evi.setFitxerOriginalID(fitxer.getFitxerID());
+
             evi.setFirmaIdiomaDocument(evidenciaStartRequest.getLanguageDocument());
+            evi.setFirmaReason(evidenciaStartRequest.getRaoDeLaFirma());
+
+            evi.setPersonaNif(evidenciaStartRequest.getPersonaNif());
+            evi.setPersonaUsername(evidenciaStartRequest.getPersonaUsername());
 
             evi.setPersonaLlinatge1(evidenciaStartRequest.getPersonaLlinatge1());
             evi.setPersonaLlinatge2(evidenciaStartRequest.getPersonaLlinatge2());
             evi.setPersonaNom(evidenciaStartRequest.getPersonaNom());
             evi.setPersonaEmail(evidenciaStartRequest.getPersonaEmail());
-
-            evi.setPersonaNif(evidenciaStartRequest.getPersonaNif());
             evi.setPersonaMobil(evidenciaStartRequest.getPersonaMobil());
-            evi.setFirmaReason(evidenciaStartRequest.getRaoDeLaFirma());
-            evi.setNom(evidenciaStartRequest.getTitolEvidencia());
 
             evidenciaEjb.create(evi);
 

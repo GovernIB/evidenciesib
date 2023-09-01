@@ -19,6 +19,14 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.NOM);
   }
 
+  public StringField PERSONANIF() {
+    return new StringField(getQueryPath(), EvidenciaFields.PERSONANIF);
+  }
+
+  public StringField PERSONAUSERNAME() {
+    return new StringField(getQueryPath(), EvidenciaFields.PERSONAUSERNAME);
+  }
+
   public StringField PERSONANOM() {
     return new StringField(getQueryPath(), EvidenciaFields.PERSONANOM);
   }
@@ -29,10 +37,6 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
 
   public StringField PERSONALLINATGE2() {
     return new StringField(getQueryPath(), EvidenciaFields.PERSONALLINATGE2);
-  }
-
-  public StringField PERSONANIF() {
-    return new StringField(getQueryPath(), EvidenciaFields.PERSONANIF);
   }
 
   public StringField PERSONAEMAIL() {
@@ -115,12 +119,12 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOLONGITUD);
   }
 
-  public StringField LOCALITZACIOCIUTAT() {
-    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOCIUTAT);
-  }
-
   public StringField LOCALITZACIOREGIO() {
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOREGIO);
+  }
+
+  public StringField LOCALITZACIOCIUTAT() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOCIUTAT);
   }
 
   public StringField LOCALITZACIOPAIS() {

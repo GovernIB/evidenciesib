@@ -191,9 +191,14 @@ public class EvidenciaUserController extends EvidenciaController {
 
             // Valors Comuns
             UserInfo user = LoginInfo.getInstance().getUserInfo();
+            
+            evi.setPersonaNif(user.getAdministrationID());
+            evi.setPersonaUsername(user.getUsername());
+            
             evi.setPersonaNom(user.getName());
             evi.setPersonaLlinatge1(user.getSurname1());
-            evi.setPersonaNif(user.getAdministrationID());
+            evi.setPersonaLlinatge2(user.getSurname2());
+            
 
             // XYZ ZZZ Falten Dades de UserInformation
             if (tipusLogin == Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK) {
@@ -208,6 +213,7 @@ public class EvidenciaUserController extends EvidenciaController {
                 evidenciaForm.addReadOnlyField(PERSONALLINATGE2);
                 evidenciaForm.addReadOnlyField(PERSONAMOBIL);
                 evidenciaForm.addReadOnlyField(PERSONANIF);
+                evidenciaForm.addReadOnlyField(PERSONAUSERNAME);
                 evidenciaForm.addReadOnlyField(PERSONANOM);
 
                 evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK);
@@ -216,7 +222,7 @@ public class EvidenciaUserController extends EvidenciaController {
 
             } else if (tipusLogin == Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN) {
 
-                // XYZ ZZZ
+                // TODO XYZ ZZZ
                 evidenciaForm.setSubTitleCode(
                         "=Després de pitjar Guardar anirà a una pàgina per autenticar-se a través de Cl@ve.");
 
@@ -226,6 +232,9 @@ public class EvidenciaUserController extends EvidenciaController {
                 evidenciaForm.addHiddenField(PERSONAMOBIL);
                 //evidenciaForm.addHiddenField(PERSONANIF);
                 //evidenciaForm.addHiddenField(PERSONANOM);
+                
+                evidenciaForm.addReadOnlyField(PERSONANIF);
+                evidenciaForm.addReadOnlyField(PERSONAUSERNAME);
 
                 evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);
 
@@ -256,6 +265,7 @@ public class EvidenciaUserController extends EvidenciaController {
             hiddenFields.remove(EvidenciaFields.PERSONALLINATGE1);
             hiddenFields.remove(EvidenciaFields.PERSONALLINATGE2);
             hiddenFields.remove(EvidenciaFields.PERSONANIF);
+            hiddenFields.remove(EvidenciaFields.PERSONAUSERNAME);
 
             hiddenFields.remove(EvidenciaFields.FIRMAREASON);
             hiddenFields.remove(EvidenciaFields.FIRMAIDIOMADOCUMENT);
@@ -620,6 +630,7 @@ public class EvidenciaUserController extends EvidenciaController {
                 map.put("PersonaLlinatge1", evi.getPersonaLlinatge1());
                 map.put("PersonaLlinatge2", evi.getPersonaLlinatge2());
                 map.put("PersonaNif", evi.getPersonaNif());
+                map.put("PersonaUsername", evi.getPersonaUsername());
                 map.put("PersonaEmail", evi.getPersonaEmail());
                 map.put("PersonaMobil", evi.getPersonaMobil());
                 map.put("DataInici", evi.getDataInici());

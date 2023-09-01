@@ -13,21 +13,24 @@ public class EvidenciaStartRequest {
     @Schema(required = true, description = "Titol descriptiu de l'evidència que es durà a terme")
     protected java.lang.String titolEvidencia;
 
-    @Schema(required = true, description = "Nom de la persona")
-    protected java.lang.String personaNom;
-
-    @Schema(required = true, description = "Primer llinatge de la persona")
-    protected java.lang.String personaLlinatge1;
-
-    @Schema(required = true, description = "Segon llintge de la persona")
-    protected java.lang.String personaLlinatge2;
-
     @Schema(required = true, description = "Nif de la persona")
     protected java.lang.String personaNif;
 
+    @Schema(required = false, description = "Username de la persona")
+    protected java.lang.String personaUsername;
+
+    @Schema(required = false, description = "Nom de la persona")
+    protected java.lang.String personaNom;
+
+    @Schema(required = false, description = "Primer llinatge de la persona")
+    protected java.lang.String personaLlinatge1;
+
+    @Schema(required = false, description = "Segon llintge de la persona")
+    protected java.lang.String personaLlinatge2;
+
     @Schema(required = false, description = "Correu electrònic de la persona")
     protected java.lang.String personaEmail;
-    
+
     @Schema(required = false, description = "Mòbil de la persona")
     java.lang.String personaMobil;
 
@@ -152,6 +155,14 @@ public class EvidenciaStartRequest {
 
     public void setPersonaMobil(java.lang.String personaMobil) {
         this.personaMobil = personaMobil;
+    }
+
+    public java.lang.String getPersonaUsername() {
+        return personaUsername;
+    }
+
+    public void setPersonaUsername(java.lang.String personaUsername) {
+        this.personaUsername = personaUsername;
     }
 
 }

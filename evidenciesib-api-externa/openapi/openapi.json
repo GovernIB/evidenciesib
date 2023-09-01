@@ -856,12 +856,20 @@
         }
       },
       "EvidenciaStartRequest" : {
-        "required" : [ "callBackUrl", "documentASignar", "languageDocument", "languageUI", "personaLlinatge1", "personaLlinatge2", "personaNif", "personaNom", "raoDeLaFirma", "titolEvidencia" ],
+        "required" : [ "callBackUrl", "documentASignar", "languageDocument", "languageUI", "personaNif", "raoDeLaFirma", "titolEvidencia" ],
         "type" : "object",
         "properties" : {
           "titolEvidencia" : {
             "type" : "string",
             "description" : "Titol descriptiu de l'evidència que es durà a terme"
+          },
+          "personaNif" : {
+            "type" : "string",
+            "description" : "Nif de la persona"
+          },
+          "personaUsername" : {
+            "type" : "string",
+            "description" : "Username de la persona"
           },
           "personaNom" : {
             "type" : "string",
@@ -874,10 +882,6 @@
           "personaLlinatge2" : {
             "type" : "string",
             "description" : "Segon llintge de la persona"
-          },
-          "personaNif" : {
-            "type" : "string",
-            "description" : "Nif de la persona"
           },
           "personaEmail" : {
             "type" : "string",

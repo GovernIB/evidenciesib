@@ -30,19 +30,19 @@
 $(document).ready(function() {
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "http://ip-api.com/json/?lang=es", true);
+    xhttp.open("GET", "https://ipapi.co/json/", true);
     xhttp.responseType = 'json';
     xhttp.onload = function() {
         var status = xhttp.status;
         var loc = xhttp.response;
         if (status === 200) {
             setValorLoc('<%=EvidenciaFields.LOCALITZACIOCIUTAT.javaName%>', loc.city);
-            setValorLoc('<%=EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName%>', loc.zip);
-            setValorLoc('<%=EvidenciaFields.LOCALITZACIOIP.javaName%>', loc.query);
-            setValorLoc('<%=EvidenciaFields.LOCALITZACIOLATITUD.javaName%>', loc.lat);
-            setValorLoc('<%=EvidenciaFields.LOCALITZACIOLONGITUD.javaName%>', loc.lon);
-            setValorLoc('<%=EvidenciaFields.LOCALITZACIOPAIS.javaName%>', loc.countryCode);
-            setValorLoc('<%=EvidenciaFields.LOCALITZACIOREGIO.javaName%>', loc.region);
+            setValorLoc('<%=EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName%>', loc.postal);
+            setValorLoc('<%=EvidenciaFields.LOCALITZACIOIP.javaName%>', loc.ip);
+            setValorLoc('<%=EvidenciaFields.LOCALITZACIOLATITUD.javaName%>', loc.latitude);
+            setValorLoc('<%=EvidenciaFields.LOCALITZACIOLONGITUD.javaName%>', loc.longitude);
+            setValorLoc('<%=EvidenciaFields.LOCALITZACIOPAIS.javaName%>', loc.country);
+            setValorLoc('<%=EvidenciaFields.LOCALITZACIOREGIO.javaName%>', loc.region_code);
         } else {
           alert("Error recolling informació de localització: " + loc);
         }
