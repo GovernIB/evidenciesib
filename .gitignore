@@ -54,3 +54,4 @@ replay_pid*
 /evidenciesib-api-externa-client/api
 /evidenciesib-api-externa-client/.github/workflows/maven.yml
 /evidenciesib-api-externa-client/.openapi-generator-ignore
+/evidenciesib-api-externa-client/.openapi-generator
