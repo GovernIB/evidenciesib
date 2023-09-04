@@ -144,12 +144,14 @@
                         <groupId>es.caib.evidenciesib</groupId>
                         <artifactId>evidenciesib-api-externa-client</artifactId>
                         <artifactVersion>1.0</artifactVersion>
+                        
+                        <artifactDescription>EvidenciesIB - API Rest - Externa Client</artifactDescription>
                         <!-- <dateLibrary>joda</dateLibrary> -->
                         <dateLibrary>java8</dateLibrary>
 
                         <useTags>true</useTags>
                         <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                        <artifactDescription>EvidenciesIB - API Rest - Externa Client</artifactDescription>
+                        
                         <java11>true</java11>
                     </configOptions>
 

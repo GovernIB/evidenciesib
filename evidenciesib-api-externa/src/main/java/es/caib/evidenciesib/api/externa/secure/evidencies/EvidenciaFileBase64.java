@@ -8,24 +8,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author anadal
  *
  */
-@Schema(description = "Objecte per enviar i rebre fitxers així com la informació associada a aquest.\n"
-        + "No utilitza byte[] que falla dins del JBoss7 sinó que utilitza un String per enviar el fitxer en Base64")
+@Schema(
+        description = "Objecte per enviar i rebre fitxers així com la informació associada a aquest.\n"
+                + "No utilitza byte[] que falla dins del JBoss7 sinó que utilitza un String per enviar el fitxer en Base64")
 public class EvidenciaFileBase64 {
-    
-    
-    
-    
-    
 
     public EvidenciaFileBase64() {
         super();
-        // TODO Auto-generated constructor stub
     }
-    
-    
-    
-    
-    
 
     public EvidenciaFileBase64(EvidenciaFile evi) {
         super();
@@ -35,11 +25,6 @@ public class EvidenciaFileBase64 {
         this.description = evi.getDescription();
         this.encryptedFileID = evi.getEncryptedFileID();
     }
-
-
-
-
-
 
     @Schema(description = "Nom del fitxer")
     private String name = null;
@@ -58,9 +43,7 @@ public class EvidenciaFileBase64 {
             description = "Identificar del fitxer per poder-ho recuperar en una segona fase. Només apareix en llistats per no incloure el contingut del fitxer.")
     private String encryptedFileID;
 
-    @Schema(
-            description = "Contingut del fitxer en Base64. En llistats aquest camp vendrà buit.",
-            required = false)
+    @Schema(description = "Contingut del fitxer en Base64. En llistats aquest camp vendrà buit.", required = false)
     protected String documentBase64;
 
     public String getName() {
@@ -102,7 +85,6 @@ public class EvidenciaFileBase64 {
     public void setEncryptedFileID(String encryptedFileID) {
         this.encryptedFileID = encryptedFileID;
     }
-
 
     public String getDocumentBase64() {
         return documentBase64;

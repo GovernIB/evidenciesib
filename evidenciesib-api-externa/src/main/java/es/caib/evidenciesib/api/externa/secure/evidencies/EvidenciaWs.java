@@ -1,9 +1,6 @@
 package es.caib.evidenciesib.api.externa.secure.evidencies;
 
 
-
-import java.util.Date;
-
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.model.entity.Evidencia;
