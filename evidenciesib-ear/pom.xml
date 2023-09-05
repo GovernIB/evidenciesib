@@ -199,15 +199,7 @@
             <type>war</type>
         </dependency>
         <!-- API EXTERNA END -->
-        <!-- API INTERNA START -->
-        <!-- http://localhost:8080/evidenciesibapi/interna/index.html -->
-        <dependency>
-            <groupId>es.caib.evidenciesib</groupId>
-            <artifactId>evidenciesib-api-interna</artifactId>
-            <version>1.0</version>
-            <type>war</type>
-        </dependency>
-        <!-- API INTERNA END -->
+        
     </dependencies>
     <build>
         <finalName>evidenciesib</finalName>
@@ -280,14 +272,7 @@
                             <bundleFileName>evidenciesib-api-externa.war</bundleFileName>
                         </webModule>
                         <!-- API EXTERNA END -->
-                        <!-- API INTERNA START -->
-                        <webModule>
-                            <groupId>es.caib.evidenciesib</groupId>
-                            <artifactId>evidenciesib-api-interna</artifactId>
-                            <contextRoot>/evidenciesibapi/interna</contextRoot>
-                            <bundleFileName>evidenciesib-api-interna.war</bundleFileName>
-                        </webModule>
-                        <!-- API INTERNA END -->
+                        
                     </modules>
                 </configuration>
             </plugin>

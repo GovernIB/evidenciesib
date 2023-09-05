@@ -1725,5 +1725,6 @@
   ],
   "generateBack": true,
   "generateFront": false,
-  "generateWS": true
+  "generateApiInterna": false,
+  "generateApiExterna": true
 }

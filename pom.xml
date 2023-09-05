@@ -11,7 +11,6 @@
         <module>evidenciesib-ejb</module>
         <module>evidenciesib-commons</module>
         <module>evidenciesib-api-externa</module>
-        <module>evidenciesib-api-interna</module>
         <module>evidenciesib-back</module>
         <module>evidenciesib-front</module>
         <module>evidenciesib-ear</module>
@@ -552,17 +551,6 @@
             </activation>
             <modules>
                 <module>evidenciesib-api-externa-client</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>api-interna-client</id>
-            <activation>
-                <file>
-                    <exists>evidenciesib-api-interna-client</exists>
-                </file>
-            </activation>
-            <modules>
-                <module>evidenciesib-api-interna-client</module>
             </modules>
         </profile>
     </profiles>

@@ -380,7 +380,7 @@ public class EvidenciesRestService extends RestUtils {
             }
 
             log.error("Error en evidenciaStart: " + msg, th);
-            throw new RestException(msg, th, Status.BAD_REQUEST);
+            throw new RestException(msg, th, Status.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -639,7 +639,6 @@ public class EvidenciesRestService extends RestUtils {
             */
 
             //llistat, countTotal, pageSizeOutput, pageOutput, totalPages);
-            log.info("NEteja dates i strings ");
             log.info("Resultat => paginacio " + paginacio);
             log.info("Resultat => getTotalcount " + paginacio.getTotalcount());
             log.info("Resultat => getTotalpages " + paginacio.getTotalpages());
