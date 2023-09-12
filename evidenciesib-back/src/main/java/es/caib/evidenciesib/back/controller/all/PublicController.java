@@ -47,18 +47,18 @@ public class PublicController {
 	@RequestMapping(value = Constants.MAPPING_BACK_LOGIN_END + "/{evidenciaID}")
     public String postLoginFront(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
-	    // Aqui hem d'averiguar si l'origen de l'evidència és REST o BACK
+
 
 	    log.info("Entra a postLoginFront[EviID:" + evidenciaID + "]");
 
 	    EvidenciaJPA evi = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
 
+	    // L'origen de l'evidència és REST o BACK
 	    if (evi.getUsuariAplicacio() == null) {
 	        // ES BACK
 	        return "redirect:" + EvidenciaUserController.CONTEXT_WEB + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + evidenciaID;
 	    } else {
 	        // ES REST
-	        // TOD XYZ ZZZ ZZZ FA FALTA FER
 	        return "redirect:" +  Constants.MAPPING_BACK_PUBLIC_EVIDENCE + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + evidenciaID;
 	    }
 	}

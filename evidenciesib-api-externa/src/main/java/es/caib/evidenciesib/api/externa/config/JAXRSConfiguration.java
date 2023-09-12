@@ -63,27 +63,4 @@ public class JAXRSConfiguration extends Application {
         log.info("Iniciant API REST EXTERNA de EvidenciesIB");
     }
 
-    /* XYZ ZZZ 
-    
-    @Bean
-    public OpenAPI customOpenAPI() {
-        Schema newUserSchema = new Schema<Map<String, Object>>()
-                .addProperties("name",new StringSchema().example("John123"))
-                .addProperties("password",new StringSchema().example("P4SSW0RD"))
-                .addProperties("image",new StringSchema().example("https://robohash.org/John123.png"));
-    
-        return new OpenAPI()
-                //.servers(servers)
-                .info(new Info()
-                        .title("Your app title")
-                        .description("App description")
-                        .version("1.0")
-                        .license(new License().name("GNU/GPL").url("https://www.gnu.org/licenses/gpl-3.0.html"))
-                )
-                .components(new Components()
-                        .addSchemas("NewUserBody" , newUserSchema)
-                );
-    }
-    */
-
 }
