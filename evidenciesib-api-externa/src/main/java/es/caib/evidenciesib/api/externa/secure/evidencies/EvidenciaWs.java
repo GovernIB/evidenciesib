@@ -200,13 +200,13 @@ public class EvidenciaWs {
                 case Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN:
                     descrLoginType = "Plugin de Login";
                 break;
-
+/*
                 case Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK:
                     descrLoginType = "Login de Back";
                 break;
-
+*/
                 default:
-                    descrLoginType = "Tipud de Login desconegut";
+                    descrLoginType = "Tipus de Login desconegut";
             }
             this.setLoginTypeDescription(descrLoginType);
         }

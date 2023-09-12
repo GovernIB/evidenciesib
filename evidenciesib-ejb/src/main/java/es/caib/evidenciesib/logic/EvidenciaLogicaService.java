@@ -26,6 +26,17 @@ public interface EvidenciaLogicaService extends es.caib.evidenciesib.ejb.Evidenc
 
     
     @Override
-    
     public Evidencia update(Evidencia instance) throws I18NException;
+    
+    /**
+     * 
+     * @param evi
+     * @param languageUI
+     * @return
+     */
+    public EvidenciaJPA createAdaptedFileAndSignDocument(EvidenciaJPA evi,  String languageUI, String url);
+    
+    
+    public void validatePdfForEvidencies(byte[] pdf) throws I18NException;
+    
 }

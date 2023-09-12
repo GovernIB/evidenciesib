@@ -40,6 +40,13 @@
     <definition name="homepublic" extends="all">
         <put-attribute name="contingut" value="/WEB-INF/jsp/all/homepublic.jsp" />
     </definition>
+
+    <!-- Pagina Completa --> 
+    <definition name="evidenciaFormApp" template="/WEB-INF/jsp/layout/onlycontentlayout.jsp">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/evidenciaForm.jsp" />
+    </definition>
+    
+    
     <!--  ===========  COMMON  ================== -->
 
     <definition name="common" extends="base.definition">

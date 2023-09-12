@@ -41,19 +41,9 @@
         </dependency>
 
 
-        <dependency>
-            <artifactId>apifirmasimple-jersey</artifactId>
-            <groupId>org.fundaciobit.apisib.apifirmasimple</groupId>
-            <version>1.0.3</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>log4j</artifactId>
-                    <groupId>log4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
 
+<!--
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
@@ -64,13 +54,7 @@
             <artifactId>xmlworker</artifactId>
             <version>5.4.3</version>
         </dependency>
-
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-
+        -->
 
         <!-- Externas -->
 
@@ -86,21 +70,31 @@
             <version>${genapp.version}</version>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>apache-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-
+        
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>1.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>javax</groupId>

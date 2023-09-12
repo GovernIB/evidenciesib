@@ -42,9 +42,9 @@ import org.fundaciobit.pluginsib.utils.rest.RestUtils;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
-import es.caib.evidenciesib.ejb.EvidenciaService;
 import es.caib.evidenciesib.ejb.FitxerService;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
+import es.caib.evidenciesib.logic.EvidenciaLogicaService;
 import es.caib.evidenciesib.logic.utils.I18NLogicUtils;
 import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
@@ -175,8 +175,8 @@ public class EvidenciesRestService extends RestUtils {
 
     protected static Logger log = Logger.getLogger(EvidenciesRestService.class);
 
-    @EJB(mappedName = es.caib.evidenciesib.ejb.EvidenciaService.JNDI_NAME)
-    protected EvidenciaService evidenciaEjb;
+    @EJB(mappedName = EvidenciaLogicaService.JNDI_NAME)
+    protected EvidenciaLogicaService evidenciaLogicaEjb;
 
     @EJB(mappedName = FitxerService.JNDI_NAME)
     protected FitxerService fitxerEjb;
@@ -300,10 +300,13 @@ public class EvidenciesRestService extends RestUtils {
         try {
 
             // XYZ ZZZ Això s'ha de moure a EJB !!!!
-
-            // Crear fitxer en BBDD
+            
+            // Validar si fitxer es un PDF i no té firmes
             EvidenciaFile fileToSign = evidenciaStartRequest.getDocumentASignar();
+            byte[] pdfInBytes = fileToSign.getDocument();
+            this.evidenciaLogicaEjb.validatePdfForEvidencies(pdfInBytes);
 
+            // Crear fitxer a BBDD
             FitxerJPA fitxer = new FitxerJPA();
             fitxer.setDescripcio(fileToSign.getDescription());
             fitxer.setMime(fileToSign.getMime());
@@ -313,7 +316,7 @@ public class EvidenciesRestService extends RestUtils {
             fitxerEjb.create(fitxer);
 
             // Guardar fitxer físic en Disc Dur
-            FileSystemManager.crearFitxer(new ByteArrayInputStream(fileToSign.getDocument()), fitxer.getFitxerID());
+            FileSystemManager.crearFitxer(new ByteArrayInputStream(pdfInBytes), fitxer.getFitxerID());
 
             // Crear Evidència
             EvidenciaJPA evi = new EvidenciaJPA();
@@ -346,7 +349,12 @@ public class EvidenciesRestService extends RestUtils {
             evi.setPersonaEmail(evidenciaStartRequest.getPersonaEmail());
             evi.setPersonaMobil(evidenciaStartRequest.getPersonaMobil());
 
-            evidenciaEjb.create(evi);
+            // TODO XYZ ZZZ   Passar per Validador !!!
+            
+            
+            evidenciaLogicaEjb.create(evi);
+            
+            
 
             log.info("Creada evidencia amb ID " + evi.getEvidenciaID());
 
@@ -461,7 +469,7 @@ public class EvidenciesRestService extends RestUtils {
 
         try {
 
-            Evidencia eviBBDD = evidenciaEjb.findByPrimaryKey(evidenciaID);
+            Evidencia eviBBDD = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
 
             // Check username aplication
             if (eviBBDD == null) {
@@ -611,7 +619,7 @@ public class EvidenciesRestService extends RestUtils {
             final Where w = Where.AND(w1, w2);
             final OrderBy orderBy = new OrderBy(EvidenciaFields.DATAINICI, OrderType.DESC);
 
-            EvidenciaPaginacio paginacioOrig = createRestPagination(EvidenciaPaginacio.class, this.evidenciaEjb, page,
+            EvidenciaPaginacio paginacioOrig = createRestPagination(EvidenciaPaginacio.class, this.evidenciaLogicaEjb, page,
                     pagesize, w, orderBy);
 
             EvidenciaWsPaginacio paginacio = new EvidenciaWsPaginacio(paginacioOrig, language);

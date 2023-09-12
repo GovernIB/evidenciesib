@@ -18,11 +18,7 @@
         <module>scripts</module>
     </modules>
     <repositories>
-        <repository>
-            <id>github_governib_maven</id>
-            <name>GitHub GovernIB Maven Repository</name>
-            <url>https://governib.github.io/maven/maven/</url>
-        </repository>
+
         <repository>
             <id>maven-nuxeo</id>
             <name>Maven Nuxeo Repository</name>
@@ -53,17 +49,21 @@
                 <updatePolicy>never</updatePolicy>
             </snapshots>
         </repository>
+        <repository>
+            <id>github_governib_maven</id>
+            <name>GitHub GovernIB Maven Repository</name>
+            <url>https://governib.github.io/maven/maven/</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -92,7 +92,6 @@
         <slf4j.version>1.7.30</slf4j.version>
         <keycloak.version>6.0.1</keycloak.version>
         <cxf.version>3.3.3</cxf.version>
-        <junit.version>4.13.1</junit.version>
         <hibernate.version>5.3.15.Final</hibernate.version>
         <hibernate.annotations.version>5.3.15.Final</hibernate.annotations.version>
         <resteasy.version>3.6.3.Final</resteasy.version>
@@ -173,13 +172,6 @@
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
-            <!-- Dependències de test -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
             <!-- fixar versió de jboss-logging ja que Hibernate i RestEasy fan referència 
                     a varies versions -->
             <dependency>
@@ -249,14 +241,6 @@
                 <version>${resteasy.version}</version>
                 <scope>provided</scope>
             </dependency>
-            <!--
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-jackson2-provider</artifactId>
-                <version>${resteasy.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-jaxb-provider</artifactId>
@@ -478,6 +462,7 @@
                 </configuration>
             </plugin>
             <plugin>
+
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.12</version>
@@ -509,8 +494,10 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
+
     <distributionManagement>
         <repository>
             <id>github_governib_maven</id>

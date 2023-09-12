@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.evidenciesib.back.controller.user.EvidenciaUserController;
 import es.caib.evidenciesib.commons.utils.Constants;
+import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.EvidenciesFrontLogicaService;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 
@@ -54,14 +55,14 @@ public class PublicController {
 
 	    if (evi.getUsuariAplicacio() == null) {
 	        // ES BACK
-	        return "redirect:" + EvidenciaUserController.CONTEXT_WEB + "/sign/" + evidenciaID;
+	        return "redirect:" + EvidenciaUserController.CONTEXT_WEB + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + evidenciaID;
 	    } else {
 	        // ES REST
 	        // TOD XYZ ZZZ ZZZ FA FALTA FER
-	        return "redirect:" + "/public/evidenciarest/sign/" + evidenciaID;
+	        return "redirect:" +  Constants.MAPPING_BACK_PUBLIC_EVIDENCE + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + evidenciaID;
 	    }
 	}
 
-
+	
 
 }

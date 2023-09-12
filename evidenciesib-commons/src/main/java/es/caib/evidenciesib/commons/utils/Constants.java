@@ -37,11 +37,15 @@ public interface Constants {
 
     // TIPUS DE LOGIN D'UNA EVIDENCIA
     public static final int EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN = 1;
-    public static final int EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK = 2;
+    //public static final int EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK = 2;
     
     
     // CONSTANTS ENTRE BACK I FRONT
     public static final String MAPPING_FRONT_LOGIN_START = "/frontloginstart";
     public static final String MAPPING_BACK_LOGIN_END = "/public/backloginend";
+    
+    public static final String MAPPING_BACK_PUBLIC_EVIDENCE = "/public/evidencia";
+    public static final String MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION =  "/sign/";
+    public static final String MAPPING_BACK_PUBLIC_EVIDENCE_INFO_OPERATION =  "/info/";
 
 }
