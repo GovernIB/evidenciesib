@@ -56,3 +56,4 @@ replay_pid*
 /evidenciesib-api-externa-client/.openapi-generator-ignore
 /evidenciesib-api-externa-client/.openapi-generator
 /scripts/sqlgenerator/target
+/evidenciesib-back/src/main/webapp/WEB-INF/jsp/all/homepublic.jsp
