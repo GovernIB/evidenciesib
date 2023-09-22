@@ -15,7 +15,10 @@
 
 <br/>
 <br/>
-This page is generated automatically. Please edit.
+EvidènciesIB és una aplicació desenvolupada pel departament de Govern Digital de la FundacióBit <br/>
+per a la Comunitat Autònoma de les Illes Balears. Es tracta d'una aplicació que extreu evidències <br/>
+del ciutadà amb la finalitat de poder realitzar una signatura (no criptogràfica) d'un document. 
+  
 
 <br/>
 <br/>
@@ -34,7 +37,12 @@ This page is generated automatically. Please edit.
  
 </div>
 
+<c:if test="${evi:isDesenvolupament()}">
 <br/>
+Only in Development Mode
+<br/>
+<br/>
+
 Username: ${loginInfo.username}<br/>
 &#36;{evi:hasRole(ROLE_ADMIN)}= ${evi:hasRole('ROLE_ADMIN')}<br/>
 &#36;{evi:hasRole(ROLE_USER) }= ${evi:hasRole('ROLE_USER') }<br/>
@@ -53,6 +61,6 @@ lang = ${lang} <br/>
 	Error carregant Plugin UserInfo. Revisar logs per mes informacio.<br/>
 </c:if>
 
-<c:if test="${evi:isDesenvolupament()}">
-Only in Development Mode
+
+
 </c:if>

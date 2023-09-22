@@ -114,19 +114,14 @@ public class EvidenciaUserController extends EvidenciaController {
             evidenciaFilterForm.setAddButtonVisible(false);
 
             if (!isAdmin()) {
-
-                /*
-                evidenciaFilterForm.addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN,
-                        "Crear Evidència des de Back",
-                        getContextWeb() + "/new?tipusLogin=" + Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK,
-                        "btn-info"));
-                        */
-
                 evidenciaFilterForm
                         .addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN, "evidencia.crear",
                                 getContextWeb() + "/new?tipusLogin=" + Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN,
                                 "btn-success"));
             }
+            
+            
+            evidenciaFilterForm.addLabel(ESTATCODI, "estatcodi.label");
 
         }
 

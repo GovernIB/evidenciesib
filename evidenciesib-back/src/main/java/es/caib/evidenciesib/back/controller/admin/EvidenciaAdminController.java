@@ -18,15 +18,13 @@ import es.caib.evidenciesib.back.form.webdb.EvidenciaForm;
 @SessionAttributes(types = { EvidenciaForm.class, EvidenciaFilterForm.class })
 public class EvidenciaAdminController extends EvidenciaUserController {
 
-    
     public static final String CONTEXT_WEB = "/admin/evidencia";
-    
-    
+
     @Override
     public boolean isAdmin() {
         return true;
     }
-    
+
     @Override
     public String getTileForm() {
         return "evidenciaFormAdmin";
@@ -36,7 +34,15 @@ public class EvidenciaAdminController extends EvidenciaUserController {
     public String getTileList() {
         return "evidenciaListAdmin";
     }
-    
-    
-    
+
+    @Override
+    public String getEntityNameCode() {
+        return "evidencies.aplicacio";
+    }
+
+    @Override
+    public String getEntityNameCodePlural() {
+        return "evidencies.aplicacio.plural";
+    }
+
 }

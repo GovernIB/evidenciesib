@@ -32,13 +32,15 @@
 		<!-- Centre esquerra -->
 		<div class="col-4 text-center pt-2 text-decoration-none bg-transparent text-uppercase p-2 opcionsPeu elementPeuResponsive">
 
+            &nbsp; 
+<%--
 			<a styleClass="text-dark linkPeu" href="/mapaweb"> <fmt:message
 					key="labels.mapaweb" />
 			</a><br /> <a styleClass="text-dark linkPeu" href="/accessibilitat">
 				<fmt:message key="labels.accessibilitat" />
 			</a><br /> <a styleClass="text-dark linkPeu" href="/protecciodades">
-				<fmt:message key="labels.protecciodades" />
-			</a><br /> <a styleClass="text-dark linkPeu" href="/avislegal"> <fmt:message
+				<fmt:message key="labels.protecciodades" /> --%>
+			</a><br /> <a styleClass="text-dark linkPeu" href="<c:url value="/public/avislegal"/>"> <fmt:message
 					key="labels.avislegal" />
 			</a>
 
@@ -77,10 +79,10 @@
                         <fmt:message key="ajuda.missatge" />
                     </p>
                     <ul>
-                        <li><fmt:message key="ajuda.viatelefon" />123456789</li>
-                        <li><fmt:message key="ajuda.viaweb" />http://www.help.hl/help</li>
+                    <%--<li><fmt:message key="ajuda.viatelefon" />123456789</li> --%>
+                        <li><fmt:message key="ajuda.viaweb" />&nbsp;https://governdigital.fundaciobit.org/</li>
                         <li><fmt:message key="ajuda.viaemail" />
-                            <a href="mailto: help@help.hl"> help@help.hl</a>
+                            <a href="mailto:firma@fundaciobit.org">&nbsp;firma@fundaciobit.org</a>
                         </li>
                     </ul>
                 </div>

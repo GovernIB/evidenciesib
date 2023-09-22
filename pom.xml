@@ -11,6 +11,7 @@
         <module>evidenciesib-ejb</module>
         <module>evidenciesib-commons</module>
         <module>evidenciesib-api-externa</module>
+        <module>evidenciesib-api-externa-client</module>
         <module>evidenciesib-back</module>
         <module>evidenciesib-front</module>
         <module>evidenciesib-ear</module>
@@ -18,7 +19,6 @@
         <module>scripts</module>
     </modules>
     <repositories>
-
         <repository>
             <id>maven-nuxeo</id>
             <name>Maven Nuxeo Repository</name>
@@ -59,11 +59,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -92,6 +94,7 @@
         <slf4j.version>1.7.30</slf4j.version>
         <keycloak.version>6.0.1</keycloak.version>
         <cxf.version>3.3.3</cxf.version>
+        <junit.version>4.13.1</junit.version>
         <hibernate.version>5.3.15.Final</hibernate.version>
         <hibernate.annotations.version>5.3.15.Final</hibernate.annotations.version>
         <resteasy.version>3.6.3.Final</resteasy.version>
@@ -109,8 +112,6 @@
         <version_txt_template_file>./scripts/templates/versio.txt.template</version_txt_template_file>
         <pluginsib.userinformation.api.version>3.0.0</pluginsib.userinformation.api.version>
         <pluginsib.userinformation.impl.version>3.0.0-SNAPSHOT</pluginsib.userinformation.impl.version>
-        <pluginsib.firmaenservidor.api.version>3.1.0-SNAPSHOT</pluginsib.firmaenservidor.api.version>
-        <pluginsib.firmaenservidor.impl.version>3.1.0-SNAPSHOT</pluginsib.firmaenservidor.impl.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -121,7 +122,7 @@
                 <version>${javaee-api.version}</version>
                 <exclusions>
                     <!-- La dependència de javax.mail fa referència a activation 1.1 enlloc 
-                            de 1.1.1 -->
+						de 1.1.1 -->
                     <exclusion>
                         <groupId>javax.activation</groupId>
                         <artifactId>activation</artifactId>
@@ -172,8 +173,15 @@
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
+            <!-- Dependències de test -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
             <!-- fixar versió de jboss-logging ja que Hibernate i RestEasy fan referència 
-                    a varies versions -->
+				a varies versions -->
             <dependency>
                 <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging</artifactId>
@@ -182,6 +190,7 @@
             </dependency>
             <!--  REST SERVICES -->
             <!-- Anotacions de documentació de openapi -->
+            <!--
             <dependency>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-annotations</artifactId>
@@ -229,11 +238,19 @@
                 <version>2.9.10.redhat-00003</version>
                 <scope>provided</scope>
             </dependency>
+            -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-client</artifactId>
                 <version>${resteasy.version}</version>
-                <scope>provided</scope>
+                <scope>test</scope>
+                <exclusions>
+                    <!-- JSON-API ja està inclòs dins les apis JAVA EE 8 -->
+                    <exclusion>
+                        <groupId>javax.json</groupId>
+                        <artifactId>javax.json-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
@@ -462,7 +479,15 @@
                 </configuration>
             </plugin>
             <plugin>
-
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <altDeploymentRepository>
+            internal.repo::default::file://${project.build.directory}/mvn-repo
+          </altDeploymentRepository>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.12</version>
@@ -494,10 +519,8 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
-
     <distributionManagement>
         <repository>
             <id>github_governib_maven</id>
@@ -505,7 +528,16 @@
             <url>file://${project.build.directory}/mvn-repo</url>
         </repository>
     </distributionManagement>
-
+    <!--   COM UTILITZAR: AFEGIR AQUEST CODI AL pom.xml    -->
+    <!--
+        <repositories>
+           <repository>
+             <id>github-governib-maven-repos</id>
+             <name>GitHub GovernIB Maven Repository</name>
+             <url>https://governib.github.io/maven/maven/</url>
+           </repository>
+        </repositories>
+  -->
     <profiles>
         <profile>
             <id>revisionnumber</id>
@@ -528,17 +560,6 @@
                     </plugins>
                 </pluginManagement>
             </build>
-        </profile>
-        <profile>
-            <id>api-externa-client</id>
-            <activation>
-                <file>
-                    <exists>evidenciesib-api-externa-client</exists>
-                </file>
-            </activation>
-            <modules>
-                <module>evidenciesib-api-externa-client</module>
-            </modules>
         </profile>
     </profiles>
 </project>

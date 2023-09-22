@@ -1,6 +1,6 @@
 package es.caib.evidenciesib.back.controller.common;
 
-import es.caib.evidenciesib.back.controller.admin.PluginFirmaEnServidorAdminController;
+import es.caib.evidenciesib.back.controller.admin.EvidenciaAdminController;
 import es.caib.evidenciesib.back.controller.user.EvidenciaUserController;
 import es.caib.evidenciesib.commons.utils.Configuracio;
 
@@ -26,6 +26,14 @@ import javax.servlet.http.HttpSession;
 public class PrincipalController {
 
 	protected final Logger log = Logger.getLogger(getClass());
+	
+	
+	
+
+	
+	
+	
+	
 
 	@RequestMapping(value = "/common/principal.html")
 	public ModelAndView principal(HttpSession session, HttpServletRequest request, HttpServletResponse response)
@@ -34,7 +42,7 @@ public class PrincipalController {
 		Boolean initialized = (Boolean) session.getAttribute("inicialitzat");
 
 		if (initialized == null) {
-			HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a EvidenciesIB");
+			HtmlUtils.saveMessageInfo(request, "Benvingut a EvidenciesIB");
 			session.setAttribute("inicialitzat", true);
 		}
 
@@ -70,7 +78,7 @@ public class PrincipalController {
 			 */
 
 			if ("admin".equals(pipella)) {
-				return new ModelAndView(new RedirectView(PluginFirmaEnServidorAdminController.CONTEXTWEB + "/list", true));
+				return new ModelAndView(new RedirectView(EvidenciaAdminController.CONTEXT_WEB + "/list", true));
 			}
 
 			if ("user".equals(pipella)) {

@@ -13,13 +13,6 @@
       </a>
     </li>
 
-    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
-
-    <li style="list-style-type: disc; list-style-position: inside;"><a
-            href="<c:url value="/admin/pluginfirmaenservidor/list"/>"> <span
-                style="${(fn:contains(url, '/admin/pluginfirmaenservidor'))? " font-weight:bold;" : ""}"><fmt:message
-                        key="menu.pluginfirma" /> </span>
-        </a></li>
     </ul>
 </div>
 

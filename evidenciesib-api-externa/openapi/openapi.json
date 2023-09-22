@@ -19,17 +19,23 @@
     "url" : "https://github.com/GovernIB/evidenciesib/tree/evidenciesib-1.0/evidenciesib-api-externa-client"
   },
   "servers" : [ {
-    "url" : "/evidenciesibapi/externa"
+    "url" : "/evidenciesibapi/externa",
+    "variables" : { }
   }, {
-    "url" : "http://localhost:8080/evidenciesibapi/externa"
+    "url" : "http://localhost:8080/evidenciesibapi/externa",
+    "variables" : { }
   }, {
-    "url" : "https://dev.caib.es/evidenciesibapi/externa"
+    "url" : "https://dev.caib.es/evidenciesibapi/externa",
+    "variables" : { }
   }, {
-    "url" : "https://proves.caib.es/evidenciesibapi/externa"
+    "url" : "https://proves.caib.es/evidenciesibapi/externa",
+    "variables" : { }
   }, {
-    "url" : "https://se.caib.es/evidenciesibapi/externa"
+    "url" : "https://se.caib.es/evidenciesibapi/externa",
+    "variables" : { }
   }, {
-    "url" : "https://www.caib.es/evidenciesibapi/externa"
+    "url" : "https://www.caib.es/evidenciesibapi/externa",
+    "variables" : { }
   } ],
   "tags" : [ {
     "name" : "Evidencies",

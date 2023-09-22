@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>evidenciesib-back</artifactId>
     <packaging>war</packaging>
-
     <parent>
         <groupId>es.caib.evidenciesib</groupId>
         <artifactId>evidenciesib</artifactId>
         <version>1.0.0</version>
     </parent>
-
     <name>EvidenciesIB - Back</name>
-
     <repositories>
         <repository>
             <id>thirdparty-releases</id>
             <name>JBoss Thirdparty Releases</name>
             <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
         </repository>
-
     </repositories>
-
     <dependencies>
-
         <!-- Internas -->
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
@@ -32,83 +24,70 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-commons</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
-
-
-
-
-<!--
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itextpdf</artifactId>
-            <version>5.4.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itextpdf.tool</groupId>
-            <artifactId>xmlworker</artifactId>
-            <version>5.4.3</version>
-        </dependency>
-        -->
-
         <!-- Externas -->
-
         <dependency>
             <groupId>org.fundaciobit.genapp</groupId>
             <artifactId>genapp-web</artifactId>
             <version>${genapp.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.activation</groupId>
+                    <artifactId>javax.activation-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.fundaciobit.genapp</groupId>
             <artifactId>genapp-core</artifactId>
             <version>${genapp.version}</version>
             <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.3</version>
             <exclusions>
                 <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
+                    <groupId>javax.activation</groupId>
+                    <artifactId>javax.activation-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <scope>provided</scope>
         </dependency>
-        
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <scope>provided</scope>
         </dependency>
-
-
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3</version>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
             <artifactId>pluginsib-exportdata-api</artifactId>
@@ -121,13 +100,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-api</artifactId>
             <version>${tiles.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-core</artifactId>
@@ -143,13 +120,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-servlet</artifactId>
             <version>${tiles.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-jsp</artifactId>
@@ -165,50 +140,41 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -224,7 +190,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
@@ -245,15 +210,12 @@
             <artifactId>taglibs-unstandard</artifactId>
             <version>20060829</version>
         </dependency>
-
-
         <!-- CGLib for @Configuration -->
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
             <version>${cglib.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
@@ -269,7 +231,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
@@ -285,7 +246,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
@@ -297,9 +257,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -329,7 +287,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 </project>

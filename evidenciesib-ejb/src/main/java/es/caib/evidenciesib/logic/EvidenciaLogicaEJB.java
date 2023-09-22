@@ -36,7 +36,6 @@ import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.plugins.signature.api.FileInfoSignature;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -154,7 +153,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             // Cream fitxer Adaptat a la BBDD 
             FitxerJPA fitxer = new FitxerJPA();
             fitxer.setDescripcio("Fitxer PDF amb l'estampació i fitxer adjunt amb evidències");
-            fitxer.setMime(FileInfoSignature.PDF_MIME_TYPE);
+            fitxer.setMime("application/pdf");
             fitxer.setNom(dst_pdf.getName());
             fitxer.setTamany(dst_pdf.length());
 
