@@ -11,12 +11,12 @@
         <module>evidenciesib-ejb</module>
         <module>evidenciesib-commons</module>
         <module>evidenciesib-api-externa</module>
-        <module>evidenciesib-api-externa-client</module>
         <module>evidenciesib-back</module>
         <module>evidenciesib-front</module>
         <module>evidenciesib-ear</module>
         <module>pluginsib-login</module>
         <module>scripts</module>
+        <module>evidenciesib-api-externa-client</module>
     </modules>
     <repositories>
         <repository>
@@ -252,23 +252,19 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!-- Dependències per tests REST - suport estàndar per JSONB -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-multipart-provider</artifactId>
+                <artifactId>resteasy-json-binding-provider</artifactId>
                 <version>${resteasy.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-jaxb-provider</artifactId>
-                <version>${resteasy.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-jaxrs</artifactId>
-                <version>${resteasy.version}</version>
-                <scope>provided</scope>
+                <scope>test</scope>
+                <exclusions>
+                    <!-- JSON-API ja està inclòs dins les apis JAVA EE 8 -->
+                    <exclusion>
+                        <groupId>javax.json</groupId>
+                        <artifactId>javax.json-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!-- ==== JBOSS ========== -->
             <dependency>
