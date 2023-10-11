@@ -25,7 +25,7 @@
                 <div class="col-sm" style="text-align: right;">
                     <a href="${download}" target="_blank">
                     <img id="waitMessage" src="<c:url value="/images/spinner_40.gif"/>" />
-                    <img id="thumbnail" style="height: 300px; border: 1px solid #000; padding: 2px; display:none;" src="${thumbnail}"
+                    <img id="thumbnail" style="display:none;" src="${thumbnail}"
                         alt="Thumbnail PDF" onload="imageLoaded();" />
                     </a>
                 </div>
@@ -61,7 +61,7 @@
             var element = document.getElementById('waitMessage');
             element.style.cssText = 'display:none;';
             var thumbnail = document.getElementById('thumbnail');
-            thumbnail.style.cssText = 'display:;';
+            thumbnail.style.cssText = 'border:2px solid #000; padding: 2px;display:;';
         }
 
         function validateForm() {
