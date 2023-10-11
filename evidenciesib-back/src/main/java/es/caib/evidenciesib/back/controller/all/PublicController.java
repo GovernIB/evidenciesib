@@ -52,6 +52,15 @@ public class PublicController {
         log.info("Entra a postLoginFront[EviID:" + evidenciaID + "]");
 
         EvidenciaJPA evi = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
+        
+        if (evi.getEstatCodi() == Constants.EVIDENCIA_ESTAT_CODI_ERROR) {
+            final String redirect = evi.getCallBackUrl().replace("{0}", String.valueOf(evi.getEvidenciaID()));
+
+            log.warn(" Error en el front ... [" + evi.getEvidenciaID() + "]  => " + redirect);
+
+            return "redirect:" + redirect;
+        }
+        
 
         // L'origen de l'evidència és REST o BACK
         if (evi.getUsuariAplicacio() == null) {

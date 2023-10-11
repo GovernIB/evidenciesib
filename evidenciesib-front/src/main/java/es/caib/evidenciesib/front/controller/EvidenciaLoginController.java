@@ -1,6 +1,9 @@
 package es.caib.evidenciesib.front.controller;
 
-import java.io.PrintWriter;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.util.Enumeration;
@@ -8,26 +11,30 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.ejb.EJB;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.fundaciobit.pluginsib.core.utils.EncrypterDecrypter;
 import org.fundaciobit.pluginsib.login.api.LoginInfo;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginController;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginManager;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginUserDetails;
 import org.springframework.context.i18n.LocaleContextHolder;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.google.gson.GsonBuilder;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
@@ -54,27 +61,86 @@ public class EvidenciaLoginController {
     public static final String MAPPING_FRONT_LOGIN_END = "/frontloginend";
 
     @RequestMapping(Constants.MAPPING_FRONT_LOGIN_START + "/{evidenciaID}")
-    public String frontLoginStart(HttpServletRequest request, HttpServletResponse response,
+    public ModelAndView frontLoginStart(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
 
-        String urlfront = Configuracio.getFrontUrl();
         log.info("frontLoginStart =>  evidenciaID=" + evidenciaID);
-        log.info("frontLoginStart =>  urlfront=" + urlfront);
 
         // mirar si existeix ID
-        Long number;
+        EvidenciaJPA evidencia;
         try {
-            number = evidenciaLogicaEjb.count(EvidenciaFields.EVIDENCIAID.equal(evidenciaID));
-        } catch (I18NException e) {
-            String msg = "Error intentant esbrinar si existeix l'evidencia amb ID " + evidenciaID + ": "
-                    + I18NUtils.getMessage(e);
+            evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
+        } catch (Throwable e) {
+
+            String msg;
+            if (e instanceof I18NException) {
+                msg = I18NUtils.getMessage((I18NException) e);
+            } else {
+                msg = e.getMessage();
+            }
+
+            msg = "Error intentant esbrinar si existeix l'evidencia amb ID " + evidenciaID + ": " + msg;
             log.error(msg, e);
             throw new Exception(msg, e);
         }
-        if (number == 0) {
+        if (evidencia == null) {
             // XYZ 
             throw new Exception("No es troba evidenciaID amb ID ]" + evidenciaID + "[");
         }
+
+        // XYZ ZZZ Falta Idioma
+
+        ModelAndView mav = new ModelAndView("norepudi");
+        mav.addObject("evidenciaID", evidenciaID);
+        mav.addObject("action", request.getContextPath() + MAPPING_NO_REPUDI_POST + "/" + evidenciaID);
+        mav.addObject("thumbnail", request.getContextPath() + THUMBNAIL_PDF_MASSIVE + "/" + evidenciaID);
+
+        mav.addObject("download", request.getContextPath() + DOWNLOAD_PDF + "/" + EncrypterDecrypter
+                .encrypt(EncrypterDecrypter.ALGORITHM_AES, Configuracio.getEncryptKey(), String.valueOf(evidenciaID)));
+        return mav;
+
+    }
+
+    public static final String MAPPING_NO_REPUDI_POST = "/norepudi";
+
+    @RequestMapping(path = MAPPING_NO_REPUDI_POST + "/{evidenciaID}", method = RequestMethod.POST)
+    public String noRepudiPost(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
+
+        if (request.getParameterMap().size() == 0) {
+            log.warn("noRepudiPost => NO HI HA PARAMETERS !!!!!!!!");
+        } else {
+            for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
+
+                log.info("noRepudiPost => Parameter[" + entry.getKey() + "] => |" + entry.getValue() + "|");
+
+            }
+        }
+
+        String botoAccept = request.getParameter("submitAccept");
+
+        if (botoAccept == null) {
+
+            // S'ha pitjat "CANCEL"
+            EvidenciaJPA evidencia;
+            evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
+
+            evidencia.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
+
+            evidencia.setEstatError(I18NUtils.tradueix("usuari.cancelat"));
+            
+            evidencia.setDataFi(new Timestamp(System.currentTimeMillis()));
+
+            evidenciaLogicaEjb.update(evidencia);
+
+            String r = "redirect:" + Configuracio.getBackUrl() + Constants.MAPPING_BACK_LOGIN_END + "/" + evidenciaID;
+            log.info("Cancel usuari. Redirect => " + r);
+
+            return r;
+        }
+
+        String urlfront = Configuracio.getFrontUrl();
+        log.info("noRepudiPost =>  urlfront=" + urlfront);
 
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute(EVIDENCIAID, evidenciaID);
@@ -86,6 +152,82 @@ public class EvidenciaLoginController {
 
         return "redirect:" + PluginLoginController.MAPPING_LOGIN;
 
+    }
+
+    public static final String THUMBNAIL_PDF_MASSIVE = "/thumbnailpdf";
+
+    @RequestMapping(value = THUMBNAIL_PDF_MASSIVE + "/{evidenciaID}", method = RequestMethod.GET)
+    public void createThumbnailPdf(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("evidenciaID") Long evidenciaID) throws Exception, I18NException {
+
+        long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERORIGINALID,
+                EvidenciaFields.EVIDENCIAID.equal(evidenciaID));
+
+        PDDocument document = null;
+        try {
+            File file = FileSystemManager.getFile(fitxerID);
+
+            log.info("PDF File: " + file);
+            log.info("PDF File: " + file.exists());
+
+            document = PDDocument.load(file);
+            PDFRenderer pdfRenderer = new PDFRenderer(document);
+
+            BufferedImage bim = pdfRenderer.renderImage(0, 0.5f);
+
+            BufferedImage scaled = scale(bim, 350);
+
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+            response.setDateHeader("Expires", -1); // Proxies.
+
+            ImageIO.write(scaled, "PNG", response.getOutputStream());
+
+        } catch (Throwable th) {
+            log.error("Error creant THUMBNAIL: " + th.getMessage(), th);
+            throw th;
+        } finally {
+            if (document != null) {
+                document.close();
+            }
+        }
+
+    }
+
+    protected static BufferedImage scale(BufferedImage image, int max) {
+
+        int width = image.getWidth(null);
+        int height = image.getHeight(null);
+        double dWidth = 0;
+        double dHeight = 0;
+        if (width == height) {
+            dWidth = max;
+            dHeight = max;
+        } else if (width > height) {
+            dWidth = max;
+            dHeight = ((double) height / (double) width) * max;
+        } else {
+            dHeight = max;
+            dWidth = ((double) width / (double) height) * max;
+        }
+        Image scaled = image.getScaledInstance((int) dWidth, (int) dHeight, Image.SCALE_SMOOTH);
+
+        return toBufferedImage(scaled);
+
+    }
+
+    protected static BufferedImage toBufferedImage(Image img) {
+        if (img instanceof BufferedImage) {
+            return (BufferedImage) img;
+        }
+
+        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D bGr = bimage.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+
+        return bimage;
     }
 
     @RequestMapping(MAPPING_FRONT_LOGIN_END + "/{evidenciaID}")
@@ -178,12 +320,42 @@ public class EvidenciaLoginController {
         return mav;
     }
 
+    public static final String DOWNLOAD_PDF = "/downloadpdf";
+
+    @RequestMapping(value = DOWNLOAD_PDF + "/{evidenciaID}", method = RequestMethod.GET)
+    public void downloadPdf(HttpServletRequest request, HttpServletResponse response,
+
+            String evidenciaIDEncrypted) throws Exception, I18NException {
+
+        String evidenciaIDDecrypted = EncrypterDecrypter.decrypt(EncrypterDecrypter.ALGORITHM_AES,
+                Configuracio.getEncryptKey(), evidenciaIDEncrypted);
+
+        Long evidenciaID = Long.parseLong(evidenciaIDDecrypted);
+
+        long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERORIGINALID,
+                EvidenciaFields.EVIDENCIAID.equal(evidenciaID));
+
+        try {
+            File file = FileSystemManager.getFile(fitxerID);
+
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+            response.setDateHeader("Expires", -1); // Proxies.
+
+            response.getOutputStream().write(FileSystemManager.readFileToByteArray(file));
+
+        } catch (Throwable th) {
+            log.error("Error descarregant PDF: " + th.getMessage(), th);
+            throw th;
+        }
+    }
+
     /**
      * 
      * @param prop
      * @return
      */
-    public static String getPropertyAsString(Properties prop) throws Exception {
+    protected static String getPropertyAsString(Properties prop) throws Exception {
         StringWriter writer = new StringWriter();
 
         prop.store(writer, "");
