@@ -595,11 +595,14 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
+        // Direcció Text:
+        // 270 Cap abaix
+        // 270 + 180 Cap a dalt
+        final int rotate = 270 + 180;
+
         String content = I18NCommonUtils.tradueix(loc, "stamp.content", nompersona, evi.getPersonaNif(),
                 sdf.format(evi.getDataInici()));
         content = " " + content.replace("\n", "\n ");
-
-        
 
         final int ampleCaixa = 500; //400;
         final int altCaixa = 30; //30;
@@ -610,28 +613,26 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         Rectangle r = new Rectangle(margin_x, page.getTop() - ampleCaixa - margin_y, margin_x + altCaixa,
                 page.getTop() - margin_y);
         {
-            
+
             PdfAnnotation annot = new PdfAnnotation(stamp.getWriter(), r);
             annot.put(PdfName.SUBTYPE, PdfName.FREETEXT);
             annot.put(PdfName.CONTENTS, new PdfString(content, PdfObject.TEXT_UNICODE));
-            
-            
-            PdfAppearance pcb = PdfAppearance.createAppearance(writer , r.getWidth() , r.getHeight());
+
+            PdfAppearance pcb = PdfAppearance.createAppearance(writer, r.getWidth(), r.getHeight());
 
             try {
                 pcb.setFontAndSize(BaseFont.createFont(BaseFont.COURIER, BaseFont.CP1250, BaseFont.NOT_EMBEDDED), 12);
             } catch (Throwable e1) {
                 e1.printStackTrace();
             }
-            
+
             annot.setDefaultAppearanceString(pcb);
-            
 
             annot.setFlags(PdfAnnotation.FLAGS_PRINT | PdfAnnotation.FLAGS_READONLY);
 
             annot.setBorder(new PdfBorderArray(1, 1, 1f));
 
-            annot.setRotate(270);
+            annot.setRotate(rotate);
 
             annot.setTitle(title);
 
