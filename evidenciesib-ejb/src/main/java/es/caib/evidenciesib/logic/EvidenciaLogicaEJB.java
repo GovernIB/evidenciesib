@@ -576,7 +576,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
      * @param writer
      * @throws MalformedURLException
      */
-    protected void afegirSegellAmbInformacioEvidencia(Evidencia evi, PdfReader reader, PdfStamper stamp,
+    public static void afegirSegellAmbInformacioEvidencia(Evidencia evi, PdfReader reader, PdfStamper stamp,
             PdfWriter writer, String url) throws MalformedURLException {
 
         Locale loc = new java.util.Locale(evi.getFirmaIdiomaDocument());
@@ -600,18 +600,35 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         // 270 + 180 Cap a dalt
         final int rotate = 270 + 180;
 
-        String content = I18NCommonUtils.tradueix(loc, "stamp.content", nompersona, evi.getPersonaNif(),
+        final int fontSize = 9;
+
+        String content = I18NLogicUtils.tradueix(loc, "stamp.content", nompersona, evi.getPersonaNif(),
                 sdf.format(evi.getDataInici()));
         content = " " + content.replace("\n", "\n ");
 
-        final int ampleCaixa = 500; //400;
-        final int altCaixa = 30; //30;
-
-        final int margin_x = 5;
+        final int margin_x = 8;
         final int margin_y = 100;
+
+        int altCaixa = 25; //30;
+        int ampleCaixa = 500; //400;
+        BaseFont basefont;
+        try {
+            basefont = BaseFont.createFont(BaseFont.COURIER_BOLD, BaseFont.CP1250, BaseFont.NOT_EMBEDDED);
+
+            String basetext = content.substring(0, content.indexOf('\n'));
+            ampleCaixa = 20 + (int) basefont.getWidthPoint(basetext, fontSize);
+            altCaixa = margin_x + (int) (2f * basefont.getAscentPoint(basetext, fontSize)
+                    - 2f * basefont.getDescentPoint(basetext, fontSize));
+
+
+        } catch (Throwable e1) {
+            basefont = null;
+            e1.printStackTrace();
+        }
 
         Rectangle r = new Rectangle(margin_x, page.getTop() - ampleCaixa - margin_y, margin_x + altCaixa,
                 page.getTop() - margin_y);
+
         {
 
             PdfAnnotation annot = new PdfAnnotation(stamp.getWriter(), r);
@@ -620,11 +637,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
             PdfAppearance pcb = PdfAppearance.createAppearance(writer, r.getWidth(), r.getHeight());
 
-            try {
-                pcb.setFontAndSize(BaseFont.createFont(BaseFont.COURIER, BaseFont.CP1250, BaseFont.NOT_EMBEDDED), 12);
-            } catch (Throwable e1) {
-                e1.printStackTrace();
-            }
+            pcb.setFontAndSize(basefont, fontSize);
 
             annot.setDefaultAppearanceString(pcb);
 
