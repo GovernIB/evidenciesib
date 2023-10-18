@@ -57,3 +57,6 @@ replay_pid*
 /evidenciesib-api-externa-client/.openapi-generator
 /scripts/sqlgenerator/target
 /evidenciesib-back/src/main/webapp/WEB-INF/jsp/all/homepublic.jsp
+/evidenciesib-ejb/src/test/java/es/caib/evidenciesib/logic/test/TestStampPdf.java
+/evidenciesib-ejb/manual.pdf
+/evidenciesib-ejb/manual_stamp.pdf

@@ -613,7 +613,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         int ampleCaixa = 500; //400;
         BaseFont basefont;
         try {
-            basefont = BaseFont.createFont(BaseFont.COURIER_BOLD, BaseFont.CP1250, BaseFont.NOT_EMBEDDED);
+            basefont = BaseFont.createFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1250, BaseFont.NOT_EMBEDDED);
 
             String basetext = content.substring(0, content.indexOf('\n'));
             ampleCaixa = 20 + (int) basefont.getWidthPoint(basetext, fontSize);
