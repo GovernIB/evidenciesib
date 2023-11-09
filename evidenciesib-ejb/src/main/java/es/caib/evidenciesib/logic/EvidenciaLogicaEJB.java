@@ -62,6 +62,7 @@ import es.caib.evidenciesib.ejb.EvidenciaEJB;
 import es.caib.evidenciesib.logic.utils.I18NLogicUtils;
 import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.entity.Fitxer;
+import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 import es.caib.evidenciesib.persistence.FitxerJPA;
 
@@ -289,9 +290,9 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
                 {
                     final String msg = "Error durant la realització de les firmes: "
                             + transactionStatus.getErrorMessage();
-                    String desc = transactionStatus.getErrorStackTrace();
-                    if (desc != null) {
-                        evi.setEstatError(desc);
+                    String stack = transactionStatus.getErrorStackTrace();
+                    if (stack != null) {
+                        evi.setEstatExcepcio(stack);
                     }
                     throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
                 }
@@ -336,7 +337,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         } catch (I18NException th) {
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
             final String msg = I18NCommonUtils.getMessage(th, languageUI);
-            evi.setEstatError(msg);
+            evi.setEstatError(StringUtils.abbreviate(msg, 4000)); // XYZ ZZZ TODO 
             if (evi.getEstatExcepcio() == null) {
                 Throwable cause = th.getCause();
                 if (cause == null) {
@@ -350,7 +351,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         } catch (Throwable th) {
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
             final String msg = "Error no controllat signant document: " + th.getMessage();
-            evi.setEstatError(msg);
+            evi.setEstatError(StringUtils.abbreviate(msg, 4000));
             if (th.getCause() != null) {
                 evi.setEstatExcepcio(ExceptionUtils.getStackTrace(th));
             }

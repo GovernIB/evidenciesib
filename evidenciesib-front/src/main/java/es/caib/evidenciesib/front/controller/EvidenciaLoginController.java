@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
@@ -127,13 +129,13 @@ public class EvidenciaLoginController {
 
             evidencia.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
 
-            evidencia.setEstatError(I18NUtils.tradueix("usuari.cancelat"));
-            
+            evidencia.setEstatError(StringUtils.abbreviate(I18NUtils.tradueix("usuari.cancelat"), 4000));
+
             evidencia.setDataFi(new Timestamp(System.currentTimeMillis()));
 
             evidenciaLogicaEjb.update(evidencia);
 
-            String r = "redirect:" + Configuracio.getBackUrl() + Constants.MAPPING_BACK_LOGIN_END + "/" + evidenciaID;
+            String r = "redirect:" + getRedirectUrl(evidenciaID);
             log.info("Cancel usuari. Redirect => " + r);
 
             return r;
@@ -152,6 +154,10 @@ public class EvidenciaLoginController {
 
         return "redirect:" + PluginLoginController.MAPPING_LOGIN;
 
+    }
+
+    protected String getRedirectUrl(Long evidenciaID) {
+        return Configuracio.getBackUrl() + Constants.MAPPING_BACK_LOGIN_END + "/" + evidenciaID;
     }
 
     public static final String THUMBNAIL_PDF_MASSIVE = "/thumbnailpdf";
@@ -235,85 +241,101 @@ public class EvidenciaLoginController {
             @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
 
         log.info("frontLoginEnd =>  evidenciaID=" + evidenciaID);
+        log.info("frontLoginEnd =>  error=" + request.getSession().getAttribute("error"));
 
         EvidenciaJPA evi = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
 
+        // Recuperar Evidència
         if (evi == null) {
-            // XYZ ZZZ
+
             String msg = "No es troba evidenciaID amb ID ]" + evidenciaID + "[ al retorn del Login";
             log.error(msg);
             throw new Exception(msg);
+        }
+        
+        evi.setLoginData(new Timestamp(System.currentTimeMillis()));
+        evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);  
+
+        // ERROR ???
+        String errorPlugin = (String) request.getSession()
+                .getAttribute(PluginLoginController.SESSION_PLUGIN_LOGIN_ERROR_MESSAGE);
+
+        if (errorPlugin != null) {
+            log.error(errorPlugin);
+            evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
+            evi.setEstatError(StringUtils.abbreviate(errorPlugin, 4000));
+
+            evidenciaLogicaEjb.update(evi);
+            return new ModelAndView(new RedirectView(getRedirectUrl(evidenciaID)));
+        }
+
+        // PLUGIN HA REGISTRAT CORRECTAMENT LA INFORMACIÓ D'AUTENTICACIO ??
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (!(principal instanceof PluginLoginUserDetails)) {
+
+            ///  XYZ ZZZ
+            final String msg = "Després del procés de Login no s'ha obtingut informació del Plugin de Login.";
+            log.error(msg);
+            evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
+            evi.setEstatError(msg);
+
+            evidenciaLogicaEjb.update(evi);
+            return new ModelAndView(new RedirectView(getRedirectUrl(evidenciaID)));
+
+        }
+
+        // CHECK NIF és el Mateix
+        PluginLoginUserDetails plud = (PluginLoginUserDetails) principal;
+
+        LoginInfo li = plud.getUsuario();
+        String msg = null;
+        if (StringUtils.isBlank(evi.getPersonaNif())) {
+            msg = "No s'ha definit dins de l'evidència el NIF de la persona que ha de fer la firma.";
         } else {
-
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-            if (!(principal instanceof PluginLoginUserDetails)) {
-
-                String msg = "Despres del Login no s'ha obtingut informació.";
-                log.error(msg);
-                evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
-                // XYZ ZZZ
-                evi.setEstatError(msg);
-
-                evidenciaLogicaEjb.update(evi);
-
-            } else {
-
-                //Guardar dades de Login dins BBDD
-
-                log.info("Login Correcte. Posant valors a Taula Evidència per ID ]" + evidenciaID + "[");
-
-                PluginLoginUserDetails plud = (PluginLoginUserDetails) principal;
-
-                evi.setLoginData(new Timestamp(System.currentTimeMillis()));
-
-                evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);
-                // XYZ ZZZ
-
-                LoginInfo li = plud.getUsuario();
-                evi.setLoginId(li.getLoginID());
-
-                evi.setPersonaEmail(null);
-                evi.setPersonaLlinatge1(li.getSurname1());
-                evi.setPersonaLlinatge2(li.getSurname2());
-                evi.setPersonaMobil(null);
-                evi.setPersonaNif(li.getAdministrationID());
-                evi.setPersonaNom(li.getName());
-
-                evi.setLoginAuthMethod(li.getAuthenticationMethod());
-                String lang = LocaleContextHolder.getLocale().getLanguage();
-                evi.setLoginSubtype(
-                        PluginLoginManager.getPluginLogin().getName(lang) + " - " + li.getIdentityProvider());
-                evi.setLoginQaa(String.valueOf(li.getQaa()));
-
-                Map<String, String> additional = li.getAdditionalProperties();
-                if (additional != null) {
-
-                    Properties props = new Properties();
-
-                    props.putAll(additional);
-
-                    evi.setLoginAdditionalProperties(getPropertyAsString(props));
-
-                }
-
-                evidenciaLogicaEjb.update(evi);
-
+            if (!evi.getPersonaNif().trim().equalsIgnoreCase(li.getAdministrationID().trim())) {
+                msg = "La persona que havia de signar tenia un NIF " + evi.getPersonaNif()
+                        + " però qui s'ha autenticat té un NIF " + li.getAdministrationID();
             }
         }
-        /*
-        String r = "redirect:" + MAPPING_PUBLIC_SET_LOCATION_GET + "/" + evidenciaID;
-        log.info("Login Correcte. Redirect a location => " + r);
-        
-        return r;
-            }
-        
-            public static final String MAPPING_PUBLIC_SET_LOCATION_GET = "/public/setlocationget";
-        
-            @RequestMapping(name=MAPPING_PUBLIC_SET_LOCATION_GET + "{evidenciaID}", method = RequestMethod.GET)
-            public ModelAndView setLocationGet(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
-        */
+        if (msg != null) {
+            log.error(msg);
+            evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
+            evi.setEstatError(msg);
+
+            evidenciaLogicaEjb.update(evi);
+            return new ModelAndView(new RedirectView(getRedirectUrl(evidenciaID)));
+        }
+
+        // TOT CORRECTE => Guardar dades de Login dins BBDD
+        log.info("Login Correcte. Posant valors a Taula Evidència per ID ]" + evidenciaID + "[");
+        evi.setLoginId(li.getLoginID());
+
+        evi.setPersonaEmail(null);
+        evi.setPersonaLlinatge1(li.getSurname1());
+        evi.setPersonaLlinatge2(li.getSurname2());
+        evi.setPersonaMobil(null);
+        evi.setPersonaNif(li.getAdministrationID());
+        evi.setPersonaNom(li.getName());
+
+        evi.setLoginAuthMethod(li.getAuthenticationMethod());
+        String lang = LocaleContextHolder.getLocale().getLanguage();
+        evi.setLoginSubtype(PluginLoginManager.getPluginLogin().getName(lang) + " - " + li.getIdentityProvider());
+        evi.setLoginQaa(String.valueOf(li.getQaa()));
+
+        Map<String, String> additional = li.getAdditionalProperties();
+        if (additional != null) {
+
+            Properties props = new Properties();
+
+            props.putAll(additional);
+
+            evi.setLoginAdditionalProperties(getPropertyAsString(props));
+
+        }
+
+        evidenciaLogicaEjb.update(evi);
+
         ModelAndView mav = new ModelAndView("location");
         mav.addObject("evidenciaID", evidenciaID);
 
@@ -383,7 +405,6 @@ public class EvidenciaLoginController {
         } else {
 
             //Guardar dades de Login dins BBDD
-
             log.info("setLocationPost:: Posant valors de UBICACIO a Taula Evidència per ID ]" + evidenciaID + "[");
 
             Enumeration<String> ubis = request.getParameterNames();
@@ -422,10 +443,9 @@ public class EvidenciaLoginController {
             evi.setLocalitzacioRegio(regio);
 
             evidenciaLogicaEjb.update(evi);
-
         }
 
-        String r = "redirect:" + Configuracio.getBackUrl() + Constants.MAPPING_BACK_LOGIN_END + "/" + evidenciaID;
+        final String r = "redirect:" + getRedirectUrl(evidenciaID);
         log.info("Login Correcte. Redirect => " + r);
 
         return r;

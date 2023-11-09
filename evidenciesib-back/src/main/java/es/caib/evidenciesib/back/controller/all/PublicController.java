@@ -1,6 +1,8 @@
 package es.caib.evidenciesib.back.controller.all;
 
 import org.apache.log4j.Logger;
+import org.fundaciobit.genapp.common.web.HtmlUtils;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,6 +59,12 @@ public class PublicController {
             final String redirect = evi.getCallBackUrl().replace("{0}", String.valueOf(evi.getEvidenciaID()));
 
             log.warn(" Error en el front ... [" + evi.getEvidenciaID() + "]  => " + redirect);
+            
+            if (evi.getUsuariAplicacio() == null) {
+                // ES BACK
+                HtmlUtils.deleteMessages(request);
+                HtmlUtils.saveMessageError(request, I18NUtils.tradueix("evidencia.error", evi.getEstatError()));
+            }
 
             return "redirect:" + redirect;
         }

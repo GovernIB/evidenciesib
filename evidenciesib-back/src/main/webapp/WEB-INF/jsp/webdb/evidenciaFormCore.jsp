@@ -297,7 +297,7 @@
             </td>
           <td id="evidencia_estatError_columnvalueid">
             <form:errors path="evidencia.estatError" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.ESTATERROR)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.ESTATERROR)? ' uneditable-input' : ''}"  style="" maxlength="255" path="evidencia.estatError"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.ESTATERROR)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.ESTATERROR)? ' uneditable-input' : ''}"  style="" maxlength="4000" path="evidencia.estatError"   />
 
            </td>
         </tr>

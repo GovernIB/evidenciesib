@@ -388,7 +388,7 @@
           "isAutoIncrement": false,
           "sqlName": "estaterror",
           "sqlType": 12,
-          "size": 255,
+          "size": 4000,
           "digits": 0,
           "isNotNullable": false,
           "labels": {

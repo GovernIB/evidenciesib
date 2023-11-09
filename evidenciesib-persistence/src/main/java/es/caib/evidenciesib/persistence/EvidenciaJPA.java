@@ -71,7 +71,7 @@ public class EvidenciaJPA implements Evidencia {
     @Column(name="estatcodi",nullable = false,length = 10)
     int estatCodi;
 
-    @Column(name="estaterror",length = 255)
+    @Column(name="estaterror",length = 4000)
     java.lang.String estatError;
 
     @Column(name="estatexcepcio",length = 2147483647)

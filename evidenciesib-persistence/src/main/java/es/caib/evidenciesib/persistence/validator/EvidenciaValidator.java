@@ -145,9 +145,9 @@ public class EvidenciaValidator<I extends Evidencia>
 
     if (__vr.getFieldErrorCount(ESTATERROR) == 0) {
       java.lang.String __estaterror = __target__.getEstatError();
-      if (__estaterror!= null && __estaterror.length() > 255) {
+      if (__estaterror!= null && __estaterror.length() > 4000) {
         __vr.rejectValue(ESTATERROR, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ESTATERROR)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ESTATERROR)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(4000)));
       }
     }
 

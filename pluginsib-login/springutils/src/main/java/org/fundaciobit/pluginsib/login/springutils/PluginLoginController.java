@@ -2,6 +2,7 @@ package org.fundaciobit.pluginsib.login.springutils;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.pluginsib.login.api.ConstantsLogin;
+import org.fundaciobit.pluginsib.login.api.IPluginLogin;
 import org.fundaciobit.pluginsib.login.api.LoginInfo;
 import org.fundaciobit.pluginsib.login.api.LoginInfoRepresentative;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,19 @@ public class PluginLoginController {
     public static final String MAPPING_PRELOGIN = "/prelogin";
 
     public static final String MAPPING_LOGIN = "/login";
-
-    protected static final String MAPPING_OK_LOGIN = "/okLogin";
-
-    protected static final String MAPPING_ERROR_LOGIN = "/errorLogin";
-
+    
     public static final String MAPPING_LOGOUT = "/logout";
+
+    private static final String MAPPING_OK_LOGIN = "/okLogin";
+
+    private static final String MAPPING_ERROR_LOGIN = "/errorLogin";
+    
+    /** 
+     * Quan el plugin no controla l'error
+     */
+    public static final String SESSION_PLUGIN_LOGIN_ERROR_MESSAGE = "_SESSION_PLUGIN_LOGIN_ERROR_MESSAGE_";
+
+    
 
     private final Logger log = Logger.getLogger(getClass());
 
@@ -139,22 +147,29 @@ public class PluginLoginController {
             String language = LocaleContextHolder.getLocale().getLanguage();
 
             String url;
+            IPluginLogin plugin = PluginLoginManager.getPluginLogin(); 
             try {
                 log.info("\n\nPluginLoginController::login() => PluginLoginManager.getPluginLogin() = "
-                        + PluginLoginManager.getPluginLogin() + "\n\n");
-                url = securityService.iniciarSesionAutentificacion(PluginLoginManager.getPluginLogin(),
+                        + plugin.getName(language) + "\n\n");
+                url = securityService.iniciarSesionAutentificacion(plugin,
                         url_callback_login, url_callback_error, language);
+                
+                log.info("Url autentificacion: " + url);
+
+                return new ModelAndView("redirect:" + url);
             } catch (Exception e) {
                 String msg = "Error Iniciant la sessió de seguretat amb Plugin de Login: " + e.getMessage();
                 log.error(msg, e);
-                url = urlbase;
-                return new ModelAndView("redirect:" + url);
+
+                // Passam l'error a MAPPING_ERROR_LOGIN
+                request.getSession().setAttribute(SESSION_PLUGIN_LOGIN_ERROR_MESSAGE, msg);
+
+                String fullUrlRedirect = getFinalRedirectAndClean(request);
+
+                log.info("\n PLUGIN LOGIN(login):  TORNAM el CONTROL A => " + fullUrlRedirect + "\n");
+                
+                return new ModelAndView("redirect:" + fullUrlRedirect);
             }
-
-            log.info("Url autentificacion: " + url);
-
-            return new ModelAndView("redirect:" + url);
-
         }
 
     }
@@ -189,20 +204,35 @@ public class PluginLoginController {
     @RequestMapping(value = { MAPPING_ERROR_LOGIN }, method = RequestMethod.GET)
     public String error(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        try {
-
-            String error = PluginLoginManager.getPluginLogin().getError(request,
-                    LocaleContextHolder.getLocale().getLanguage());
-
-            request.getSession().setAttribute("error", error);
-
-        } catch (Throwable e1) {
-            log.error("Error: " + e1.getMessage(), e1);
+        // Primer revisam si hi ha error NO CONTROLAT
+        
+        String error = (String)request.getSession().getAttribute(SESSION_PLUGIN_LOGIN_ERROR_MESSAGE);
+        
+        if (error == null) {
+            // Miram l'error del Propi PLugin
+        
+            try {         
+               error = PluginLoginManager.getPluginLogin().getError(request,
+                        LocaleContextHolder.getLocale().getLanguage());
+    
+               if (error == null) {
+                   error = "El plugin de Login per alguna raó desconeguda he retornat "
+                           + "a la pàgina d'error però no ha definit cap error en el mètode getError()";
+                   
+               } 
+    
+            } catch (Throwable e1) {
+                error = "S'ha produit una excepció al intentar recuperar el missatge d'error del Plugin de Login: " + e1.getMessage();
+                log.error("Error: " + error, e1);
+            }
+            
+            
+            request.getSession().setAttribute(SESSION_PLUGIN_LOGIN_ERROR_MESSAGE, error);
         }
 
         String fullUrlRedirect = getFinalRedirectAndClean(request);
 
-        log.info("\n " + MAPPING_OK_LOGIN + " => " + fullUrlRedirect + "\n");
+        log.info("\n PLUGIN LOGIN(error):  TORNAM el CONTROL A => " + fullUrlRedirect + "\n");
 
         return "redirect:" + fullUrlRedirect;
 
