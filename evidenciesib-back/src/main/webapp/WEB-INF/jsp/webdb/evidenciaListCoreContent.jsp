@@ -174,6 +174,16 @@
           ${evidencia.localitzacioPais}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DEVICEPROPERTIES)}">
+          <td>
+          ${evidencia.deviceProperties}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.CLICKPROPERTIES)}">
+          <td>
+          ${evidencia.clickProperties}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMAREASON)}">
           <td>
           ${evidencia.firmaReason}

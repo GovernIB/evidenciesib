@@ -131,6 +131,14 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOPAIS);
   }
 
+  public StringField DEVICEPROPERTIES() {
+    return new StringField(getQueryPath(), EvidenciaFields.DEVICEPROPERTIES);
+  }
+
+  public StringField CLICKPROPERTIES() {
+    return new StringField(getQueryPath(), EvidenciaFields.CLICKPROPERTIES);
+  }
+
   public StringField FIRMAREASON() {
     return new StringField(getQueryPath(), EvidenciaFields.FIRMAREASON);
   }

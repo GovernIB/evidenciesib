@@ -255,6 +255,22 @@ public class EvidenciaValidator<I extends Evidencia>
       }
     }
 
+    if (__vr.getFieldErrorCount(DEVICEPROPERTIES) == 0) {
+      java.lang.String __deviceproperties = __target__.getDeviceProperties();
+      if (__deviceproperties!= null && __deviceproperties.length() > 4000) {
+        __vr.rejectValue(DEVICEPROPERTIES, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DEVICEPROPERTIES)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(4000)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(CLICKPROPERTIES) == 0) {
+      java.lang.String __clickproperties = __target__.getClickProperties();
+      if (__clickproperties!= null && __clickproperties.length() > 4000) {
+        __vr.rejectValue(CLICKPROPERTIES, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CLICKPROPERTIES)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(4000)));
+      }
+    }
+
     if (__vr.getFieldErrorCount(FIRMAREASON) == 0) {
       java.lang.String __firmareason = __target__.getFirmaReason();
       if (__firmareason!= null && __firmareason.length() > 255) {

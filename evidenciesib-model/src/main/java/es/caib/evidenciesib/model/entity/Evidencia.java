@@ -92,6 +92,12 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getLocalitzacioPais();
 	public void setLocalitzacioPais(java.lang.String _localitzacioPais_);
 
+	public java.lang.String getDeviceProperties();
+	public void setDeviceProperties(java.lang.String _deviceProperties_);
+
+	public java.lang.String getClickProperties();
+	public void setClickProperties(java.lang.String _clickProperties_);
+
 	public java.lang.String getFirmaReason();
 	public void setFirmaReason(java.lang.String _firmaReason_);
 

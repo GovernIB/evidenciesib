@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${currentLang}" lang="${pageContext.response.locale.language}">
 <%@include file="/WEB-INF/views/pages/head.jsp"%>
-<body>
+<body onload="initValues()">
     <br />
     <br />
     <br />
@@ -40,20 +40,56 @@
                     </div>
                     <br />
                     <center>
-                        <input id="submitAccept" name="submitAccept" class="btn btn-primary btn-lg" 
-                        onclick="clickedButton='accept';"
+                        <input id="submitAccept" name="submitAccept" class="btn btn-primary btn-lg"
                            type="submit"  value="<fmt:message key="norepudi.acceptar" />" />
                             &nbsp;&nbsp;
                              <input id="submitCancel" name="submitCancel" class="btn btn-secondary btn-lg"
-                             onclick="clickedButton='cancel';"
+                             onclick="clickedButton='cancel'"
                             type="submit" value="<fmt:message key="norepudi.cancelar" />" />
                     </center>
                 </div>
             </div>
         </div>
+        
+        <input type="hidden" name="clickInfo" id="clickInfo" value=""/>
+        
+        <input type="hidden" name="deviceInfo" id="deviceInfo" value=""/>
+        
+        <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOCIUTAT.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOCIUTAT.javaName%>" />
+        <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName%>" />
+        <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOIP.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOIP.javaName%>" />
+        <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOLATITUD.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOLATITUD.javaName%>" />
+        <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOLONGITUD.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOLONGITUD.javaName%>" />
+        <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOPAIS.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOPAIS.javaName%>" />
+        <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOREGIO.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOREGIO.javaName%>" />
+        
+        
     </form>
 
     <script type="text/javascript">
+    
+    
+        $("#submitAccept").click(function(evt){
+            
+            clickedButton='accept';
+            
+            var dt = new Date();
+    
+            var clickInfo =
+                "date.ms="  + dt.getTime() + "\n"
+                + "date.iso="  + dt.toISOString() + "\n"
+                + "click.clientX="  + evt.clientX + "\n"
+                + "click.clientY=" + evt.clientY + "\n"
+                + "click.pageX=" + evt.pageX + "\n"
+                + "click.pageY=" + evt.pageY + "\n"
+                + "click.screenX=" + evt.screenX + "\n"
+                + "click.screenY=" + evt.screenY;
+            
+            var element = document.getElementById('clickInfo');
+            element.value = clickInfo;
+            
+         });
+    
     
         var clickedButton;
     
@@ -77,6 +113,70 @@
             }
             document.body.style.cursor = 'wait';
         }
+        
+        function initValues() {
+            initDeviceInfo();
+            initLocation();
+        }
+            
+            
+        function initDeviceInfo() {
+            var deviceinfo = "platform.name=" +platform.name + "\n"
+            + "platform.version=" +platform.version + "\n"
+            + "platform.product=" +platform.product + "\n"
+            + "platform.manufacturer=" +platform.manufacturer + "\n"
+            + "platform.layout=" +platform.layout + "\n"
+            + "platform.prerelease =" +platform.prerelease + "\n"
+            + "platform.description =" +platform.description + "\n"
+            + "platform.ua =" +platform.ua  + "\n"
+            + "platform.os=" +platform.os + "\n"
+            + "platform.os.architecture=" +platform.os.architecture + "\n"
+            + "platform.os.family=" +platform.os.family + "\n"
+            + "platform.os.version=" +platform.os.version;
+
+            
+            var element = document.getElementById('deviceInfo');
+            
+            element.value = deviceinfo;
+        }
+        
+
+        function initLocation() {
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "https://ipapi.co/json/", true);
+            xhttp.responseType = 'json';
+            xhttp.onload = function() {
+                var status = xhttp.status;
+                var loc = xhttp.response;
+                if (status === 200) {
+                    setValorLoc('<%=EvidenciaFields.LOCALITZACIOCIUTAT.javaName%>', loc.city);
+                    setValorLoc('<%=EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName%>', loc.postal);
+                    setValorLoc('<%=EvidenciaFields.LOCALITZACIOIP.javaName%>', loc.ip);
+                    setValorLoc('<%=EvidenciaFields.LOCALITZACIOLATITUD.javaName%>', loc.latitude);
+                    setValorLoc('<%=EvidenciaFields.LOCALITZACIOLONGITUD.javaName%>', loc.longitude);
+                    setValorLoc('<%=EvidenciaFields.LOCALITZACIOPAIS.javaName%>', loc.country);
+                    setValorLoc('<%=EvidenciaFields.LOCALITZACIOREGIO.javaName%>', loc.region_code);
+                } else {
+                  alert("Error recolling informació de localització: " + loc);
+                }
+            };
+            xhttp.send();
+
+        };
+
+        function setValorLoc(camp, valor) {
+            if (valor != undefined && valor != null && valor != '') {
+                var obj = document.getElementById('<%=EvidenciaFields._TABLE_MODEL%>' + '.' + camp);
+                if (obj == null) {
+                    console.error("El camp ]" + camp + "[ val null");
+                } else {
+                    obj.value = valor;
+                    obj.readOnly = true;
+                }
+            }
+        }
+        
     </script>
 
 </body>

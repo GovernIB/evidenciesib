@@ -646,6 +646,84 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.DEVICEPROPERTIES)}">
+        <tr id="evidencia_deviceProperties_rowid">
+          <td id="evidencia_deviceProperties_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.DEVICEPROPERTIES])?'evidencia.deviceProperties':__theForm.labels[EvidenciaFields.DEVICEPROPERTIES]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.DEVICEPROPERTIES]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.DEVICEPROPERTIES]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_deviceProperties_columnvalueid">
+              <form:errors path="evidencia.deviceProperties" cssClass="errorField alert alert-danger" />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.DEVICEPROPERTIES)? 'true' : 'false'}" path="evidencia.deviceProperties"  />
+   </td>
+   <td style="width:40px">
+      <div id="dropdownMenuButton_deviceProperties" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_deviceProperties" class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('evidencia.deviceProperties'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('evidencia.deviceProperties'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('evidencia.deviceProperties'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_deviceProperties').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_deviceProperties').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_deviceProperties').css('display', valor);
+                 return false;
+				});
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.CLICKPROPERTIES)}">
+        <tr id="evidencia_clickProperties_rowid">
+          <td id="evidencia_clickProperties_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.CLICKPROPERTIES])?'evidencia.clickProperties':__theForm.labels[EvidenciaFields.CLICKPROPERTIES]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.CLICKPROPERTIES]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.CLICKPROPERTIES]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_clickProperties_columnvalueid">
+              <form:errors path="evidencia.clickProperties" cssClass="errorField alert alert-danger" />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.CLICKPROPERTIES)? 'true' : 'false'}" path="evidencia.clickProperties"  />
+   </td>
+   <td style="width:40px">
+      <div id="dropdownMenuButton_clickProperties" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_clickProperties" class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('evidencia.clickProperties'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('evidencia.clickProperties'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('evidencia.clickProperties'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_clickProperties').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_clickProperties').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_clickProperties').css('display', valor);
+                 return false;
+				});
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.FIRMAREASON)}">
         <tr id="evidencia_firmaReason_rowid">
           <td id="evidencia_firmaReason_columnlabelid">

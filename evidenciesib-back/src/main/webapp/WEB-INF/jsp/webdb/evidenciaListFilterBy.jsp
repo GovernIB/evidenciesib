@@ -584,6 +584,32 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.DEVICEPROPERTIES)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.deviceProperties" var="deviceProperties" />
+              <fmt:message key="genapp.form.searchby" var="cercaperdeviceProperties" >                
+                 <fmt:param value="${deviceProperties}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${deviceProperties}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperdeviceProperties}" path="deviceProperties" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.CLICKPROPERTIES)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.clickProperties" var="clickProperties" />
+              <fmt:message key="genapp.form.searchby" var="cercaperclickProperties" >                
+                 <fmt:param value="${clickProperties}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${clickProperties}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperclickProperties}" path="clickProperties" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.FIRMAREASON)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">

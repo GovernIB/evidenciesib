@@ -42,6 +42,8 @@ public interface EvidenciaFields extends java.io.Serializable {
 	 public static final StringField LOCALITZACIOREGIO = new StringField(_TABLE_MODEL, "localitzacioRegio", "localitzacioregio");
 	 public static final StringField LOCALITZACIOCIUTAT = new StringField(_TABLE_MODEL, "localitzacioCiutat", "localitzaciociutat");
 	 public static final StringField LOCALITZACIOPAIS = new StringField(_TABLE_MODEL, "localitzacioPais", "localitzaciopais");
+	 public static final StringField DEVICEPROPERTIES = new StringField(_TABLE_MODEL, "deviceProperties", "deviceproperties");
+	 public static final StringField CLICKPROPERTIES = new StringField(_TABLE_MODEL, "clickProperties", "clickproperties");
 	 public static final StringField FIRMAREASON = new StringField(_TABLE_MODEL, "firmaReason", "firmareason");
 	 public static final StringField FIRMAIDIOMADOCUMENT = new StringField(_TABLE_MODEL, "firmaIdiomaDocument", "firmaidiomadocument");
 	 public static final IntegerField FIRMATIPUSDOCUMENTAL = new IntegerField(_TABLE_MODEL, "firmaTipusDocumental", "firmatipusdocumental");
@@ -82,6 +84,8 @@ public interface EvidenciaFields extends java.io.Serializable {
     LOCALITZACIOREGIO,
     LOCALITZACIOCIUTAT,
     LOCALITZACIOPAIS,
+    DEVICEPROPERTIES,
+    CLICKPROPERTIES,
     FIRMAREASON,
     FIRMAIDIOMADOCUMENT,
     FIRMATIPUSDOCUMENTAL,

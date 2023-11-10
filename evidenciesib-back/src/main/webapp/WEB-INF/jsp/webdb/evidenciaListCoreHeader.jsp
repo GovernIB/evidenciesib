@@ -102,6 +102,12 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOPAIS)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOPAIS)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.DEVICEPROPERTIES)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.DEVICEPROPERTIES)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.CLICKPROPERTIES)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.CLICKPROPERTIES)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.FIRMAREASON)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.FIRMAREASON)}</th>
         </c:if>

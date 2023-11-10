@@ -121,11 +121,11 @@ public class EvidenciaLoginController {
 
         String botoAccept = request.getParameter("submitAccept");
 
-        if (botoAccept == null) {
+        // S'ha pitjat "CANCEL"
+        EvidenciaJPA evidencia;
+        evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
 
-            // S'ha pitjat "CANCEL"
-            EvidenciaJPA evidencia;
-            evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
+        if (botoAccept == null) {
 
             evidencia.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
 
@@ -140,6 +140,50 @@ public class EvidenciaLoginController {
 
             return r;
         }
+        
+        
+        evidencia.setClickProperties(request.getParameter("clickInfo"));
+
+        evidencia.setDeviceProperties(request.getParameter("deviceInfo"));
+
+        //Guardar dades de Login dins BBDD
+        log.info("setLocationPost:: Posant valors de UBICACIO a Taula Evidència per ID ]" + evidenciaID + "[");
+
+        Enumeration<String> ubis = request.getParameterNames();
+
+        while (ubis.hasMoreElements()) {
+            String name = ubis.nextElement();
+            log.info("PARAMETRE[" + name + "] => " + request.getParameter(name));
+
+        }
+
+        String ciutat = request
+                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCIUTAT.javaName);
+        String codipostal = request
+                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName);
+        String ip = request.getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOIP.javaName);
+        String latitud = request
+                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOLATITUD.javaName);
+        String longitud = request
+                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOLONGITUD.javaName);
+        String pais = request
+                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOPAIS.javaName);
+        String regio = request
+                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOREGIO.javaName);
+
+        log.info("setLocationPost:: ciutat => " + ciutat);
+        log.info("setLocationPost:: pais => " + pais);
+        log.info("setLocationPost:: ip => " + ip);
+
+        evidencia.setLocalitzacioCiutat(ciutat);
+        evidencia.setLocalitzacioCodiPostal(codipostal);
+        evidencia.setLocalitzacioIp(ip);
+        evidencia.setLocalitzacioLatitud(latitud);
+        evidencia.setLocalitzacioLongitud(longitud);
+        evidencia.setLocalitzacioPais(pais);
+        evidencia.setLocalitzacioRegio(regio);
+
+        evidenciaLogicaEjb.update(evidencia);
 
         String urlfront = Configuracio.getFrontUrl();
         log.info("noRepudiPost =>  urlfront=" + urlfront);
@@ -237,7 +281,7 @@ public class EvidenciaLoginController {
     }
 
     @RequestMapping(MAPPING_FRONT_LOGIN_END + "/{evidenciaID}")
-    public ModelAndView frontLoginEnd(HttpServletRequest request, HttpServletResponse response,
+    public String frontLoginEnd(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
 
         log.info("frontLoginEnd =>  evidenciaID=" + evidenciaID);
@@ -252,9 +296,11 @@ public class EvidenciaLoginController {
             log.error(msg);
             throw new Exception(msg);
         }
-        
+
+        final String r = "redirect:" + getRedirectUrl(evidenciaID);
+
         evi.setLoginData(new Timestamp(System.currentTimeMillis()));
-        evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);  
+        evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);
 
         // ERROR ???
         String errorPlugin = (String) request.getSession()
@@ -266,7 +312,7 @@ public class EvidenciaLoginController {
             evi.setEstatError(StringUtils.abbreviate(errorPlugin, 4000));
 
             evidenciaLogicaEjb.update(evi);
-            return new ModelAndView(new RedirectView(getRedirectUrl(evidenciaID)));
+            return r;
         }
 
         // PLUGIN HA REGISTRAT CORRECTAMENT LA INFORMACIÓ D'AUTENTICACIO ??
@@ -281,7 +327,7 @@ public class EvidenciaLoginController {
             evi.setEstatError(msg);
 
             evidenciaLogicaEjb.update(evi);
-            return new ModelAndView(new RedirectView(getRedirectUrl(evidenciaID)));
+            return r;
 
         }
 
@@ -304,7 +350,7 @@ public class EvidenciaLoginController {
             evi.setEstatError(msg);
 
             evidenciaLogicaEjb.update(evi);
-            return new ModelAndView(new RedirectView(getRedirectUrl(evidenciaID)));
+            return r;
         }
 
         // TOT CORRECTE => Guardar dades de Login dins BBDD
@@ -336,10 +382,7 @@ public class EvidenciaLoginController {
 
         evidenciaLogicaEjb.update(evi);
 
-        ModelAndView mav = new ModelAndView("location");
-        mav.addObject("evidenciaID", evidenciaID);
-
-        return mav;
+        return r;
     }
 
     public static final String DOWNLOAD_PDF = "/downloadpdf";
@@ -385,36 +428,37 @@ public class EvidenciaLoginController {
         return writer.getBuffer().toString();
     }
 
+    /*
     public static final String MAPPING_PUBLIC_SET_LOCATION_POST = "/public/setlocationpost";
-
+    
     @RequestMapping(
             value = MAPPING_PUBLIC_SET_LOCATION_POST + "/{evidenciaID}",
             method = { RequestMethod.POST, RequestMethod.GET })
     public String setLocationPost(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
-
+    
         log.info("setLocationPost =>  evidenciaID=" + evidenciaID);
-
+    
         EvidenciaJPA evi = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
-
+    
         if (evi == null) {
             // XYZ ZZZ
             String msg = "No es troba evidenciaID amb ID ]" + evidenciaID + "[ al retorn del Login";
             log.error(msg);
             throw new Exception(msg);
         } else {
-
+    
             //Guardar dades de Login dins BBDD
             log.info("setLocationPost:: Posant valors de UBICACIO a Taula Evidència per ID ]" + evidenciaID + "[");
-
+    
             Enumeration<String> ubis = request.getParameterNames();
-
+    
             while (ubis.hasMoreElements()) {
                 String name = ubis.nextElement();
                 log.info("PARAMETRE[" + name + "] => " + request.getParameter(name));
-
+    
             }
-
+    
             String ciutat = request
                     .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCIUTAT.javaName);
             String codipostal = request
@@ -429,11 +473,11 @@ public class EvidenciaLoginController {
                     .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOPAIS.javaName);
             String regio = request
                     .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOREGIO.javaName);
-
+    
             log.info("setLocationPost:: ciutat => " + ciutat);
             log.info("setLocationPost:: pais => " + pais);
             log.info("setLocationPost:: ip => " + ip);
-
+    
             evi.setLocalitzacioCiutat(ciutat);
             evi.setLocalitzacioCodiPostal(codipostal);
             evi.setLocalitzacioIp(ip);
@@ -441,15 +485,16 @@ public class EvidenciaLoginController {
             evi.setLocalitzacioLongitud(longitud);
             evi.setLocalitzacioPais(pais);
             evi.setLocalitzacioRegio(regio);
-
+    
             evidenciaLogicaEjb.update(evi);
         }
-
+    
         final String r = "redirect:" + getRedirectUrl(evidenciaID);
         log.info("Login Correcte. Redirect => " + r);
-
+    
         return r;
-
+    
     }
+    */
 
 }

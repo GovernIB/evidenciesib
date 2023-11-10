@@ -788,6 +788,56 @@
         },
         {
           "isAutoIncrement": false,
+          "sqlName": "deviceproperties",
+          "sqlType": 12,
+          "size": 4000,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Propietats del Dispositiu del Client",
+            "es": "Propiedades del Dispositivo del Cliente"
+          },
+          "javaName": "deviceProperties",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "clickproperties",
+          "sqlType": 12,
+          "size": 4000,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Informació del Click de la Voluntat de Firmant",
+            "es": "Informació del Click de la Voluntat del Firmante"
+          },
+          "javaName": "clickProperties",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
           "sqlName": "firmareason",
           "sqlType": 12,
           "size": 255,

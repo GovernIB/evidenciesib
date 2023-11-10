@@ -11,6 +11,9 @@
 <script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
 <%-- Bootstrap --%>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+<%-- DeviceAPI --%>
+<script src="<%=request.getContextPath()%>/js/platform.js"></script>
+
 
 <script src="<%=request.getContextPath()%>/js/webapp.js"></script>
 

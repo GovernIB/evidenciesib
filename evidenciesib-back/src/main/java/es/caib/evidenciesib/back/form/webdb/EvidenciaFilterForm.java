@@ -395,6 +395,28 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
+  private java.lang.String deviceProperties;
+
+  public java.lang.String getDeviceProperties() {
+    return this.deviceProperties;
+  }
+
+  public void setDeviceProperties(java.lang.String deviceProperties) {
+    this.deviceProperties = deviceProperties;
+  }
+
+
+  private java.lang.String clickProperties;
+
+  public java.lang.String getClickProperties() {
+    return this.clickProperties;
+  }
+
+  public void setClickProperties(java.lang.String clickProperties) {
+    this.clickProperties = clickProperties;
+  }
+
+
   private java.lang.String firmaReason;
 
   public java.lang.String getFirmaReason() {
@@ -478,6 +500,8 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.localitzacioRegio = __toClone.localitzacioRegio;
     this.localitzacioCiutat = __toClone.localitzacioCiutat;
     this.localitzacioPais = __toClone.localitzacioPais;
+    this.deviceProperties = __toClone.deviceProperties;
+    this.clickProperties = __toClone.clickProperties;
     this.firmaReason = __toClone.firmaReason;
     this.firmaIdiomaDocument = __toClone.firmaIdiomaDocument;
     this.firmaTipusDocumentalSelect = __toClone.firmaTipusDocumentalSelect;
