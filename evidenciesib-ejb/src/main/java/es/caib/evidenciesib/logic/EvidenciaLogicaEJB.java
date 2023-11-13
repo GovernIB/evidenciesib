@@ -62,7 +62,6 @@ import es.caib.evidenciesib.ejb.EvidenciaEJB;
 import es.caib.evidenciesib.logic.utils.I18NLogicUtils;
 import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.entity.Fitxer;
-import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 import es.caib.evidenciesib.persistence.FitxerJPA;
 

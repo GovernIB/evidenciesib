@@ -1,9 +1,18 @@
 package es.caib.evidenciesib.front.controller;
 
+
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
+
+
+
+
 import java.io.File;
+import java.io.OutputStream;
 import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.util.Enumeration;
@@ -11,15 +20,13 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.ejb.EJB;
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.PDFRenderer;
+
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
@@ -36,7 +43,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
@@ -97,8 +103,12 @@ public class EvidenciaLoginController {
         mav.addObject("action", request.getContextPath() + MAPPING_NO_REPUDI_POST + "/" + evidenciaID);
         mav.addObject("thumbnail", request.getContextPath() + THUMBNAIL_PDF_MASSIVE + "/" + evidenciaID);
 
-        mav.addObject("download", request.getContextPath() + DOWNLOAD_PDF + "/" + EncrypterDecrypter
-                .encrypt(EncrypterDecrypter.ALGORITHM_AES, Configuracio.getEncryptKey(), String.valueOf(evidenciaID)));
+        final String base = request.getContextPath();
+        final String append = EncrypterDecrypter
+                .encrypt(EncrypterDecrypter.ALGORITHM_AES, Configuracio.getEncryptKey(), String.valueOf(evidenciaID));
+        
+        mav.addObject("download",base  + DOWNLOAD_PDF + "/" + append);
+        mav.addObject("objectpdf",base  + OBJECT_PDF + "/" + append);
         return mav;
 
     }
@@ -204,6 +214,7 @@ public class EvidenciaLoginController {
         return Configuracio.getBackUrl() + Constants.MAPPING_BACK_LOGIN_END + "/" + evidenciaID;
     }
 
+    
     public static final String THUMBNAIL_PDF_MASSIVE = "/thumbnailpdf";
 
     @RequestMapping(value = THUMBNAIL_PDF_MASSIVE + "/{evidenciaID}", method = RequestMethod.GET)
@@ -230,7 +241,7 @@ public class EvidenciaLoginController {
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
             response.setDateHeader("Expires", -1); // Proxies.
-
+            
             ImageIO.write(scaled, "PNG", response.getOutputStream());
 
         } catch (Throwable th) {
@@ -279,6 +290,7 @@ public class EvidenciaLoginController {
 
         return bimage;
     }
+    
 
     @RequestMapping(MAPPING_FRONT_LOGIN_END + "/{evidenciaID}")
     public String frontLoginEnd(HttpServletRequest request, HttpServletResponse response,
@@ -389,8 +401,23 @@ public class EvidenciaLoginController {
 
     @RequestMapping(value = DOWNLOAD_PDF + "/{evidenciaID}", method = RequestMethod.GET)
     public void downloadPdf(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("evidenciaID") String evidenciaIDEncrypted) throws Exception, I18NException {
+        returnPdf(request, response, evidenciaIDEncrypted, true);   
+    }
+    public static final String OBJECT_PDF = "/objectpdf";
 
-            String evidenciaIDEncrypted) throws Exception, I18NException {
+    @RequestMapping(value = OBJECT_PDF + "/{evidenciaID}", method = RequestMethod.GET)
+    public void objectPdf(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("evidenciaID") String evidenciaIDEncrypted) throws Exception, I18NException {
+        
+        returnPdf(request, response, evidenciaIDEncrypted, false);
+        
+    }
+    
+    
+    protected void returnPdf(HttpServletRequest request, HttpServletResponse response,
+            String evidenciaIDEncrypted, boolean isDownload) throws Exception, I18NException {
+    
 
         String evidenciaIDDecrypted = EncrypterDecrypter.decrypt(EncrypterDecrypter.ALGORITHM_AES,
                 Configuracio.getEncryptKey(), evidenciaIDEncrypted);
@@ -406,8 +433,15 @@ public class EvidenciaLoginController {
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
             response.setDateHeader("Expires", -1); // Proxies.
+            response.setContentType("application/pdf");
 
-            response.getOutputStream().write(FileSystemManager.readFileToByteArray(file));
+            if (isDownload) {
+              response.setHeader("Content-disposition", "attachment; filename=document.pdf");
+            }
+
+            OutputStream out = response.getOutputStream(); 
+            out.write(FileSystemManager.readFileToByteArray(file));
+            out.flush();
 
         } catch (Throwable th) {
             log.error("Error descarregant PDF: " + th.getMessage(), th);

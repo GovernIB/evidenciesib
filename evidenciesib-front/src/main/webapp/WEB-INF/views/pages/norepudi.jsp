@@ -9,26 +9,18 @@
 <body onload="initValues()">
     <br />
     <br />
-    <br />
     <center>
         <h1><fmt:message key="norepudi.titol" /></h1>
-        <h3>-- <fmt:message key="norepudi.subtitol" /> --</h3>
+    <%--    <h3>-- <fmt:message key="norepudi.subtitol" /> --</h3> --%>
     </center>
-    <br/>
     <br/>
 
     <form name="norepudiForm" id="norepudiForm" action="${action}" onsubmit="return validateForm()" method="post">
 
         <div class="container">
 
-            <div class="row">
-                <div class="col-sm" style="text-align: right;">
-                    <a href="${download}" target="_blank">
-                    <img id="waitMessage" src="<c:url value="/images/spinner_40.gif"/>" />
-                    <img id="thumbnail" style="display:none;" src="${thumbnail}"
-                        alt="Thumbnail PDF" onload="imageLoaded();" />
-                    </a>
-                </div>
+            <div class="row" style="margin-bottom: 20px;">
+
                 <div class="col-sm" style>
                     <br/><br/>
                     <div class="form-check">
@@ -40,13 +32,34 @@
                     </div>
                     <br />
                     <center>
-                        <input id="submitAccept" name="submitAccept" class="btn btn-primary btn-lg"
-                           type="submit"  value="<fmt:message key="norepudi.acceptar" />" />
-                            &nbsp;&nbsp;
-                             <input id="submitCancel" name="submitCancel" class="btn btn-secondary btn-lg"
+                        <button class="btn btn-primary btn-lg"
+                           type="button" onclick="mostrarModal()">
+                           <i class="fas fa-file-signature"></i>&nbsp;<fmt:message key="norepudi.firmar" />
+                        </button>
+                        &nbsp;&nbsp;
+                        <input id="submitCancel" name="submitCancel" class="btn btn-secondary btn-lg"
                              onclick="clickedButton='cancel'"
                             type="submit" value="<fmt:message key="norepudi.cancelar" />" />
+                         &nbsp;&nbsp;
+                         <button  class="btn btn-info btn-lg"
+                           type="button" onclick="window.open('${download}','_blank')"><i class="fas fa-download"></i>&nbsp;<fmt:message key="norepudi.descarregar" /></button>
                     </center>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm">
+                    <object data="${objectpdf}" title="Document a signar" type="application/pdf" width="100%" height="1500px">
+                        <center>
+
+                            <a href="${download}" target="_blank">
+                                <%-- <img id="waitMessage" src="<c:url value="/images/spinner_40.gif"/>" />  --%>
+                                <img id="thumbnail" src="${thumbnail}" alt="Thumbnail PDF" />
+                                <%--  style="display: none;" onload="imageLoaded();" --%>
+                            </a>
+
+                        </center>
+                    </object>
                 </div>
             </div>
         </div>
@@ -63,6 +76,31 @@
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOPAIS.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOPAIS.javaName%>" />
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOREGIO.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOREGIO.javaName%>" />
         
+        
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><fmt:message key="modal.title" /></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <fmt:message key="modal.body" />
+              </div>
+              <div class="modal-footer">
+                
+                <button type="submit" id="submitAccept" name="submitAccept"  class="btn btn-primary"><fmt:message key="norepudi.acceptar" /></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key="norepudi.cancelar" /></button>
+                
+                
+              </div>
+            </div>
+          </div>
+        </div>
         
     </form>
 
@@ -89,28 +127,33 @@
             element.value = clickInfo;
             
          });
-    
-    
-        var clickedButton;
-    
+    <%--
         function imageLoaded() {
             var element = document.getElementById('waitMessage');
             element.style.cssText = 'display:none;';
             var thumbnail = document.getElementById('thumbnail');
             thumbnail.style.cssText = 'border:2px solid #000; padding: 2px;display:;';
         }
-
-        function validateForm() {
-            //alert("Entra a validateForm ...");
-            if (clickedButton == 'accept') {
-                var element = document.getElementById('checkNoRepudi');
-                //alert("Element: " + element);
-                //alert("Checked: " + element.checked);
-                if (!element.checked) {
-                    alert("<fmt:message key="norepudi.nomarcat" />");
-                    return false;
-                }
+    --%>
+        var clickedButton;
+        
+        
+        function mostrarModal() {   
+            var element = document.getElementById('checkNoRepudi');
+            //alert("Element: " + element);
+            //alert("Checked: " + element.checked);
+            if (element.checked) {
+            
+              $('#exampleModal').modal();
+            }  else {
+                alert("<fmt:message key="norepudi.nomarcat" />");
+                return false;
             }
+        }
+        
+        
+    
+        function validateForm() {
             document.body.style.cursor = 'wait';
         }
         
