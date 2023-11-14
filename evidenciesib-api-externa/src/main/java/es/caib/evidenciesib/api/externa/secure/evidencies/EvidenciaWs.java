@@ -61,11 +61,8 @@ public class EvidenciaWs {
     @Schema(required = false, description = "Stacktrace de l'excepció si n'hi hagues")
     java.lang.String estatExcepcio;
 
-    @Schema(required = true, description = "Codi del Tipus de Login")
-    int loginType;
-
-    @Schema(required = true, description = "Descripció del tipus de login")
-    String loginTypeDescription;
+    @Schema(required = true, description = "Tipus de Login")
+    String loginType;
 
     @Schema(required = true, description = "Subtipus de login")
     java.lang.String loginSubtype;
@@ -193,25 +190,6 @@ public class EvidenciaWs {
         this.setFirmaIdiomaDocument(__bean.getFirmaIdiomaDocument());
         this.setFirmaTipusDocumental(__bean.getFirmaTipusDocumental());
 
-        {
-            String descrLoginType;
-            switch (__bean.getLoginType()) {
-
-                case Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN:
-                    descrLoginType = "Plugin de Login";
-                break;
-/*
-                case Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK:
-                    descrLoginType = "Login de Back";
-                break;
-*/
-                default:
-                    descrLoginType = "Tipus de Login desconegut";
-            }
-            this.setLoginTypeDescription(descrLoginType);
-        }
-
-
         this.setFirmaTipusDocumentalDescripcio(EvidenciesRestService.MAP_TIPUS_DOCUMENTAL.get(__bean.getFirmaTipusDocumental() + "_" + language));
 
 
@@ -338,11 +316,11 @@ public class EvidenciaWs {
         this.estatExcepcio = estatExcepcio;
     }
 
-    public int getLoginType() {
+    public String getLoginType() {
         return loginType;
     }
 
-    public void setLoginType(int loginType) {
+    public void setLoginType(String loginType) {
         this.loginType = loginType;
     }
 
@@ -504,14 +482,6 @@ public class EvidenciaWs {
 
     public void setEstatCodiDescripcio(String estatCodiDescripcio) {
         this.estatCodiDescripcio = estatCodiDescripcio;
-    }
-
-    public String getLoginTypeDescription() {
-        return loginTypeDescription;
-    }
-
-    public void setLoginTypeDescription(String loginTypeDescription) {
-        this.loginTypeDescription = loginTypeDescription;
     }
 
     public String getFirmaTipusDocumentalDescripcio() {

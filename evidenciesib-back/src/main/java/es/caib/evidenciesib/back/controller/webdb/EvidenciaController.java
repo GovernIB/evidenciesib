@@ -191,13 +191,13 @@ public class EvidenciaController
       };
     }
 
-    // Field loginType
+    // Field loginQaa
     {
-      _listSKV = getReferenceListForLoginType(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForLoginQaa(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForLoginType(_tmp);
-      if (filterForm.getGroupByFields().contains(LOGINTYPE)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, LOGINTYPE, false);
+      filterForm.setMapOfValuesForLoginQaa(_tmp);
+      if (filterForm.getGroupByFields().contains(LOGINQAA)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, LOGINQAA, false);
       };
     }
 
@@ -237,7 +237,7 @@ public class EvidenciaController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(ESTATCODI, filterForm.getMapOfValuesForEstatCodi());
-    __mapping.put(LOGINTYPE, filterForm.getMapOfValuesForLoginType());
+    __mapping.put(LOGINQAA, filterForm.getMapOfValuesForLoginQaa());
     __mapping.put(FIRMAIDIOMADOCUMENT, filterForm.getMapOfValuesForFirmaIdiomaDocument());
     __mapping.put(FIRMATIPUSDOCUMENTAL, filterForm.getMapOfValuesForFirmaTipusDocumental());
     exportData(request, response, dataExporterID, filterForm,
@@ -297,13 +297,13 @@ public class EvidenciaController
       evidenciaForm.setListOfValuesForEstatCodi(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (evidenciaForm.getListOfValuesForLoginType() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForLoginType(request, mav, evidenciaForm, null);
+    if (evidenciaForm.getListOfValuesForLoginQaa() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForLoginQaa(request, mav, evidenciaForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      evidenciaForm.setListOfValuesForLoginType(_listSKV);
+      evidenciaForm.setListOfValuesForLoginQaa(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (evidenciaForm.getListOfValuesForFirmaIdiomaDocument() == null) {
@@ -715,34 +715,35 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForLoginType(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForLoginQaa(HttpServletRequest request,
        ModelAndView mav, EvidenciaForm evidenciaForm, Where where)  throws I18NException {
-    if (evidenciaForm.isHiddenField(LOGINTYPE)) {
+    if (evidenciaForm.isHiddenField(LOGINQAA)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
-    return getReferenceListForLoginType(request, mav, where);
+    return getReferenceListForLoginQaa(request, mav, where);
   }
 
 
-  public List<StringKeyValue> getReferenceListForLoginType(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForLoginQaa(HttpServletRequest request,
        ModelAndView mav, EvidenciaFilterForm evidenciaFilterForm,
        List<Evidencia> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (evidenciaFilterForm.isHiddenField(LOGINTYPE)
-       && !evidenciaFilterForm.isGroupByField(LOGINTYPE)
-       && !evidenciaFilterForm.isFilterByField(LOGINTYPE)) {
+    if (evidenciaFilterForm.isHiddenField(LOGINQAA)
+       && !evidenciaFilterForm.isGroupByField(LOGINQAA)
+       && !evidenciaFilterForm.isFilterByField(LOGINQAA)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
-    return getReferenceListForLoginType(request, mav, Where.AND(where,_w));
+    return getReferenceListForLoginQaa(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForLoginType(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForLoginQaa(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("0" , "0"));
     __tmp.add(new StringKeyValue("1" , "1"));
     __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
     return __tmp;
   }
 

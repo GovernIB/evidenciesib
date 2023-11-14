@@ -79,24 +79,23 @@ public class EvidenciaJPA implements Evidencia {
     @Type(type = "org.hibernate.type.TextType")
     java.lang.String estatExcepcio;
 
-    @org.hibernate.annotations.ColumnDefault("0")
-    @Column(name="logintype",nullable = false,length = 10)
-    int loginType = 0;
+    @Column(name="logintype",length = 255)
+    java.lang.String loginType;
 
     @Column(name="loginsubtype",length = 255)
     java.lang.String loginSubtype;
 
+    @Column(name="loginauthmethod",length = 255)
+    java.lang.String loginAuthMethod;
+
     @Column(name="loginqaa",length = 255)
     java.lang.String loginQaa;
-
-    @Column(name="logindata",length = 29,precision = 6)
-    java.sql.Timestamp loginData;
 
     @Column(name="loginid",length = 255)
     java.lang.String loginId;
 
-    @Column(name="loginauthmethod",length = 255)
-    java.lang.String loginAuthMethod;
+    @Column(name="logindata",length = 29,precision = 6)
+    java.sql.Timestamp loginData;
 
     @Column(name="loginadditionalproperties",length = 2147483647)
     @Lob
@@ -161,7 +160,7 @@ public class EvidenciaJPA implements Evidencia {
   }
 
   /** Constructor amb tots els camps  */
-  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginSubtype , java.lang.String loginQaa , java.sql.Timestamp loginData , java.lang.String loginId , java.lang.String loginAuthMethod , java.lang.String loginAdditionalProperties , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
+  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNif=personaNif;
@@ -180,10 +179,10 @@ public class EvidenciaJPA implements Evidencia {
     this.estatExcepcio=estatExcepcio;
     this.loginType=loginType;
     this.loginSubtype=loginSubtype;
-    this.loginQaa=loginQaa;
-    this.loginData=loginData;
-    this.loginId=loginId;
     this.loginAuthMethod=loginAuthMethod;
+    this.loginQaa=loginQaa;
+    this.loginId=loginId;
+    this.loginData=loginData;
     this.loginAdditionalProperties=loginAdditionalProperties;
     this.localitzacioIp=localitzacioIp;
     this.localitzacioCodiPostal=localitzacioCodiPostal;
@@ -203,7 +202,7 @@ public class EvidenciaJPA implements Evidencia {
     this.callBackUrl=callBackUrl;
 }
   /** Constructor sense valors autoincrementals */
-  public EvidenciaJPA(java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , int loginType , java.lang.String loginSubtype , java.lang.String loginQaa , java.sql.Timestamp loginData , java.lang.String loginId , java.lang.String loginAuthMethod , java.lang.String loginAdditionalProperties , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
+  public EvidenciaJPA(java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
     this.nom=nom;
     this.personaNif=personaNif;
     this.personaUsername=personaUsername;
@@ -221,10 +220,10 @@ public class EvidenciaJPA implements Evidencia {
     this.estatExcepcio=estatExcepcio;
     this.loginType=loginType;
     this.loginSubtype=loginSubtype;
-    this.loginQaa=loginQaa;
-    this.loginData=loginData;
-    this.loginId=loginId;
     this.loginAuthMethod=loginAuthMethod;
+    this.loginQaa=loginQaa;
+    this.loginId=loginId;
+    this.loginData=loginData;
     this.loginAdditionalProperties=loginAdditionalProperties;
     this.localitzacioIp=localitzacioIp;
     this.localitzacioCodiPostal=localitzacioCodiPostal;
@@ -244,13 +243,12 @@ public class EvidenciaJPA implements Evidencia {
     this.callBackUrl=callBackUrl;
 }
   /** Constructor dels valors Not Null */
-  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.sql.Timestamp dataInici , int estatCodi , int loginType , java.lang.String firmaReason , int firmaTipusDocumental , long fitxerOriginalID , java.lang.String callBackUrl) {
+  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.sql.Timestamp dataInici , int estatCodi , java.lang.String firmaReason , int firmaTipusDocumental , long fitxerOriginalID , java.lang.String callBackUrl) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNif=personaNif;
     this.dataInici=dataInici;
     this.estatCodi=estatCodi;
-    this.loginType=loginType;
     this.firmaReason=firmaReason;
     this.firmaTipusDocumental=firmaTipusDocumental;
     this.fitxerOriginalID=fitxerOriginalID;
@@ -275,10 +273,10 @@ public class EvidenciaJPA implements Evidencia {
     this.setEstatExcepcio(__bean.getEstatExcepcio());
     this.setLoginType(__bean.getLoginType());
     this.setLoginSubtype(__bean.getLoginSubtype());
-    this.setLoginQaa(__bean.getLoginQaa());
-    this.setLoginData(__bean.getLoginData());
-    this.setLoginId(__bean.getLoginId());
     this.setLoginAuthMethod(__bean.getLoginAuthMethod());
+    this.setLoginQaa(__bean.getLoginQaa());
+    this.setLoginId(__bean.getLoginId());
+    this.setLoginData(__bean.getLoginData());
     this.setLoginAdditionalProperties(__bean.getLoginAdditionalProperties());
     this.setLocalitzacioIp(__bean.getLocalitzacioIp());
     this.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
@@ -416,10 +414,10 @@ public class EvidenciaJPA implements Evidencia {
 		this.estatExcepcio = _estatExcepcio_;
 	};
 
-	public int getLoginType() {
+	public java.lang.String getLoginType() {
 		return(loginType);
 	};
-	public void setLoginType(int _loginType_) {
+	public void setLoginType(java.lang.String _loginType_) {
 		this.loginType = _loginType_;
 	};
 
@@ -430,18 +428,18 @@ public class EvidenciaJPA implements Evidencia {
 		this.loginSubtype = _loginSubtype_;
 	};
 
+	public java.lang.String getLoginAuthMethod() {
+		return(loginAuthMethod);
+	};
+	public void setLoginAuthMethod(java.lang.String _loginAuthMethod_) {
+		this.loginAuthMethod = _loginAuthMethod_;
+	};
+
 	public java.lang.String getLoginQaa() {
 		return(loginQaa);
 	};
 	public void setLoginQaa(java.lang.String _loginQaa_) {
 		this.loginQaa = _loginQaa_;
-	};
-
-	public java.sql.Timestamp getLoginData() {
-		return(loginData);
-	};
-	public void setLoginData(java.sql.Timestamp _loginData_) {
-		this.loginData = _loginData_;
 	};
 
 	public java.lang.String getLoginId() {
@@ -451,11 +449,11 @@ public class EvidenciaJPA implements Evidencia {
 		this.loginId = _loginId_;
 	};
 
-	public java.lang.String getLoginAuthMethod() {
-		return(loginAuthMethod);
+	public java.sql.Timestamp getLoginData() {
+		return(loginData);
 	};
-	public void setLoginAuthMethod(java.lang.String _loginAuthMethod_) {
-		this.loginAuthMethod = _loginAuthMethod_;
+	public void setLoginData(java.sql.Timestamp _loginData_) {
+		this.loginData = _loginData_;
 	};
 
 	public java.lang.String getLoginAdditionalProperties() {
@@ -657,10 +655,10 @@ public class EvidenciaJPA implements Evidencia {
     __tmp.setEstatExcepcio(__bean.getEstatExcepcio());
     __tmp.setLoginType(__bean.getLoginType());
     __tmp.setLoginSubtype(__bean.getLoginSubtype());
-    __tmp.setLoginQaa(__bean.getLoginQaa());
-    __tmp.setLoginData(__bean.getLoginData());
-    __tmp.setLoginId(__bean.getLoginId());
     __tmp.setLoginAuthMethod(__bean.getLoginAuthMethod());
+    __tmp.setLoginQaa(__bean.getLoginQaa());
+    __tmp.setLoginId(__bean.getLoginId());
+    __tmp.setLoginData(__bean.getLoginData());
     __tmp.setLoginAdditionalProperties(__bean.getLoginAdditionalProperties());
     __tmp.setLocalitzacioIp(__bean.getLocalitzacioIp());
     __tmp.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());

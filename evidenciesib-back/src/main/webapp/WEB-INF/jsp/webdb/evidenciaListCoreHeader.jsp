@@ -66,17 +66,17 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINSUBTYPE)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINSUBTYPE)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINAUTHMETHOD)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINAUTHMETHOD)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINQAA)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINQAA)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINDATA)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINDATA)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINID)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINAUTHMETHOD)}">
-        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINAUTHMETHOD)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINDATA)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINDATA)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINADDITIONALPROPERTIES)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINADDITIONALPROPERTIES)}</th>

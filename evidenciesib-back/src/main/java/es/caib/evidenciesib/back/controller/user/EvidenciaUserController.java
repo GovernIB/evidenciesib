@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import es.caib.evidenciesib.back.controller.webdb.EvidenciaController;
 import es.caib.evidenciesib.back.form.webdb.EvidenciaFilterForm;
@@ -116,7 +115,7 @@ public class EvidenciaUserController extends EvidenciaController {
             if (!isAdmin()) {
                 evidenciaFilterForm
                         .addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN, "evidencia.crear",
-                                getContextWeb() + "/new?tipusLogin=" + Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN,
+                                getContextWeb() + "/new",
                                 "btn-success"));
             }
             
@@ -135,24 +134,6 @@ public class EvidenciaUserController extends EvidenciaController {
 
         if (evidenciaForm.isNou()) {
 
-            String tipusLoginStr = request.getParameter("tipusLogin");
-            if (tipusLoginStr == null) {
-                // XYZ ZZZ
-                HtmlUtils.saveMessageError(request, "No s'ha passat el parametre 'tipusLogin'");
-                mav.setView(new RedirectView(getContextWeb() + "/list"));
-                return evidenciaForm;
-            }
-
-            int tipusLogin;
-            try {
-                tipusLogin = Integer.parseInt(tipusLoginStr);
-            } catch (NumberFormatException e) {
-                // XYZ ZZZ
-                HtmlUtils.saveMessageError(request,
-                        "El parametre 'tipusLogin' ha de ser de tipus numeric (" + tipusLoginStr + ")");
-                mav.setView(new RedirectView(getContextWeb() + "/list"));
-                return evidenciaForm;
-            }
 
             EvidenciaJPA evi = evidenciaForm.getEvidencia();
 
@@ -165,52 +146,6 @@ public class EvidenciaUserController extends EvidenciaController {
             evi.setPersonaNom(user.getName());
             evi.setPersonaLlinatge1(user.getSurname1());
             evi.setPersonaLlinatge2(user.getSurname2());
-
-            // XYZ ZZZ Falten Dades de UserInformation
-            /*if (tipusLogin == Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK) {
-
-                evi.setPersonaEmail(user.getEmail());
-
-                evi.setPersonaLlinatge2(user.getSurname2());
-                evi.setPersonaMobil(user.getPhoneNumber());
-
-                evidenciaForm.addReadOnlyField(PERSONAEMAIL);
-                evidenciaForm.addReadOnlyField(PERSONALLINATGE1);
-                evidenciaForm.addReadOnlyField(PERSONALLINATGE2);
-                evidenciaForm.addReadOnlyField(PERSONAMOBIL);
-                evidenciaForm.addReadOnlyField(PERSONANIF);
-                evidenciaForm.addReadOnlyField(PERSONAUSERNAME);
-                evidenciaForm.addReadOnlyField(PERSONANOM);
-
-                evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK);
-                evi.setLoginId(request.getRemoteUser());
-                evi.setLoginData(new Timestamp(System.currentTimeMillis()));
-
-            } else */ if (tipusLogin == Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN) {
-
-                // TODO XYZ ZZZ
-                evidenciaForm.setSubTitleCode(
-                        "=Després de pitjar Guardar anirà a una pàgina per autenticar-se a través de Cl@ve.");
-
-                evidenciaForm.addHiddenField(PERSONAEMAIL);
-                //evidenciaForm.addHiddenField(PERSONALLINATGE1);
-                evidenciaForm.addHiddenField(PERSONALLINATGE2);
-                evidenciaForm.addHiddenField(PERSONAMOBIL);
-                //evidenciaForm.addHiddenField(PERSONANIF);
-                //evidenciaForm.addHiddenField(PERSONANOM);
-
-                evidenciaForm.addReadOnlyField(PERSONANIF);
-                evidenciaForm.addReadOnlyField(PERSONAUSERNAME);
-
-                evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);
-
-            } else {
-                // XYZ ZZZ
-                HtmlUtils.saveMessageError(request, "El parametre 'tipusLogin' no té un valor vàlid: " + tipusLoginStr);
-                mav.setView(new RedirectView(getContextWeb() + "/list"));
-                return evidenciaForm;
-            }
-
             evi.setNom(I18NUtils.tradueix("evidencia.evidencia") + "_" + System.currentTimeMillis());
 
             // XYZ ZZZ TODO 
@@ -306,18 +241,6 @@ public class EvidenciaUserController extends EvidenciaController {
         return __tmp;
     }
 
-    @Override
-    public List<StringKeyValue> getReferenceListForLoginType(HttpServletRequest request, ModelAndView mav, Where where)
-            throws I18NException {
-        List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-        // TODO XYZ ZZZ Traduir
-        __tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN),
-                "PLUGIN LOGIN (Cl@ve, Mock, ...)"));
-        //__tmp.add(new StringKeyValue(String.valueOf(Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK),
-        //        "Autenticació BACK"));
-
-        return __tmp;
-    }
 
     @Override
     public String getRedirectWhenCreated(HttpServletRequest request, EvidenciaForm evidenciaForm) {
@@ -510,5 +433,16 @@ public class EvidenciaUserController extends EvidenciaController {
     public boolean isAdmin() {
         return false;
     }
+    
+    @Override
+    public List<StringKeyValue> getReferenceListForLoginQaa(HttpServletRequest request,
+            ModelAndView mav, Where where)  throws I18NException {
+         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+         __tmp.add(new StringKeyValue("1" , I18NUtils.tradueix("qaa.1", "1")));
+         __tmp.add(new StringKeyValue("2" , I18NUtils.tradueix("qaa.2", "2")));
+         __tmp.add(new StringKeyValue("3" , I18NUtils.tradueix("qaa.3", "3")));
+         __tmp.add(new StringKeyValue("4" , I18NUtils.tradueix("qaa.4", "4")));
+         return __tmp;
+     }
 
 }

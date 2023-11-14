@@ -322,9 +322,6 @@ public class EvidenciesRestService extends RestUtils {
             EvidenciaJPA evi = new EvidenciaJPA();
 
             evi.setCallBackUrl(evidenciaStartRequest.getCallBackUrl());
-
-            evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);
-
             evi.setNom(evidenciaStartRequest.getTitolEvidencia());
 
             // XYZ ZZZ TODO 

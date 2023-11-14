@@ -33,7 +33,7 @@ public class EvidenciaForm extends EvidenciesIBBaseForm {
     super(__toClone);
       this.evidencia = __toClone.evidencia;
     this.listOfValuesForEstatCodi = __toClone.listOfValuesForEstatCodi;
-    this.listOfValuesForLoginType = __toClone.listOfValuesForLoginType;
+    this.listOfValuesForLoginQaa = __toClone.listOfValuesForLoginQaa;
     this.listOfValuesForFirmaIdiomaDocument = __toClone.listOfValuesForFirmaIdiomaDocument;
     this.listOfValuesForFirmaTipusDocumental = __toClone.listOfValuesForFirmaTipusDocumental;
   }
@@ -105,14 +105,14 @@ public class EvidenciaForm extends EvidenciesIBBaseForm {
 
 
 
-  private List<StringKeyValue> listOfValuesForLoginType;
+  private List<StringKeyValue> listOfValuesForLoginQaa;
 
-  public List<StringKeyValue> getListOfValuesForLoginType() {
-    return this.listOfValuesForLoginType;
+  public List<StringKeyValue> getListOfValuesForLoginQaa() {
+    return this.listOfValuesForLoginQaa;
   }
 
-  public void setListOfValuesForLoginType(List<StringKeyValue> listOfValuesForLoginType) {
-    this.listOfValuesForLoginType = listOfValuesForLoginType;
+  public void setListOfValuesForLoginQaa(List<StringKeyValue> listOfValuesForLoginQaa) {
+    this.listOfValuesForLoginQaa = listOfValuesForLoginQaa;
   }
 
 

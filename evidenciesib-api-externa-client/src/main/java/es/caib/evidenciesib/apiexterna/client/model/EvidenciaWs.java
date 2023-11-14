@@ -44,7 +44,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   EvidenciaWs.JSON_PROPERTY_ESTAT_ERROR,
   EvidenciaWs.JSON_PROPERTY_ESTAT_EXCEPCIO,
   EvidenciaWs.JSON_PROPERTY_LOGIN_TYPE,
-  EvidenciaWs.JSON_PROPERTY_LOGIN_TYPE_DESCRIPTION,
   EvidenciaWs.JSON_PROPERTY_LOGIN_SUBTYPE,
   EvidenciaWs.JSON_PROPERTY_LOGIN_QAA,
   EvidenciaWs.JSON_PROPERTY_LOGIN_DATA,
@@ -111,10 +110,7 @@ public class EvidenciaWs {
   private String estatExcepcio;
 
   public static final String JSON_PROPERTY_LOGIN_TYPE = "loginType";
-  private Integer loginType;
-
-  public static final String JSON_PROPERTY_LOGIN_TYPE_DESCRIPTION = "loginTypeDescription";
-  private String loginTypeDescription;
+  private String loginType;
 
   public static final String JSON_PROPERTY_LOGIN_SUBTYPE = "loginSubtype";
   private String loginSubtype;
@@ -543,55 +539,29 @@ public class EvidenciaWs {
   }
 
 
-  public EvidenciaWs loginType(Integer loginType) {
+  public EvidenciaWs loginType(String loginType) {
     
     this.loginType = loginType;
     return this;
   }
 
    /**
-   * Codi del Tipus de Login
+   * Tipus de Login
    * @return loginType
   **/
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LOGIN_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public Integer getLoginType() {
+  public String getLoginType() {
     return loginType;
   }
 
 
   @JsonProperty(JSON_PROPERTY_LOGIN_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setLoginType(Integer loginType) {
+  public void setLoginType(String loginType) {
     this.loginType = loginType;
-  }
-
-
-  public EvidenciaWs loginTypeDescription(String loginTypeDescription) {
-    
-    this.loginTypeDescription = loginTypeDescription;
-    return this;
-  }
-
-   /**
-   * Descripció del tipus de login
-   * @return loginTypeDescription
-  **/
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_LOGIN_TYPE_DESCRIPTION)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public String getLoginTypeDescription() {
-    return loginTypeDescription;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_LOGIN_TYPE_DESCRIPTION)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setLoginTypeDescription(String loginTypeDescription) {
-    this.loginTypeDescription = loginTypeDescription;
   }
 
 
@@ -1138,7 +1108,6 @@ public class EvidenciaWs {
         Objects.equals(this.estatError, evidenciaWs.estatError) &&
         Objects.equals(this.estatExcepcio, evidenciaWs.estatExcepcio) &&
         Objects.equals(this.loginType, evidenciaWs.loginType) &&
-        Objects.equals(this.loginTypeDescription, evidenciaWs.loginTypeDescription) &&
         Objects.equals(this.loginSubtype, evidenciaWs.loginSubtype) &&
         Objects.equals(this.loginQaa, evidenciaWs.loginQaa) &&
         Objects.equals(this.loginData, evidenciaWs.loginData) &&
@@ -1163,7 +1132,7 @@ public class EvidenciaWs {
 
   @Override
   public int hashCode() {
-    return Objects.hash(evidenciaID, nom, personaNom, personaLlinatge1, personaLlinatge2, personaNif, personaEmail, personaMobil, dataInici, dataFi, estatCodi, estatCodiDescripcio, estatError, estatExcepcio, loginType, loginTypeDescription, loginSubtype, loginQaa, loginData, loginId, loginAuthMethod, loginAdditionalProperties, localitzacioIp, localitzacioCodiPostal, localitzacioLatitud, localitzacioLongitud, localitzacioCiutat, localitzacioRegio, localitzacioPais, firmaReason, firmaIdiomaDocument, firmaTipusDocumental, firmaTipusDocumentalDescripcio, fitxerOriginal, fitxerAdaptat, fitxerSignat);
+    return Objects.hash(evidenciaID, nom, personaNom, personaLlinatge1, personaLlinatge2, personaNif, personaEmail, personaMobil, dataInici, dataFi, estatCodi, estatCodiDescripcio, estatError, estatExcepcio, loginType, loginSubtype, loginQaa, loginData, loginId, loginAuthMethod, loginAdditionalProperties, localitzacioIp, localitzacioCodiPostal, localitzacioLatitud, localitzacioLongitud, localitzacioCiutat, localitzacioRegio, localitzacioPais, firmaReason, firmaIdiomaDocument, firmaTipusDocumental, firmaTipusDocumentalDescripcio, fitxerOriginal, fitxerAdaptat, fitxerSignat);
   }
 
   @Override
@@ -1185,7 +1154,6 @@ public class EvidenciaWs {
     sb.append("    estatError: ").append(toIndentedString(estatError)).append("\n");
     sb.append("    estatExcepcio: ").append(toIndentedString(estatExcepcio)).append("\n");
     sb.append("    loginType: ").append(toIndentedString(loginType)).append("\n");
-    sb.append("    loginTypeDescription: ").append(toIndentedString(loginTypeDescription)).append("\n");
     sb.append("    loginSubtype: ").append(toIndentedString(loginSubtype)).append("\n");
     sb.append("    loginQaa: ").append(toIndentedString(loginQaa)).append("\n");
     sb.append("    loginData: ").append(toIndentedString(loginData)).append("\n");

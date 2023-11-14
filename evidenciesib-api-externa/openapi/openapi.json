@@ -641,7 +641,7 @@
         "description" : "Objecte per enviar i rebre fitxers així com la informació associada a aquest."
       },
       "EvidenciaWs" : {
-        "required" : [ "dataInici", "firmaIdiomaDocument", "firmaReason", "firmaTipusDocumental", "firmaTipusDocumentalDescripcio", "fitxerOriginal", "loginData", "loginId", "loginQaa", "loginSubtype", "loginType", "loginTypeDescription", "personaLlinatge1", "personaLlinatge2", "personaNif", "personaNom" ],
+        "required" : [ "dataInici", "firmaIdiomaDocument", "firmaReason", "firmaTipusDocumental", "firmaTipusDocumentalDescripcio", "fitxerOriginal", "loginData", "loginId", "loginQaa", "loginSubtype", "loginType", "personaLlinatge1", "personaLlinatge2", "personaNif", "personaNom" ],
         "type" : "object",
         "properties" : {
           "evidenciaID" : {
@@ -707,13 +707,8 @@
             "description" : "Stacktrace de l'excepció si n'hi hagues"
           },
           "loginType" : {
-            "type" : "integer",
-            "description" : "Codi del Tipus de Login",
-            "format" : "int32"
-          },
-          "loginTypeDescription" : {
             "type" : "string",
-            "description" : "Descripció del tipus de login"
+            "description" : "Tipus de Login"
           },
           "loginSubtype" : {
             "type" : "string",

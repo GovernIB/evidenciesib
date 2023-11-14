@@ -75,28 +75,28 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.ESTATEXCEPCIO);
   }
 
-  public IntegerField LOGINTYPE() {
-    return new IntegerField(getQueryPath(), EvidenciaFields.LOGINTYPE);
+  public StringField LOGINTYPE() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOGINTYPE);
   }
 
   public StringField LOGINSUBTYPE() {
     return new StringField(getQueryPath(), EvidenciaFields.LOGINSUBTYPE);
   }
 
-  public StringField LOGINQAA() {
-    return new StringField(getQueryPath(), EvidenciaFields.LOGINQAA);
+  public StringField LOGINAUTHMETHOD() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOGINAUTHMETHOD);
   }
 
-  public TimestampField LOGINDATA() {
-    return new TimestampField(getQueryPath(), EvidenciaFields.LOGINDATA);
+  public StringField LOGINQAA() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOGINQAA);
   }
 
   public StringField LOGINID() {
     return new StringField(getQueryPath(), EvidenciaFields.LOGINID);
   }
 
-  public StringField LOGINAUTHMETHOD() {
-    return new StringField(getQueryPath(), EvidenciaFields.LOGINAUTHMETHOD);
+  public TimestampField LOGINDATA() {
+    return new TimestampField(getQueryPath(), EvidenciaFields.LOGINDATA);
   }
 
   public StringField LOGINADDITIONALPROPERTIES() {

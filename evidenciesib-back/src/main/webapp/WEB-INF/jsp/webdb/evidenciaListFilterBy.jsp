@@ -352,28 +352,14 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINTYPE)}">
-            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <%-- FILTRE NUMERO SELECT MULTIPLE --%>
-              <div class="input-group-prepend" style="padding-top: 5px;padding-right: 5px;">
-                 <span class="add-on"><fmt:message key="evidencia.loginType" />:</span>
-              </div>
-
-              <div class="input-group-prepend" style="min-width:200px">
-                <form:select id="evidencia_loginType_select" path="loginTypeSelect" cssClass="search-query input-medium form-control select2 select2-hidden-accessible" multiple="true" style="width:100%;" tabindex="-1" aria-hidden="true">
-                    <c:forEach var="_entry" items="${__theFilterForm.mapOfValuesForLoginType}">
-                      <option value="${_entry.key}" ${fn:contains(__theFilterForm.loginTypeSelect, _entry.key)?'selected':''} >${_entry.value}</option>
-                    </c:forEach>
-                </form:select>
-              </div>
-
-              <script type="text/javascript">
-                $(document).ready(function() {
-                    $('#evidencia_loginType_select').select2({
-                        closeOnSelect: false
-                    });
-                    $('.select2-selection__rendered').css('padding-bottom','5px');
-                });
-              </script>
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.loginType" var="loginType" />
+              <fmt:message key="genapp.form.searchby" var="cercaperloginType" >                
+                 <fmt:param value="${loginType}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${loginType}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginType}" path="loginType" />
             </div>
 
 
@@ -391,6 +377,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINAUTHMETHOD)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.loginAuthMethod" var="loginAuthMethod" />
+              <fmt:message key="genapp.form.searchby" var="cercaperloginAuthMethod" >                
+                 <fmt:param value="${loginAuthMethod}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${loginAuthMethod}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginAuthMethod}" path="loginAuthMethod" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINQAA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -400,6 +399,19 @@
               </fmt:message>
               <span class="add-on"><c:out value="${loginQaa}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperloginQaa}" path="loginQaa" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINID)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.loginId" var="loginId" />
+              <fmt:message key="genapp.form.searchby" var="cercaperloginId" >                
+                 <fmt:param value="${loginId}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${loginId}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginId}" path="loginId" />
             </div>
 
 
@@ -453,32 +465,6 @@
         </script>            </div>
 
     
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINID)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="evidencia.loginId" var="loginId" />
-              <fmt:message key="genapp.form.searchby" var="cercaperloginId" >                
-                 <fmt:param value="${loginId}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${loginId}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginId}" path="loginId" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINAUTHMETHOD)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="evidencia.loginAuthMethod" var="loginAuthMethod" />
-              <fmt:message key="genapp.form.searchby" var="cercaperloginAuthMethod" >                
-                 <fmt:param value="${loginAuthMethod}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${loginAuthMethod}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginAuthMethod}" path="loginAuthMethod" />
-            </div>
-
-
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINADDITIONALPROPERTIES)}">
             <%-- FILTRE STRING --%>

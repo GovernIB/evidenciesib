@@ -46,10 +46,6 @@ public class EvidenciaValidator<I extends Evidencia>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ESTATCODI)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,LOGINTYPE, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINTYPE)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,FIRMAREASON, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(FIRMAREASON)));
@@ -159,11 +155,38 @@ public class EvidenciaValidator<I extends Evidencia>
       }
     }
 
+    if (__vr.getFieldErrorCount(LOGINTYPE) == 0) {
+      java.lang.String __logintype = __target__.getLoginType();
+      if (__logintype!= null && __logintype.length() > 255) {
+        __vr.rejectValue(LOGINTYPE, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINTYPE)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOGINTYPE) == 0) {
+      String val = __target__.getLoginType();
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("0,1,2");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(LOGINTYPE, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINTYPE)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(LOGINSUBTYPE) == 0) {
       java.lang.String __loginsubtype = __target__.getLoginSubtype();
       if (__loginsubtype!= null && __loginsubtype.length() > 255) {
         __vr.rejectValue(LOGINSUBTYPE, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINSUBTYPE)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOGINAUTHMETHOD) == 0) {
+      java.lang.String __loginauthmethod = __target__.getLoginAuthMethod();
+      if (__loginauthmethod!= null && __loginauthmethod.length() > 255) {
+        __vr.rejectValue(LOGINAUTHMETHOD, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINAUTHMETHOD)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
 
@@ -180,14 +203,6 @@ public class EvidenciaValidator<I extends Evidencia>
       if (__loginid!= null && __loginid.length() > 255) {
         __vr.rejectValue(LOGINID, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINID)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
-      }
-    }
-
-    if (__vr.getFieldErrorCount(LOGINAUTHMETHOD) == 0) {
-      java.lang.String __loginauthmethod = __target__.getLoginAuthMethod();
-      if (__loginauthmethod!= null && __loginauthmethod.length() > 255) {
-        __vr.rejectValue(LOGINAUTHMETHOD, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINAUTHMETHOD)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
       }
     }
 

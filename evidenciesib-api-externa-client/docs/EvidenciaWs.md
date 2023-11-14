@@ -22,8 +22,7 @@ Estructura que inclou tota la informació de l'evidència.
 |**estatCodiDescripcio** | **String** | Descripció del camp estatCodi |  [optional] |
 |**estatError** | **String** | Missatge de l&#39;error |  [optional] |
 |**estatExcepcio** | **String** | Stacktrace de l&#39;excepció si n&#39;hi hagues |  [optional] |
-|**loginType** | **Integer** | Codi del Tipus de Login |  |
-|**loginTypeDescription** | **String** | Descripció del tipus de login |  |
+|**loginType** | **String** | Tipus de Login |  |
 |**loginSubtype** | **String** | Subtipus de login |  |
 |**loginQaa** | **String** | Nivell des eguretat de login |  |
 |**loginData** | **OffsetDateTime** | Data de realització del login |  |

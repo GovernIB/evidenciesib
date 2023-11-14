@@ -35,7 +35,6 @@ import org.fundaciobit.pluginsib.login.api.LoginInfo;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginController;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginManager;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginUserDetails;
-import org.springframework.context.i18n.LocaleContextHolder;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -312,7 +311,7 @@ public class EvidenciaLoginController {
         final String r = "redirect:" + getRedirectUrl(evidenciaID);
 
         evi.setLoginData(new Timestamp(System.currentTimeMillis()));
-        evi.setLoginType(Constants.EVIDENCIA_TIPUS_LOGIN_PLUGIN_LOGIN);
+        
 
         // ERROR ???
         String errorPlugin = (String) request.getSession()
@@ -377,8 +376,9 @@ public class EvidenciaLoginController {
         evi.setPersonaNom(li.getName());
 
         evi.setLoginAuthMethod(li.getAuthenticationMethod());
-        String lang = LocaleContextHolder.getLocale().getLanguage();
-        evi.setLoginSubtype(PluginLoginManager.getPluginLogin().getName(lang) + " - " + li.getIdentityProvider());
+                
+        evi.setLoginType(PluginLoginManager.getPluginLogin().getName(null));
+        evi.setLoginSubtype(li.getIdentityProvider());
         evi.setLoginQaa(String.valueOf(li.getQaa()));
 
         Map<String, String> additional = li.getAdditionalProperties();

@@ -330,9 +330,15 @@ public class PluginLoginLoginIB extends AbstractPluginLogin {
 
     @Override
     public String getName(String language) {
-        return "Cl@veAutenticación";
+        return "LoginIB";
     }
 
+    /**
+     * 
+     * @param sessionID
+     * @return
+     * @throws Exception
+     */
     public REvidenciasAutenticacion getEvidencies(String sessionID) throws Exception {
 
         final org.springframework.web.client.RestTemplate restTemplate = getLoginIbRestTemplate();

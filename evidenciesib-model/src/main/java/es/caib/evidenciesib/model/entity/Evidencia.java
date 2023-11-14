@@ -50,23 +50,23 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getEstatExcepcio();
 	public void setEstatExcepcio(java.lang.String _estatExcepcio_);
 
-	public int getLoginType();
-	public void setLoginType(int _loginType_);
+	public java.lang.String getLoginType();
+	public void setLoginType(java.lang.String _loginType_);
 
 	public java.lang.String getLoginSubtype();
 	public void setLoginSubtype(java.lang.String _loginSubtype_);
 
+	public java.lang.String getLoginAuthMethod();
+	public void setLoginAuthMethod(java.lang.String _loginAuthMethod_);
+
 	public java.lang.String getLoginQaa();
 	public void setLoginQaa(java.lang.String _loginQaa_);
-
-	public java.sql.Timestamp getLoginData();
-	public void setLoginData(java.sql.Timestamp _loginData_);
 
 	public java.lang.String getLoginId();
 	public void setLoginId(java.lang.String _loginId_);
 
-	public java.lang.String getLoginAuthMethod();
-	public void setLoginAuthMethod(java.lang.String _loginAuthMethod_);
+	public java.sql.Timestamp getLoginData();
+	public void setLoginData(java.sql.Timestamp _loginData_);
 
 	public java.lang.String getLoginAdditionalProperties();
 	public void setLoginAdditionalProperties(java.lang.String _loginAdditionalProperties_);

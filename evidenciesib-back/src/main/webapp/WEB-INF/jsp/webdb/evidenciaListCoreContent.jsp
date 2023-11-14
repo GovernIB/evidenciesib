@@ -105,10 +105,7 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINTYPE)}">
           <td>
-          <c:set var="tmp">${evidencia.loginType}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForLoginType[tmp]}
-          </c:if>
+          ${evidencia.loginType}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINSUBTYPE)}">
@@ -116,23 +113,26 @@
           ${evidencia.loginSubtype}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINQAA)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINAUTHMETHOD)}">
           <td>
-          ${evidencia.loginQaa}
+          ${evidencia.loginAuthMethod}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINDATA)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${evidencia.loginData}" /></td>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINQAA)}">
+          <td>
+          <c:set var="tmp">${evidencia.loginQaa}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForLoginQaa[tmp]}
+          </c:if>
+          </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINID)}">
           <td>
           ${evidencia.loginId}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINAUTHMETHOD)}">
-          <td>
-          ${evidencia.loginAuthMethod}
-          </td>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINDATA)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${evidencia.loginData}" /></td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINADDITIONALPROPERTIES)}">
           <td>

@@ -230,14 +230,14 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
-  private java.util.List<java.lang.Integer> loginTypeSelect;
+  private java.lang.String loginType;
 
-  public java.util.List<java.lang.Integer> getLoginTypeSelect() {
-    return this.loginTypeSelect;
+  public java.lang.String getLoginType() {
+    return this.loginType;
   }
 
-  public void setLoginTypeSelect(java.util.List<java.lang.Integer> loginTypeSelect) {
-    this.loginTypeSelect = loginTypeSelect;
+  public void setLoginType(java.lang.String loginType) {
+    this.loginType = loginType;
   }
 
 
@@ -252,6 +252,17 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
+  private java.lang.String loginAuthMethod;
+
+  public java.lang.String getLoginAuthMethod() {
+    return this.loginAuthMethod;
+  }
+
+  public void setLoginAuthMethod(java.lang.String loginAuthMethod) {
+    this.loginAuthMethod = loginAuthMethod;
+  }
+
+
   private java.lang.String loginQaa;
 
   public java.lang.String getLoginQaa() {
@@ -260,6 +271,17 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   public void setLoginQaa(java.lang.String loginQaa) {
     this.loginQaa = loginQaa;
+  }
+
+
+  private java.lang.String loginId;
+
+  public java.lang.String getLoginId() {
+    return this.loginId;
+  }
+
+  public void setLoginId(java.lang.String loginId) {
+    this.loginId = loginId;
   }
 
 
@@ -282,28 +304,6 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   public void setLoginDataFins(java.sql.Timestamp loginDataFins) {
     this.loginDataFins = loginDataFins;
-  }
-
-
-  private java.lang.String loginId;
-
-  public java.lang.String getLoginId() {
-    return this.loginId;
-  }
-
-  public void setLoginId(java.lang.String loginId) {
-    this.loginId = loginId;
-  }
-
-
-  private java.lang.String loginAuthMethod;
-
-  public java.lang.String getLoginAuthMethod() {
-    return this.loginAuthMethod;
-  }
-
-  public void setLoginAuthMethod(java.lang.String loginAuthMethod) {
-    this.loginAuthMethod = loginAuthMethod;
   }
 
 
@@ -485,13 +485,13 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.estatCodiSelect = __toClone.estatCodiSelect;
     this.estatError = __toClone.estatError;
     this.estatExcepcio = __toClone.estatExcepcio;
-    this.loginTypeSelect = __toClone.loginTypeSelect;
+    this.loginType = __toClone.loginType;
     this.loginSubtype = __toClone.loginSubtype;
+    this.loginAuthMethod = __toClone.loginAuthMethod;
     this.loginQaa = __toClone.loginQaa;
+    this.loginId = __toClone.loginId;
     this.loginDataDesde = __toClone.loginDataDesde;
     this.loginDataFins = __toClone.loginDataFins;
-    this.loginId = __toClone.loginId;
-    this.loginAuthMethod = __toClone.loginAuthMethod;
     this.loginAdditionalProperties = __toClone.loginAdditionalProperties;
     this.localitzacioIp = __toClone.localitzacioIp;
     this.localitzacioCodiPostal = __toClone.localitzacioCodiPostal;
@@ -507,7 +507,7 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.firmaTipusDocumentalSelect = __toClone.firmaTipusDocumentalSelect;
     this.callBackUrl = __toClone.callBackUrl;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
-    this.mapOfValuesForLoginType = __toClone.mapOfValuesForLoginType;
+    this.mapOfValuesForLoginQaa = __toClone.mapOfValuesForLoginQaa;
     this.mapOfValuesForFirmaIdiomaDocument = __toClone.mapOfValuesForFirmaIdiomaDocument;
     this.mapOfValuesForFirmaTipusDocumental = __toClone.mapOfValuesForFirmaTipusDocumental;
   }
@@ -556,14 +556,14 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
 
 
-  private Map<String, String> mapOfValuesForLoginType;
+  private Map<String, String> mapOfValuesForLoginQaa;
 
-  public Map<String, String> getMapOfValuesForLoginType() {
-    return this.mapOfValuesForLoginType;
+  public Map<String, String> getMapOfValuesForLoginQaa() {
+    return this.mapOfValuesForLoginQaa;
   }
 
-  public void setMapOfValuesForLoginType(Map<String, String> mapOfValuesForLoginType) {
-    this.mapOfValuesForLoginType = mapOfValuesForLoginType;
+  public void setMapOfValuesForLoginQaa(Map<String, String> mapOfValuesForLoginQaa) {
+    this.mapOfValuesForLoginQaa = mapOfValuesForLoginQaa;
   }
 
 

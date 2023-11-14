@@ -28,12 +28,12 @@ public interface EvidenciaFields extends java.io.Serializable {
 	 public static final IntegerField ESTATCODI = new IntegerField(_TABLE_MODEL, "estatCodi", "estatcodi");
 	 public static final StringField ESTATERROR = new StringField(_TABLE_MODEL, "estatError", "estaterror");
 	 public static final StringField ESTATEXCEPCIO = new StringField(_TABLE_MODEL, "estatExcepcio", "estatexcepcio");
-	 public static final IntegerField LOGINTYPE = new IntegerField(_TABLE_MODEL, "loginType", "logintype");
+	 public static final StringField LOGINTYPE = new StringField(_TABLE_MODEL, "loginType", "logintype");
 	 public static final StringField LOGINSUBTYPE = new StringField(_TABLE_MODEL, "loginSubtype", "loginsubtype");
-	 public static final StringField LOGINQAA = new StringField(_TABLE_MODEL, "loginQaa", "loginqaa");
-	 public static final TimestampField LOGINDATA = new TimestampField(_TABLE_MODEL, "loginData", "logindata");
-	 public static final StringField LOGINID = new StringField(_TABLE_MODEL, "loginId", "loginid");
 	 public static final StringField LOGINAUTHMETHOD = new StringField(_TABLE_MODEL, "loginAuthMethod", "loginauthmethod");
+	 public static final StringField LOGINQAA = new StringField(_TABLE_MODEL, "loginQaa", "loginqaa");
+	 public static final StringField LOGINID = new StringField(_TABLE_MODEL, "loginId", "loginid");
+	 public static final TimestampField LOGINDATA = new TimestampField(_TABLE_MODEL, "loginData", "logindata");
 	 public static final StringField LOGINADDITIONALPROPERTIES = new StringField(_TABLE_MODEL, "loginAdditionalProperties", "loginadditionalproperties");
 	 public static final StringField LOCALITZACIOIP = new StringField(_TABLE_MODEL, "localitzacioIp", "localitzacioip");
 	 public static final StringField LOCALITZACIOCODIPOSTAL = new StringField(_TABLE_MODEL, "localitzacioCodiPostal", "localitzaciocodipostal");
@@ -72,10 +72,10 @@ public interface EvidenciaFields extends java.io.Serializable {
     ESTATEXCEPCIO,
     LOGINTYPE,
     LOGINSUBTYPE,
-    LOGINQAA,
-    LOGINDATA,
-    LOGINID,
     LOGINAUTHMETHOD,
+    LOGINQAA,
+    LOGINID,
+    LOGINDATA,
     LOGINADDITIONALPROPERTIES,
     LOCALITZACIOIP,
     LOCALITZACIOCODIPOSTAL,

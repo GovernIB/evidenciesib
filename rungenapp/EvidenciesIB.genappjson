@@ -437,27 +437,26 @@
         {
           "isAutoIncrement": false,
           "sqlName": "logintype",
-          "sqlType": 4,
-          "size": 10,
+          "sqlType": 12,
+          "size": 255,
           "digits": 0,
-          "isNotNullable": true,
+          "isNotNullable": false,
           "labels": {
             "ca": "Login - Tipus",
             "es": "Login - Tipo"
           },
           "javaName": "loginType",
-          "javaType": "int",
+          "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
-          "defaultValue": "0",
           "minAllowedValue": "0,1,2",
           "filter": false,
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 16
+            "webtype": 1
           },
           "foreignKeys": []
         },
@@ -473,81 +472,6 @@
             "es": "Login - Subtipo"
           },
           "javaName": "loginSubtype",
-          "javaType": "java.lang.String",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 1
-          },
-          "foreignKeys": []
-        },
-        {
-          "isAutoIncrement": false,
-          "sqlName": "loginqaa",
-          "sqlType": 12,
-          "size": 255,
-          "digits": 0,
-          "isNotNullable": false,
-          "labels": {
-            "ca": "Login - QAA",
-            "es": "Login - QAA"
-          },
-          "javaName": "loginQaa",
-          "javaType": "java.lang.String",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 1
-          },
-          "foreignKeys": []
-        },
-        {
-          "isAutoIncrement": false,
-          "sqlName": "logindata",
-          "sqlType": 93,
-          "size": 29,
-          "digits": 6,
-          "isNotNullable": false,
-          "labels": {
-            "ca": "Login - Data",
-            "es": "Login - Fecha"
-          },
-          "javaName": "loginData",
-          "javaType": "java.sql.Timestamp",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 7
-          },
-          "foreignKeys": []
-        },
-        {
-          "isAutoIncrement": false,
-          "sqlName": "loginid",
-          "sqlType": 12,
-          "size": 255,
-          "digits": 0,
-          "isNotNullable": false,
-          "labels": {
-            "ca": "Login - ID",
-            "es": "Login - ID"
-          },
-          "javaName": "loginId",
           "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
@@ -583,6 +507,82 @@
           "groupBy": false,
           "webFieldInfo": {
             "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "loginqaa",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Login - QAA",
+            "es": "Login - QAA"
+          },
+          "javaName": "loginQaa",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "loginid",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Login - ID",
+            "es": "Login - ID"
+          },
+          "javaName": "loginId",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "logindata",
+          "sqlType": 93,
+          "size": 29,
+          "digits": 6,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Login - Data",
+            "es": "Login - Fecha"
+          },
+          "javaName": "loginData",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
           },
           "foreignKeys": []
         },
