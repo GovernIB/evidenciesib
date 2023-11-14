@@ -5,20 +5,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
+import java.util.TreeMap;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -36,6 +40,7 @@ import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.pluginsib.core.utils.ISO8601;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -500,13 +505,44 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         // 1.3.- Attach Files
 
         File fileEviJson = null;
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new TreeMap<String, Object>();
         try {
             String name = "evidencies.json";
 
             fileEviJson = File.createTempFile("evidenciesib_evidencies_", ".json");
             fileEviJson.deleteOnExit();
 
+            map.put("EvidenciaID", evi.getEvidenciaID());
+
+            map.put("person.name", evi.getPersonaNom());
+            map.put("person.surname1", evi.getPersonaLlinatge1());
+            map.put("person.surname2", evi.getPersonaLlinatge2());
+            map.put("person.administrationid", evi.getPersonaNif());
+
+            map.put("login.type", evi.getLoginType());
+            map.put("login.subtype", evi.getLoginSubtype());
+            map.put("login.id", evi.getLoginId());
+            map.put("login.date", ISO8601.dateToISO8601(evi.getLoginData()));
+            map.put("login.properties.sha256", DigestUtils.sha256Hex(evi.getLoginAdditionalProperties()));
+
+            String clickProperties = evi.getClickProperties();
+            if (clickProperties != null && clickProperties.trim().length() != 0) {
+
+                Properties prop = new Properties();
+                prop.load(new StringReader(clickProperties));
+                String datemsStr = prop.getProperty("date.ms");
+                if (datemsStr != null) {
+                    try {
+                        long dateMs = Long.parseLong(datemsStr);
+                        map.put("sign.intention.date", ISO8601.dateToISO8601(new Date(dateMs)));
+                    } catch (Exception e) {
+                        log.error("No s'ha pogut parsejar la data de la voluntat de firma: " + e.getMessage(), e);
+                    }
+
+                }
+            }
+
+            /*
             map.put("Nom", evi.getNom());
             map.put("PersonaNom", evi.getPersonaNom());
             map.put("PersonaLlinatge1", evi.getPersonaLlinatge1());
@@ -534,7 +570,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             map.put("FirmaIdiomaDocument", evi.getFirmaIdiomaDocument());
             map.put("FirmaTipusDocumental", evi.getFirmaTipusDocumental());
             map.put("FirmaIdiomaDocument", evi.getFirmaIdiomaDocument());
-
+            */
             // Esborram tots els valors null !!!!
             while (map.values().remove(null))
                 ;
@@ -619,7 +655,6 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             ampleCaixa = 20 + (int) basefont.getWidthPoint(basetext, fontSize);
             altCaixa = margin_x + (int) (2f * basefont.getAscentPoint(basetext, fontSize)
                     - 2f * basefont.getDescentPoint(basetext, fontSize));
-
 
         } catch (Throwable e1) {
             basefont = null;
