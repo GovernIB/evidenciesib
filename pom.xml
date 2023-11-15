@@ -14,7 +14,6 @@
         <module>evidenciesib-back</module>
         <module>evidenciesib-front</module>
         <module>evidenciesib-ear</module>
-        <module>pluginsib-login</module>
         <module>scripts</module>
         <module>evidenciesib-api-externa-client</module>
     </modules>
