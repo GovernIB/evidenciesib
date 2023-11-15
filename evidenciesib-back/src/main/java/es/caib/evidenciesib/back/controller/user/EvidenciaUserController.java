@@ -113,13 +113,10 @@ public class EvidenciaUserController extends EvidenciaController {
             evidenciaFilterForm.setAddButtonVisible(false);
 
             if (!isAdmin()) {
-                evidenciaFilterForm
-                        .addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN, "evidencia.crear",
-                                getContextWeb() + "/new",
-                                "btn-success"));
+                evidenciaFilterForm.addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN,
+                        "evidencia.crear", getContextWeb() + "/new", "btn-success"));
             }
-            
-            
+
             evidenciaFilterForm.addLabel(ESTATCODI, "estatcodi.label");
 
         }
@@ -133,7 +130,6 @@ public class EvidenciaUserController extends EvidenciaController {
         EvidenciaForm evidenciaForm = super.getEvidenciaForm(_jpa, __isView, request, mav);
 
         if (evidenciaForm.isNou()) {
-
 
             EvidenciaJPA evi = evidenciaForm.getEvidencia();
 
@@ -199,28 +195,105 @@ public class EvidenciaUserController extends EvidenciaController {
         } else if (__isView) {
 
             evidenciaForm.addHiddenField(FITXERADAPTATID);
-            evidenciaForm.addHiddenField(USUARIAPLICACIO);
 
             EvidenciaJPA evi = evidenciaForm.getEvidencia();
 
             if (evi.getEstatCodi() == Constants.EVIDENCIA_ESTAT_CODI_ERROR) {
                 evidenciaForm.addHiddenField(FITXERSIGNATID);
+
+                if (evi.getLoginType() == null) {
+                    evidenciaForm.addHiddenField(LOGINTYPE);
+                }
+                if (evi.getLoginSubtype() == null) {
+                    evidenciaForm.addHiddenField(LOGINSUBTYPE);
+                }
+                if (evi.getLoginAuthMethod() == null) {
+                    evidenciaForm.addHiddenField(LOGINAUTHMETHOD);
+                }
+                if (evi.getLoginQaa() == null) {
+                    evidenciaForm.addHiddenField(LOGINQAA);
+                }
+                if (evi.getLoginId() == null) {
+                    evidenciaForm.addHiddenField(LOGINID);
+                }
+                if (evi.getLoginData() == null) {
+                    evidenciaForm.addHiddenField(LOGINDATA);
+                }
+                if (evi.getLoginAdditionalProperties() == null) {
+                    evidenciaForm.addHiddenField(LOGINADDITIONALPROPERTIES);
+                }
+                if (evi.getLocalitzacioIp() == null) {
+                    evidenciaForm.addHiddenField(LOCALITZACIOIP);
+                }
+                if (evi.getLocalitzacioCodiPostal() == null) {
+                    evidenciaForm.addHiddenField(LOCALITZACIOCODIPOSTAL);
+                }
+                if (evi.getLocalitzacioLatitud() == null) {
+                    evidenciaForm.addHiddenField(LOCALITZACIOLATITUD);
+                }
+                if (evi.getLocalitzacioLongitud() == null) {
+                    evidenciaForm.addHiddenField(LOCALITZACIOLONGITUD);
+                }
+                if (evi.getLocalitzacioRegio() == null) {
+                    evidenciaForm.addHiddenField(LOCALITZACIOREGIO);
+                }
+                if (evi.getLocalitzacioCiutat() == null) {
+                    evidenciaForm.addHiddenField(LOCALITZACIOCIUTAT);
+                }
+                if (evi.getLocalitzacioPais() == null) {
+                    evidenciaForm.addHiddenField(LOCALITZACIOPAIS);
+                }
+                if (evi.getDeviceProperties() == null) {
+                    evidenciaForm.addHiddenField(DEVICEPROPERTIES);
+                }
+                if (evi.getClickProperties() == null) {
+                    evidenciaForm.addHiddenField(CLICKPROPERTIES);
+                }
+                if (evi.getFirmaReason() == null) {
+                    evidenciaForm.addHiddenField(FIRMAREASON);
+                }
+                if (evi.getFirmaIdiomaDocument() == null) {
+                    evidenciaForm.addHiddenField(FIRMAIDIOMADOCUMENT);
+                }
+
+                if (evi.getFitxerAdaptatID() == null) {
+                    evidenciaForm.addHiddenField(FITXERADAPTATID);
+                }
+                if (evi.getFitxerSignatID() == null) {
+                    evidenciaForm.addHiddenField(FITXERSIGNATID);
+                }
+
+
             } else {
                 evidenciaForm.addHiddenField(ESTATERROR);
                 evidenciaForm.addHiddenField(ESTATEXCEPCIO);
-            }
 
-            if (evi.getLoginData() == null) {
-                evidenciaForm.addHiddenField(LOGINDATA);
             }
 
             if (evi.getPersonaMobil() == null) {
                 evidenciaForm.addHiddenField(PERSONAMOBIL);
             }
 
+            if (isAdmin()) {
+                evidenciaForm.addHiddenField(USUARIPERSONA);
+            } else {
+                evidenciaForm.addHiddenField(USUARIAPLICACIO);
+                evidenciaForm.addHiddenField(CALLBACKURL);
+            }
+
         }
 
         return evidenciaForm;
+    }
+
+    public static void main(String[] args) {
+
+        for (Field<?> field : ALL_EVIDENCIA_FIELDS) {
+            System.out.println(" if (evi.get" + Character.toUpperCase(field.getJavaName().charAt(0))
+                    + field.getJavaName().substring(1) + "() == null) {\r\n" + "   evidenciaForm.addHiddenField("
+                    + field.getJavaName().toUpperCase() + ");\r\n" + "}");
+        }
+
     }
 
     @Override
@@ -241,12 +314,11 @@ public class EvidenciaUserController extends EvidenciaController {
         return __tmp;
     }
 
-
     @Override
     public String getRedirectWhenCreated(HttpServletRequest request, EvidenciaForm evidenciaForm) {
 
         EvidenciaJPA evi = evidenciaForm.getEvidencia();
-       
+
         /*
         if (evidenciaForm.getEvidencia().getLoginType() == Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK) {
             
@@ -261,19 +333,19 @@ public class EvidenciaUserController extends EvidenciaController {
                 log.error(msg, e);
                 HtmlUtils.saveMessageError(request, msg);
             }
-
+        
             
             String url =  Configuracio.getBackUrl() + "/public/evidencia/"  + HibernateFileUtil.encryptFileID(evi.getEvidenciaID());
             
             final String languageUI = LocaleContextHolder.getLocale().getLanguage();
-
+        
             evi = this.evidenciaLogicaEjb.createAdaptedFileAndSignDocument(evi, languageUI, url);
-
+        
             messagesInternalSignDocument(request, evi);
-
+        
             return "redirect:" + getContextWeb() + "/list";
             
-
+        
         } else  */ {
             // Hem d'anar a FRONT per autenticació Cl@ve o Mock            
 
@@ -288,18 +360,20 @@ public class EvidenciaUserController extends EvidenciaController {
     protected void messagesInternalSignDocument(HttpServletRequest request, EvidenciaJPA evi) {
         if (evi.getUsuariPersona() != null) {
             String error = evi.getEstatError();
-            if (error == null) {            
+            if (error == null) {
                 // TODO XYZ ZZZ
                 HtmlUtils.saveMessageSuccess(request, "Generada Correctament l'evidència !!!");
             } else {
-    
+
                 HtmlUtils.deleteMessages(request);
                 HtmlUtils.saveMessageError(request, error);
             }
         }
     }
 
-    @RequestMapping(value = Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + "{evidenciaID}", method = RequestMethod.GET)
+    @RequestMapping(
+            value = Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + "{evidenciaID}",
+            method = RequestMethod.GET)
     public String signEvidenciaRequest(@PathVariable("evidenciaID") java.lang.Long evidenciaID,
             HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
@@ -307,8 +381,10 @@ public class EvidenciaUserController extends EvidenciaController {
 
         // AQUEST IDIOMA HA DE SER EL QUE DIGUI EVIDENCIA 
         final String languageUI = LocaleContextHolder.getLocale().getLanguage();
-        
-        String url =  Configuracio.getBackUrl() + Constants.MAPPING_BACK_PUBLIC_EVIDENCE + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_INFO_OPERATION  + HibernateFileUtil.encryptFileID(evi.getEvidenciaID());
+
+        String url = Configuracio.getBackUrl() + Constants.MAPPING_BACK_PUBLIC_EVIDENCE
+                + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_INFO_OPERATION
+                + HibernateFileUtil.encryptFileID(evi.getEvidenciaID());
 
         evi = this.evidenciaLogicaEjb.createAdaptedFileAndSignDocument(evi, languageUI, url);
 
@@ -433,16 +509,16 @@ public class EvidenciaUserController extends EvidenciaController {
     public boolean isAdmin() {
         return false;
     }
-    
+
     @Override
-    public List<StringKeyValue> getReferenceListForLoginQaa(HttpServletRequest request,
-            ModelAndView mav, Where where)  throws I18NException {
-         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-         __tmp.add(new StringKeyValue("1" , I18NUtils.tradueix("qaa.1", "1")));
-         __tmp.add(new StringKeyValue("2" , I18NUtils.tradueix("qaa.2", "2")));
-         __tmp.add(new StringKeyValue("3" , I18NUtils.tradueix("qaa.3", "3")));
-         __tmp.add(new StringKeyValue("4" , I18NUtils.tradueix("qaa.4", "4")));
-         return __tmp;
-     }
+    public List<StringKeyValue> getReferenceListForLoginQaa(HttpServletRequest request, ModelAndView mav, Where where)
+            throws I18NException {
+        List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+        __tmp.add(new StringKeyValue("1", I18NUtils.tradueix("qaa.1", "1")));
+        __tmp.add(new StringKeyValue("2", I18NUtils.tradueix("qaa.2", "2")));
+        __tmp.add(new StringKeyValue("3", I18NUtils.tradueix("qaa.3", "3")));
+        __tmp.add(new StringKeyValue("4", I18NUtils.tradueix("qaa.4", "4")));
+        return __tmp;
+    }
 
 }
