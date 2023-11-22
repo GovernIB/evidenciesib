@@ -124,7 +124,7 @@
                 <!-- https://openapi-generator.tech/docs/generators/java/ -->
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.6.0</version>
+                <version>7.1.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -144,7 +144,7 @@
                             <modelPackage>${client.default.package}.model</modelPackage>
                             <invokerPackage>${client.default.package}.services</invokerPackage>
                             <variableNamingConvention>camelCase</variableNamingConvention>
-
+                            <generateModelTests>false</generateModelTests>
                             <configOptions>
                                 <groupId>es.caib.evidenciesib</groupId>
                                 <artifactId>evidenciesib-api-externa-client</artifactId>

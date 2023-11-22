@@ -68,9 +68,9 @@ public class EvidenciesApiTest extends ConstantsWs {
 
             //test.listTest(api);
 
-            test.getTest(api, props);
+            //test.getTest(api, props);
 
-            //test.startTest(api, props);
+            test.startTest(api, props);
 
             //test.versioTest(api);
 
