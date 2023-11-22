@@ -144,7 +144,7 @@
                             <modelPackage>${client.default.package}.model</modelPackage>
                             <invokerPackage>${client.default.package}.services</invokerPackage>
                             <variableNamingConvention>camelCase</variableNamingConvention>
-                            <fullJavaUtil>true</fullJavaUtil>
+
                             <configOptions>
                                 <groupId>es.caib.evidenciesib</groupId>
                                 <artifactId>evidenciesib-api-externa-client</artifactId>
@@ -154,6 +154,8 @@
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
                                 <java11>true</java11>
+                                <!-- <fullJavaUtil>true</fullJavaUtil> --> 
+                                <!-- <useJakartaEe>true</useJakartaEe> -->
                             </configOptions>
                         </configuration>
                     </execution>
