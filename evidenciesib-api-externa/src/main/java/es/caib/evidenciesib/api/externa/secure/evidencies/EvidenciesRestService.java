@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -27,14 +26,13 @@ import javax.ws.rs.core.SecurityContext;
 
 import org.apache.log4j.Logger;
 
-import org.fundaciobit.genapp.common.IGenAppEntity;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.ITableManager;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.pluginsib.utils.rest.GenAppPaginationUtils;
 import org.fundaciobit.pluginsib.utils.rest.RestException;
 import org.fundaciobit.pluginsib.utils.rest.RestExceptionInfo;
 import org.fundaciobit.pluginsib.utils.rest.RestPagination;
@@ -86,8 +84,6 @@ public class EvidenciesRestService extends RestUtils {
     protected static final Map<String, String> MAP_TIPUS_DOCUMENTAL = new HashMap<String, String>();
 
     static {
-
-        // 
 
         MAP_TIPUS_DOCUMENTAL.put("1_ca", "Resolució");
         MAP_TIPUS_DOCUMENTAL.put("2_ca", "Acord");
@@ -616,7 +612,7 @@ public class EvidenciesRestService extends RestUtils {
             final Where w = Where.AND(w1, w2);
             final OrderBy orderBy = new OrderBy(EvidenciaFields.DATAINICI, OrderType.DESC);
 
-            EvidenciaPaginacio paginacioOrig = createRestPagination(EvidenciaPaginacio.class, this.evidenciaLogicaEjb, page,
+            EvidenciaPaginacio paginacioOrig = GenAppPaginationUtils.createRestPagination(EvidenciaPaginacio.class, this.evidenciaLogicaEjb, page,
                     pagesize, w, orderBy);
 
             EvidenciaWsPaginacio paginacio = new EvidenciaWsPaginacio(paginacioOrig, language);
@@ -668,32 +664,23 @@ public class EvidenciesRestService extends RestUtils {
 
     }
 
+    /**
+     * 
+     * @param <D>
+     * @param <P>
+     * @param classe
+     * @param ejb
+     * @param page
+     * @param pagesize
+     * @param w
+     * @param orderBy
+     * @return
+     * @throws I18NException 
+     */
+    /*
     protected static <D extends IGenAppEntity, P extends RestPagination<D>> P createRestPagination(Class<P> classe,
             ITableManager<D, Long> ejb, int page, int pagesize, Where w, OrderBy orderBy
-    /* final List<D> llistat, long countTotal, final int pageSizeOutput,
-    final int pageOutput, final int totalPages */) throws Exception {
-
-        /*
-        final int firstResult = (page - 1) * pagesize;
-        final int maxResults = pagesize;
-        final List<Evidencia> llistat = this.evidenciaEjb.select(w, null, firstResult, maxResults, orderBy);
-        
-        long countTotal = this.evidenciaEjb.count(w);
-        
-        // PAGINACIO
-        final int pageSizeOutput = pagesize;
-        final int pageOutput = page;
-        final int totalPages = (int) (countTotal / pagesize) + ((countTotal % pagesize == 0) ? 0 : 1);
-        
-        
-        EvidenciesPaginacio paginacio = new EvidenciesPaginacio();
-        paginacio.setPage(pageSizeOutput);
-        paginacio.setPage(pageOutput);
-        paginacio.setTotalpages(totalPages);
-        paginacio.setTotalcount((int) countTotal);
-        paginacio.setData(llistat);
-        */
-
+    
         final int firstResult = (page - 1) * pagesize;
         final int maxResults = pagesize;
         final List<D> llistat = ejb.select(w, null, firstResult, maxResults, orderBy);
@@ -705,7 +692,14 @@ public class EvidenciesRestService extends RestUtils {
         final int pageOutput = page;
         final int totalPages = (int) (countTotal / pagesize) + ((countTotal % pagesize == 0) ? 0 : 1);
 
-        P paginacio = classe.getConstructor().newInstance();
+        P paginacio;
+        try {
+            paginacio = classe.getConstructor().newInstance();
+        } catch (Throwable e) {
+            String msg = "Error instanciant un objecte de la classe " + classe + ": " + e.getMessage();
+            log.error(msg, e);
+            throw new I18NException("comodi",msg);
+        }
         paginacio.setPagesize(pageSizeOutput);
         paginacio.setPage(pageOutput);
         paginacio.setTotalpages(totalPages);
@@ -713,7 +707,7 @@ public class EvidenciesRestService extends RestUtils {
         paginacio.setData(llistat);
         return paginacio;
     }
-
+*/
     //  obtenir fitxers
 
     // obtenir fitxer de evidencia
