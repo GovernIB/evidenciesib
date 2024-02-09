@@ -76,6 +76,16 @@
           "example" : "ca"
         } ],
         "responses" : {
+          "200" : {
+            "description" : "Retornada correctament la informació de l'evidència",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EvidenciaWs"
+                }
+              }
+            }
+          },
           "400" : {
             "description" : "Paràmetres incorrectes",
             "content" : {
@@ -112,16 +122,6 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/RestExceptionInfo"
-                }
-              }
-            }
-          },
-          "200" : {
-            "description" : "Retornada correctament la informació de l'evidència",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/EvidenciaWs"
                 }
               }
             }
@@ -174,6 +174,16 @@
           "example" : "ca"
         } ],
         "responses" : {
+          "200" : {
+            "description" : "Retornada correctament la informació de l'evidència",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EvidenciaFile"
+                }
+              }
+            }
+          },
           "400" : {
             "description" : "Paràmetres incorrectes",
             "content" : {
@@ -210,16 +220,6 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/RestExceptionInfo"
-                }
-              }
-            }
-          },
-          "200" : {
-            "description" : "Retornada correctament la informació de l'evidència",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/EvidenciaFile"
                 }
               }
             }
@@ -272,6 +272,16 @@
           "example" : "ca"
         } ],
         "responses" : {
+          "200" : {
+            "description" : "Retornada correctament la informació de l'evidència",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EvidenciaFileBase64"
+                }
+              }
+            }
+          },
           "400" : {
             "description" : "Paràmetres incorrectes",
             "content" : {
@@ -308,16 +318,6 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/RestExceptionInfo"
-                }
-              }
-            }
-          },
-          "200" : {
-            "description" : "Retornada correctament la informació de l'evidència",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/EvidenciaFileBase64"
                 }
               }
             }
@@ -387,6 +387,16 @@
           "example" : "ca"
         } ],
         "responses" : {
+          "200" : {
+            "description" : "EFIB: Retornades dades obertes correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EvidenciaWsPaginacio"
+                }
+              }
+            }
+          },
           "400" : {
             "description" : "EFIB: Paràmetres incorrectes",
             "content" : {
@@ -426,16 +436,6 @@
                 }
               }
             }
-          },
-          "200" : {
-            "description" : "EFIB: Retornades dades obertes correctament",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/EvidenciaWsPaginacio"
-                }
-              }
-            }
           }
         },
         "security" : [ {
@@ -459,6 +459,16 @@
           }
         },
         "responses" : {
+          "200" : {
+            "description" : "Procés de recolecció d'evidències inciaciat correctament",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EvidenciaStartResponse"
+                }
+              }
+            }
+          },
           "400" : {
             "description" : "Paràmetres incorrectes",
             "content" : {
@@ -498,16 +508,6 @@
                 }
               }
             }
-          },
-          "200" : {
-            "description" : "Procés de recolecció d'evidències inciaciat correctament",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/EvidenciaStartResponse"
-                }
-              }
-            }
           }
         },
         "security" : [ {
@@ -521,8 +521,8 @@
         "summary" : "Retorna la versió d'aquest Servei",
         "operationId" : "versio",
         "responses" : {
-          "401" : {
-            "description" : "No Autenticat",
+          "200" : {
+            "description" : "Retornada correctament la versió d'aquest Servei",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -531,12 +531,12 @@
               }
             }
           },
-          "510" : {
-            "description" : "Només s'utilitza per crear fitxer de constants...",
+          "401" : {
+            "description" : "No Autenticat",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ConstantsWs"
+                  "type" : "string"
                 }
               }
             }
@@ -561,12 +561,12 @@
               }
             }
           },
-          "200" : {
-            "description" : "Retornada correctament la versió d'aquest Servei",
+          "510" : {
+            "description" : "Només s'utilitza per crear fitxer de constants...",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/ConstantsWs"
                 }
               }
             }
@@ -580,34 +580,6 @@
   },
   "components" : {
     "schemas" : {
-      "RestExceptionInfo" : {
-        "required" : [ "code", "errorMessage" ],
-        "type" : "object",
-        "properties" : {
-          "code" : {
-            "type" : "integer",
-            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
-            "format" : "int32"
-          },
-          "errorMessage" : {
-            "type" : "string",
-            "description" : "Missatge de l'error"
-          },
-          "stackTrace" : {
-            "type" : "string",
-            "description" : "Stacktrace de l'excepció si n'hi hagués."
-          },
-          "causeException" : {
-            "type" : "string",
-            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
-          },
-          "causeStackTrace" : {
-            "type" : "string",
-            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
-          }
-        },
-        "description" : "Estructura de dades utilitzada per passar informació d'un error"
-      },
       "EvidenciaFile" : {
         "type" : "object",
         "properties" : {
@@ -792,6 +764,34 @@
         },
         "description" : "Estructura que inclou tota la informació de l'evidència."
       },
+      "RestExceptionInfo" : {
+        "required" : [ "code", "errorMessage" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
+            "format" : "int32"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "Missatge de l'error"
+          },
+          "stackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció si n'hi hagués."
+          },
+          "causeException" : {
+            "type" : "string",
+            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
+          },
+          "causeStackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
+          }
+        },
+        "description" : "Estructura de dades utilitzada per passar informació d'un error"
+      },
       "EvidenciaFileBase64" : {
         "type" : "object",
         "properties" : {
@@ -827,14 +827,14 @@
         "required" : [ "data", "page", "pagesize", "totalcount", "totalpages" ],
         "type" : "object",
         "properties" : {
-          "pagesize" : {
-            "type" : "integer",
-            "description" : "Mida de pàgina",
-            "format" : "int32"
-          },
           "page" : {
             "type" : "integer",
             "description" : "Número pàgina. Comença per 1.",
+            "format" : "int32"
+          },
+          "pagesize" : {
+            "type" : "integer",
+            "description" : "Mida de pàgina",
             "format" : "int32"
           },
           "totalpages" : {

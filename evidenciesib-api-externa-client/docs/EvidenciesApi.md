@@ -88,11 +88,11 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **200** | EFIB: Retornades dades obertes correctament |  -  |
 | **400** | EFIB: Paràmetres incorrectes |  -  |
 | **401** | EFIB: No Autenticat |  -  |
 | **403** | EFIB: No Autoritzat |  -  |
 | **500** | EFIB: Error durant la consulta de les dades obertes |  -  |
-| **200** | EFIB: Retornades dades obertes correctament |  -  |
 
 
 ## get
@@ -164,11 +164,11 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **200** | Retornada correctament la informació de l&#39;evidència |  -  |
 | **400** | Paràmetres incorrectes |  -  |
 | **401** | No Autenticat |  -  |
 | **403** | No Autoritzat |  -  |
 | **500** | Error no controlat |  -  |
-| **200** | Retornada correctament la informació de l&#39;evidència |  -  |
 
 
 ## getfile
@@ -242,11 +242,11 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **200** | Retornada correctament la informació de l&#39;evidència |  -  |
 | **400** | Paràmetres incorrectes |  -  |
 | **401** | No Autenticat |  -  |
 | **403** | No Autoritzat |  -  |
 | **500** | Error no controlat |  -  |
-| **200** | Retornada correctament la informació de l&#39;evidència |  -  |
 
 
 ## getfilebase64
@@ -320,11 +320,11 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **200** | Retornada correctament la informació de l&#39;evidència |  -  |
 | **400** | Paràmetres incorrectes |  -  |
 | **401** | No Autenticat |  -  |
 | **403** | No Autoritzat |  -  |
 | **500** | Error no controlat |  -  |
-| **200** | Retornada correctament la informació de l&#39;evidència |  -  |
 
 
 ## start
@@ -394,11 +394,11 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **200** | Procés de recolecció d&#39;evidències inciaciat correctament |  -  |
 | **400** | Paràmetres incorrectes |  -  |
 | **401** | No Autenticat |  -  |
 | **403** | No Autoritzat |  -  |
 | **500** | Error no controlat |  -  |
-| **200** | Procés de recolecció d&#39;evidències inciaciat correctament |  -  |
 
 
 ## versio
@@ -464,9 +464,9 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+| **200** | Retornada correctament la versió d&#39;aquest Servei |  -  |
 | **401** | No Autenticat |  -  |
-| **510** | Només s&#39;utilitza per crear fitxer de constants... |  -  |
 | **403** | No Autoritzat |  -  |
 | **500** | Error no controlat |  -  |
-| **200** | Retornada correctament la versió d&#39;aquest Servei |  -  |
+| **510** | Només s&#39;utilitza per crear fitxer de constants... |  -  |
 

@@ -189,19 +189,18 @@ public class EvidenciesRestService extends RestUtils {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Operation(tags = { TAG_NAME }, operationId = "versio", summary = "Retorna la versió d'aquest Servei")
     @ApiResponses({
-
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Retornada correctament la versió d'aquest Servei",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = String.class)) }),
             @ApiResponse(
                     responseCode = "401",
                     description = "No Autenticat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = String.class)) }),
-            @ApiResponse(
-                    responseCode = "510",
-                    description = "Només s'utilitza per crear fitxer de constants...",
-                    content = { @Content(
-                            mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = ConstantsWs.class)) }),
             @ApiResponse(
                     responseCode = "403",
                     description = "No Autoritzat",
@@ -215,11 +214,11 @@ public class EvidenciesRestService extends RestUtils {
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
-                    responseCode = "200",
-                    description = "Retornada correctament la versió d'aquest Servei",
+                    responseCode = "510",
+                    description = "Només s'utilitza per crear fitxer de constants...",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }) })
+                            schema = @Schema(implementation = ConstantsWs.class)) }) })
     public String versio() {
         return "1.0";
     }
@@ -251,6 +250,12 @@ public class EvidenciesRestService extends RestUtils {
 
     @ApiResponses({
             @ApiResponse(
+                    responseCode = "200",
+                    description = "Procés de recolecció d'evidències inciaciat correctament",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = EvidenciaStartResponse.class)) }),
+            @ApiResponse(
                     responseCode = "400",
                     description = "Paràmetres incorrectes",
                     content = { @Content(
@@ -273,13 +278,7 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Error no controlat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Procés de recolecció d'evidències inciaciat correctament",
-                    content = { @Content(
-                            mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = EvidenciaStartResponse.class)) }) })
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }) })
     public EvidenciaStartResponse start(@RequestBody EvidenciaStartRequest evidenciaStartRequest,
             @Parameter(hidden = true) @Context HttpServletRequest request) {
 
@@ -296,7 +295,7 @@ public class EvidenciesRestService extends RestUtils {
         try {
 
             // XYZ ZZZ Això s'ha de moure a EJB !!!!
-            
+
             // Validar si fitxer es un PDF i no té firmes
             EvidenciaFile fileToSign = evidenciaStartRequest.getDocumentASignar();
             byte[] pdfInBytes = fileToSign.getDocument();
@@ -343,11 +342,8 @@ public class EvidenciesRestService extends RestUtils {
             evi.setPersonaMobil(evidenciaStartRequest.getPersonaMobil());
 
             // TODO XYZ ZZZ   Passar per Validador !!!
-            
-            
+
             evidenciaLogicaEjb.create(evi);
-            
-            
 
             log.info("Creada evidencia amb ID " + evi.getEvidenciaID());
 
@@ -399,6 +395,12 @@ public class EvidenciesRestService extends RestUtils {
             summary = "Retorna informació d'una evidència a partir del seu id")
     @ApiResponses({
             @ApiResponse(
+                    responseCode = "200",
+                    description = "Retornada correctament la informació de l'evidència",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = EvidenciaWs.class)) }),
+            @ApiResponse(
                     responseCode = "400",
                     description = "Paràmetres incorrectes",
                     content = { @Content(
@@ -421,15 +423,8 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Error no controlat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Retornada correctament la informació de l'evidència",
-                    content = { @Content(
-                            mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = EvidenciaWs.class)) }) })
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }), })
     public EvidenciaWs get(
-
             @Parameter(
                     name = "evidenciaID",
                     description = "Identificador de l'evidència de la que volem informació",
@@ -513,6 +508,12 @@ public class EvidenciesRestService extends RestUtils {
     @Operation(tags = { TAG_NAME }, operationId = "list", summary = "Retorna un llistat de les evidencies ")
     @ApiResponses({
             @ApiResponse(
+                    responseCode = "200",
+                    description = "EFIB: Retornades dades obertes correctament",
+                    content = { @Content(
+                            mediaType = RestUtils.MIME_APPLICATION_JSON,
+                            schema = @Schema(implementation = EvidenciaWsPaginacio.class)) }),
+            @ApiResponse(
                     responseCode = "400",
                     description = "EFIB: Paràmetres incorrectes",
                     content = { @Content(
@@ -535,13 +536,7 @@ public class EvidenciesRestService extends RestUtils {
                     description = "EFIB: Error durant la consulta de les dades obertes",
                     content = { @Content(
                             mediaType = RestUtils.MIME_APPLICATION_JSON,
-                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "EFIB: Retornades dades obertes correctament",
-                    content = { @Content(
-                            mediaType = RestUtils.MIME_APPLICATION_JSON,
-                            schema = @Schema(implementation = EvidenciaWsPaginacio.class)) }) })
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }), })
     public EvidenciaWsPaginacio list(@Parameter(
             description = "Data d'inici, en format yyyy-MM-dd (ISO 8601), a partir de la qual volem obtenir dades",
             in = ParameterIn.QUERY,
@@ -589,14 +584,9 @@ public class EvidenciesRestService extends RestUtils {
         // Check de language
         language = RestUtils.checkLanguage(language);
 
-        // Convertir Data en format dd/MM/yyyy a tipus Date
+        // Convertir Data en format ISO8601 a tipus Date
         // i check de dates
-
-        final String dataIniciRequestLabel = "inici";
-        final String dataFiRequestLabel = "fi";
-
-        final Date[] dates = checkRangeOfOnlyDates(dataIniciRequest, dataIniciRequestLabel, dataFiRequest,
-                dataFiRequestLabel);
+        final Date[] dates = checkRangeOfOnlyDates(dataIniciRequest, "inici", dataFiRequest, "fi", language);
 
         Date dateStart = dates[0];
         Date dateEnd = dates[1];
@@ -612,32 +602,10 @@ public class EvidenciesRestService extends RestUtils {
             final Where w = Where.AND(w1, w2);
             final OrderBy orderBy = new OrderBy(EvidenciaFields.DATAINICI, OrderType.DESC);
 
-            EvidenciaPaginacio paginacioOrig = GenAppPaginationUtils.createRestPagination(EvidenciaPaginacio.class, this.evidenciaLogicaEjb, page,
-                    pagesize, w, orderBy);
+            EvidenciaPaginacio paginacioOrig = GenAppPaginationUtils.createRestPagination(EvidenciaPaginacio.class,
+                    this.evidenciaLogicaEjb, page, pagesize, w, orderBy);
 
             EvidenciaWsPaginacio paginacio = new EvidenciaWsPaginacio(paginacioOrig, language);
-
-            /*
-            final int firstResult = (page - 1) * pagesize;
-            final int maxResults = pagesize;
-            final List<Evidencia> llistatOrig = this.evidenciaEjb.select(w, null, firstResult, maxResults, orderBy);
-            
-            long countTotal = this.evidenciaEjb.count(w);
-            
-            // PAGINACIO
-            final int pageSizeOutput = pagesize;
-            final int pageOutput = page;
-            final int totalPages = (int) (countTotal / pagesize) + ((countTotal % pagesize == 0) ? 0 : 1);
-            
-            
-            EvidenciesPaginacio paginacio = new EvidenciesPaginacio();
-            paginacio.setPage(pageSizeOutput);
-            paginacio.setPage(pageOutput);
-            paginacio.setTotalpages(totalPages);
-            paginacio.setTotalcount((int) countTotal);
-            paginacio.setData(llistatOrig);
-            
-            */
 
             //llistat, countTotal, pageSizeOutput, pageOutput, totalPages);
             log.info("Resultat => paginacio " + paginacio);
@@ -664,52 +632,6 @@ public class EvidenciesRestService extends RestUtils {
 
     }
 
-    /**
-     * 
-     * @param <D>
-     * @param <P>
-     * @param classe
-     * @param ejb
-     * @param page
-     * @param pagesize
-     * @param w
-     * @param orderBy
-     * @return
-     * @throws I18NException 
-     */
-    /*
-    protected static <D extends IGenAppEntity, P extends RestPagination<D>> P createRestPagination(Class<P> classe,
-            ITableManager<D, Long> ejb, int page, int pagesize, Where w, OrderBy orderBy
-    
-        final int firstResult = (page - 1) * pagesize;
-        final int maxResults = pagesize;
-        final List<D> llistat = ejb.select(w, null, firstResult, maxResults, orderBy);
-
-        long countTotal = ejb.count(w);
-
-        // PAGINACIO
-        final int pageSizeOutput = pagesize;
-        final int pageOutput = page;
-        final int totalPages = (int) (countTotal / pagesize) + ((countTotal % pagesize == 0) ? 0 : 1);
-
-        P paginacio;
-        try {
-            paginacio = classe.getConstructor().newInstance();
-        } catch (Throwable e) {
-            String msg = "Error instanciant un objecte de la classe " + classe + ": " + e.getMessage();
-            log.error(msg, e);
-            throw new I18NException("comodi",msg);
-        }
-        paginacio.setPagesize(pageSizeOutput);
-        paginacio.setPage(pageOutput);
-        paginacio.setTotalpages(totalPages);
-        paginacio.setTotalcount((int) countTotal);
-        paginacio.setData(llistat);
-        return paginacio;
-    }
-*/
-    //  obtenir fitxers
-
     // obtenir fitxer de evidencia
     @Path("/getfile/{evidenciaID}/{encryptedFileID}")
     @GET
@@ -722,6 +644,12 @@ public class EvidenciesRestService extends RestUtils {
             operationId = "getfile",
             summary = "Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID")
     @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Retornada correctament la informació de l'evidència",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = EvidenciaFile.class)) }),
             @ApiResponse(
                     responseCode = "400",
                     description = "Paràmetres incorrectes",
@@ -745,13 +673,7 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Error no controlat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Retornada correctament la informació de l'evidència",
-                    content = { @Content(
-                            mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = EvidenciaFile.class)) }) })
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }), })
     public EvidenciaFile getFile(
 
             @Parameter(
@@ -830,9 +752,8 @@ public class EvidenciesRestService extends RestUtils {
         }
 
     }
-    
-    
- // obtenir fitxer de evidencia
+
+    // obtenir fitxer de evidencia
     @Path("/getfilebase64/{evidenciaID}/{encryptedFileID}")
     @GET
     @RolesAllowed({ Constants.EVI_WS })
@@ -844,6 +765,12 @@ public class EvidenciesRestService extends RestUtils {
             operationId = "getfilebase64",
             summary = "Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID")
     @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Retornada correctament la informació de l'evidència",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = EvidenciaFileBase64.class)) }),
             @ApiResponse(
                     responseCode = "400",
                     description = "Paràmetres incorrectes",
@@ -867,13 +794,7 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Error no controlat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Retornada correctament la informació de l'evidència",
-                    content = { @Content(
-                            mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = EvidenciaFileBase64.class)) }) })
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }), })
     public EvidenciaFileBase64 getFileBase64(
 
             @Parameter(
@@ -926,7 +847,7 @@ public class EvidenciesRestService extends RestUtils {
                         + " no es troba en l'evidència amb ID " + evidenciaID;
                 throw new RestException(msg, Status.BAD_REQUEST);
             }
-            
+
             EvidenciaFileBase64 filebase64 = new EvidenciaFileBase64(file);
 
             Long fileID = HibernateFileUtil.decryptFileID(encryptedFileID);

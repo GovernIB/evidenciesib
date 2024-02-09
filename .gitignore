@@ -61,3 +61,4 @@ replay_pid*
 /evidenciesib-ejb/manual.pdf
 /evidenciesib-ejb/manual_stamp.pdf
 /pluginsib-login/target
+/evidenciesib-back/src/main/webapp/WEB-INF/jsp/admin/admin.jsp
