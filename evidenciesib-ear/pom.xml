@@ -257,7 +257,7 @@
                         <webModule>
                             <groupId>es.caib.evidenciesib</groupId>
                             <artifactId>evidenciesib-api-externa</artifactId>
-                            <contextRoot>/evidenciesibapi/externa</contextRoot>
+                            <contextRoot>evidenciesibapi/externa</contextRoot>
                             <bundleFileName>evidenciesib-api-externa.war</bundleFileName>
                         </webModule>
                         <!-- API EXTERNA END -->

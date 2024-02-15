@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.Base64;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -32,10 +31,11 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.pluginsib.utils.rest.GenAppPaginationUtils;
+import org.fundaciobit.pluginsib.utils.rest.GenAppEntityConverter;
+import org.fundaciobit.pluginsib.utils.rest.GenAppRangeOfDates;
+import org.fundaciobit.pluginsib.utils.rest.GenAppRestUtils;
 import org.fundaciobit.pluginsib.utils.rest.RestException;
 import org.fundaciobit.pluginsib.utils.rest.RestExceptionInfo;
-import org.fundaciobit.pluginsib.utils.rest.RestPagination;
 import org.fundaciobit.pluginsib.utils.rest.RestUtils;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
@@ -170,6 +170,9 @@ public class EvidenciesRestService extends RestUtils {
     }
 
     protected static Logger log = Logger.getLogger(EvidenciesRestService.class);
+    
+    protected static EvidenciaToEvidenciaWsConverter converterES = new EvidenciaToEvidenciaWsConverter("es");
+    protected static EvidenciaToEvidenciaWsConverter converterCA = new EvidenciaToEvidenciaWsConverter("ca");
 
     @EJB(mappedName = EvidenciaLogicaService.JNDI_NAME)
     protected EvidenciaLogicaService evidenciaLogicaEjb;
@@ -471,8 +474,11 @@ public class EvidenciesRestService extends RestUtils {
                 throw new RestException("L'aplicació " + request.getRemoteUser()
                         + " no és la propietària de l'evidència amb ID " + evidenciaID, Status.BAD_REQUEST);
             }
+            
+            
+            final EvidenciaToEvidenciaWsConverter converter = "es".equalsIgnoreCase(language)?converterES:converterCA; 
 
-            EvidenciaWs evi = new EvidenciaWs(eviBBDD, language);
+            EvidenciaWs evi = converter.convert(eviBBDD);
 
             return evi;
 
@@ -586,26 +592,23 @@ public class EvidenciesRestService extends RestUtils {
 
         // Convertir Data en format ISO8601 a tipus Date
         // i check de dates
-        final Date[] dates = checkRangeOfOnlyDates(dataIniciRequest, "inici", dataFiRequest, "fi", language);
-
-        Date dateStart = dates[0];
-        Date dateEnd = dates[1];
+        GenAppRangeOfDates grod;
+        grod = GenAppRestUtils.checkRangeOfOnlyDates(dataIniciRequest, "inici", dataFiRequest, "fi",
+                EvidenciaFields.DATAINICI, language);
 
         // Realitzar Consulta
         try {
 
-            final Timestamp from = new Timestamp(atStartOfDay(dateStart).getTime());
-            final Timestamp to = new Timestamp(atEndOfDay(dateEnd).getTime());
-            final Where w1 = EvidenciaFields.DATAINICI.between(from, to);
+            final Where w1 = grod.getWhere();
             final Where w2 = EvidenciaFields.USUARIAPLICACIO.equal(request.getRemoteUser());
 
             final Where w = Where.AND(w1, w2);
             final OrderBy orderBy = new OrderBy(EvidenciaFields.DATAINICI, OrderType.DESC);
 
-            EvidenciaPaginacio paginacioOrig = GenAppPaginationUtils.createRestPagination(EvidenciaPaginacio.class,
-                    this.evidenciaLogicaEjb, page, pagesize, w, orderBy);
+            final EvidenciaToEvidenciaWsConverter converter = "es".equalsIgnoreCase(language)?converterES:converterCA;
 
-            EvidenciaWsPaginacio paginacio = new EvidenciaWsPaginacio(paginacioOrig, language);
+            EvidenciaWsPaginacio paginacio = GenAppRestUtils.createRestPagination(EvidenciaWsPaginacio.class,
+                    this.evidenciaLogicaEjb, page, pagesize, w, orderBy, converter);
 
             //llistat, countTotal, pageSizeOutput, pageOutput, totalPages);
             log.info("Resultat => paginacio " + paginacio);
@@ -877,11 +880,108 @@ public class EvidenciesRestService extends RestUtils {
 
     }
 
-    protected static class EvidenciaPaginacio extends RestPagination<Evidencia> {
+    /**
+     * 
+     * @author anadal
+     *
+     */
+    public static class EvidenciaToEvidenciaWsConverter implements GenAppEntityConverter<Evidencia, EvidenciaWs> {
 
-        public EvidenciaPaginacio() {
-            super();
+        protected final String language;
+        
+        public EvidenciaToEvidenciaWsConverter(String language) {
+            this.language = language;
         }
-    }
+        
+        @Override
+        public EvidenciaWs convert(Evidencia genAppEntity) throws RestException {
+            Evidencia __bean = genAppEntity;
+            EvidenciaWs evi = new EvidenciaWs();
+            evi.setEvidenciaID(__bean.getEvidenciaID());
+            evi.setNom(__bean.getNom());
+            evi.setPersonaNom(__bean.getPersonaNom());
+            evi.setPersonaLlinatge1(__bean.getPersonaLlinatge1());
+            evi.setPersonaLlinatge2(__bean.getPersonaLlinatge2());
+            evi.setPersonaNif(__bean.getPersonaNif());
+            evi.setPersonaEmail(__bean.getPersonaEmail());
+            evi.setPersonaMobil(__bean.getPersonaMobil());
+            evi.setDataInici(__bean.getDataInici());
+            evi.setDataFi(__bean.getDataFi());
+            evi.setEstatCodi(__bean.getEstatCodi());
+            {
+                // XYZ ZZZ Falta traduir estats a IDIOMA
+                String desc;
+                switch (evi.getEstatCodi()) {
+
+                    case Constants.EVIDENCIA_ESTAT_CODI_ERROR:
+                        desc = "Error";
+                    break;
+
+                    case Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO:
+                        desc = "En procés de creació";
+                    break;
+
+                    case Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN:
+                        desc = "Realitzant login";
+                    break;
+
+                    case Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA:
+                        desc = "Realitzant signatura";
+                    break;
+
+                    case Constants.EVIDENCIA_ESTAT_CODI_SIGNAT:
+                        desc = "Finalitzat correctament";
+                    break;
+
+                    default:
+                        desc = "Codi desconegut (" + evi.getEstatCodi() + ")";
+                    break;
+                }
+                evi.setEstatCodiDescripcio(desc);
+            }
+
+            evi.setEstatError(__bean.getEstatError());
+            evi.setEstatExcepcio(__bean.getEstatExcepcio());
+            evi.setLoginType(__bean.getLoginType());
+            evi.setLoginSubtype(__bean.getLoginSubtype());
+            evi.setLoginQaa(__bean.getLoginQaa());
+            evi.setLoginData(__bean.getLoginData());
+            evi.setLoginId(__bean.getLoginId());
+            evi.setLoginAuthMethod(__bean.getLoginAuthMethod());
+            evi.setLoginAdditionalProperties(__bean.getLoginAdditionalProperties());
+            evi.setLocalitzacioIp(__bean.getLocalitzacioIp());
+            evi.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
+            evi.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
+            evi.setLocalitzacioLongitud(__bean.getLocalitzacioLongitud());
+            evi.setLocalitzacioCiutat(__bean.getLocalitzacioCiutat());
+            evi.setLocalitzacioRegio(__bean.getLocalitzacioRegio());
+            evi.setLocalitzacioPais(__bean.getLocalitzacioPais());
+            evi.setFirmaReason(__bean.getFirmaReason());
+            evi.setFirmaIdiomaDocument(__bean.getFirmaIdiomaDocument());
+            evi.setFirmaTipusDocumental(__bean.getFirmaTipusDocumental());
+
+            evi.setFirmaTipusDocumentalDescripcio(
+                    EvidenciesRestService.MAP_TIPUS_DOCUMENTAL.get(__bean.getFirmaTipusDocumental() + "_" + language));
+
+            // Fitxer
+            evi.setFitxerOriginal(EvidenciaFile.toBean(__bean.getFitxerOriginal()));
+            // Fitxer
+            evi.setFitxerAdaptat(EvidenciaFile.toBean(__bean.getFitxerAdaptat()));
+            // Fitxer
+            evi.setFitxerSignat(EvidenciaFile.toBean(__bean.getFitxerSignat()));
+
+            evi.getFitxerOriginal().setEncryptedFileID(HibernateFileUtil.encryptFileID(__bean.getFitxerOriginalID()));
+
+            if (__bean.getFitxerAdaptatID() != null) {
+                evi.getFitxerAdaptat().setEncryptedFileID(HibernateFileUtil.encryptFileID(__bean.getFitxerAdaptatID()));
+            }
+
+            if (__bean.getFitxerSignatID() != null) {
+                evi.getFitxerSignat().setEncryptedFileID(HibernateFileUtil.encryptFileID(__bean.getFitxerSignatID()));
+            }
+
+            return evi;
+        }
+    };
 
 }

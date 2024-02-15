@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author anadal
  *
  */
-@WebFilter(urlPatterns = { "/" })
+@WebFilter(urlPatterns = { "", "/" })
 public class RedirectToIndexFilter implements Filter {
 
     @Override

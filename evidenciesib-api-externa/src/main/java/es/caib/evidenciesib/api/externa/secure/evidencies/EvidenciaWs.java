@@ -1,9 +1,6 @@
 package es.caib.evidenciesib.api.externa.secure.evidencies;
 
 
-import es.caib.evidenciesib.commons.utils.Constants;
-import es.caib.evidenciesib.hibernate.HibernateFileUtil;
-import es.caib.evidenciesib.model.entity.Evidencia;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -126,91 +123,7 @@ public class EvidenciaWs {
     public EvidenciaWs() {
     }
 
-    public EvidenciaWs(Evidencia __bean, String language) {
-        this.setEvidenciaID(__bean.getEvidenciaID());
-        this.setNom(__bean.getNom());
-        this.setPersonaNom(__bean.getPersonaNom());
-        this.setPersonaLlinatge1(__bean.getPersonaLlinatge1());
-        this.setPersonaLlinatge2(__bean.getPersonaLlinatge2());
-        this.setPersonaNif(__bean.getPersonaNif());
-        this.setPersonaEmail(__bean.getPersonaEmail());
-        this.setPersonaMobil(__bean.getPersonaMobil());
-        this.setDataInici(__bean.getDataInici());
-        this.setDataFi(__bean.getDataFi());
-        this.setEstatCodi(__bean.getEstatCodi());
-        {
-            // XYZ ZZZ Falta traduir estats a IDIOMA
-            String desc;
-            switch (this.getEstatCodi()) {
-
-                case Constants.EVIDENCIA_ESTAT_CODI_ERROR:
-                    desc = "Error";
-                break;
-
-                case Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO:
-                    desc = "En procés de creació";
-                break;
-
-                case Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN:
-                    desc = "Realitzant login";
-                break;
-
-                case Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA:
-                    desc = "Realitzant signatura";
-                break;
-
-                case Constants.EVIDENCIA_ESTAT_CODI_SIGNAT:
-                    desc = "Finalitzat correctament";
-                break;
-
-                default:
-                    desc = "Codi desconegut (" + this.getEstatCodi() + ")";
-                break;
-            }
-            this.setEstatCodiDescripcio(desc);
-        }
-
-        this.setEstatError(__bean.getEstatError());
-        this.setEstatExcepcio(__bean.getEstatExcepcio());
-        this.setLoginType(__bean.getLoginType());
-        this.setLoginSubtype(__bean.getLoginSubtype());
-        this.setLoginQaa(__bean.getLoginQaa());
-        this.setLoginData(__bean.getLoginData());
-        this.setLoginId(__bean.getLoginId());
-        this.setLoginAuthMethod(__bean.getLoginAuthMethod());
-        this.setLoginAdditionalProperties(__bean.getLoginAdditionalProperties());
-        this.setLocalitzacioIp(__bean.getLocalitzacioIp());
-        this.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
-        this.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
-        this.setLocalitzacioLongitud(__bean.getLocalitzacioLongitud());
-        this.setLocalitzacioCiutat(__bean.getLocalitzacioCiutat());
-        this.setLocalitzacioRegio(__bean.getLocalitzacioRegio());
-        this.setLocalitzacioPais(__bean.getLocalitzacioPais());
-        this.setFirmaReason(__bean.getFirmaReason());
-        this.setFirmaIdiomaDocument(__bean.getFirmaIdiomaDocument());
-        this.setFirmaTipusDocumental(__bean.getFirmaTipusDocumental());
-
-        this.setFirmaTipusDocumentalDescripcio(EvidenciesRestService.MAP_TIPUS_DOCUMENTAL.get(__bean.getFirmaTipusDocumental() + "_" + language));
-
-
-        // Fitxer
-        this.setFitxerOriginal(EvidenciaFile.toBean(__bean.getFitxerOriginal()));
-        // Fitxer
-        this.setFitxerAdaptat(EvidenciaFile.toBean(__bean.getFitxerAdaptat()));
-        // Fitxer
-        this.setFitxerSignat(EvidenciaFile.toBean(__bean.getFitxerSignat()));
-
-        this.getFitxerOriginal().setEncryptedFileID(HibernateFileUtil.encryptFileID(__bean.getFitxerOriginalID()));
-
-        if (__bean.getFitxerAdaptatID() != null) {
-            this.getFitxerAdaptat().setEncryptedFileID(HibernateFileUtil.encryptFileID(__bean.getFitxerAdaptatID()));
-        }
-
-        if (__bean.getFitxerSignatID() != null) {
-            this.getFitxerSignat().setEncryptedFileID(HibernateFileUtil.encryptFileID(__bean.getFitxerSignatID()));
-        }
-
-    }
+    
 
     public long getEvidenciaID() {
         return evidenciaID;
