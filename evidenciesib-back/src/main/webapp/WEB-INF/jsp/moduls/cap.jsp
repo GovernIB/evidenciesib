@@ -100,10 +100,7 @@
 						aria-expanded="false">
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
-					<div class="dropdown-menu  dropdown-menu-right"
-						aria-labelledby="dropdownMenu3">
-
-
+					<div class="dropdown-menu  dropdown-menu-right"	aria-labelledby="dropdownMenu3">
 
 						<c:if test="${ empty loginInfo  }">
 							<a class="dropdown-item"
@@ -111,24 +108,21 @@
 								class="fas fa-sign-in-alt"></i> Login
 							</a>
 						</c:if>
-						<c:if test="${ not empty loginInfo  }">
 
+						<c:if test="${ not empty loginInfo  }">
+<%-- 
 							<a class="dropdown-item"
 								href="<c:url value="/configuracio"></c:url>"> <i
 								class="fas fa-cog"></i> <fmt:message key="configuracio" />
 							</a>
-
+--%>
 							<a class="dropdown-item" href="<c:url value="/logout"></c:url>">
 								<i class="fas fa-sign-out-alt"></i> <fmt:message key="sortir" />
 							</a>
 						</c:if>
 
-
 					</div>
 				</li>
-
-
-
 
 			</ul>
 
