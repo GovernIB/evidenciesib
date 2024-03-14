@@ -1,15 +1,11 @@
 package es.caib.evidenciesib.front.controller;
 
-
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
-
-
-
 
 import java.io.File;
 import java.io.OutputStream;
@@ -67,6 +63,8 @@ public class EvidenciaLoginController {
 
     public static final String MAPPING_FRONT_LOGIN_END = "/frontloginend";
 
+    public static final String MAPPING_FRONT_POST_LOGIN_END = "/frontpostloginend";
+
     @RequestMapping(Constants.MAPPING_FRONT_LOGIN_START + "/{evidenciaID}")
     public ModelAndView frontLoginStart(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
@@ -103,11 +101,11 @@ public class EvidenciaLoginController {
         mav.addObject("thumbnail", request.getContextPath() + THUMBNAIL_PDF_MASSIVE + "/" + evidenciaID);
 
         final String base = request.getContextPath();
-        final String append = EncrypterDecrypter
-                .encrypt(EncrypterDecrypter.ALGORITHM_AES, Configuracio.getEncryptKey(), String.valueOf(evidenciaID));
-        
-        mav.addObject("download",base  + DOWNLOAD_PDF + "/" + append);
-        mav.addObject("objectpdf",base  + OBJECT_PDF + "/" + append);
+        final String append = EncrypterDecrypter.encrypt(EncrypterDecrypter.ALGORITHM_AES, Configuracio.getEncryptKey(),
+                String.valueOf(evidenciaID));
+
+        mav.addObject("download", base + DOWNLOAD_PDF + "/" + append);
+        mav.addObject("objectpdf", base + OBJECT_PDF + "/" + append);
         return mav;
 
     }
@@ -149,8 +147,7 @@ public class EvidenciaLoginController {
 
             return r;
         }
-        
-        
+
         evidencia.setClickProperties(request.getParameter("clickInfo"));
 
         evidencia.setDeviceProperties(request.getParameter("deviceInfo"));
@@ -213,7 +210,6 @@ public class EvidenciaLoginController {
         return Configuracio.getBackUrl() + Constants.MAPPING_BACK_LOGIN_END + "/" + evidenciaID;
     }
 
-    
     public static final String THUMBNAIL_PDF_MASSIVE = "/thumbnailpdf";
 
     @RequestMapping(value = THUMBNAIL_PDF_MASSIVE + "/{evidenciaID}", method = RequestMethod.GET)
@@ -240,7 +236,7 @@ public class EvidenciaLoginController {
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
             response.setDateHeader("Expires", -1); // Proxies.
-            
+
             ImageIO.write(scaled, "PNG", response.getOutputStream());
 
         } catch (Throwable th) {
@@ -289,10 +285,20 @@ public class EvidenciaLoginController {
 
         return bimage;
     }
-    
 
     @RequestMapping(MAPPING_FRONT_LOGIN_END + "/{evidenciaID}")
-    public String frontLoginEnd(HttpServletRequest request, HttpServletResponse response,
+    public ModelAndView frontLoginEnd(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
+
+        ModelAndView mav = new ModelAndView("loginend");
+
+        mav.addObject("evidenciaID", evidenciaID);
+
+        return mav;
+    }
+
+    @RequestMapping(MAPPING_FRONT_POST_LOGIN_END + "/{evidenciaID}")
+    public String frontPostLoginEnd(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
 
         log.info("frontLoginEnd =>  evidenciaID=" + evidenciaID);
@@ -311,7 +317,6 @@ public class EvidenciaLoginController {
         final String r = "redirect:" + getRedirectUrl(evidenciaID);
 
         evi.setLoginData(new Timestamp(System.currentTimeMillis()));
-        
 
         // ERROR ???
         String errorPlugin = (String) request.getSession()
@@ -376,7 +381,7 @@ public class EvidenciaLoginController {
         evi.setPersonaNom(li.getName());
 
         evi.setLoginAuthMethod(li.getAuthenticationMethod());
-                
+
         evi.setLoginType(PluginLoginManager.getPluginLogin().getName(null));
         evi.setLoginSubtype(li.getIdentityProvider());
         evi.setLoginQaa(String.valueOf(li.getQaa()));
@@ -402,22 +407,21 @@ public class EvidenciaLoginController {
     @RequestMapping(value = DOWNLOAD_PDF + "/{evidenciaID}", method = RequestMethod.GET)
     public void downloadPdf(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") String evidenciaIDEncrypted) throws Exception, I18NException {
-        returnPdf(request, response, evidenciaIDEncrypted, true);   
+        returnPdf(request, response, evidenciaIDEncrypted, true);
     }
+
     public static final String OBJECT_PDF = "/objectpdf";
 
     @RequestMapping(value = OBJECT_PDF + "/{evidenciaID}", method = RequestMethod.GET)
     public void objectPdf(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("evidenciaID") String evidenciaIDEncrypted) throws Exception, I18NException {
-        
+
         returnPdf(request, response, evidenciaIDEncrypted, false);
-        
+
     }
-    
-    
-    protected void returnPdf(HttpServletRequest request, HttpServletResponse response,
-            String evidenciaIDEncrypted, boolean isDownload) throws Exception, I18NException {
-    
+
+    protected void returnPdf(HttpServletRequest request, HttpServletResponse response, String evidenciaIDEncrypted,
+            boolean isDownload) throws Exception, I18NException {
 
         String evidenciaIDDecrypted = EncrypterDecrypter.decrypt(EncrypterDecrypter.ALGORITHM_AES,
                 Configuracio.getEncryptKey(), evidenciaIDEncrypted);
@@ -436,10 +440,10 @@ public class EvidenciaLoginController {
             response.setContentType("application/pdf");
 
             if (isDownload) {
-              response.setHeader("Content-disposition", "attachment; filename=document.pdf");
+                response.setHeader("Content-disposition", "attachment; filename=document.pdf");
             }
 
-            OutputStream out = response.getOutputStream(); 
+            OutputStream out = response.getOutputStream();
             out.write(FileSystemManager.readFileToByteArray(file));
             out.flush();
 
