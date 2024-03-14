@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.caib.evidenciesib</groupId>
     <artifactId>evidenciesib-ear</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>ear</packaging>
     <parent>
         <groupId>es.caib.evidenciesib</groupId>
         <artifactId>evidenciesib</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <name>EvidenciesIB - Ear</name>
     <properties>

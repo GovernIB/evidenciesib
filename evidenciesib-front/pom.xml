@@ -4,7 +4,7 @@
     <parent>
         <artifactId>evidenciesib</artifactId>
         <groupId>es.caib.evidenciesib</groupId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <artifactId>evidenciesib-front</artifactId>
     <packaging>war</packaging>

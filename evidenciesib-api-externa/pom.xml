@@ -4,7 +4,7 @@
     <parent>
         <artifactId>evidenciesib</artifactId>
         <groupId>es.caib.evidenciesib</groupId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <artifactId>evidenciesib-api-externa</artifactId>
     <packaging>war</packaging>
@@ -33,13 +33,13 @@
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-commons</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-persistence</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-ejb</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
