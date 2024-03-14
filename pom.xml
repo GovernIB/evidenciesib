@@ -33,9 +33,9 @@
             </snapshots>
         </repository>
         <repository>
-            <id>repository.spring.release</id>
-            <name>Spring GA Repository</name>
-            <url>https://repo.spring.io/release</url>
+            <id>github_governib_maven</id>
+            <name>GitHub GovernIB Maven Repository</name>
+            <url>https://governib.github.io/maven/maven/</url>
         </repository>
         <repository>
             <id>jboss-releases</id>
@@ -48,11 +48,13 @@
                 <updatePolicy>never</updatePolicy>
             </snapshots>
         </repository>
+        <!--
         <repository>
-            <id>github_governib_maven</id>
-            <name>GitHub GovernIB Maven Repository</name>
-            <url>https://governib.github.io/maven/maven/</url>
+            <id>repository.spring.release</id>
+            <name>Spring GA Repository</name>
+            <url>https://repo.spring.io/release</url>
         </repository>
+        -->
     </repositories>
     <dependencies>
         <dependency>

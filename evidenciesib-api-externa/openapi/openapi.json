@@ -61,6 +61,7 @@
           "in" : "query",
           "description" : "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
           "schema" : {
+            "pattern" : "^(|ca|es)$",
             "type" : "string"
           },
           "examples" : {
@@ -72,8 +73,7 @@
               "description" : "Castellano",
               "value" : "es"
             }
-          },
-          "example" : "ca"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -159,6 +159,7 @@
           "in" : "query",
           "description" : "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
           "schema" : {
+            "pattern" : "^(|ca|es)$",
             "type" : "string"
           },
           "examples" : {
@@ -170,8 +171,7 @@
               "description" : "Castellano",
               "value" : "es"
             }
-          },
-          "example" : "ca"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -257,6 +257,7 @@
           "in" : "query",
           "description" : "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
           "schema" : {
+            "pattern" : "^(|ca|es)$",
             "type" : "string"
           },
           "examples" : {
@@ -268,8 +269,7 @@
               "description" : "Castellano",
               "value" : "es"
             }
-          },
-          "example" : "ca"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -372,6 +372,7 @@
           "in" : "query",
           "description" : "Idioma en que s'han de retornar les dades(Només suportat 'ca' o 'es')",
           "schema" : {
+            "pattern" : "^(|ca|es)$",
             "type" : "string"
           },
           "examples" : {
@@ -383,8 +384,7 @@
               "description" : "Castellano",
               "value" : "es"
             }
-          },
-          "example" : "ca"
+          }
         } ],
         "responses" : {
           "200" : {

@@ -438,11 +438,10 @@ public class EvidenciesRestService extends RestUtils {
                     name = "language",
                     description = "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
                     in = ParameterIn.QUERY,
-                    required = false,
-                    example = "ca",
+                    required = false,                    
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(implementation = String.class)) @QueryParam("language") String language,
+                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$" )) @QueryParam("language") String language,
             @Parameter(hidden = true) @Context HttpServletRequest request) {
 
         log.info("Entra a get  ...[" + request.getRemoteUser() + "]");
@@ -570,10 +569,9 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Idioma en que s'han de retornar les dades(Només suportat 'ca' o 'es')",
                     in = ParameterIn.QUERY,
                     required = false,
-                    example = "ca",
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(implementation = String.class)) @QueryParam("language") String language,
+                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$" )) @QueryParam("language") String language,
             @Parameter(hidden = true) @Context HttpServletRequest request,
             @Parameter(hidden = true) @Context SecurityContext security) throws RestException {
 
@@ -699,10 +697,9 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
                     in = ParameterIn.QUERY,
                     required = false,
-                    example = "ca",
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(implementation = String.class)) @QueryParam("language") String language,
+                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$" )) @QueryParam("language") String language,
             @Parameter(hidden = true) @Context HttpServletRequest request) {
 
         log.info("Entra a getFile ...[" + request.getRemoteUser() + "]");
@@ -819,11 +816,10 @@ public class EvidenciesRestService extends RestUtils {
                     name = "language",
                     description = "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
                     in = ParameterIn.QUERY,
-                    required = false,
-                    example = "ca",
+                    required = false,                    
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(implementation = String.class)) @QueryParam("language") String language,
+                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$" )) @QueryParam("language") String language,
             @Parameter(hidden = true) @Context HttpServletRequest request) {
 
         log.info("Entra a getFile ...[" + request.getRemoteUser() + "]");

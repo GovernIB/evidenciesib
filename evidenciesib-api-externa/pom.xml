@@ -9,7 +9,6 @@
     <artifactId>evidenciesib-api-externa</artifactId>
     <packaging>war</packaging>
     <name>EvidenciesIB - API Rest - Externa</name>
-    <version>1.0</version>
     <properties>
         <auth.method>BASIC</auth.method>
         <client.default.package>es.caib.evidenciesib.apiexterna.client</client.default.package>
@@ -134,7 +133,7 @@
                         <configuration>
                             <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
                             <generatorName>java</generatorName>
-                            <skipValidateSpec>true</skipValidateSpec>
+                            <skipValidateSpec>false</skipValidateSpec>
                             <library>resteasy</library>
                             <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
                             <!-- <configHelp>true</configHelp> -->
@@ -142,7 +141,7 @@
                             <output>${project.basedir}/../evidenciesib-api-externa-client</output>
                             <apiPackage>${client.default.package}.api</apiPackage>
                             <modelPackage>${client.default.package}.model</modelPackage>
-                            <invokerPackage>${client.default.package}.services</invokerPackage>
+                            <invokerPackage>${client.default.package}.services</invokerPackage>                            
                             <variableNamingConvention>camelCase</variableNamingConvention>
                             <generateModelTests>false</generateModelTests>
                             <configOptions>
