@@ -90,6 +90,7 @@ public class EvidenciaUserController extends EvidenciaController {
         if (evidenciaFilterForm.isNou()) {
             Set<Field<?>> hidden = new HashSet<Field<?>>(Arrays.asList(EvidenciaFields.ALL_EVIDENCIA_FIELDS));
 
+            hidden.remove(EVIDENCIAID);
             hidden.remove(NOM);
             hidden.remove(DATAINICI);
             hidden.remove(DATAFI);

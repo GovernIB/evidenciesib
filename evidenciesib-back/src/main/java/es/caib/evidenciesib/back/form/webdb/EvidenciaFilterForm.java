@@ -516,7 +516,7 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NOM ,PERSONANIF ,PERSONAUSERNAME ,PERSONALLINATGE1 ,PERSONAEMAIL ,USUARIPERSONA ,ESTATCODI ,ESTATERROR ,LOCALITZACIOIP ,FIRMATIPUSDOCUMENTAL }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { EVIDENCIAID ,NOM ,PERSONANIF ,PERSONAUSERNAME ,PERSONALLINATGE1 ,PERSONAEMAIL ,USUARIPERSONA ,ESTATCODI ,ESTATERROR ,LOCALITZACIOIP ,FIRMATIPUSDOCUMENTAL }));
   }
 
   @Override
