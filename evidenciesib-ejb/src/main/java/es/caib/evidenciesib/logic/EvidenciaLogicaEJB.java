@@ -34,6 +34,8 @@ import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignDocumentReq
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignatureResult;
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleSignedFileInfo;
 import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleStatus;
+import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleUpgradeRequest;
+import org.fundaciobit.apisib.apifirmasimple.v1.beans.FirmaSimpleUpgradeResponse;
 import org.fundaciobit.apisib.apifirmasimple.v1.jersey.ApiFirmaEnServidorSimpleJersey;
 import org.fundaciobit.apisib.core.exceptions.AbstractApisIBException;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
@@ -311,17 +313,41 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
                 case FirmaSimpleStatus.STATUS_FINAL_OK: // = 2;
                 {
 
-                    // TODO  XYZ ZZZ
-                    log.info(FirmaSimpleSignedFileInfo.toString(fullResults.getSignedFileInfo()));
+                    // Firma document
 
-                    FirmaSimpleFile fsf = fullResults.getSignedFile();
+                    FirmaSimpleFile signedFile = fullResults.getSignedFile();
+
+                    FirmaSimpleSignedFileInfo signedFileInfo = fullResults.getSignedFileInfo();
+                    log.info(FirmaSimpleSignedFileInfo.toString(signedFileInfo));
+                    
+                    String mime = signedFile.getMime();
+
+                    // Afegir Segell de Temps emprant l'upgrade de firma
+                    FirmaSimpleFile fsf;
+                    {
+
+                        FirmaSimpleFile fileToUpgrade = signedFile;
+                        FirmaSimpleFile documentDetached = null;
+                        FirmaSimpleUpgradeResponse upgradeResponse = api.upgradeSignature(
+                                new FirmaSimpleUpgradeRequest(perfil, fileToUpgrade, documentDetached, null, idiomaUI));
+
+                        FirmaSimpleFile upgraded = upgradeResponse.getUpgradedFile();
+
+                        fsf = upgraded;
+                    }
+                    
+                    if (fsf.getMime() != null) {
+                        mime = fsf.getMime();                    
+                    }
+
+                    // FirmaSimpleFile fsf = fullResults.getSignedFile();
 
                     byte[] data = fsf.getData();
 
                     String newname = evi.getFitxerOriginal().getNom();
                     newname = FilenameUtils.getBaseName(newname) + "_signed." + FilenameUtils.getExtension(newname);
 
-                    Fitxer fitxer = fitxerLogicaEjb.create(newname, fsf.getMime(), data.length, "");
+                    Fitxer fitxer = fitxerLogicaEjb.create(newname, mime, data.length, "");
                     FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
 
                     evi.setFitxerSignatID(fitxer.getFitxerID());
