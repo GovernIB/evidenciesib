@@ -550,6 +550,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             map.put("login.id", evi.getLoginId());
             map.put("login.date", ISO8601.dateToISO8601(evi.getLoginData()));
             map.put("login.properties.sha256", DigestUtils.sha256Hex(evi.getLoginAdditionalProperties()));
+            map.put("login.qaa", evi.getLoginQaa());
 
             String clickProperties = evi.getClickProperties();
             if (clickProperties != null && clickProperties.trim().length() != 0) {
