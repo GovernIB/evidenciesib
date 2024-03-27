@@ -35,6 +35,7 @@ public interface EvidenciaFields extends java.io.Serializable {
 	 public static final StringField LOGINID = new StringField(_TABLE_MODEL, "loginId", "loginid");
 	 public static final TimestampField LOGINDATA = new TimestampField(_TABLE_MODEL, "loginData", "logindata");
 	 public static final StringField LOGINADDITIONALPROPERTIES = new StringField(_TABLE_MODEL, "loginAdditionalProperties", "loginadditionalproperties");
+	 public static final StringField LOGINPROPERTIESSHA256 = new StringField(_TABLE_MODEL, "loginPropertiesSha256", "loginpropertiessha256");
 	 public static final StringField LOCALITZACIOIP = new StringField(_TABLE_MODEL, "localitzacioIp", "localitzacioip");
 	 public static final StringField LOCALITZACIOCODIPOSTAL = new StringField(_TABLE_MODEL, "localitzacioCodiPostal", "localitzaciocodipostal");
 	 public static final StringField LOCALITZACIOLATITUD = new StringField(_TABLE_MODEL, "localitzacioLatitud", "localitzaciolatitud");
@@ -77,6 +78,7 @@ public interface EvidenciaFields extends java.io.Serializable {
     LOGINID,
     LOGINDATA,
     LOGINADDITIONALPROPERTIES,
+    LOGINPROPERTIESSHA256,
     LOCALITZACIOIP,
     LOCALITZACIOCODIPOSTAL,
     LOCALITZACIOLATITUD,

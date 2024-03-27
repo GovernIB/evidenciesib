@@ -139,6 +139,11 @@
           ${evidencia.loginAdditionalProperties}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINPROPERTIESSHA256)}">
+          <td>
+          ${evidencia.loginPropertiesSha256}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOIP)}">
           <td>
           ${evidencia.localitzacioIp}

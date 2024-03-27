@@ -318,6 +318,17 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
+  private java.lang.String loginPropertiesSha256;
+
+  public java.lang.String getLoginPropertiesSha256() {
+    return this.loginPropertiesSha256;
+  }
+
+  public void setLoginPropertiesSha256(java.lang.String loginPropertiesSha256) {
+    this.loginPropertiesSha256 = loginPropertiesSha256;
+  }
+
+
   private java.lang.String localitzacioIp;
 
   public java.lang.String getLocalitzacioIp() {
@@ -493,6 +504,7 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.loginDataDesde = __toClone.loginDataDesde;
     this.loginDataFins = __toClone.loginDataFins;
     this.loginAdditionalProperties = __toClone.loginAdditionalProperties;
+    this.loginPropertiesSha256 = __toClone.loginPropertiesSha256;
     this.localitzacioIp = __toClone.localitzacioIp;
     this.localitzacioCodiPostal = __toClone.localitzacioCodiPostal;
     this.localitzacioLatitud = __toClone.localitzacioLatitud;

@@ -529,6 +529,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.LOGINPROPERTIESSHA256)}">
+        <tr id="evidencia_loginPropertiesSha256_rowid">
+          <td id="evidencia_loginPropertiesSha256_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.LOGINPROPERTIESSHA256])?'evidencia.loginPropertiesSha256':__theForm.labels[EvidenciaFields.LOGINPROPERTIESSHA256]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.LOGINPROPERTIESSHA256]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.LOGINPROPERTIESSHA256]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_loginPropertiesSha256_columnvalueid">
+            <form:errors path="evidencia.loginPropertiesSha256" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOGINPROPERTIESSHA256)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LOGINPROPERTIESSHA256)? ' uneditable-input' : ''}"  style="" maxlength="255" path="evidencia.loginPropertiesSha256"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.LOCALITZACIOIP)}">
         <tr id="evidencia_localitzacioIp_rowid">
           <td id="evidencia_localitzacioIp_columnlabelid">

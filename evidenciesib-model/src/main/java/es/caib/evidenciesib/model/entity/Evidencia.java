@@ -71,6 +71,9 @@ public interface Evidencia extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getLoginAdditionalProperties();
 	public void setLoginAdditionalProperties(java.lang.String _loginAdditionalProperties_);
 
+	public java.lang.String getLoginPropertiesSha256();
+	public void setLoginPropertiesSha256(java.lang.String _loginPropertiesSha256_);
+
 	public java.lang.String getLocalitzacioIp();
 	public void setLocalitzacioIp(java.lang.String _localitzacioIp_);
 

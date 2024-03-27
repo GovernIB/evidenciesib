@@ -613,6 +613,32 @@
         },
         {
           "isAutoIncrement": false,
+          "sqlName": "loginpropertiessha256",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Login Properties - SHA256",
+            "es": "Login Properties - SHA256"
+          },
+          "javaName": "loginPropertiesSha256",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "\u0027NO_DEFINED\u0027::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
           "sqlName": "localitzacioip",
           "sqlType": 12,
           "size": 100,

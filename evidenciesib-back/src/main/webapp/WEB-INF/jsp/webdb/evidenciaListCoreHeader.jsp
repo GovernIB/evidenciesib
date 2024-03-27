@@ -81,6 +81,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINADDITIONALPROPERTIES)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINADDITIONALPROPERTIES)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOGINPROPERTIESSHA256)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOGINPROPERTIESSHA256)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LOCALITZACIOIP)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LOCALITZACIOIP)}</th>
         </c:if>

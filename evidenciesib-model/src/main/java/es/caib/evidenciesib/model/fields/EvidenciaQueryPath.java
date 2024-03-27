@@ -103,6 +103,10 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.LOGINADDITIONALPROPERTIES);
   }
 
+  public StringField LOGINPROPERTIESSHA256() {
+    return new StringField(getQueryPath(), EvidenciaFields.LOGINPROPERTIESSHA256);
+  }
+
   public StringField LOCALITZACIOIP() {
     return new StringField(getQueryPath(), EvidenciaFields.LOCALITZACIOIP);
   }

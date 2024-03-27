@@ -214,6 +214,14 @@ public class EvidenciaValidator<I extends Evidencia>
       }
     }
 
+    if (__vr.getFieldErrorCount(LOGINPROPERTIESSHA256) == 0) {
+      java.lang.String __loginpropertiessha256 = __target__.getLoginPropertiesSha256();
+      if (__loginpropertiessha256!= null && __loginpropertiessha256.length() > 255) {
+        __vr.rejectValue(LOGINPROPERTIESSHA256, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGINPROPERTIESSHA256)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
     if (__vr.getFieldErrorCount(LOCALITZACIOIP) == 0) {
       java.lang.String __localitzacioip = __target__.getLocalitzacioIp();
       if (__localitzacioip!= null && __localitzacioip.length() > 100) {

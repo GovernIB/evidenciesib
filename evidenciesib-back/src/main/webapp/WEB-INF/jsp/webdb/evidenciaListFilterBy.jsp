@@ -479,6 +479,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOGINPROPERTIESSHA256)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="evidencia.loginPropertiesSha256" var="loginPropertiesSha256" />
+              <fmt:message key="genapp.form.searchby" var="cercaperloginPropertiesSha256" >                
+                 <fmt:param value="${loginPropertiesSha256}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${loginPropertiesSha256}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperloginPropertiesSha256}" path="loginPropertiesSha256" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EvidenciaFields.LOCALITZACIOIP)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">

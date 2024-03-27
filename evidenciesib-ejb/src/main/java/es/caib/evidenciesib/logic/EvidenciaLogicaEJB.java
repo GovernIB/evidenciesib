@@ -22,7 +22,6 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -549,7 +548,8 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             map.put("login.subtype", evi.getLoginSubtype());
             map.put("login.id", evi.getLoginId());
             map.put("login.date", ISO8601.dateToISO8601(evi.getLoginData()));
-            map.put("login.properties.sha256", DigestUtils.sha256Hex(evi.getLoginAdditionalProperties()));
+            // DigestUtils.sha256Hex(evi.getLoginAdditionalProperties());
+            map.put("login.properties.sha256", evi.getLoginPropertiesSha256());
             map.put("login.qaa", evi.getLoginQaa());
 
             String clickProperties = evi.getClickProperties();

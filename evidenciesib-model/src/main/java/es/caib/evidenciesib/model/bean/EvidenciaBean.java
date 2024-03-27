@@ -31,6 +31,7 @@ public class EvidenciaBean implements Evidencia {
 	java.lang.String loginId;
 	java.sql.Timestamp loginData;
 	java.lang.String loginAdditionalProperties;
+	java.lang.String loginPropertiesSha256;
 	java.lang.String localitzacioIp;
 	java.lang.String localitzacioCodiPostal;
 	java.lang.String localitzacioLatitud;
@@ -54,7 +55,7 @@ public class EvidenciaBean implements Evidencia {
   }
 
   /** Constructor amb tots els camps  */
-  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
+  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNif=personaNif;
@@ -78,6 +79,7 @@ public class EvidenciaBean implements Evidencia {
     this.loginId=loginId;
     this.loginData=loginData;
     this.loginAdditionalProperties=loginAdditionalProperties;
+    this.loginPropertiesSha256=loginPropertiesSha256;
     this.localitzacioIp=localitzacioIp;
     this.localitzacioCodiPostal=localitzacioCodiPostal;
     this.localitzacioLatitud=localitzacioLatitud;
@@ -96,7 +98,7 @@ public class EvidenciaBean implements Evidencia {
     this.callBackUrl=callBackUrl;
 }
   /** Constructor sense valors autoincrementals */
-  public EvidenciaBean(java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
+  public EvidenciaBean(java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
     this.nom=nom;
     this.personaNif=personaNif;
     this.personaUsername=personaUsername;
@@ -119,6 +121,7 @@ public class EvidenciaBean implements Evidencia {
     this.loginId=loginId;
     this.loginData=loginData;
     this.loginAdditionalProperties=loginAdditionalProperties;
+    this.loginPropertiesSha256=loginPropertiesSha256;
     this.localitzacioIp=localitzacioIp;
     this.localitzacioCodiPostal=localitzacioCodiPostal;
     this.localitzacioLatitud=localitzacioLatitud;
@@ -172,6 +175,7 @@ public class EvidenciaBean implements Evidencia {
     this.setLoginId(__bean.getLoginId());
     this.setLoginData(__bean.getLoginData());
     this.setLoginAdditionalProperties(__bean.getLoginAdditionalProperties());
+    this.setLoginPropertiesSha256(__bean.getLoginPropertiesSha256());
     this.setLocalitzacioIp(__bean.getLocalitzacioIp());
     this.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
     this.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());
@@ -357,6 +361,13 @@ public class EvidenciaBean implements Evidencia {
 		this.loginAdditionalProperties = _loginAdditionalProperties_;
 	};
 
+	public java.lang.String getLoginPropertiesSha256() {
+		return(loginPropertiesSha256);
+	};
+	public void setLoginPropertiesSha256(java.lang.String _loginPropertiesSha256_) {
+		this.loginPropertiesSha256 = _loginPropertiesSha256_;
+	};
+
 	public java.lang.String getLocalitzacioIp() {
 		return(localitzacioIp);
 	};
@@ -499,6 +510,7 @@ public class EvidenciaBean implements Evidencia {
     __tmp.setLoginId(__bean.getLoginId());
     __tmp.setLoginData(__bean.getLoginData());
     __tmp.setLoginAdditionalProperties(__bean.getLoginAdditionalProperties());
+    __tmp.setLoginPropertiesSha256(__bean.getLoginPropertiesSha256());
     __tmp.setLocalitzacioIp(__bean.getLocalitzacioIp());
     __tmp.setLocalitzacioCodiPostal(__bean.getLocalitzacioCodiPostal());
     __tmp.setLocalitzacioLatitud(__bean.getLocalitzacioLatitud());

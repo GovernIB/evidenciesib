@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -392,8 +393,11 @@ public class EvidenciaLoginController {
             Properties props = new Properties();
 
             props.putAll(additional);
+            final String p = getPropertyAsString(props);
 
-            evi.setLoginAdditionalProperties(getPropertyAsString(props));
+            evi.setLoginAdditionalProperties(p);
+
+            evi.setLoginPropertiesSha256(DigestUtils.sha256Hex(p));
 
         }
 
