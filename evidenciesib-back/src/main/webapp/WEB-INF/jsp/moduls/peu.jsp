@@ -48,10 +48,17 @@
 
 		<!-- Dreta -->
 		<div class="col-4 text-right" >
-			<a href="http://otaeweb.ibit.org/" style="padding-top: 10px" target="_blank"> <img
-				src="<c:url value="/img/fundaciobit-logo-peu.png"/>"
-				alt="Fundacio Bit" />
-			</a> <br />
+ 
+              <% String footerLogo = Configuracio.getWebuiFooterLogoUrl(); %>
+              <% if (footerLogo == null) { %>
+                <a href="https://governdigital.fundaciobit.org/" style="padding-top: 10px" target="_blank">
+                <img src="<c:url value="/img/fundaciobit-logo-peu.png"/>"   alt="Fundacio Bit" />
+                </a>
+              <% } else { %>
+                <img src="<%=footerLogo%>" alt="EvidenciesIB" title="EvidenciesIB" />
+              <% } %>
+ 
+			 <br />
 
 			<!-- Button to trigger modal -->
 			<small><a href="#modalAjuda" role="button"

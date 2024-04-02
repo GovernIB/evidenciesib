@@ -1,1 +1,1 @@
-compile.bat -pl evidenciesib-back,evidenciesib-ear -Denforcer.skip=true
+compile.bat -pl evidenciesib-commons,evidenciesib-back,evidenciesib-ear -Denforcer.skip=true

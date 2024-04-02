@@ -218,5 +218,21 @@ public class Configuracio implements Constants {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.profile");
     }
 
+    // ===========================================================
+    // ==============   ASPECTE WEB ====================
+    // ===========================================================
+    
+    public static String getWebuiHeaderColor() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "webui.headercolor");
+    }
+
+    public static String getWebuiHeaderLogoUrl() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "webui.headerlogourl");
+    }
+    
+    public static String getWebuiFooterLogoUrl() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "webui.footerlogourl");
+    }
+    
 
 }
