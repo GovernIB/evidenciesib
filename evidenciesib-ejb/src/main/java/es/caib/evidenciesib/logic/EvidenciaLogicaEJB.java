@@ -643,8 +643,12 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             PdfWriter writer, String url) throws MalformedURLException {
 
         Locale loc = new java.util.Locale(evi.getFirmaIdiomaDocument());
+        
+        
+        
 
         Rectangle page = reader.getPageSize(1);
+        
 
         // "Informació de la Firma"
         String title = I18NCommonUtils.tradueix(loc, "stamp.info");
@@ -711,8 +715,10 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
             annot.setTitle(title);
 
-            //Insert the annotation         
-            stamp.addAnnotation(annot, 1);
+            //Insert the annotation  
+            for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+                stamp.addAnnotation(annot, i);
+            }
         }
 
         PdfAction action = new PdfAction(new URL(url));
@@ -720,7 +726,9 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             PdfAnnotation annotLink1;
             annotLink1 = new PdfAnnotation(writer, r.getLeft(), r.getBottom(), r.getRight(), r.getTop(), action);
             //annot2.put(PdfName.NAME, new PdfName(name));
-            stamp.addAnnotation(annotLink1, 1);
+            for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+                stamp.addAnnotation(annotLink1, i);
+            }
         }
     }
 
