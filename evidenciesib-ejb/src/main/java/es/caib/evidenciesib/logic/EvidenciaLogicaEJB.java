@@ -226,8 +226,8 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
                         FileSystemManager.getFileContent(fitxerAdaptat.getFitxerID()));
 
             } catch (IOException e) {
-                // TODO XYZ ZZZ
-                String msg = "Error llegint el fitxer a signar (fitxer adaptat): " + e.getMessage();
+                // "Error llegint el fitxer a signar (fitxer original): " + e.getMessage();
+                String msg = I18NCommonUtils.tradueix(languageUI, "error.llegintoriginal", e.getMessage());
                 log.error(msg, e);
                 throw new I18NException(e, "genapp.comodi", new I18NArgumentString(msg));
             }
@@ -239,10 +239,8 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
             final int signNumber = 1;
 
-            // XYZ ZZZ
-            final String languageSign = evi.getFirmaIdiomaDocument();
 
-            // XYZ ZZZ
+            final String languageSign = evi.getFirmaIdiomaDocument();
             final long tipusDocumentalID = evi.getFirmaTipusDocumental(); // =TD99
 
             FirmaSimpleFileInfoSignature fileInfoSignature = new FirmaSimpleFileInfoSignature(fileToSign, signID, name,
@@ -266,9 +264,9 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             try {
                 fullResults = api.signDocument(signature);
             } catch (AbstractApisIBException e) {
-                // TODO XYZ ZZZ
-                String msg = "Error signant el fitxer: " + e.getMessage() + "(" + e.getDescription() + ")";
-                throw new I18NException(e, "genapp.comodi", new I18NArgumentString(msg));
+                log.error("Error signant el fitxer: " + e.getMessage() + "(" +  e.getDescription() + ")", e);
+                // error.signant=Error signant el fitxer: {0} ({1})
+                throw new I18NException("error.signant", e.getMessage(),  e.getDescription());
             }
 
             FirmaSimpleStatus transactionStatus = fullResults.getStatus();
@@ -279,41 +277,36 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
                 case FirmaSimpleStatus.STATUS_INITIALIZING: // = 0;
                 {
-                    // TODO XYZ ZZZ
-                    String msg = "L'estat del procés de firma ha tornat el control però encara està en estat INICIALITZANT";
-                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                    log.error("L'estat del procés de firma ha tornat el control però encara està en estat INICIALITZANT");
+                    throw new I18NException("error.encarainicialitzant");
                 }
 
                 case FirmaSimpleStatus.STATUS_IN_PROGRESS: // = 1;
                 {
-                    // TODO XYZ ZZZ
-                    String msg = "L'estat del procés de firma ha tornat el control però encara està en estat EN PROGRESS";
-                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                    log.error("L'estat del procés de firma ha tornat el control però encara està en estat EN PROGRESS");
+                    throw new I18NException("error.encaraenproces");
                 }
 
                 case FirmaSimpleStatus.STATUS_FINAL_ERROR: // = -1;
                 {
-                    final String msg = "Error durant la realització de les firmes: "
-                            + transactionStatus.getErrorMessage();
+                    log.error("Error durant la realització de les firmes: " + transactionStatus.getErrorMessage());
                     String stack = transactionStatus.getErrorStackTrace();
                     if (stack != null) {
                         evi.setEstatExcepcio(stack);
+                        log.error(stack);
                     }
-                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                    throw new I18NException("error.estatfinalerror", transactionStatus.getErrorMessage());
                 }
 
                 case FirmaSimpleStatus.STATUS_CANCELLED: // = -2;
                 {
-                    // TODO XYZ ZZZ
-                    String msg = "El procés de firma ha tornat el control amb estat CANCEL·LAT";
-                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                    log.warn("El procés de firma ha tornat el control amb estat CANCEL·LAT");
+                    throw new I18NException("error.procescancelat");
                 }
 
                 case FirmaSimpleStatus.STATUS_FINAL_OK: // = 2;
                 {
-
                     // Firma document
-
                     FirmaSimpleFile signedFile = fullResults.getSignedFile();
 
                     FirmaSimpleSignedFileInfo signedFileInfo = fullResults.getSignedFileInfo();
@@ -324,7 +317,6 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
                     // Afegir Segell de Temps emprant l'upgrade de firma
                     FirmaSimpleFile fsf;
                     {
-
                         FirmaSimpleFile fileToUpgrade = signedFile;
                         FirmaSimpleFile documentDetached = null;
                         FirmaSimpleUpgradeResponse upgradeResponse = api.upgradeSignature(
@@ -338,8 +330,6 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
                     if (fsf.getMime() != null) {
                         mime = fsf.getMime();                    
                     }
-
-                    // FirmaSimpleFile fsf = fullResults.getSignedFile();
 
                     byte[] data = fsf.getData();
 
@@ -357,16 +347,15 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
                 break;
 
                 default: {
-                    // TODO XYZ ZZZ
-                    String msg = "L'estat del procés de firma ha tornat un estat desconegut amb valor " + status;
-                    throw new I18NException("genapp.comodi", new I18NArgumentString(msg));
+                    log.error("L'estat del procés de firma ha tornat un estat desconegut amb valor " + status);
+                    throw new I18NException("error.estatfinaldesconeguti",  String.valueOf(status));
                 }
             } // Final Switch Firma
 
         } catch (I18NException th) {
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
             final String msg = I18NCommonUtils.getMessage(th, languageUI);
-            evi.setEstatError(StringUtils.abbreviate(msg, 4000)); // XYZ ZZZ TODO 
+            evi.setEstatError(StringUtils.abbreviate(msg, 4000));
             if (evi.getEstatExcepcio() == null) {
                 Throwable cause = th.getCause();
                 if (cause == null) {
@@ -395,7 +384,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             try {
                 this.update(evi);
             } catch (I18NException e) {
-                // TODO XYZ ZZZ
+                
                 String msg = "Error actualitzant l'evidència despres de signar el document: "
                         + I18NCommonUtils.getMessage(e, languageUI);
                 log.error(msg, e);
@@ -407,108 +396,6 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
     }
 
-    /*
-    protected static void createAdaptedFile()
-            throws Exception {
-        //PdfReader reader;
-        
-    
-    //        reader = new PdfReader(new FileInputStream(src_pdf));
-    //
-    //        //Create PdfStamp object
-    //        PdfStamper stamp = new PdfStamper(reader, new FileOutputStream(dst_pdf), '\0', true);
-    //        PdfWriter writer = stamp.getWriter();
-    
-        //Create the proper annotation
-        
-    
-    
-        
-    
-        // NOTA el rectangle no rota
-    
-        
-        
-    //      System.out.println(page);
-    //            System.out.println("Alt: " + page.getHeight() + "    | Ample + " + page.getWidth() );
-    
-        
-        // Llegir PDF
-        File original = FileSystemManager.getFile(evi.getFitxerOriginalID());
-        File fileTmp1 = File.createTempFile("evidenciesib_generarfitxeradaptat_", ".pdf");
-    
-        FileOutputStream output1 = null;
-        FileInputStream readerInputStream = null;
-        PdfReader reader = null;
-        PdfStamper stamper = null;
-        try {
-    
-            // File input3 = null;
-            readerInputStream = new FileInputStream(original);
-            reader = new PdfReader(readerInputStream);
-    
-            output1 = new FileOutputStream(fileTmp1);
-    
-            stamper = new PdfStamper(reader, output1);
-        
-            
-            // Afegeix ANOTACIO 
-            
-            
-            
-            // Afegir ATTACH amb informació
-            
-        
-    
-        try {
-            
-            
-        
-    } catch (DocumentException docex) {
-        // TODO XYZ ZZZ
-        String msg = "Error adaptant el PDF per afegir-hi annexes: " + docex.getMessage();
-        log.error(msg, docex);
-        throw new I18NException(docex, "genapp.comodi", new I18NArgumentString(msg));
-    }
-    
-        
-    
-        String newname = evi.getFitxerOriginal().getNom();
-        newname = FilenameUtils.getBaseName(newname) + "_adaptat." + FilenameUtils.getExtension(newname);
-    
-        Fitxer fitxerAdaptat = fitxerEjb.create(newname, evi.getFitxerOriginal().getMime(), fileTmp1.length(), "");
-        FileSystemManager.crearFitxer(fileTmp1, fitxerAdaptat.getFitxerID());
-    
-        
-        
-    } catch(Exception e) {
-        
-        
-    
-    
-    } finally {
-    
-        // 1.3.- Guardar PDF
-        if (stamper != null) {
-            stamper.close();
-        }
-    
-        if (reader != null) {
-            reader.close();
-        }
-    
-        if (readerInputStream != null) {
-            readerInputStream.close();
-        }
-    
-        if (output1 != null) {
-            output1.flush();
-            output1.close();
-        }
-    
-    }
-    
-    */
 
     /**
      * 
@@ -523,7 +410,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
     protected void generarAnnexJsonDeLesEvidencies(Evidencia evi, PdfReader reader, PdfStamper stamper,
             PdfWriter writer) throws IOException, I18NException, DocumentException {
 
-        // TODO XYZ Attach JSON  to PDF
+        // Attach JSON  to PDF
 
         // 1. Modificar Contingut del PDF
 
@@ -548,7 +435,6 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             map.put("login.subtype", evi.getLoginSubtype());
             map.put("login.id", evi.getLoginId());
             map.put("login.date", ISO8601.dateToISO8601(evi.getLoginData()));
-            // DigestUtils.sha256Hex(evi.getLoginAdditionalProperties());
             map.put("login.properties.sha256", evi.getLoginPropertiesSha256());
             map.put("login.qaa", evi.getLoginQaa());
 
@@ -569,35 +455,6 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
                 }
             }
 
-            /*
-            map.put("Nom", evi.getNom());
-            map.put("PersonaNom", evi.getPersonaNom());
-            map.put("PersonaLlinatge1", evi.getPersonaLlinatge1());
-            map.put("PersonaLlinatge2", evi.getPersonaLlinatge2());
-            map.put("PersonaNif", evi.getPersonaNif());
-            map.put("PersonaUsername", evi.getPersonaUsername());
-            map.put("PersonaEmail", evi.getPersonaEmail());
-            map.put("PersonaMobil", evi.getPersonaMobil());
-            map.put("DataInici", evi.getDataInici());
-            map.put("DataFi", evi.getDataFi());
-            map.put("UsuariAplicacio", evi.getUsuariAplicacio());
-            map.put("UsuariPersona", evi.getUsuariPersona());
-            map.put("LoginType", evi.getLoginType());
-            map.put("LoginId", evi.getLoginId());
-            map.put("LoginData", evi.getLoginData());
-            map.put("LocalitzacioIp", evi.getLocalitzacioIp());
-            map.put("LocalitzacioCodiPostal", evi.getLocalitzacioCodiPostal());
-            map.put("LocalitzacioLongitud", evi.getLocalitzacioLongitud());
-            map.put("LocalitzacioCiutat", evi.getLocalitzacioCiutat());
-            map.put("LocalitzacioLatitud", evi.getLocalitzacioLatitud());
-            map.put("LocalitzacioRegio", evi.getLocalitzacioRegio());
-            map.put("LocalitzacioPais", evi.getLocalitzacioPais());
-            map.put("FirmaReason", evi.getFirmaReason());
-            map.put("FirmaTipusDocumental", evi.getFirmaTipusDocumental());
-            map.put("FirmaIdiomaDocument", evi.getFirmaIdiomaDocument());
-            map.put("FirmaTipusDocumental", evi.getFirmaTipusDocumental());
-            map.put("FirmaIdiomaDocument", evi.getFirmaIdiomaDocument());
-            */
             // Esborram tots els valors null !!!!
             while (map.values().remove(null))
                 ;
@@ -644,9 +501,6 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
         Locale loc = new java.util.Locale(evi.getFirmaIdiomaDocument());
         
-        
-        
-
         Rectangle page = reader.getPageSize(1);
         
 

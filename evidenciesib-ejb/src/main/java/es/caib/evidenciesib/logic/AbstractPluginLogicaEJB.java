@@ -139,7 +139,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
             where = Where.AND(where, PLUGINID.in(filterByPluginID));
         }
 
-        // TODO XYZ pendent afegir camp codi dins plugin
+        // TODO endent afegir camp codi dins plugin
         // if (filterByPluginCode != null && filterByPluginCode.size() != 0) {
         // where = Where.AND(where, CODI.in(filterByPluginID));
         // }
