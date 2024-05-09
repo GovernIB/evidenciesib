@@ -1,0 +1,1009 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: otae@fundaciobit.org
+    name: Departament de Govern Digital a la Fundació Bit
+    url: https://governdigital.fundaciobit.org
+  description: Conjunt de Serveis REST de EvidenciesIB per ser accedits des de l'exterior
+  license:
+    name: European Union Public Licence (EUPL v1.2)
+    url: https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf
+  title: API REST EXTERNA de EvidenciesIB - Evidencies
+  version: 1.0-SNAPSHOT
+externalDocs:
+  description: Java Client (GovernIB Github)
+  url: https://github.com/GovernIB/evidenciesib/tree/evidenciesib-1.0/evidenciesib-api-externa-client-evidencies-v1
+servers:
+- url: /evidenciesibapi/externa
+- url: http://localhost:8080/evidenciesibapi/externa
+- url: https://dev.caib.es/evidenciesibapi/externa
+- url: https://proves.caib.es/evidenciesibapi/externa
+- url: https://se.caib.es/evidenciesibapi/externa
+- url: https://www.caib.es/evidenciesibapi/externa
+tags:
+- description: Realització d'Evidències via API REST
+  name: Evidencies
+paths:
+  /secure/evidencies/get/{evidenciaID}:
+    get:
+      operationId: get
+      parameters:
+      - description: Identificador de l'evidència de la que volem informació
+        explode: false
+        in: path
+        name: evidenciaID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Idioma en que s'han de retornar les dades i errors(Només suportat
+          'ca' o 'es')
+        examples:
+          Català:
+            description: Català
+            value: ca
+          Castellano:
+            description: Castellano
+            value: es
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          pattern: ^(|ca|es)$
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenciaWs'
+          description: Retornada correctament la informació de l'evidència
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna informació d'una evidència a partir del seu id
+      tags:
+      - Evidencies
+      x-accepts: application/json
+  /secure/evidencies/getfile/{evidenciaID}/{encryptedFileID}:
+    get:
+      operationId: getfile
+      parameters:
+      - description: Identificador de l'evidència de la que volem informació
+        explode: false
+        in: path
+        name: evidenciaID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Identificador encriptat del fitxer que volem descarregar.
+        explode: false
+        in: path
+        name: encryptedFileID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Idioma en que s'han de retornar les dades i errors(Només suportat
+          'ca' o 'es')
+        examples:
+          Català:
+            description: Català
+            value: ca
+          Castellano:
+            description: Castellano
+            value: es
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          pattern: ^(|ca|es)$
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenciaFile'
+          description: Retornada correctament la informació de l'evidència
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID
+      tags:
+      - Evidencies
+      x-accepts: application/json
+  /secure/evidencies/getfilebase64/{evidenciaID}/{encryptedFileID}:
+    get:
+      operationId: getfilebase64
+      parameters:
+      - description: Identificador de l'evidència de la que volem informació
+        explode: false
+        in: path
+        name: evidenciaID
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Identificador encriptat del fitxer que volem descarregar.
+        explode: false
+        in: path
+        name: encryptedFileID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Idioma en que s'han de retornar les dades i errors(Només suportat
+          'ca' o 'es')
+        examples:
+          Català:
+            description: Català
+            value: ca
+          Castellano:
+            description: Castellano
+            value: es
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          pattern: ^(|ca|es)$
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenciaFileBase64'
+          description: Retornada correctament la informació de l'evidència
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID
+      tags:
+      - Evidencies
+      x-accepts: application/json
+  /secure/evidencies/list:
+    get:
+      operationId: list
+      parameters:
+      - description: "Data d'inici, en format yyyy-MM-dd (ISO 8601), a partir de la\
+          \ qual volem obtenir dades"
+        example: 2022-08-29
+        explode: true
+        in: query
+        name: inici
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Data fi, en format yyyy-MM-dd (ISO 8601), fins la qual volem\
+          \ tenir dades"
+        example: 2023-12-31
+        explode: true
+        in: query
+        name: fi
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Pàgina de la que es volen obtenir les dades
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Quantitat d'elements a retornar
+        example: 10
+        explode: true
+        in: query
+        name: pagesize
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Idioma en que s'han de retornar les dades(Només suportat 'ca'
+          o 'es')
+        examples:
+          Català:
+            description: Català
+            value: ca
+          Castellano:
+            description: Castellano
+            value: es
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          pattern: ^(|ca|es)$
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenciaWsPaginacio'
+          description: "EFIB: Retornades dades obertes correctament"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: "EFIB: Paràmetres incorrectes"
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: "EFIB: No Autenticat"
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: "EFIB: No Autoritzat"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: "EFIB: Error durant la consulta de les dades obertes"
+      security:
+      - BasicAuth: []
+      summary: 'Retorna un llistat de les evidencies '
+      tags:
+      - Evidencies
+      x-accepts: application/json
+  /secure/evidencies/start:
+    post:
+      operationId: start
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenciaStartRequest'
+        description: Estructura de dades inicials per iniciar un procés d'evidències
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenciaStartResponse'
+          description: Procés de recolecció d'evidències inciaciat correctament
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Primera cridada a realitzar per iniciar un procés d'evidències
+      tags:
+      - Evidencies
+      x-content-type: application/json
+      x-accepts: application/json
+  /secure/evidencies/versio:
+    get:
+      operationId: versio
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Retornada correctament la versió d'aquest Servei
+        "401":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+        "510":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstantsWs'
+          description: Només s'utilitza per crear fitxer de constants...
+      security:
+      - BasicAuth: []
+      summary: Retorna la versió d'aquest Servei
+      tags:
+      - Evidencies
+      x-accepts: application/json
+components:
+  schemas:
+    EvidenciaFile:
+      description: Objecte per enviar i rebre fitxers així com la informació associada
+        a aquest.
+      example:
+        size: 5
+        mime: mime
+        document: document
+        name: name
+        description: description
+        encryptedFileID: encryptedFileID
+      properties:
+        name:
+          description: Nom del fitxer
+          type: string
+        mime:
+          description: Tipus MIME del Fitxer
+          type: string
+        size:
+          description: Mida en bytes del document
+          format: int64
+          type: integer
+        description:
+          description: Descripció del Fitxer
+          type: string
+        encryptedFileID:
+          description: Identificar del fitxer per poder-ho recuperar en una segona
+            fase. Només apareix en llistats per no incloure el contingut del fitxer.
+          type: string
+        document:
+          description: Contingut del fitxer. En llistats aquest camp vendrà buit.
+          format: byte
+          type: string
+      type: object
+    EvidenciaWs:
+      description: Estructura que inclou tota la informació de l'evidència.
+      example:
+        localitzacioIp: localitzacioIp
+        estatExcepcio: estatExcepcio
+        loginId: loginId
+        loginType: loginType
+        personaNif: personaNif
+        estatCodi: 6
+        evidenciaID: 0
+        fitxerAdaptat:
+          size: 5
+          mime: mime
+          document: document
+          name: name
+          description: description
+          encryptedFileID: encryptedFileID
+        nom: nom
+        loginData: 2000-01-23T04:56:07.000+00:00
+        personaLlinatge1: personaLlinatge1
+        loginAuthMethod: loginAuthMethod
+        personaLlinatge2: personaLlinatge2
+        localitzacioCiutat: localitzacioCiutat
+        localitzacioLatitud: localitzacioLatitud
+        loginAdditionalProperties: loginAdditionalProperties
+        firmaTipusDocumental: 1
+        dataInici: 2000-01-23T04:56:07.000+00:00
+        localitzacioPais: localitzacioPais
+        fitxerSignat:
+          size: 5
+          mime: mime
+          document: document
+          name: name
+          description: description
+          encryptedFileID: encryptedFileID
+        estatCodiDescripcio: estatCodiDescripcio
+        firmaIdiomaDocument: firmaIdiomaDocument
+        personaEmail: personaEmail
+        fitxerOriginal:
+          size: 5
+          mime: mime
+          document: document
+          name: name
+          description: description
+          encryptedFileID: encryptedFileID
+        localitzacioLongitud: localitzacioLongitud
+        localitzacioRegio: localitzacioRegio
+        loginSubtype: loginSubtype
+        localitzacioCodiPostal: localitzacioCodiPostal
+        firmaTipusDocumentalDescripcio: "1"
+        loginQaa: loginQaa
+        firmaReason: firmaReason
+        personaNom: personaNom
+        personaMobil: personaMobil
+        dataFi: 2000-01-23T04:56:07.000+00:00
+        estatError: estatError
+      properties:
+        evidenciaID:
+          description: Identificador únic de l'evidència.
+          format: int64
+          type: integer
+        nom:
+          description: Nom descriptiu de l'evidència.
+          type: string
+        personaNom:
+          description: Nom de la persona
+          type: string
+        personaLlinatge1:
+          description: Primer llinatge de la persona
+          type: string
+        personaLlinatge2:
+          description: Segon llintge de la persona
+          type: string
+        personaNif:
+          description: Nif de la persona
+          type: string
+        personaEmail:
+          description: Email de la persona
+          type: string
+        personaMobil:
+          description: Mòbil de la persona
+          type: string
+        dataInici:
+          description: Data de creació de l'evidència
+          format: date-time
+          pattern: yyyy-MM-dd'T'HH:mm:ss
+          type: string
+        dataFi:
+          description: Data final de l'evidència
+          format: date-time
+          pattern: yyyy-MM-dd'T'HH:mm:ss
+          type: string
+        estatCodi:
+          description: "Estat en que ha finalitzat l'evidència. Posibles estats:\r\
+            \n    public static final int EVIDENCIA_ESTAT_CODI_ERROR = -1;\r\n   \
+            \ public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO =\
+            \ 1;\r\n    public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN\
+            \ = 2;\r\n    public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA\
+            \ = 3;\r\n    public static final int EVIDENCIA_ESTAT_CODI_SIGNAT = 10;"
+          format: int32
+          type: integer
+        estatCodiDescripcio:
+          description: Descripció del camp estatCodi
+          type: string
+        estatError:
+          description: Missatge de l'error
+          type: string
+        estatExcepcio:
+          description: Stacktrace de l'excepció si n'hi hagues
+          type: string
+        loginType:
+          description: Tipus de Login
+          type: string
+        loginSubtype:
+          description: Subtipus de login
+          type: string
+        loginQaa:
+          description: Nivell des eguretat de login
+          type: string
+        loginData:
+          description: Data de realització del login
+          format: date-time
+          pattern: yyyy-MM-dd'T'HH:mm:ss
+          type: string
+        loginId:
+          description: Identificador del login realitzat.
+          type: string
+        loginAuthMethod:
+          type: string
+        loginAdditionalProperties:
+          type: string
+        localitzacioIp:
+          description: IP des d'on està connectat el ciutadà
+          type: string
+        localitzacioCodiPostal:
+          description: Codi postal des d'on està connectat el ciutadà.
+          type: string
+        localitzacioLatitud:
+          description: Latitud des d'on està connectat el ciutadà.
+          type: string
+        localitzacioLongitud:
+          description: Longitud des d'on està connectat el ciutadà.
+          type: string
+        localitzacioCiutat:
+          description: Localitat des d'on està connectat el ciutadà.
+          type: string
+        localitzacioRegio:
+          description: Regió (Si és Espanya Comunitat Autonoma) des d'on està connectat
+            el ciutadà.
+          type: string
+        localitzacioPais:
+          description: Pais des d'on està connectat el ciutadà.
+          type: string
+        firmaReason:
+          description: Raó de firma.
+          type: string
+        firmaIdiomaDocument:
+          description: Idioma en que està escrit el document.
+          type: string
+        firmaTipusDocumental:
+          description: Tipus documental de la Firma. Veure https://administracionelectronica.gob.es/pae_Home/dam/jcr:26d90313-7af0-4f69-9d62-c853d55d7627/Esquema_Metadatos_e-EMGDE_2016.pdf
+          format: int32
+          type: integer
+        firmaTipusDocumentalDescripcio:
+          description: DescripcioTipus documental de la Firma.Per exemple per 1 retorna
+            'Resolución(TD01)'
+          example: "1"
+          type: string
+        fitxerOriginal:
+          $ref: '#/components/schemas/EvidenciaFile'
+        fitxerAdaptat:
+          $ref: '#/components/schemas/EvidenciaFile'
+        fitxerSignat:
+          $ref: '#/components/schemas/EvidenciaFile'
+      required:
+      - dataInici
+      - firmaIdiomaDocument
+      - firmaReason
+      - firmaTipusDocumental
+      - firmaTipusDocumentalDescripcio
+      - fitxerOriginal
+      - loginData
+      - loginId
+      - loginQaa
+      - loginSubtype
+      - loginType
+      - personaLlinatge1
+      - personaLlinatge2
+      - personaNif
+      - personaNom
+      type: object
+    RestExceptionInfo:
+      description: Estructura de dades utilitzada per passar informació d'un error
+      example:
+        code: 5
+        causeStackTrace: causeStackTrace
+        causeException: causeException
+        errorMessage: errorMessage
+        stackTrace: stackTrace
+      properties:
+        code:
+          description: Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
+          format: int32
+          type: integer
+        errorMessage:
+          description: Missatge de l'error
+          type: string
+        stackTrace:
+          description: Stacktrace de l'excepció si n'hi hagués.
+          type: string
+        causeException:
+          description: Tipus de l'excepció origen (cause) si n'hi hagués.
+          type: string
+        causeStackTrace:
+          description: Stacktrace de l'excepció origen (cause) si n'hi hagués.
+          type: string
+      required:
+      - code
+      - errorMessage
+      type: object
+    EvidenciaFileBase64:
+      description: |-
+        Objecte per enviar i rebre fitxers així com la informació associada a aquest.
+        No utilitza byte[] que falla dins del JBoss7 sinó que utilitza un String per enviar el fitxer en Base64
+      example:
+        size: 0
+        mime: mime
+        name: name
+        description: description
+        documentBase64: documentBase64
+        encryptedFileID: encryptedFileID
+      properties:
+        name:
+          description: Nom del fitxer
+          type: string
+        mime:
+          description: Tipus MIME del Fitxer
+          type: string
+        size:
+          description: Mida en bytes del document
+          format: int64
+          type: integer
+        description:
+          description: Descripció del Fitxer
+          type: string
+        encryptedFileID:
+          description: Identificar del fitxer per poder-ho recuperar en una segona
+            fase. Només apareix en llistats per no incloure el contingut del fitxer.
+          type: string
+        documentBase64:
+          description: Contingut del fitxer en Base64. En llistats aquest camp vendrà
+            buit.
+          type: string
+      type: object
+    EvidenciaWsPaginacio:
+      example:
+        totalcount: 5
+        data:
+        - localitzacioIp: localitzacioIp
+          estatExcepcio: estatExcepcio
+          loginId: loginId
+          loginType: loginType
+          personaNif: personaNif
+          estatCodi: 6
+          evidenciaID: 0
+          fitxerAdaptat:
+            size: 5
+            mime: mime
+            document: document
+            name: name
+            description: description
+            encryptedFileID: encryptedFileID
+          nom: nom
+          loginData: 2000-01-23T04:56:07.000+00:00
+          personaLlinatge1: personaLlinatge1
+          loginAuthMethod: loginAuthMethod
+          personaLlinatge2: personaLlinatge2
+          localitzacioCiutat: localitzacioCiutat
+          localitzacioLatitud: localitzacioLatitud
+          loginAdditionalProperties: loginAdditionalProperties
+          firmaTipusDocumental: 1
+          dataInici: 2000-01-23T04:56:07.000+00:00
+          localitzacioPais: localitzacioPais
+          fitxerSignat:
+            size: 5
+            mime: mime
+            document: document
+            name: name
+            description: description
+            encryptedFileID: encryptedFileID
+          estatCodiDescripcio: estatCodiDescripcio
+          firmaIdiomaDocument: firmaIdiomaDocument
+          personaEmail: personaEmail
+          fitxerOriginal:
+            size: 5
+            mime: mime
+            document: document
+            name: name
+            description: description
+            encryptedFileID: encryptedFileID
+          localitzacioLongitud: localitzacioLongitud
+          localitzacioRegio: localitzacioRegio
+          loginSubtype: loginSubtype
+          localitzacioCodiPostal: localitzacioCodiPostal
+          firmaTipusDocumentalDescripcio: "1"
+          loginQaa: loginQaa
+          firmaReason: firmaReason
+          personaNom: personaNom
+          personaMobil: personaMobil
+          dataFi: 2000-01-23T04:56:07.000+00:00
+          estatError: estatError
+        - localitzacioIp: localitzacioIp
+          estatExcepcio: estatExcepcio
+          loginId: loginId
+          loginType: loginType
+          personaNif: personaNif
+          estatCodi: 6
+          evidenciaID: 0
+          fitxerAdaptat:
+            size: 5
+            mime: mime
+            document: document
+            name: name
+            description: description
+            encryptedFileID: encryptedFileID
+          nom: nom
+          loginData: 2000-01-23T04:56:07.000+00:00
+          personaLlinatge1: personaLlinatge1
+          loginAuthMethod: loginAuthMethod
+          personaLlinatge2: personaLlinatge2
+          localitzacioCiutat: localitzacioCiutat
+          localitzacioLatitud: localitzacioLatitud
+          loginAdditionalProperties: loginAdditionalProperties
+          firmaTipusDocumental: 1
+          dataInici: 2000-01-23T04:56:07.000+00:00
+          localitzacioPais: localitzacioPais
+          fitxerSignat:
+            size: 5
+            mime: mime
+            document: document
+            name: name
+            description: description
+            encryptedFileID: encryptedFileID
+          estatCodiDescripcio: estatCodiDescripcio
+          firmaIdiomaDocument: firmaIdiomaDocument
+          personaEmail: personaEmail
+          fitxerOriginal:
+            size: 5
+            mime: mime
+            document: document
+            name: name
+            description: description
+            encryptedFileID: encryptedFileID
+          localitzacioLongitud: localitzacioLongitud
+          localitzacioRegio: localitzacioRegio
+          loginSubtype: loginSubtype
+          localitzacioCodiPostal: localitzacioCodiPostal
+          firmaTipusDocumentalDescripcio: "1"
+          loginQaa: loginQaa
+          firmaReason: firmaReason
+          personaNom: personaNom
+          personaMobil: personaMobil
+          dataFi: 2000-01-23T04:56:07.000+00:00
+          estatError: estatError
+        pagesize: 6
+        page: 0
+        totalpages: 1
+      properties:
+        page:
+          description: Número pàgina. Comença per 1.
+          format: int32
+          type: integer
+        pagesize:
+          description: Mida de pàgina
+          format: int32
+          type: integer
+        totalpages:
+          description: Número total de pàgines
+          format: int32
+          type: integer
+        totalcount:
+          description: Numero total d'elements
+          format: int32
+          type: integer
+        data:
+          description: Elements retornats
+          items:
+            $ref: '#/components/schemas/EvidenciaWs'
+          type: array
+      required:
+      - data
+      - page
+      - pagesize
+      - totalcount
+      - totalpages
+      type: object
+    EvidenciaStartRequest:
+      description: Estructura de dades a enviar al servidor per iniciar un procés
+        d'Evidències
+      example:
+        documentASignar:
+          size: 5
+          mime: mime
+          document: document
+          name: name
+          description: description
+          encryptedFileID: encryptedFileID
+        callBackUrl: "http://host:port/myappback/mycallbackcontroller/callbackevidencies?evidenciaid={0}"
+        personaNif: personaNif
+        raoDeLaFirma: raoDeLaFirma
+        personaEmail: personaEmail
+        personaUsername: personaUsername
+        personaLlinatge1: personaLlinatge1
+        personaLlinatge2: personaLlinatge2
+        languageUI: ca
+        titolEvidencia: titolEvidencia
+        personaNom: personaNom
+        personaMobil: personaMobil
+        languageDocument: ca
+      properties:
+        titolEvidencia:
+          description: Titol descriptiu de l'evidència que es durà a terme
+          type: string
+        personaNif:
+          description: Nif de la persona
+          type: string
+        personaUsername:
+          description: Username de la persona
+          type: string
+        personaNom:
+          description: Nom de la persona
+          type: string
+        personaLlinatge1:
+          description: Primer llinatge de la persona
+          type: string
+        personaLlinatge2:
+          description: Segon llintge de la persona
+          type: string
+        personaEmail:
+          description: Correu electrònic de la persona
+          type: string
+        personaMobil:
+          description: Mòbil de la persona
+          type: string
+        raoDeLaFirma:
+          description: Raó per la qual es requereix aquesta signatura
+          type: string
+        languageDocument:
+          default: ca
+          description: Idioma del document en ISO 639-1. Valors permesos 'ca' i 'es'
+          example: ca
+          type: string
+        documentASignar:
+          $ref: '#/components/schemas/EvidenciaFile'
+        callBackUrl:
+          description: "URL de retorn quan el proces d'evidències hagi acabat. A la\
+            \ URL la cadena {0} es substituirà per l'identificador de l'evidència\
+            \ (evidenciaID)"
+          example: "http://host:port/myappback/mycallbackcontroller/callbackevidencies?evidenciaid={0}"
+          type: string
+        languageUI:
+          default: ca
+          description: Idioma del missatges d'error en format ISO 639-1. Valors permesos
+            'ca' i 'es'
+          example: ca
+          type: string
+      required:
+      - callBackUrl
+      - documentASignar
+      - languageDocument
+      - languageUI
+      - personaNif
+      - raoDeLaFirma
+      - titolEvidencia
+      type: object
+    EvidenciaStartResponse:
+      example:
+        evidenciaUrlRedirect: https://openapi-generator.tech
+        evidenciaID: 0
+      properties:
+        evidenciaID:
+          description: Identificador del nou procés de recolecció d'evidències
+          format: int64
+          type: integer
+        evidenciaUrlRedirect:
+          description: Adreça a on redirigir el navegador del client per iniciar la
+            recolecció d'evidències
+          format: uri
+          type: string
+      required:
+      - evidenciaID
+      - evidenciaUrlRedirect
+      type: object
+    ConstantsWs:
+      example:
+        EVIDENCIA_ESTAT_CODI_ERROR: 0
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: 5
+        EVIDENCIA_ESTAT_CODI_SIGNAT: 5
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO: 6
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN: 1
+      properties:
+        EVIDENCIA_ESTAT_CODI_ERROR:
+          default: -1
+          description: Codi d'estat d'una evidència que indica un error
+          format: int32
+          readOnly: true
+          type: integer
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO:
+          default: 1
+          description: Codi d'estat d'una evidència que indica que esta en procés
+            de creació
+          format: int32
+          readOnly: true
+          type: integer
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN:
+          default: 2
+          description: Codi d'estat d'una evidència que indica que esta realitzant
+            el login
+          format: int32
+          readOnly: true
+          type: integer
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA:
+          default: 3
+          description: Codi d'estat d'una evidència que indica que esta realitzant
+            la firma del document
+          format: int32
+          readOnly: true
+          type: integer
+        EVIDENCIA_ESTAT_CODI_SIGNAT:
+          default: 10
+          description: Codi d'estat d'una evidència que indica que ha finalitzat correctament
+          format: int32
+          readOnly: true
+          type: integer
+      required:
+      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO
+      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA
+      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN
+      - EVIDENCIA_ESTAT_CODI_ERROR
+      - EVIDENCIA_ESTAT_CODI_SIGNAT
+      type: object
+  securitySchemes:
+    BasicAuth:
+      scheme: basic
+      type: http
+

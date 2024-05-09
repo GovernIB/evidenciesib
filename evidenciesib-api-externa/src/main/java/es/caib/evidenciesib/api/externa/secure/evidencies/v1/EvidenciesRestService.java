@@ -1,4 +1,4 @@
-package es.caib.evidenciesib.api.externa.secure.evidencies;
+package es.caib.evidenciesib.api.externa.secure.evidencies.v1;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -48,11 +48,15 @@ import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 import es.caib.evidenciesib.persistence.FitxerJPA;
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -68,9 +72,27 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
  * @author anadal
  *
  */
-@Path("/secure/evidencies")
+/** Per no modificar l'API es deixa així però realment hauria de ser "/secure/evidencies/v1" !!!!! */
+@Path("/secure/evidencies") 
 @OpenAPIDefinition(
-        tags = { @Tag(name = EvidenciesRestService.TAG_NAME, description = "Realització d'Evidències via API REST"), })
+        tags = { @Tag(name = EvidenciesRestService.TAG_NAME, description = "Realització d'Evidències via API REST"), },
+        info = @Info(
+                title = "API REST EXTERNA de EvidenciesIB - Evidencies",
+                description = "Conjunt de Serveis REST de EvidenciesIB per ser accedits des de l'exterior",
+                version = "1.0-SNAPSHOT",
+                license = @License(
+                        name = "European Union Public Licence (EUPL v1.2)",
+                        url = "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_es.pdf"),
+                contact = @Contact(
+                        name = "Departament de Govern Digital a la Fundació Bit",
+                        email = "otae@fundaciobit.org",
+                        url = "https://governdigital.fundaciobit.org")),
+
+        externalDocs = @ExternalDocumentation(
+                description = "Java Client (GovernIB Github)",
+                url = "https://github.com/GovernIB/evidenciesib/tree/evidenciesib-1.0/evidenciesib-api-externa-client-evidencies-v1")
+
+)
 @SecurityScheme(type = SecuritySchemeType.HTTP, name = EvidenciesRestService.SECURITY_NAME, scheme = "basic")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -170,7 +192,7 @@ public class EvidenciesRestService extends RestUtils {
     }
 
     protected static Logger log = Logger.getLogger(EvidenciesRestService.class);
-    
+
     protected static EvidenciaToEvidenciaWsConverter converterES = new EvidenciaToEvidenciaWsConverter("es");
     protected static EvidenciaToEvidenciaWsConverter converterCA = new EvidenciaToEvidenciaWsConverter("ca");
 
@@ -438,10 +460,12 @@ public class EvidenciesRestService extends RestUtils {
                     name = "language",
                     description = "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
                     in = ParameterIn.QUERY,
-                    required = false,                    
+                    required = false,
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$" )) @QueryParam("language") String language,
+                    schema = @Schema(
+                            implementation = String.class,
+                            pattern = "^(|ca|es)$")) @QueryParam("language") String language,
             @Parameter(hidden = true) @Context HttpServletRequest request) {
 
         log.info("Entra a get  ...[" + request.getRemoteUser() + "]");
@@ -473,9 +497,9 @@ public class EvidenciesRestService extends RestUtils {
                 throw new RestException("L'aplicació " + request.getRemoteUser()
                         + " no és la propietària de l'evidència amb ID " + evidenciaID, Status.BAD_REQUEST);
             }
-            
-            
-            final EvidenciaToEvidenciaWsConverter converter = "es".equalsIgnoreCase(language)?converterES:converterCA; 
+
+            final EvidenciaToEvidenciaWsConverter converter = "es".equalsIgnoreCase(language) ? converterES
+                    : converterCA;
 
             EvidenciaWs evi = converter.convert(eviBBDD);
 
@@ -571,7 +595,9 @@ public class EvidenciesRestService extends RestUtils {
                     required = false,
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$" )) @QueryParam("language") String language,
+                    schema = @Schema(
+                            implementation = String.class,
+                            pattern = "^(|ca|es)$")) @QueryParam("language") String language,
             @Parameter(hidden = true) @Context HttpServletRequest request,
             @Parameter(hidden = true) @Context SecurityContext security) throws RestException {
 
@@ -603,7 +629,8 @@ public class EvidenciesRestService extends RestUtils {
             final Where w = Where.AND(w1, w2);
             final OrderBy orderBy = new OrderBy(EvidenciaFields.DATAINICI, OrderType.DESC);
 
-            final EvidenciaToEvidenciaWsConverter converter = "es".equalsIgnoreCase(language)?converterES:converterCA;
+            final EvidenciaToEvidenciaWsConverter converter = "es".equalsIgnoreCase(language) ? converterES
+                    : converterCA;
 
             EvidenciaWsPaginacio paginacio = GenAppRestUtils.createRestPagination(EvidenciaWsPaginacio.class,
                     this.evidenciaLogicaEjb, page, pagesize, w, orderBy, converter);
@@ -699,7 +726,9 @@ public class EvidenciesRestService extends RestUtils {
                     required = false,
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$" )) @QueryParam("language") String language,
+                    schema = @Schema(
+                            implementation = String.class,
+                            pattern = "^(|ca|es)$")) @QueryParam("language") String language,
             @Parameter(hidden = true) @Context HttpServletRequest request) {
 
         log.info("Entra a getFile ...[" + request.getRemoteUser() + "]");
@@ -816,10 +845,12 @@ public class EvidenciesRestService extends RestUtils {
                     name = "language",
                     description = "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
                     in = ParameterIn.QUERY,
-                    required = false,                    
+                    required = false,
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$" )) @QueryParam("language") String language,
+                    schema = @Schema(
+                            implementation = String.class,
+                            pattern = "^(|ca|es)$")) @QueryParam("language") String language,
             @Parameter(hidden = true) @Context HttpServletRequest request) {
 
         log.info("Entra a getFile ...[" + request.getRemoteUser() + "]");
@@ -884,11 +915,11 @@ public class EvidenciesRestService extends RestUtils {
     public static class EvidenciaToEvidenciaWsConverter implements GenAppEntityConverter<Evidencia, EvidenciaWs> {
 
         protected final String language;
-        
+
         public EvidenciaToEvidenciaWsConverter(String language) {
             this.language = language;
         }
-        
+
         @Override
         public EvidenciaWs convert(Evidencia genAppEntity) throws RestException {
             Evidencia __bean = genAppEntity;

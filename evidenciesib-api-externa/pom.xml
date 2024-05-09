@@ -8,10 +8,10 @@
     </parent>
     <artifactId>evidenciesib-api-externa</artifactId>
     <packaging>war</packaging>
-    <name>EvidenciesIB - API Rest - Externa</name>
+    <name>EvidenciesIB - API Rest - Externa Server</name>
     <properties>
         <auth.method>BASIC</auth.method>
-        <client.default.package>es.caib.evidenciesib.apiexterna.client</client.default.package>
+        <client.default.package>es.caib.evidenciesib.api.externa.client</client.default.package>
         <!-- La darrera versió disponible: https://github.com/swagger-api/swagger-ui/releases -->
         <swagger-ui.version>3.52.5</swagger-ui.version>
     </properties>
@@ -99,26 +99,36 @@
             <plugin>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
-                <version>2.2.0</version>
+                <version>2.2.15</version>
+                <configuration>
+                    <outputFormat>JSON</outputFormat>
+                    <prettyPrint>TRUE</prettyPrint>
+                    <outputPath>${project.basedir}/openapi/</outputPath>                   
+                </configuration>                
                 <executions>
                     <execution>
+                        <id>openapi1</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>resolve</goal>
                         </goals>
                         <configuration>
-                            <outputFileName>openapi</outputFileName>
-                            <outputPath>${project.basedir}/openapi/</outputPath>
-                            <outputFormat>JSON</outputFormat>
+                            <contextId>Evidencies</contextId>
+                            <outputFileName>openapi_evidencies</outputFileName>
 		                    <resourcePackages>
-		                        <package>es.caib.evidenciesib.api.externa</package>
+		                        <package>es.caib.evidenciesib.api.externa.config</package>
+		                        <package>es.caib.evidenciesib.api.externa.secure.evidencies.v1</package>
 		                    </resourcePackages>
-		                    <prettyPrint>TRUE</prettyPrint>
 		                </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <!-- Genera el Client Rest per Java a partir del fitxer openapi.json -->
+            
+            
+            
+            <!-- ==================================================================  -->
+            <!-- Genera el Client Rest per Java a partir del fitxers openapi_*.json -->
+            <!-- ==================================================================  -->
             <plugin>
                 <!-- https://openapi-generator.tech/docs/generators/java/ -->
                 <groupId>org.openapitools</groupId>
@@ -126,86 +136,74 @@
                 <version>7.3.0</version>
                 <executions>
                     <execution>
+                        <id>openapi1</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <phase>install</phase>
                         <configuration>
-                            <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
+                            <inputSpec>${project.basedir}/openapi/openapi_evidencies.json</inputSpec>
                             <generatorName>java</generatorName>
                             <skipValidateSpec>false</skipValidateSpec>
                             <library>resteasy</library>
                             <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
                             <!-- <configHelp>true</configHelp> -->
                             <addCompileSourceRoot>false</addCompileSourceRoot>
-                            <output>${project.basedir}/../evidenciesib-api-externa-client</output>
-                            <apiPackage>${client.default.package}.api</apiPackage>
-                            <modelPackage>${client.default.package}.model</modelPackage>
-                            <invokerPackage>${client.default.package}.services</invokerPackage>                            
-                            <variableNamingConvention>camelCase</variableNamingConvention>
+                            <output>${project.basedir}/../evidenciesib-api-externa-client-evidencies-v1</output>
+                            <apiPackage>${client.default.package}.evidencies.v1.api</apiPackage>
+                            <modelPackage>${client.default.package}.evidencies.v1.model</modelPackage>
+                            <invokerPackage>${client.default.package}.evidencies.v1.services</invokerPackage>                            
                             <generateModelTests>false</generateModelTests>
                             <configOptions>
                                 <groupId>es.caib.evidenciesib</groupId>
-                                <artifactId>evidenciesib-api-externa-client</artifactId>
-                                <artifactVersion>1.0</artifactVersion>
-                                <artifactDescription>EvidenciesIB - API Rest - Externa Client</artifactDescription>
+                                <artifactId>evidenciesib-api-externa-client-evidencies-v1</artifactId>
+                                <artifactVersion>1.0-SNAPSHOT</artifactVersion>
+                                <artifactDescription>EvidenciesIB - API Rest - Externa Client - Evidencies v1</artifactDescription>
                                 <dateLibrary>java8</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
                                 <java11>true</java11>
-                                <!-- <fullJavaUtil>true</fullJavaUtil> --> 
-                                <!-- <useJakartaEe>true</useJakartaEe> -->
                             </configOptions>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <!-- Inclou swagger-ui dins el mòdul -->
-            <!-- Davalla la versió de swagger-ui (Web UI que parseja openapi.json. 
-                Veure index.html) -->
+            
+            <!--NOU TODO -->
             <plugin>
-                <groupId>com.googlecode.maven-download-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
-                        <id>swagger-ui</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <skipCache>false</skipCache>
-                            <url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
-                            <unpack>true</unpack>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Canvia l'adreça de la configuració d'exemple per la real, 
-                ./openapi.json -->
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <executions>
-                    <execution>
-                        <id>index</id>
                         <phase>prepare-package</phase>
                         <goals>
-                            <goal>replace</goal>
+                            <goal>java</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <file>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist/index.html</file>
-                    <replacements>
-                        <replacement>
-                            <token>https://petstore.swagger.io/v2/swagger.json</token>
-                            <value>./openapi.json</value>
-                        </replacement>
-                    </replacements>
+                    <includeProjectDependencies>false</includeProjectDependencies>
+                    <includePluginDependencies>true</includePluginDependencies>
+                    <executableDependency>
+                        <artifactId>pluginsib-utils-rest</artifactId>
+                        <groupId>org.fundaciobit.pluginsib.utils</groupId>
+                    </executableDependency>
+                    <mainClass>
+                        org.fundaciobit.pluginsib.utils.rest.pomadaptertojboss72.AdaptApiClientPomToJboss72</mainClass>
+                    <arguments>
+                        <argument>${project.basedir}</argument>
+                    </arguments>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <artifactId>pluginsib-utils-rest</artifactId>
+                        <groupId>org.fundaciobit.pluginsib.utils</groupId>
+                        <version>2.0.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
             </plugin>
+            
             <!-- Inclou el openapi.json i el swagger-ui dins el war -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
@@ -213,69 +211,12 @@
                     <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
                     <webResources>
                         <resource>
-                            <directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
-                        </resource>
-                        <resource>
                             <directory>${project.basedir}/openapi</directory>
                         </resource>
                     </webResources>
                 </configuration>
             </plugin>
-            <!--   Llevar el .gitignore del codi generat -->
-            <plugin>
-                <groupId>com.coderplus.maven.plugins</groupId>
-                <artifactId>copy-rename-maven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <id>copy-file</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>rename</goal>
-                        </goals>
-                        <configuration>
-                            <sourceFile>${basedir}/../evidenciesib-api-externa-client/.gitignore</sourceFile>
-                            <destinationFile>${project.build.directory}/client_gitignore_renamed.txt</destinationFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+           
         </plugins>
-        <pluginManagement>
-            <plugins>
-                <!--This plugin's configuration is used to store Eclipse 
-                    m2e settings only. It has no influence on the Maven build itself. -->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>
-                                            org.apache.geronimo
-                                        </groupId>
-                                        <artifactId>
-                                            geronimo-openapi-maven-plugin
-                                        </artifactId>
-                                        <versionRange>
-                                            [1.0.12,)
-                                        </versionRange>
-                                        <goals>
-                                            <goal>openapi.json</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore/>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
 </project>

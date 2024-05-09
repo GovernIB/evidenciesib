@@ -1,4 +1,4 @@
-package es.caib.evidenciesib.api.externa.secure.evidencies;
+package es.caib.evidenciesib.api.externa.secure.evidencies.v1;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;

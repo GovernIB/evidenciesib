@@ -15,7 +15,10 @@
         <module>evidenciesib-front</module>
         <module>evidenciesib-ear</module>
         <module>scripts</module>
+        <module>evidenciesib-api-externa-client-evidencies-v1</module>
+        <!-- 
         <module>evidenciesib-api-externa-client</module>
+        -->
     </modules>
     <repositories>
         <repository>
