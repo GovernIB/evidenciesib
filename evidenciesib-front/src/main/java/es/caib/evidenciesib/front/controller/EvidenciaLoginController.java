@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.pluginsib.core.utils.EncrypterDecrypter;
+import org.fundaciobit.pluginsib.core.v3.utils.EncrypterDecrypter;
 import org.fundaciobit.pluginsib.login.api.LoginInfo;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginController;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginManager;

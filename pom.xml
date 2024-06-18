@@ -63,13 +63,11 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -98,7 +96,6 @@
         <slf4j.version>1.7.30</slf4j.version>
         <keycloak.version>6.0.1</keycloak.version>
         <cxf.version>3.3.3</cxf.version>
-        <junit.version>4.13.1</junit.version>
         <hibernate.version>5.3.15.Final</hibernate.version>
         <hibernate.annotations.version>5.3.15.Final</hibernate.annotations.version>
         <resteasy.version>3.6.3.Final</resteasy.version>
@@ -114,8 +111,12 @@
         <!-- XYZ ZZZ S'ha de fer la substitució -->
         <genapp.version>2.0.0-SNAPSHOT</genapp.version>
         <version_txt_template_file>./scripts/templates/versio.txt.template</version_txt_template_file>
-        <pluginsib.userinformation.api.version>3.0.0</pluginsib.userinformation.api.version>
-        <pluginsib.userinformation.impl.version>3.0.0-SNAPSHOT</pluginsib.userinformation.impl.version>
+        
+        <pluginsib.core.version>3.0.0-SNAPSHOT</pluginsib.core.version>
+        <pluginsib.utils.version>3.0.0-SNAPSHOT</pluginsib.utils.version>
+        <pluginsib.userinformation.version>4.0.0-SNAPSHOT</pluginsib.userinformation.version>
+        <pluginsib.exportdata.version>3.0.0-SNAPSHOT</pluginsib.exportdata.version>
+        <pluginsib.login.version>2.0.0-SNAPSHOT</pluginsib.login.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -176,13 +177,6 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.version}</version>
-            </dependency>
-            <!-- Dependències de test -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
             </dependency>
             <!-- fixar versió de jboss-logging ja que Hibernate i RestEasy fan referència 
 				a varies versions -->
@@ -480,7 +474,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.8.1</version>
                 <configuration>
                     <altDeploymentRepository>
             internal.repo::default::file://${project.build.directory}/mvn-repo

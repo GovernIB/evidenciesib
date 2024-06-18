@@ -43,13 +43,13 @@
         <dependency>
             <artifactId>pluginsib-userinformation-api</artifactId>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-            <version>${pluginsib.userinformation.api.version}</version>
+            <version>${pluginsib.userinformation.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
             <artifactId>pluginsib-utils-templateengine</artifactId>
-            <version>2.0.2</version>
+            <version>3.0.0-SNAPSHOT</version>
         </dependency>
        
         <dependency>
@@ -88,10 +88,7 @@
     </dependencies>
 
     <build>
-
         <finalName>${project.artifactId}-${project.version}</finalName>
-
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -10,6 +10,7 @@
     <packaging>war</packaging>
     <name>EvidenciesIB - Front</name>
     <description>Front de EvidenciesIB</description>
+    
     <dependencies>
         <!-- Especificacions i llibreries proporcionades per JBoss -->
         <dependency>
@@ -45,30 +46,30 @@
         <dependency>
             <artifactId>pluginsib-login-api</artifactId>
             <groupId>org.fundaciobit.pluginsib.login</groupId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${pluginsib.login.version}</version>
         </dependency>
         <dependency>
             <artifactId>pluginsib-login-mock</artifactId>
             <groupId>org.fundaciobit.pluginsib.login</groupId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${pluginsib.login.version}</version>
         </dependency>
         <dependency>
             <artifactId>pluginsib-login-loginib</artifactId>
             <groupId>org.fundaciobit.pluginsib.login</groupId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${pluginsib.login.version}</version>
         </dependency>
         
         <dependency>
             <artifactId>pluginsib-login-springutils</artifactId>
             <groupId>org.fundaciobit.pluginsib.login</groupId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${pluginsib.login.version}</version>
         </dependency>
 
         
         <dependency>
             <artifactId>pluginsib-core</artifactId>
-            <groupId>org.fundaciobit.pluginsib.core</groupId>
-            <version>2.0.2</version>
+            <groupId>org.fundaciobit.pluginsib.core.v3</groupId>
+            <version>${pluginsib.core.version}</version>
             <scope>provided</scope>
         </dependency>
 
