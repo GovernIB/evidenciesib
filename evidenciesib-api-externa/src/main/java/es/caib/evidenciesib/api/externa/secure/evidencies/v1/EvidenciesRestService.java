@@ -73,7 +73,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
  *
  */
 /** Per no modificar l'API es deixa així però realment hauria de ser "/secure/evidencies/v1" !!!!! */
-@Path("/secure/evidencies") 
+@Path("/secure/evidencies")
 @OpenAPIDefinition(
         tags = { @Tag(name = EvidenciesRestService.TAG_NAME, description = "Realització d'Evidències via API REST"), },
         info = @Info(
@@ -309,15 +309,18 @@ public class EvidenciesRestService extends RestUtils {
 
         log.info(" Entra a EvidenciaStart ...[" + request.getRemoteUser() + "]");
 
+        if (evidenciaStartRequest == null) {
+            // TODO XYZ ZZZ
+            throw new RestException("Paràmetre enviat es buit o null", Status.BAD_REQUEST);
+        }
         String language = evidenciaStartRequest.getLanguageUI();
 
         // Check de language
         language = checkLanguage(language);
 
-        // Check username aplication
-        // XYZ ZZZ TODO 
-
         try {
+            // Check username aplication
+            // XYZ ZZZ TODO 
 
             // XYZ ZZZ Això s'ha de moure a EJB !!!!
 

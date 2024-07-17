@@ -32,17 +32,25 @@
                     </div>
                     <br />
                     <center>
-                        <button class="btn btn-primary btn-lg"
-                           type="button" onclick="mostrarModal()">
+                        <button class="btn btn-primary btn-lg" type="button" onclick="mostrarModal()">
                            <i class="fas fa-file-signature"></i>&nbsp;<fmt:message key="norepudi.firmar" />
                         </button>
                         &nbsp;&nbsp;
-                        <input id="submitCancel" name="submitCancel" class="btn btn-secondary btn-lg"
+                        <%-- 
+                            <input id="submitCancel" name="submitCancel" class="btn btn-secondary btn-lg"
                              onclick="clickedButton='cancel'"
                             type="submit" value="<fmt:message key="norepudi.cancelar" />" />
+                         --%>
+                         
+                         <button class="btn btn-secondary btn-lg"  type="button" onclick="cancelar()">
+                             <fmt:message key="norepudi.cancelar" />
+                         </button>
+                         
+                         
                          &nbsp;&nbsp;
-                         <button  class="btn btn-info btn-lg"
-                           type="button" onclick="window.open('${download}','_blank')"><i class="fas fa-download"></i>&nbsp;<fmt:message key="norepudi.descarregar" /></button>
+                         <button  class="btn btn-info btn-lg" type="button" onclick="window.open('${download}','_blank')">
+                              <i class="fas fa-download"></i>&nbsp;<fmt:message key="norepudi.descarregar" />
+                         </button>
                     </center>
                 </div>
             </div>
@@ -75,9 +83,7 @@
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOLONGITUD.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOLONGITUD.javaName%>" />
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOPAIS.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOPAIS.javaName%>" />
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOREGIO.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOREGIO.javaName%>" />
-        
-        
-        
+
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -93,7 +99,9 @@
               </div>
               <div class="modal-footer">
                 
-                <button type="submit" id="submitAccept" name="submitAccept"  class="btn btn-primary"><fmt:message key="norepudi.acceptar" /></button>
+                <button type="submit" id="submitAccept" name="submitAccept"  class="btn btn-primary">
+                   <fmt:message key="norepudi.acceptar" />
+                </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key="norepudi.cancelar" /></button>
                 
                 
@@ -127,24 +135,14 @@
             element.value = clickInfo;
             
          });
-    <%--
-        function imageLoaded() {
-            var element = document.getElementById('waitMessage');
-            element.style.cssText = 'display:none;';
-            var thumbnail = document.getElementById('thumbnail');
-            thumbnail.style.cssText = 'border:2px solid #000; padding: 2px;display:;';
-        }
-    --%>
+
         var clickedButton;
         
         
         function mostrarModal() {   
             var element = document.getElementById('checkNoRepudi');
-            //alert("Element: " + element);
-            //alert("Checked: " + element.checked);
             if (element.checked) {
-            
-              $('#exampleModal').modal();
+                $('#exampleModal').modal();
             }  else {
                 alert("<fmt:message key="norepudi.nomarcat" />");
                 return false;
@@ -157,12 +155,16 @@
             document.body.style.cursor = 'wait';
         }
         
+        
+        function cancelar() {
+            window.location.href = "${cancelurl}";
+        }
+
         function initValues() {
             initDeviceInfo();
             initLocation();
         }
-            
-            
+   
         function initDeviceInfo() {
             var deviceinfo = "platform.name=" +platform.name + "\n"
             + "platform.version=" +platform.version + "\n"
@@ -182,7 +184,6 @@
             
             element.value = deviceinfo;
         }
-        
 
         function initLocation() {
 

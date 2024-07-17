@@ -59,7 +59,6 @@ public class EvidenciaLoginController {
     @EJB(mappedName = EvidenciesFrontLogicaService.JNDI_NAME)
     protected EvidenciesFrontLogicaService evidenciaLogicaEjb;
 
-
     public static final String EVIDENCIAID = "SESSION_EVIDENCIA_ID";
 
     public static final String MAPPING_FRONT_LOGIN_END = "/frontloginend";
@@ -95,8 +94,15 @@ public class EvidenciaLoginController {
 
         ModelAndView mav = new ModelAndView("norepudi");
         mav.addObject("evidenciaID", evidenciaID);
-        mav.addObject("action", request.getContextPath() + MAPPING_NO_REPUDI_POST + "/" + evidenciaID);
+        final String action = request.getContextPath() + MAPPING_NO_REPUDI_POST + "/" + evidenciaID;
+        mav.addObject("action", action);
+        final String cancelurl = request.getContextPath() + MAPPING_CANCEL_GET + "/" + evidenciaID;
+        mav.addObject("cancelurl", cancelurl);
         mav.addObject("thumbnail", request.getContextPath() + THUMBNAIL_PDF_MASSIVE + "/" + evidenciaID);
+        
+        log.info("frontLoginStart =>  action=" +action);
+        log.info("frontLoginStart =>  cancelurl=" +cancelurl);
+        
 
         final String base = request.getContextPath();
         final String append = EncrypterDecrypter.encrypt(EncrypterDecrypter.ALGORITHM_AES, Configuracio.getEncryptKey(),
@@ -105,6 +111,47 @@ public class EvidenciaLoginController {
         mav.addObject("download", base + DOWNLOAD_PDF + "/" + append);
         mav.addObject("objectpdf", base + OBJECT_PDF + "/" + append);
         return mav;
+
+    }
+
+    public static final String MAPPING_CANCEL_GET = "/cancelnorepudi";
+
+    @RequestMapping(path = MAPPING_CANCEL_GET + "/{evidenciaID}", method = RequestMethod.GET)
+    public String canceGet(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
+
+        log.info("ENTRA A CANCEL GET => evidenciaID=" + evidenciaID);
+        
+        if (request.getParameterMap().size() == 0) {
+            log.warn("noRepudiPost => NO HI HA PARAMETERS !!!!!!!!");
+        } else {
+            for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
+
+                log.info("noRepudiPost => Parameter[" + entry.getKey() + "] => |" + entry.getValue() + "|");
+
+            }
+        }
+
+        // S'ha pitjat "CANCEL"
+        EvidenciaJPA evidencia;
+        evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
+
+        //String submitCancel = request.getParameter("submitCancel");
+        //if ("cancel".equals(submitCancel)) {
+
+        evidencia.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
+
+        evidencia.setEstatError(StringUtils.abbreviate(I18NUtils.tradueix("usuari.cancelat"), 4000));
+
+        evidencia.setDataFi(new Timestamp(System.currentTimeMillis()));
+
+        evidenciaLogicaEjb.update(evidencia);
+
+        String r = "redirect:" + getRedirectUrl(evidenciaID);
+        log.info("Cancel usuari. Redirect => " + r);
+
+        return r;
+        //}
 
     }
 
@@ -118,33 +165,32 @@ public class EvidenciaLoginController {
             log.warn("noRepudiPost => NO HI HA PARAMETERS !!!!!!!!");
         } else {
             for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
-
                 log.info("noRepudiPost => Parameter[" + entry.getKey() + "] => |" + entry.getValue() + "|");
-
             }
         }
 
-        String botoAccept = request.getParameter("submitAccept");
-
-        // S'ha pitjat "CANCEL"
         EvidenciaJPA evidencia;
         evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
 
-        if (botoAccept == null) {
-
+        /*
+        // S'ha pitjat "CANCEL"
+        String submitCancel = request.getParameter("submitCancel");
+        if ("cancel".equals(submitCancel)) {
+        
             evidencia.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
-
+        
             evidencia.setEstatError(StringUtils.abbreviate(I18NUtils.tradueix("usuari.cancelat"), 4000));
-
+        
             evidencia.setDataFi(new Timestamp(System.currentTimeMillis()));
-
+        
             evidenciaLogicaEjb.update(evidencia);
-
+        
             String r = "redirect:" + getRedirectUrl(evidenciaID);
             log.info("Cancel usuari. Redirect => " + r);
-
+        
             return r;
         }
+        */
 
         evidencia.setClickProperties(request.getParameter("clickInfo"));
 

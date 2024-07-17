@@ -65,6 +65,7 @@ public class EvidenciesIBSecurityConfig extends WebSecurityConfigurerAdapter {
                         EvidenciaLoginController.DOWNLOAD_PDF + "/**",
                         EvidenciaLoginController.OBJECT_PDF + "/**",
                         EvidenciaLoginController.MAPPING_NO_REPUDI_POST + "/**",
+                        EvidenciaLoginController.MAPPING_CANCEL_GET + "/**",
                         EvidenciaLoginController.THUMBNAIL_PDF_MASSIVE + "/**",
                         EvidenciaLoginController.MAPPING_FRONT_LOGIN_END  + "/**", 
                         EvidenciaLoginController.MAPPING_FRONT_POST_LOGIN_END  + "/**", 
