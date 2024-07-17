@@ -19,6 +19,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
@@ -115,7 +116,7 @@ public class EvidenciaUserController extends EvidenciaController {
 
             if (!isAdmin()) {
                 evidenciaFilterForm.addAdditionalButton(new AdditionalButton(IconUtils.ICON_PLUS_SIGN,
-                        "evidencia.crear", getContextWeb() + "/new", "btn-success"));
+                        "evidencia.crear", getContextWeb() + "/new", AdditionalButtonStyle.SUCCESS));
             }
 
             evidenciaFilterForm.addLabel(ESTATCODI, "estatcodi.label");
