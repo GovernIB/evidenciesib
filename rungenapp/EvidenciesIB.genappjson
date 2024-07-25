@@ -1682,8 +1682,8 @@
       "labelsPlural": {
         "de": "",
         "en": "",
-        "ca": "",
-        "es": ""
+        "ca": "TraduccionsMap",
+        "es": "TraduccionesMap"
       },
       "generate": true,
       "fileMappingEntity": false,
