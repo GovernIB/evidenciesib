@@ -100,3 +100,6 @@ replay_pid*
 /evidenciesib-api-externa-client-evidencies-v1/gradle
 /evidenciesib-api-externa-client-evidencies-v1/target
 /evidenciesib-api-externa-client-evidencies-v1/.travis.yml
+/evidenciesib-back/src/main/resources/missatges_en.properties
+/evidenciesib-ejb/src/main/resources/genapp_en.properties
+/evidenciesib-ejb/src/main/resources/logicmissatges_en.properties
