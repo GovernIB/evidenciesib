@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>evidenciesib-ear</artifactId>
     <packaging>ear</packaging>
@@ -50,13 +51,13 @@
         <!-- ====================================== -->
         <!-- ===== PLUGINS DE USERINFORMATION ===== -->
         <!-- ====================================== -->
-        
+
         <dependency>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <artifactId>pluginsib-userinformation-api</artifactId>
             <version>${pluginsib.userinformation.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <artifactId>pluginsib-userinformation-keycloak</artifactId>
@@ -109,22 +110,14 @@
             <artifactId>pluginsib-exportdata-excel</artifactId>
             <version>${pluginsib.exportdata.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.9</version>
-        </dependency>
+
         <!-- ODS Plugin -->
         <dependency>
             <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
             <artifactId>pluginsib-exportdata-ods</artifactId>
             <version>${pluginsib.exportdata.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.jopendocument</groupId>
-            <artifactId>jOpenDocument</artifactId>
-            <version>1.3b1</version>
-        </dependency>
+
         <!-- CSV Plugin -->
         <dependency>
             <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
@@ -137,13 +130,13 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        
-        
+
+
         <!-- API REST de EvidenciesIB -->
         <!-- API EXTERNA START -->
         <!-- http://localhost:8080/evidenciesibapi/externa/index.html -->
@@ -154,7 +147,7 @@
             <type>war</type>
         </dependency>
         <!-- API EXTERNA END -->
-        
+
     </dependencies>
     <build>
         <finalName>evidenciesib</finalName>
@@ -162,19 +155,7 @@
             <filter>../config.properties</filter>
         </filters>
         <plugins>
-            <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <!-- Aquest bloc força a netejar sempre -->
-                <executions>
-                    <execution>
-                        <id>auto-clean</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ear-plugin</artifactId>
@@ -185,6 +166,63 @@
                     <generateApplicationXml>true</generateApplicationXml>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <skinnyWars>true</skinnyWars>
+                    <packagingExcludes>
+
+                        <!-- Requereix afegir mòdul 'com.fasterxml.jackson.core.jackson-annotations' a jboss-deployment-structure.xml -->
+                         **/jackson-annotations*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.fasterxml.jackson.core.jackson-core' a jboss-deployment-structure.xml -->
+                         **/jackson-core*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.fasterxml.jackson.core.jackson-databind' a jboss-deployment-structure.xml -->
+                         **/jackson-databind*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.google.code.gson' a jboss-deployment-structure.xml -->
+                         **/gson*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.activation.api' a jboss-deployment-structure.xml -->
+                         **/activation*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.annotation.api' a jboss-deployment-structure.xml -->
+                         **/jboss-annotations-api_1.3_spec*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.persistence.api' a jboss-deployment-structure.xml -->
+                         **/javax.persistence-api*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.xml.bind.api' a jboss-deployment-structure.xml -->
+                         **/jboss-jaxb-api_2.3_spec*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.commons.codec' a jboss-deployment-structure.xml -->
+                         **/commons-codec*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.commons.io' a jboss-deployment-structure.xml -->
+                         **/commons-io*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.commons.lang3' a jboss-deployment-structure.xml -->
+                         **/commons-lang3*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.httpcomponents.core' a jboss-deployment-structure.xml -->
+                         **/httpclient*redhat*.jar,
+                         **/httpcore*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.bouncycastle' a jboss-deployment-structure.xml -->
+                         **/bcprov-jdk15on*redhat*.jar,
+                         **/bcmail-jdk15on*redhat*.jar,
+                         **/bcpkix-jdk15on*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-core-asl' a jboss-deployment-structure.xml -->
+                         **/jackson-core-asl*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-jaxrs' a jboss-deployment-structure.xml -->
+                         **/jackson-jaxrs*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-mapper-asl' a jboss-deployment-structure.xml -->
+                         **/jackson-mapper-asl*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-xc' a jboss-deployment-structure.xml -->
+                         **/jackson-xc*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.codehaus.jettison' a jboss-deployment-structure.xml -->
+                         **/jettison*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.jboss.logging' a jboss-deployment-structure.xml -->
+                         **/jboss-logging*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.jboss.logging.commons.logging' a jboss-deployment-structure.xml -->
+                         **/commons-logging-jboss-logging*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.slf4j' a jboss-deployment-structure.xml -->
+                         **/slf4j-api*redhat*.jar,
+                         
+                         
+                         <!-- CASOS ESPECIALS !!!!   -->
+                         
+                         <!-- Requereix afegir mòdul 'javax.ws.rs.api' a jboss-deployment-structure.xml -->
+                         **/jsr311-api-*.jar,
+                         <!-- Requereix afegir mòdul 'org.apache.log4j' a jboss-deployment-structure.xml -->
+                         **/log4j-*.jar,
+                         
+                    </packagingExcludes>
                     <includeLibInApplicationXml>false</includeLibInApplicationXml>
                     <!--suppress UnresolvedMavenProperty -->
                     <!-- Nom mòduls d'acord amb punt 4.2 de l'Estàndard CAIB -->
@@ -227,63 +265,13 @@
                             <bundleFileName>evidenciesib-api-externa.war</bundleFileName>
                         </webModule>
                         <!-- API EXTERNA END -->
-                        
+
                     </modules>
-                </configuration>
-            </plugin>
-            <!-- Per arrencar/desplegar automàticament l'aplicació. 
-			     Documentació ús: https://codehaus-cargo.github.io/cargo/Maven2+plugin.html 
-				configuració: https://codehaus-cargo.github.io/cargo/Maven2+Plugin+Reference+Guide.html 
-		   -->
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <configuration>
-                    <skip>false</skip>
-                    <container>
-                        <!-- El plugin cargo empra la configuració wildfly13x pel JBoss EAP 
-							7.2 -->
-                        <containerId>wildfly13x</containerId>
-                        <type>installed</type>
-                        <home>${env.JBOSS_HOME}</home>
-                    </container>
-                    <configuration>
-                        <!-- Empra la configuració existent del servidor d'aplicacions. -->
-                        <type>existing</type>
-                        <home>${env.JBOSS_HOME}/standalone</home>
-                        <!-- Si volem arrancar el jboss amb cargo:start i amb una configuració 
-							copiada de l'original, fixar el <type> a standalone i llevar el <home> -->
-                        <properties>
-                            <cargo.hostname>localhost</cargo.hostname>
-                            <cargo.port.offset>0</cargo.port.offset>
-                            <cargo.remote.username>admin</cargo.remote.username>
-                            <cargo.remote.password>admin</cargo.remote.password>
-                        </properties>
-                    </configuration>
-                    <deployables>
-                        <deployable>
-                            <properties>
-                                <name>${project.build.finalName}</name>
-                            </properties>
-                        </deployable>
-                    </deployables>
                 </configuration>
             </plugin>
         </plugins>
     </build>
     <profiles>
-        <!-- Garantir que es fixa la variable d'entorn JBOSS_HOME -->
-        <profile>
-            <id>fix JBOSS_HOME</id>
-            <activation>
-                <property>
-                    <name>!env.JBOSS_HOME</name>
-                </property>
-            </activation>
-            <properties>
-                <env.JBOSS_HOME>HA DE FIXAR LA VARIABLE D'ENTORN JBOSS_HOME</env.JBOSS_HOME>
-            </properties>
-        </profile>
         <profile>
             <id>revisionnumber</id>
             <build>

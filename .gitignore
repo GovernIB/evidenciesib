@@ -103,3 +103,4 @@ replay_pid*
 /evidenciesib-back/src/main/resources/missatges_en.properties
 /evidenciesib-ejb/src/main/resources/genapp_en.properties
 /evidenciesib-ejb/src/main/resources/logicmissatges_en.properties
+/evidenciesib-api-externa-client-evidencies-v1/test.properties

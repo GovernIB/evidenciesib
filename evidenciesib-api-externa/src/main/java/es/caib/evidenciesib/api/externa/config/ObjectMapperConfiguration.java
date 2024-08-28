@@ -40,13 +40,12 @@ public class ObjectMapperConfiguration extends JacksonJaxbJsonProvider {
         MAPPER.registerModule(modul);
 
         // allow only non-null fields to be serialized
-        MAPPER.setSerializationInclusion(Include.NON_NULL);
-        
+        MAPPER.setSerializationInclusion(Include.NON_NULL);        
     }
 
     public ObjectMapperConfiguration() {
         
-        log.info("\n\n\n ObjectMapperConfiguration  \n\n\n");
+        log.info("\n\n\n ObjectMapperConfiguration EvidenciesIB Api Externa \n\n\n");
         
         super.setMapper(MAPPER);
     }

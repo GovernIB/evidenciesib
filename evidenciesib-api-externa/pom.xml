@@ -12,53 +12,35 @@
     <packaging>war</packaging>
     <name>EvidenciesIB - API Rest - Externa Server</name>
     <properties>
-        <auth.method>BASIC</auth.method>
         <client.default.package>es.caib.evidenciesib.api.externa.client</client.default.package>
-        <!-- La darrera versió disponible:
-        https://github.com/swagger-api/swagger-ui/releases -->
-        <swagger-ui.version>3.52.5</swagger-ui.version>
     </properties>
     <dependencies>
         <!-- Especificacions i llibreries proporcionades per JBoss -->
         <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-8.0</artifactId>
-            <type>pom</type>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <scope>provided</scope>
         </dependency>
         <!-- Altres mòduls del projecte -->
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-commons</artifactId>
-            <version>1.0.1</version>
-            <scope>provided</scope>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-persistence</artifactId>
-            <version>1.0.1</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.activation</groupId>
-                    <artifactId>javax.activation-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.xml.bind</groupId>
-                    <artifactId>jaxb-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-ejb</artifactId>
-            <version>1.0.1</version>
-            <scope>provided</scope>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
@@ -68,7 +50,6 @@
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>2.1.13</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -121,8 +102,7 @@
                             <outputFileName>openapi_evidencies</outputFileName>
                             <resourcePackages>
                                 <package>es.caib.evidenciesib.api.externa.config</package>
-                                <package>
-                                    es.caib.evidenciesib.api.externa.secure.evidencies.v1</package>
+                                <package>es.caib.evidenciesib.api.externa.secure.evidencies.v1</package>
                             </resourcePackages>
                         </configuration>
                     </execution>
@@ -130,12 +110,9 @@
             </plugin>
 
 
-            <!--
-            ==================================================================  -->
-            <!-- Genera el Client Rest per Java a partir del fitxers
-            openapi_*.json -->
-            <!--
-            ==================================================================  -->
+            <!--  ============================================================= -->
+            <!-- Genera el Client Rest Java a partir del fitxers openapi_*.json -->
+            <!--  ============================================================= -->
             <plugin>
                 <!-- https://openapi-generator.tech/docs/generators/java/ -->
                 <groupId>org.openapitools</groupId>
@@ -157,22 +134,16 @@
                             <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
                             <!-- <configHelp>true</configHelp> -->
                             <addCompileSourceRoot>false</addCompileSourceRoot>
-                            <output>
-                                ${project.basedir}/../evidenciesib-api-externa-client-evidencies-v1</output>
-                            <apiPackage>
-                                ${client.default.package}.evidencies.v1.api</apiPackage>
-                            <modelPackage>
-                                ${client.default.package}.evidencies.v1.model</modelPackage>
-                            <invokerPackage>
-                                ${client.default.package}.evidencies.v1.services</invokerPackage>
+                            <output>${project.basedir}/../evidenciesib-api-externa-client-evidencies-v1</output>
+                            <apiPackage>${client.default.package}.evidencies.v1.api</apiPackage>
+                            <modelPackage>${client.default.package}.evidencies.v1.model</modelPackage>
+                            <invokerPackage>${client.default.package}.evidencies.v1.services</invokerPackage>
                             <generateModelTests>false</generateModelTests>
                             <configOptions>
                                 <groupId>es.caib.evidenciesib</groupId>
-                                <artifactId>
-                                    evidenciesib-api-externa-client-evidencies-v1</artifactId>
+                                <artifactId>evidenciesib-api-externa-client-evidencies-v1</artifactId>
                                 <artifactVersion>1.0-SNAPSHOT</artifactVersion>
-                                <artifactDescription>EvidenciesIB - API Rest -
-                                    Externa Client - Evidencies v1</artifactDescription>
+                                <artifactDescription>EvidenciesIB - API Rest - Externa Client - Evidencies v1</artifactDescription>
                                 <dateLibrary>java8</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
@@ -228,6 +199,14 @@
                             <directory>${project.basedir}/openapi</directory>
                         </resource>
                     </webResources>
+                    <packagingExcludes>
+                        <!-- Requereix afegir mòdul 'com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider' a jboss-deployment-structure.xml -->
+                         **/jackson-jaxrs-json-provider*redhat*.jar,
+                         **/jackson-jaxrs-base*redhat*.jar,
+                         **/jackson-module-jaxb-annotations*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'javax.ws.rs.api' a jboss-deployment-structure.xml -->
+                         **/jboss-jaxrs-api_2.1_spec*redhat*.jar,
+                    </packagingExcludes>
                 </configuration>
             </plugin>
 

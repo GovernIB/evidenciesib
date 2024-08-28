@@ -43,6 +43,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.Properties;
@@ -65,11 +66,11 @@ public class EvidenciesApiTest extends ConstantsWs {
 
             EvidenciesApiTest test = new EvidenciesApiTest();
 
-            test.listTest(api);
+            //test.listTest(api);
 
             //test.getTest(api, props);
 
-            //test.startTest(api, props);
+            test.startTest(api, props);
 
             //test.versioTest(api);
 
@@ -198,6 +199,12 @@ public class EvidenciesApiTest extends ConstantsWs {
 
         return odt.atZoneSameInstant(java.time.ZoneId.systemDefault()).toLocalDateTime().toString();
     }
+    
+    
+    public static String formatOffsetDateTimeToLocalTime(java.util.Date date) {
+        String formatted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(date);
+        return formatted.substring(0, 22) + ":" + formatted.substring(22);
+    }
 
     @Test
     public void versioTest(EvidenciesApi api) throws ApiException, Exception {
@@ -251,7 +258,7 @@ public class EvidenciesApiTest extends ConstantsWs {
         start.setPersonaNom("Pep");
         start.setPersonaNif(props.getProperty("test.nif"));
         start.setPersonaEmail(props.getProperty("test.email"));
-        start.setRaoDeLaFirma("Probva des de Api Client Java");
+        start.setRaoDeLaFirma("Probàáäaó des de Api Client Java");
         start.setTitolEvidencia("Provar evidencies des de API");
 
         EvidenciaStartResponse response = api.start(start);
@@ -305,7 +312,7 @@ public class EvidenciesApiTest extends ConstantsWs {
         fos.flush();
         fos.close();
 
-        System.out.println("Gardat Fitxer " + fileType + " a " + f.getName());
+        System.out.println("Guardat Fitxer " + fileType + " a " + f.getName());
         return f;
     }
 

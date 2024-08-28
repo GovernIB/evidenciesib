@@ -22,55 +22,30 @@
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-ejb</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-commons</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
         </dependency>
         <!-- Externas -->
         <dependency>
             <groupId>org.fundaciobit.genapp</groupId>
             <artifactId>genapp-web</artifactId>
             <version>${genapp.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.activation</groupId>
-                    <artifactId>javax.activation-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.xml.bind</groupId>
-                    <artifactId>jaxb-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.fundaciobit.genapp</groupId>
             <artifactId>genapp-core</artifactId>
             <version>${genapp.version}</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.activation</groupId>
-                    <artifactId>javax.activation-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.xml.bind</groupId>
-                    <artifactId>jaxb-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -82,25 +57,17 @@
             <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-            <scope>provided</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <artifactId>pluginsib-userinformation-api</artifactId>
             <version>${pluginsib.userinformation.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.exportdata</groupId>
             <artifactId>pluginsib-exportdata-api</artifactId>
             <version>${pluginsib.exportdata.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -252,6 +219,20 @@
     </dependencies>
     <build>
         <plugins>
+            
+                        <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <packagingExcludes>
+                        <!-- Requereix afegir mòdul 'org.apache.commons.beanutils' a jboss-deployment-structure.xml -->
+                         **/commons-beanutils*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.commons.collections' a jboss-deployment-structure.xml -->
+                         **/commons-collections*redhat*.jar,
+                    </packagingExcludes>
+                </configuration>
+            </plugin>
+            
+            
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>

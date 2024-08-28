@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>evidenciesib-ejb</artifactId>
@@ -18,15 +19,12 @@
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-persistence</artifactId>
             <version>${project.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>es.caib.evidenciesib</groupId>
             <artifactId>evidenciesib-commons</artifactId>
             <version>${project.version}</version>
-            <type>jar</type>
         </dependency>
 
         <dependency>
@@ -38,7 +36,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <artifactId>pluginsib-userinformation-api</artifactId>
@@ -49,15 +46,15 @@
         <dependency>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
             <artifactId>pluginsib-utils-templateengine</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
+            <version>${pluginsib.utils.version}</version>
         </dependency>
-       
+
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
             <version>5.4.3</version>
         </dependency>
-        
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -67,12 +64,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        
+
         <dependency>
             <artifactId>apifirmasimple-jersey</artifactId>
             <groupId>org.fundaciobit.apisib.apifirmasimple</groupId>
