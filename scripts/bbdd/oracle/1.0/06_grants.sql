@@ -1,0 +1,10 @@
+    grant select on evi_evidencia_seq to www_evidenciesib;
+    grant select on evi_fitxer_seq to www_evidenciesib;
+    grant select on evi_plugin_seq to www_evidenciesib;
+    grant select on evi_traduccio_seq to www_evidenciesib;
+    grant select,insert,delete,update on evi_evidencia to www_evidenciesib;
+    grant select,insert,delete,update on evi_fitxer to www_evidenciesib;
+    grant select,insert,delete,update on evi_idioma to www_evidenciesib;
+    grant select,insert,delete,update on evi_plugin to www_evidenciesib;
+    grant select,insert,delete,update on evi_traduccio to www_evidenciesib;
+    grant select,insert,delete,update on evi_traducciomap to www_evidenciesib;
