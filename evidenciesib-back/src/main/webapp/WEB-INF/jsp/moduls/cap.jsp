@@ -1,3 +1,4 @@
+<%@page import="es.caib.evidenciesib.back.security.LoginInfo"%>
 <%@page import="es.caib.evidenciesib.commons.utils.Configuracio"%>
 <%@page import="org.springframework.context.i18n.LocaleContextHolder"%>
 <%@page import="java.util.Locale"%>
@@ -30,9 +31,7 @@
             
             <% String headerLogo = Configuracio.getWebuiHeaderLogoUrl(); %>
               <% if (headerLogo == null) { %>
-                <a href="http://www.fundaciobit.org">
-                    <img src="<c:url value="/img/fundaciobit-logo-cap.png"/>" alt="FundacioBit-Govern Digital" />
-                </a>
+                    <img src="<c:url value="/img/fundaciobit-logo-cap.png"/>" />
               <% } else { %>
                 <img src="<%=headerLogo%>" alt="EvidenciesIB" title="EvidenciesIB" />
               <% } %>
@@ -48,8 +47,13 @@
             </div>
             <div>
                 <div>
-                    <strong class="subtitol llevarMobil"><fmt:message key="usuari" />: </strong> <span class="subtitolMay"> <%=request.getUserPrincipal()== null? "ANONIM": request.getUserPrincipal().getName()%>
-                        | <%= request.getRemoteUser() %>
+                    <strong class="subtitol llevarMobil"><fmt:message key="usuari" />: </strong>
+                       <span class="subtitolMay">
+                        <% if(request.getUserPrincipal()== null || LoginInfo.getInstance() == null) { %> 
+                           ANONIM
+                        <% } else {  %> 
+                        <%=request.getRemoteUser() %> | ${loginInfo.userInfo.name}  ${loginInfo.userInfo.surname1}  ${empty loginInfo.userInfo.surname2?'':loginInfo.userInfo.surname2}
+                        <% }  %>
                     </span>
                 </div>
             </div>
