@@ -84,9 +84,24 @@
                         <fmt:message key="ajuda.missatge" />
                     </p>
                     <ul>
-                        <%--<li><fmt:message key="ajuda.viatelefon" />123456789</li> --%>
-                        <li><fmt:message key="ajuda.viaweb" />&nbsp;https://governdigital.fundaciobit.org/</li>
-                        <li><fmt:message key="ajuda.viaemail" /> <a href="mailto:firma@fundaciobit.org">&nbsp;firma@fundaciobit.org</a>
+                        <% String telefon = Configuracio.getBackHelpTelefon(); 
+                        if (telefon != null && telefon.trim().length() != 0) {
+                        %>
+                        <li><fmt:message key="ajuda.viatelefon" />&nbsp;<%=telefon %></li>
+                        <% } %>
+                        <li><fmt:message key="ajuda.viaweb" />
+                        <% String url = Configuracio.getBackHelpUrl();
+                           if (url == null || url.trim().length() == 0) {
+                               url = "https://governdigital.fundaciobit.org";
+                           }
+                        %>
+                        &nbsp;<%=url%>
+                        </li>
+                        <li><fmt:message key="ajuda.viaemail" />
+                        <%  String email = Configuracio.getBackHelpEmail();
+                            email = (email == null)?"firma@fundaciobit.org":email;
+                         %>
+                         <a href="mailto:<%=email%>">&nbsp;<%=email%></a>
                         </li>
                     </ul>
                 </div>

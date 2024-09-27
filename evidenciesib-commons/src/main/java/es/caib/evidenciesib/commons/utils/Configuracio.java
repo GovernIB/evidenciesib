@@ -27,21 +27,20 @@ public class Configuracio implements Constants {
      */
     public static Properties getFilesProperties() {
 
-		if (fileProperties.isEmpty()) {
-			// matches the property name as defined in the system-properties element in
-			// WildFly
-			String property = Constants.EVIDENCIESIB_PROPERTY_BASE + "properties";
-			loadPropertyFile(property);
+        if (fileProperties.isEmpty()) {
+            // matches the property name as defined in the system-properties element in
+            // WildFly
+            String property = Constants.EVIDENCIESIB_PROPERTY_BASE + "properties";
+            loadPropertyFile(property);
 
-			String propertySystem = Constants.EVIDENCIESIB_PROPERTY_BASE + "system.properties";
-			loadPropertyFile(propertySystem);
-		}
+            String propertySystem = Constants.EVIDENCIESIB_PROPERTY_BASE + "system.properties";
+            loadPropertyFile(propertySystem);
+        }
 
-		return fileProperties;
+        return fileProperties;
 
-	}
-    
-    
+    }
+
     public static Properties getJavaAndEvidenciesIBFileProperties() {
 
         if (fileAndSystemProperties.isEmpty()) {
@@ -50,7 +49,6 @@ public class Configuracio implements Constants {
         }
         return fileAndSystemProperties;
     }
-
 
     public static void loadPropertyFile(String property) {
 
@@ -115,11 +113,11 @@ public class Configuracio implements Constants {
     public static String getAppEmail() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "email.from");
     }
-    
+
     public static String getFrontUrl() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "url.front");
     }
-    
+
     public static String getBackUrl() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "url.back");
     }
@@ -149,21 +147,23 @@ public class Configuracio implements Constants {
         if (path == null) {
             throw new RuntimeException("No existeix la propietat '" + EVIDENCIESIB_PROPERTY_BASE + "filesdirectory'"
                     + " al fitxer " + System.getProperty(EVIDENCIESIB_PROPERTY_BASE + "system.properties")
-                    + ". S'hauria d'anar al fitxer " + System.getProperty(EVIDENCIESIB_PROPERTY_BASE + "system.properties")
-                    + " i incloure la propietat '" + EVIDENCIESIB_PROPERTY_BASE
-                    + "filesdirectory'" + " amb una ruta al directori on l'aplició gestionara els fitxers.");
+                    + ". S'hauria d'anar al fitxer "
+                    + System.getProperty(EVIDENCIESIB_PROPERTY_BASE + "system.properties")
+                    + " i incloure la propietat '" + EVIDENCIESIB_PROPERTY_BASE + "filesdirectory'"
+                    + " amb una ruta al directori on l'aplició gestionara els fitxers.");
         }
 
         if (path.isEmpty()) {
             throw new RuntimeException("No s'ha definit la propietat '" + EVIDENCIESIB_PROPERTY_BASE + "filesdirectory'"
                     + " al fitxer " + System.getProperty(EVIDENCIESIB_PROPERTY_BASE + "system.properties")
-                    + ". S'hauria d'anar al fitxer " + System.getProperty(EVIDENCIESIB_PROPERTY_BASE + "system.properties")
-                    + " i donar valor a la propietat '" + EVIDENCIESIB_PROPERTY_BASE +"filesdirectory'"
+                    + ". S'hauria d'anar al fitxer "
+                    + System.getProperty(EVIDENCIESIB_PROPERTY_BASE + "system.properties")
+                    + " i donar valor a la propietat '" + EVIDENCIESIB_PROPERTY_BASE + "filesdirectory'"
                     + " amb una ruta al directori on l'aplició gestionara els fitxers.");
         }
-        
+
         File filesFolder = new File(path);
-        
+
         if (!filesFolder.exists()) {
             throw new RuntimeException("El directori indicat a la propietat '" + EVIDENCIESIB_PROPERTY_BASE
                     + ".filesdirectory'" + " del fitxer "
@@ -192,15 +192,12 @@ public class Configuracio implements Constants {
     public static String getFileSystemManager() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "filesystemmanagerclass");
     }
-    
-    
-    
+
     // ===========================================================
     // ===========================================================
     // ==============   API FIRMA EN SERVIDOR ====================
     // ===========================================================
     // ===========================================================
-    
 
     public static String getApiFirmaEnServidorUrl() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.url");
@@ -213,7 +210,7 @@ public class Configuracio implements Constants {
     public static String getApiFirmaEnServidorPassword() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.password");
     }
-    
+
     public static String getApiFirmaEnServidorProfile() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.profile");
     }
@@ -221,7 +218,7 @@ public class Configuracio implements Constants {
     // ===========================================================
     // ==============   ASPECTE WEB ====================
     // ===========================================================
-    
+
     public static String getWebuiHeaderColor() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "webui.headercolor");
     }
@@ -229,10 +226,21 @@ public class Configuracio implements Constants {
     public static String getWebuiHeaderLogoUrl() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "webui.headerlogourl");
     }
-    
+
     public static String getWebuiFooterLogoUrl() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "webui.footerlogourl");
     }
-    
+
+    public static String getBackHelpUrl() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "back.help.url");
+    }
+
+    public static String getBackHelpEmail() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "back.help.email");
+    }
+
+    public static String getBackHelpTelefon() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "back.help.telefon");
+    }
 
 }
