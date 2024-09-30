@@ -45,6 +45,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <scope>provided</scope> <!-- Error https://github.com/GovernIB/portafib/issues/866 -->
         </dependency>
         <!-- Anotacions de documentació de openapi -->
         <dependency>
@@ -205,7 +206,7 @@
                          **/jackson-jaxrs-base*redhat*.jar,
                          **/jackson-module-jaxb-annotations*redhat*.jar,
                         <!-- Requereix afegir mòdul 'javax.ws.rs.api' a jboss-deployment-structure.xml -->
-                         **/jboss-jaxrs-api_2.1_spec*redhat*.jar,
+                        **/jboss-jaxrs-api_2.1_spec*redhat*.jar,
                     </packagingExcludes>
                 </configuration>
             </plugin>

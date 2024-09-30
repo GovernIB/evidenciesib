@@ -23,7 +23,7 @@
     </div>
     <%-- Enviar página a /loginpostend utilizando javascript --%>
     <script type="text/javascript">
-          setTimeout(() => {gotoPage()}, 250);
+          setTimeout(() => {gotoPage()}, 50);
     </script>
 </body>
 </html>

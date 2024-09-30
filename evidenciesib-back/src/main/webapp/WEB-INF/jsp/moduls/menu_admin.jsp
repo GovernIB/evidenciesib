@@ -9,7 +9,7 @@
     
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/evidencia/list"/>">
-        <span style="${(fn:contains(url, '/admin/evidencia'))? "font-weight: bold;" : ""}"><fmt:message key="evidencia.evidencia.plural" /></span>
+        <span style="${(fn:contains(url, '/admin/evidencia'))? "font-weight: bold;" : ""}"><fmt:message key="evidencies.aplicacio.plural" /></span>
       </a>
     </li>
 
