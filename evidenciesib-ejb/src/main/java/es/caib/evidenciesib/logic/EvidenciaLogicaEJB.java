@@ -247,7 +247,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
                     reason, location, signNumber, languageSign, tipusDocumentalID);
 
             // Es la configuració del Servidor (deixam el valor per defecte)
-            final String certificat = null;
+            final String certificat = Configuracio.getApiFirmaEnServidorDefaultAliasCertificate();
 
             final String perfil = Configuracio.getApiFirmaEnServidorProfile();
             FirmaSimpleCommonInfo commonInfo;
