@@ -211,6 +211,11 @@ public class Configuracio implements Constants {
     public static String getApiFirmaEnServidorProfile() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.profile");
     }
+    
+    public static String getApiFirmaEnServidorDefaultAliasCertificate() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.defaultaliascertificate");
+    }
+
 
     // ===========================================================
     // ==============   ASPECTE WEB ====================

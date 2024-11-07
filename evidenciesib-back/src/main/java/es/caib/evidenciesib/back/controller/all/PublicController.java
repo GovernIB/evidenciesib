@@ -3,6 +3,7 @@ package es.caib.evidenciesib.back.controller.all;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.evidenciesib.back.controller.user.EvidenciaUserController;
 import es.caib.evidenciesib.commons.utils.Constants;
+import es.caib.evidenciesib.commons.utils.Version;
 import es.caib.evidenciesib.logic.EvidenciesFrontLogicaService;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 
@@ -31,6 +33,9 @@ public class PublicController {
     protected EvidenciesFrontLogicaService evidenciaLogicaEjb;
 
     protected final Logger log = Logger.getLogger(getClass());
+    
+    @Autowired
+    protected Version versio;
 
     @RequestMapping(value = "/public/avislegal")
     public ModelAndView avislegal(HttpSession session, HttpServletRequest request, HttpServletResponse response)
@@ -80,6 +85,15 @@ public class PublicController {
             return "redirect:" + Constants.MAPPING_BACK_PUBLIC_EVIDENCE
                     + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + evidenciaID;
         }
+    }
+    
+    @RequestMapping(value = "/public/versio")
+    public void versio(HttpServletResponse response) throws Exception {
+        
+        response.getWriter().write(versio.getVersion() + "|" + versio.getBuildTime());
+        response.getWriter().flush();
+        response.getWriter().close();
+
     }
 
 }
