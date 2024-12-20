@@ -251,7 +251,9 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
             final String perfil = Configuracio.getApiFirmaEnServidorProfile();
             FirmaSimpleCommonInfo commonInfo;
-            commonInfo = new FirmaSimpleCommonInfo(perfil, idiomaUI, certificat, evi.getPersonaNif(),
+            // En firmes en servidor el NIF no es de cap persona sinó de del d'entitat en que es firmi
+            final String nif = null;
+            commonInfo = new FirmaSimpleCommonInfo(perfil, idiomaUI, certificat, nif,
                     evi.getPersonaEmail());
 
             FirmaSimpleSignDocumentRequest signature;
