@@ -27,6 +27,11 @@
 
 <link href="<c:url value="/css/stylesapp.css"/>" rel="stylesheet">
 
+<script type="text/javascript">
+    var lang = '<c:out value="${pageContext.response.locale.language}"/>';
+    var applicationContextPath="${pageContext.request.contextPath}";
+</script>
+
 <%-- JS --%>
 <script src="<c:url value="/js/jquery.js"/>"></script>
 <script src="<c:url value="/js/popper.min.js"/>"></script>
@@ -47,14 +52,13 @@
 <script src="<c:url value="/js/datetimepicker/tempusdominus-bootstrap-4.js"/>"></script>
 
 <%-- TinyMCE --%>
-<script type="text/javascript">
-	var lang = '<c:out value="${pageContext.response.locale.language}"/>';
-</script>
+
 <script src="<c:url value="/js/tiny_mce/tiny_mce.js"/>"	type="text/javascript"></script>
 <script src="<c:url value="/js/tinymce.js"/>" type="text/javascript"></script>
 
 <%-- Select Multiple --%>
 <script src="<c:url value="/js/select2.min.js"/>"></script>
+<script src="<c:url value="/js/select2_i18n/${lang}.js"/>"></script>
 
 
 <script type="text/javascript">

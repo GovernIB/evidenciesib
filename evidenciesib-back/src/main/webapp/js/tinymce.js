@@ -22,7 +22,7 @@ tinyMCE.init({
         //TTT theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",  
         theme_advanced_toolbar_location : "top",  
         theme_advanced_toolbar_align : "left",  
-        
+
         // TTT
         theme_advanced_statusbar_location : "none",
         //TTT theme_advanced_statusbar_location : "bottom",  
@@ -31,7 +31,7 @@ tinyMCE.init({
         // Example content CSS (should be your site CSS)  
         // using false to ensure that the default browser settings are used for best Accessibility  
         // ACCESSIBILITY SETTINGS  
-        content_css : "/evidenciesibback/css/default.css,/evidenciesibback/css/bootstrap.css,/evidenciesibback/css/bootstrap.min.css",  
+        content_css : applicationContextPath + "/css/default.css," + applicationContextPath +"/css/bootstrap.css," + applicationContextPath + "/css/bootstrap.min.css",    
         // Use browser preferred colors for dialogs.  
         browser_preferred_colors : true,  
         detect_highcontrast : true,

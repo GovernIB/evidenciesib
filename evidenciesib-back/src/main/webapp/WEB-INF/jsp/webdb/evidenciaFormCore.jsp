@@ -834,6 +834,11 @@
                   <c:set var="containEmptyValue"  value="true" />
                 </c:if>
             </c:forEach>
+          <script>
+              $(document).ready(function() {
+                  $('#evidencia_firmaTipusDocumental').select2();
+              });
+          </script>
           </form:select>
           </c:if>
            </td>
