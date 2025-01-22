@@ -14,7 +14,7 @@
     <%--  Elemento centrado horizonalmente y verticalmente --%>
     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <center>
-            <h4>EvidènciesIB</h4>
+            <h4><fmt:message key="espera.titol" /></h4>
         </center>
         <img src="<%=request.getContextPath()%>/images/spinner_40.gif" /><br />
         <center>
