@@ -95,7 +95,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -105,7 +105,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -193,7 +193,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -203,7 +203,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -291,7 +291,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -301,7 +301,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -406,7 +406,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -416,7 +416,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -478,7 +478,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -488,7 +488,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -530,7 +530,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -540,7 +540,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -607,9 +607,44 @@
         "description" : "Objecte per enviar i rebre fitxers així com la informació associada a aquest."
       },
       "EvidenciaWs" : {
-        "required" : [ "dataInici", "firmaIdiomaDocument", "firmaReason", "firmaTipusDocumental", "firmaTipusDocumentalDescripcio", "fitxerOriginal", "loginData", "loginId", "loginQaa", "loginSubtype", "loginType", "personaLlinatge1", "personaLlinatge2", "personaNif", "personaNom" ],
+        "required" : [ "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN", "EVIDENCIA_ESTAT_CODI_ERROR", "EVIDENCIA_ESTAT_CODI_SIGNAT", "dataInici", "firmaIdiomaDocument", "firmaReason", "firmaTipusDocumental", "firmaTipusDocumentalDescripcio", "fitxerOriginal", "loginData", "loginId", "loginQaa", "loginSubtype", "loginType", "personaLlinatge1", "personaLlinatge2", "personaNif", "personaNom" ],
         "type" : "object",
         "properties" : {
+          "EVIDENCIA_ESTAT_CODI_ERROR" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica un error",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : -1
+          },
+          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica que esta en procés de creació",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 1
+          },
+          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica que esta realitzant el login",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 2
+          },
+          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica que esta realitzant la firma del document",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 3
+          },
+          "EVIDENCIA_ESTAT_CODI_SIGNAT" : {
+            "type" : "integer",
+            "description" : "Codi d'estat d'una evidència que indica que ha finalitzat correctament",
+            "format" : "int32",
+            "readOnly" : true,
+            "default" : 10
+          },
           "evidenciaID" : {
             "type" : "integer",
             "description" : "Identificador únic de l'evidència.",
@@ -759,12 +794,12 @@
         "description" : "Estructura que inclou tota la informació de l'evidència."
       },
       "RestExceptionInfo" : {
-        "required" : [ "code", "errorMessage" ],
+        "required" : [ "errorMessage" ],
         "type" : "object",
         "properties" : {
-          "code" : {
+          "errorCode" : {
             "type" : "integer",
-            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
+            "description" : "Codi intern de l'error. Si l'Aplicació no gestiona codis d'error llavors val null.",
             "format" : "int32"
           },
           "errorMessage" : {
@@ -773,15 +808,15 @@
           },
           "stackTrace" : {
             "type" : "string",
-            "description" : "Stacktrace de l'excepció si n'hi hagués."
+            "description" : "Stacktrace de l'excepció"
           },
-          "causeException" : {
+          "stackTraceCause" : {
             "type" : "string",
-            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
+            "description" : "Stacktrace de l'excepció causant de l'error si n'hi hagués."
           },
-          "causeStackTrace" : {
+          "field" : {
             "type" : "string",
-            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
+            "description" : "Indica el camp en que hi ha un error de validació."
           }
         },
         "description" : "Estructura de dades utilitzada per passar informació d'un error"
@@ -938,6 +973,7 @@
             "description" : "Codi d'estat d'una evidència que indica un error",
             "format" : "int32",
             "readOnly" : true,
+            "deprecated" : true,
             "default" : -1
           },
           "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO" : {
@@ -945,6 +981,7 @@
             "description" : "Codi d'estat d'una evidència que indica que esta en procés de creació",
             "format" : "int32",
             "readOnly" : true,
+            "deprecated" : true,
             "default" : 1
           },
           "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN" : {
@@ -952,6 +989,7 @@
             "description" : "Codi d'estat d'una evidència que indica que esta realitzant el login",
             "format" : "int32",
             "readOnly" : true,
+            "deprecated" : true,
             "default" : 2
           },
           "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA" : {
@@ -959,6 +997,7 @@
             "description" : "Codi d'estat d'una evidència que indica que esta realitzant la firma del document",
             "format" : "int32",
             "readOnly" : true,
+            "deprecated" : true,
             "default" : 3
           },
           "EVIDENCIA_ESTAT_CODI_SIGNAT" : {
@@ -966,9 +1005,11 @@
             "description" : "Codi d'estat d'una evidència que indica que ha finalitzat correctament",
             "format" : "int32",
             "readOnly" : true,
+            "deprecated" : true,
             "default" : 10
           }
-        }
+        },
+        "deprecated" : true
       }
     },
     "securitySchemes" : {

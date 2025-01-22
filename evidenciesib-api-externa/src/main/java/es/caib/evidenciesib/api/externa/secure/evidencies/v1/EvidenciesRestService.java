@@ -225,19 +225,20 @@ public class EvidenciesRestService extends RestUtils {
                     description = "No Autenticat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "403",
                     description = "No Autoritzat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "500",
                     description = "Error no controlat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = RestExceptionInfo.class)) }),
+            // NOTA: A partir de 2026 aquesta ApiResponse es pot eliminar
             @ApiResponse(
                     responseCode = "510",
                     description = "Només s'utilitza per crear fitxer de constants...",
@@ -291,13 +292,13 @@ public class EvidenciesRestService extends RestUtils {
                     description = "No Autenticat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "403",
                     description = "No Autoritzat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "500",
                     description = "Error no controlat",
@@ -311,7 +312,7 @@ public class EvidenciesRestService extends RestUtils {
 
         if (evidenciaStartRequest == null) {
             // TODO XYZ ZZZ
-            throw new RestException("Paràmetre enviat es buit o null", Status.BAD_REQUEST);
+            throw new RestException(Status.BAD_REQUEST, "Paràmetre enviat es buit o null", "evidenciaStartRequest");
         }
         String language = evidenciaStartRequest.getLanguageUI();
 
@@ -405,7 +406,7 @@ public class EvidenciesRestService extends RestUtils {
             }
 
             log.error("Error en evidenciaStart: " + msg, th);
-            throw new RestException(msg, th, Status.INTERNAL_SERVER_ERROR);
+            throw new RestException(Status.INTERNAL_SERVER_ERROR, msg, th);
         }
 
     }
@@ -439,13 +440,13 @@ public class EvidenciesRestService extends RestUtils {
                     description = "No Autenticat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "403",
                     description = "No Autoritzat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "500",
                     description = "Error no controlat",
@@ -480,8 +481,8 @@ public class EvidenciesRestService extends RestUtils {
         if (evidenciaID == null || evidenciaID <= 0) {
 
             // XYZ ZZZ Segons idioma
-            throw new RestException("El paràmetre evidenciaID té un valor incorrecte: " + evidenciaID,
-                    Status.BAD_REQUEST);
+            throw new RestException(Status.BAD_REQUEST, "El paràmetre evidenciaID té un valor incorrecte: " + evidenciaID,
+                    "evidenciaID");
         }
 
         try {
@@ -491,14 +492,14 @@ public class EvidenciesRestService extends RestUtils {
             // Check username aplication
             if (eviBBDD == null) {
                 // XYZ ZZZ Segons idioma
-                throw new RestException("L'evidència amb ID " + evidenciaID + " no existeix.", Status.BAD_REQUEST);
+                throw new RestException(Status.INTERNAL_SERVER_ERROR, "L'evidència amb ID " + evidenciaID + " no existeix.");
             }
 
             // Check username aplication
             if (!request.getRemoteUser().equals(eviBBDD.getUsuariAplicacio())) {
                 // XYZ ZZZ Segons idioma
-                throw new RestException("L'aplicació " + request.getRemoteUser()
-                        + " no és la propietària de l'evidència amb ID " + evidenciaID, Status.BAD_REQUEST);
+                throw new RestException(Status.INTERNAL_SERVER_ERROR, "L'aplicació " + request.getRemoteUser()
+                        + " no és la propietària de l'evidència amb ID " + evidenciaID);
             }
 
             final EvidenciaToEvidenciaWsConverter converter = "es".equalsIgnoreCase(language) ? converterES
@@ -524,7 +525,7 @@ public class EvidenciesRestService extends RestUtils {
             msg = "Error obtenint evidència " + msg;
 
             log.error(msg, th);
-            throw new RestException(msg, th, Status.INTERNAL_SERVER_ERROR);
+            throw new RestException(Status.INTERNAL_SERVER_ERROR, msg, th);
         }
 
     }
@@ -556,13 +557,13 @@ public class EvidenciesRestService extends RestUtils {
                     description = "EFIB: No Autenticat",
                     content = { @Content(
                             mediaType = RestUtils.MIME_APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "403",
                     description = "EFIB: No Autoritzat",
                     content = { @Content(
                             mediaType = RestUtils.MIME_APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "500",
                     description = "EFIB: Error durant la consulta de les dades obertes",
@@ -658,7 +659,7 @@ public class EvidenciesRestService extends RestUtils {
             }
             msg = "Error desconegut llistant evidències: " + msg;
             log.error(msg, th);
-            throw new RestException(msg, th, Status.INTERNAL_SERVER_ERROR);
+            throw new RestException(Status.INTERNAL_SERVER_ERROR, msg, th);
         }
 
     }
@@ -692,13 +693,13 @@ public class EvidenciesRestService extends RestUtils {
                     description = "No Autenticat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "403",
                     description = "No Autoritzat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "500",
                     description = "Error no controlat",
@@ -756,7 +757,7 @@ public class EvidenciesRestService extends RestUtils {
                 // TODO XYZ ZZZ Traduir
                 final String msg = "El fitxer amb encryptedFileID igual a " + encryptedFileID
                         + " no es troba en l'evidència amb ID " + evidenciaID;
-                throw new RestException(msg, Status.BAD_REQUEST);
+                throw new RestException(Status.INTERNAL_SERVER_ERROR, msg);
             }
 
             Long fileID = HibernateFileUtil.decryptFileID(encryptedFileID);
@@ -780,7 +781,7 @@ public class EvidenciesRestService extends RestUtils {
             }
             msg = "Error desconegut obtenint fitxers: " + msg;
             log.error(msg, th);
-            throw new RestException(msg, th, Status.INTERNAL_SERVER_ERROR);
+            throw new RestException(Status.INTERNAL_SERVER_ERROR, msg, th);
         }
 
     }
@@ -814,13 +815,13 @@ public class EvidenciesRestService extends RestUtils {
                     description = "No Autenticat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "403",
                     description = "No Autoritzat",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = String.class)) }),
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
             @ApiResponse(
                     responseCode = "500",
                     description = "Error no controlat",
@@ -878,7 +879,7 @@ public class EvidenciesRestService extends RestUtils {
                 // TODO XYZ ZZZ Traduir
                 final String msg = "El fitxer amb encryptedFileID igual a " + encryptedFileID
                         + " no es troba en l'evidència amb ID " + evidenciaID;
-                throw new RestException(msg, Status.BAD_REQUEST);
+                throw new RestException(Status.INTERNAL_SERVER_ERROR, msg);
             }
 
             EvidenciaFileBase64 filebase64 = new EvidenciaFileBase64(file);
@@ -905,7 +906,7 @@ public class EvidenciesRestService extends RestUtils {
             }
             msg = "Error desconegut obtenint fitxers: " + msg;
             log.error(msg, th);
-            throw new RestException(msg, th, Status.INTERNAL_SERVER_ERROR);
+            throw new RestException(Status.INTERNAL_SERVER_ERROR, msg, th);
         }
 
     }

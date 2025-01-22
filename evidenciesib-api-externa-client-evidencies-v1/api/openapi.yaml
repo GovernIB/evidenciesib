@@ -71,13 +71,13 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autenticat
         "403":
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autoritzat
         "500":
           content:
@@ -146,13 +146,13 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autenticat
         "403":
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autoritzat
         "500":
           content:
@@ -221,13 +221,13 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autenticat
         "403":
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autoritzat
         "500":
           content:
@@ -319,13 +319,13 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: "EFIB: No Autenticat"
         "403":
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: "EFIB: No Autoritzat"
         "500":
           content:
@@ -365,13 +365,13 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autenticat
         "403":
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autoritzat
         "500":
           content:
@@ -400,13 +400,13 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autenticat
         "403":
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RestExceptionInfo'
           description: No Autoritzat
         "500":
           content:
@@ -432,7 +432,7 @@ components:
       description: Objecte per enviar i rebre fitxers així com la informació associada
         a aquest.
       example:
-        size: 5
+        size: 3
         mime: mime
         document: document
         name: name
@@ -466,13 +466,16 @@ components:
       example:
         localitzacioIp: localitzacioIp
         estatExcepcio: estatExcepcio
+        EVIDENCIA_ESTAT_CODI_ERROR: 0
         loginId: loginId
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: 5
         loginType: loginType
         personaNif: personaNif
-        estatCodi: 6
-        evidenciaID: 0
+        estatCodi: 7
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO: 6
+        evidenciaID: 2
         fitxerAdaptat:
-          size: 5
+          size: 3
           mime: mime
           document: document
           name: name
@@ -486,11 +489,11 @@ components:
         localitzacioCiutat: localitzacioCiutat
         localitzacioLatitud: localitzacioLatitud
         loginAdditionalProperties: loginAdditionalProperties
-        firmaTipusDocumental: 1
+        firmaTipusDocumental: 9
         dataInici: 2000-01-23T04:56:07.000+00:00
         localitzacioPais: localitzacioPais
         fitxerSignat:
-          size: 5
+          size: 3
           mime: mime
           document: document
           name: name
@@ -500,16 +503,18 @@ components:
         firmaIdiomaDocument: firmaIdiomaDocument
         personaEmail: personaEmail
         fitxerOriginal:
-          size: 5
+          size: 3
           mime: mime
           document: document
           name: name
           description: description
           encryptedFileID: encryptedFileID
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN: 1
         localitzacioLongitud: localitzacioLongitud
         localitzacioRegio: localitzacioRegio
         loginSubtype: loginSubtype
         localitzacioCodiPostal: localitzacioCodiPostal
+        EVIDENCIA_ESTAT_CODI_SIGNAT: 5
         firmaTipusDocumentalDescripcio: "1"
         loginQaa: loginQaa
         firmaReason: firmaReason
@@ -518,6 +523,39 @@ components:
         dataFi: 2000-01-23T04:56:07.000+00:00
         estatError: estatError
       properties:
+        EVIDENCIA_ESTAT_CODI_ERROR:
+          default: -1
+          description: Codi d'estat d'una evidència que indica un error
+          format: int32
+          readOnly: true
+          type: integer
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO:
+          default: 1
+          description: Codi d'estat d'una evidència que indica que esta en procés
+            de creació
+          format: int32
+          readOnly: true
+          type: integer
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN:
+          default: 2
+          description: Codi d'estat d'una evidència que indica que esta realitzant
+            el login
+          format: int32
+          readOnly: true
+          type: integer
+        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA:
+          default: 3
+          description: Codi d'estat d'una evidència que indica que esta realitzant
+            la firma del document
+          format: int32
+          readOnly: true
+          type: integer
+        EVIDENCIA_ESTAT_CODI_SIGNAT:
+          default: 10
+          description: Codi d'estat d'una evidència que indica que ha finalitzat correctament
+          format: int32
+          readOnly: true
+          type: integer
         evidenciaID:
           description: Identificador únic de l'evidència.
           format: int64
@@ -636,6 +674,11 @@ components:
         fitxerSignat:
           $ref: '#/components/schemas/EvidenciaFile'
       required:
+      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO
+      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA
+      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN
+      - EVIDENCIA_ESTAT_CODI_ERROR
+      - EVIDENCIA_ESTAT_CODI_SIGNAT
       - dataInici
       - firmaIdiomaDocument
       - firmaReason
@@ -655,30 +698,30 @@ components:
     RestExceptionInfo:
       description: Estructura de dades utilitzada per passar informació d'un error
       example:
-        code: 5
-        causeStackTrace: causeStackTrace
-        causeException: causeException
+        field: field
         errorMessage: errorMessage
+        stackTraceCause: stackTraceCause
+        errorCode: 2
         stackTrace: stackTrace
       properties:
-        code:
-          description: Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
+        errorCode:
+          description: Codi intern de l'error. Si l'Aplicació no gestiona codis d'error
+            llavors val null.
           format: int32
           type: integer
         errorMessage:
           description: Missatge de l'error
           type: string
         stackTrace:
-          description: Stacktrace de l'excepció si n'hi hagués.
+          description: Stacktrace de l'excepció
           type: string
-        causeException:
-          description: Tipus de l'excepció origen (cause) si n'hi hagués.
+        stackTraceCause:
+          description: Stacktrace de l'excepció causant de l'error si n'hi hagués.
           type: string
-        causeStackTrace:
-          description: Stacktrace de l'excepció origen (cause) si n'hi hagués.
+        field:
+          description: Indica el camp en que hi ha un error de validació.
           type: string
       required:
-      - code
       - errorMessage
       type: object
     EvidenciaFileBase64:
@@ -721,13 +764,16 @@ components:
         data:
         - localitzacioIp: localitzacioIp
           estatExcepcio: estatExcepcio
+          EVIDENCIA_ESTAT_CODI_ERROR: 0
           loginId: loginId
+          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: 5
           loginType: loginType
           personaNif: personaNif
-          estatCodi: 6
-          evidenciaID: 0
+          estatCodi: 7
+          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO: 6
+          evidenciaID: 2
           fitxerAdaptat:
-            size: 5
+            size: 3
             mime: mime
             document: document
             name: name
@@ -741,11 +787,11 @@ components:
           localitzacioCiutat: localitzacioCiutat
           localitzacioLatitud: localitzacioLatitud
           loginAdditionalProperties: loginAdditionalProperties
-          firmaTipusDocumental: 1
+          firmaTipusDocumental: 9
           dataInici: 2000-01-23T04:56:07.000+00:00
           localitzacioPais: localitzacioPais
           fitxerSignat:
-            size: 5
+            size: 3
             mime: mime
             document: document
             name: name
@@ -755,16 +801,18 @@ components:
           firmaIdiomaDocument: firmaIdiomaDocument
           personaEmail: personaEmail
           fitxerOriginal:
-            size: 5
+            size: 3
             mime: mime
             document: document
             name: name
             description: description
             encryptedFileID: encryptedFileID
+          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN: 1
           localitzacioLongitud: localitzacioLongitud
           localitzacioRegio: localitzacioRegio
           loginSubtype: loginSubtype
           localitzacioCodiPostal: localitzacioCodiPostal
+          EVIDENCIA_ESTAT_CODI_SIGNAT: 5
           firmaTipusDocumentalDescripcio: "1"
           loginQaa: loginQaa
           firmaReason: firmaReason
@@ -774,13 +822,16 @@ components:
           estatError: estatError
         - localitzacioIp: localitzacioIp
           estatExcepcio: estatExcepcio
+          EVIDENCIA_ESTAT_CODI_ERROR: 0
           loginId: loginId
+          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: 5
           loginType: loginType
           personaNif: personaNif
-          estatCodi: 6
-          evidenciaID: 0
+          estatCodi: 7
+          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO: 6
+          evidenciaID: 2
           fitxerAdaptat:
-            size: 5
+            size: 3
             mime: mime
             document: document
             name: name
@@ -794,11 +845,11 @@ components:
           localitzacioCiutat: localitzacioCiutat
           localitzacioLatitud: localitzacioLatitud
           loginAdditionalProperties: loginAdditionalProperties
-          firmaTipusDocumental: 1
+          firmaTipusDocumental: 9
           dataInici: 2000-01-23T04:56:07.000+00:00
           localitzacioPais: localitzacioPais
           fitxerSignat:
-            size: 5
+            size: 3
             mime: mime
             document: document
             name: name
@@ -808,16 +859,18 @@ components:
           firmaIdiomaDocument: firmaIdiomaDocument
           personaEmail: personaEmail
           fitxerOriginal:
-            size: 5
+            size: 3
             mime: mime
             document: document
             name: name
             description: description
             encryptedFileID: encryptedFileID
+          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN: 1
           localitzacioLongitud: localitzacioLongitud
           localitzacioRegio: localitzacioRegio
           loginSubtype: loginSubtype
           localitzacioCodiPostal: localitzacioCodiPostal
+          EVIDENCIA_ESTAT_CODI_SIGNAT: 5
           firmaTipusDocumentalDescripcio: "1"
           loginQaa: loginQaa
           firmaReason: firmaReason
@@ -862,7 +915,7 @@ components:
         d'Evidències
       example:
         documentASignar:
-          size: 5
+          size: 3
           mime: mime
           document: document
           name: name
@@ -955,6 +1008,7 @@ components:
       - evidenciaUrlRedirect
       type: object
     ConstantsWs:
+      deprecated: true
       example:
         EVIDENCIA_ESTAT_CODI_ERROR: 0
         EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: 5
@@ -964,12 +1018,14 @@ components:
       properties:
         EVIDENCIA_ESTAT_CODI_ERROR:
           default: -1
+          deprecated: true
           description: Codi d'estat d'una evidència que indica un error
           format: int32
           readOnly: true
           type: integer
         EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO:
           default: 1
+          deprecated: true
           description: Codi d'estat d'una evidència que indica que esta en procés
             de creació
           format: int32
@@ -977,6 +1033,7 @@ components:
           type: integer
         EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN:
           default: 2
+          deprecated: true
           description: Codi d'estat d'una evidència que indica que esta realitzant
             el login
           format: int32
@@ -984,6 +1041,7 @@ components:
           type: integer
         EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA:
           default: 3
+          deprecated: true
           description: Codi d'estat d'una evidència que indica que esta realitzant
             la firma del document
           format: int32
@@ -991,6 +1049,7 @@ components:
           type: integer
         EVIDENCIA_ESTAT_CODI_SIGNAT:
           default: 10
+          deprecated: true
           description: Codi d'estat d'una evidència que indica que ha finalitzat correctament
           format: int32
           readOnly: true

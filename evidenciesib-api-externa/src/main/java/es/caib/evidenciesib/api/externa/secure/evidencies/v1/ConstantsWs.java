@@ -9,8 +9,8 @@ import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
  * @author anadal
  *
  */
-
-@Schema(name = "ConstantsWs")
+@Schema(name = "ConstantsWs", deprecated = true)
+@Deprecated
 public class ConstantsWs {
 
     @Schema(
@@ -19,7 +19,8 @@ public class ConstantsWs {
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_ERROR,
             implementation = Integer.class,
             required = true,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
     public int EVIDENCIA_ESTAT_CODI_ERROR;
 
     @Schema(
@@ -28,7 +29,8 @@ public class ConstantsWs {
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO,
             implementation = Integer.class,
             required = true,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
     public int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO;
 
     @Schema(
@@ -37,7 +39,8 @@ public class ConstantsWs {
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN,
             implementation = Integer.class,
             required = true,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
     public int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN;
 
     @Schema(
@@ -46,7 +49,8 @@ public class ConstantsWs {
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA,
             implementation = Integer.class,
             required = true,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
     public int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA;
 
     @Schema(
@@ -55,7 +59,8 @@ public class ConstantsWs {
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_SIGNAT,
             implementation = Integer.class,
             required = true,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
     public int EVIDENCIA_ESTAT_CODI_SIGNAT;
 
 

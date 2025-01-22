@@ -25,7 +25,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * ConstantsWs
+ * @deprecated
  */
+@Deprecated
 @JsonPropertyOrder({
   ConstantsWs.JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R,
   ConstantsWs.JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O,
@@ -72,7 +74,9 @@ public class ConstantsWs {
    /**
    * Codi d&#39;estat d&#39;una evidència que indica un error
    * @return EVIDENCIA_ESTAT_CODI_ERROR
+   * @deprecated
   **/
+  @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -87,7 +91,9 @@ public class ConstantsWs {
    /**
    * Codi d&#39;estat d&#39;una evidència que indica que esta en procés de creació
    * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO
+   * @deprecated
   **/
+  @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -102,7 +108,9 @@ public class ConstantsWs {
    /**
    * Codi d&#39;estat d&#39;una evidència que indica que esta realitzant el login
    * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN
+   * @deprecated
   **/
+  @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_L_O_G_I_N)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -117,7 +125,9 @@ public class ConstantsWs {
    /**
    * Codi d&#39;estat d&#39;una evidència que indica que esta realitzant la firma del document
    * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA
+   * @deprecated
   **/
+  @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -132,7 +142,9 @@ public class ConstantsWs {
    /**
    * Codi d&#39;estat d&#39;una evidència que indica que ha finalitzat correctament
    * @return EVIDENCIA_ESTAT_CODI_SIGNAT
+   * @deprecated
   **/
+  @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
