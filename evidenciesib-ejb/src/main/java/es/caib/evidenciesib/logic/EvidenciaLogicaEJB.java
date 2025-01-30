@@ -239,7 +239,6 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
             final int signNumber = 1;
 
-
             final String languageSign = evi.getFirmaIdiomaDocument();
             final long tipusDocumentalID = evi.getFirmaTipusDocumental(); // =TD99
 
@@ -253,8 +252,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             FirmaSimpleCommonInfo commonInfo;
             // En firmes en servidor el NIF no es de cap persona sinó de del d'entitat en que es firmi
             final String nif = null;
-            commonInfo = new FirmaSimpleCommonInfo(perfil, idiomaUI, certificat, nif,
-                    evi.getPersonaEmail());
+            commonInfo = new FirmaSimpleCommonInfo(perfil, idiomaUI, certificat, nif, evi.getPersonaEmail());
 
             FirmaSimpleSignDocumentRequest signature;
             signature = new FirmaSimpleSignDocumentRequest(commonInfo, fileInfoSignature);
@@ -266,9 +264,9 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             try {
                 fullResults = api.signDocument(signature);
             } catch (AbstractApisIBException e) {
-                log.error("Error signant el fitxer: " + e.getMessage() + "(" +  e.getDescription() + ")", e);
+                log.error("Error signant el fitxer: " + e.getMessage() + "(" + e.getDescription() + ")", e);
                 // error.signant=Error signant el fitxer: {0} ({1})
-                throw new I18NException("error.signant", e.getMessage(),  e.getDescription());
+                throw new I18NException("error.signant", e.getMessage(), e.getDescription());
             }
 
             FirmaSimpleStatus transactionStatus = fullResults.getStatus();
@@ -279,7 +277,8 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
                 case FirmaSimpleStatus.STATUS_INITIALIZING: // = 0;
                 {
-                    log.error("L'estat del procés de firma ha tornat el control però encara està en estat INICIALITZANT");
+                    log.error(
+                            "L'estat del procés de firma ha tornat el control però encara està en estat INICIALITZANT");
                     throw new I18NException("error.encarainicialitzant");
                 }
 
@@ -313,29 +312,42 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
                     FirmaSimpleSignedFileInfo signedFileInfo = fullResults.getSignedFileInfo();
                     log.info(FirmaSimpleSignedFileInfo.toString(signedFileInfo));
-                    
-                    String mime = signedFile.getMime();
 
-                    // Afegir Segell de Temps emprant l'upgrade de firma
-                    FirmaSimpleFile fsf;
-                    {
-                        FirmaSimpleFile fileToUpgrade = signedFile;
-                        FirmaSimpleFile documentDetached = null;
-                        FirmaSimpleUpgradeResponse upgradeResponse = api.upgradeSignature(
-                                new FirmaSimpleUpgradeRequest(perfil, fileToUpgrade, documentDetached, null, idiomaUI));
+                    String mime;
+                    byte[] data;
 
-                        FirmaSimpleFile upgraded = upgradeResponse.getUpgradedFile();
+                    // La normativa de Signatura no criptogràfica obliga a que el 
+                    // document signat  inclogui un Segell de Temps.
+                    // NOTA: El plugin de @firma a dia 30/01/2025 no permetia fer firmes PADES-T
+                    //       cosa que implicava que no duia segell de temps per això s'ha de fer l'upgrade.
+                    if (fullResults.getSignedFileInfo().isTimeStampIncluded()) {
+                        data = signedFile.getData();
+                        mime = signedFile.getMime();
+                    } else {
+                        // Com que no duu segell de temps llavors hem 
+                        // d'afegir Segell de Temps emprant l'upgrade de firma
+                        FirmaSimpleFile fsf;
+                        {
+                            final FirmaSimpleFile fileToUpgrade = signedFile;
+                            final FirmaSimpleFile documentDetached = null;
+                            FirmaSimpleUpgradeResponse upgradeResponse = api
+                                    .upgradeSignature(new FirmaSimpleUpgradeRequest(perfil, fileToUpgrade,
+                                            documentDetached, null, idiomaUI));
+                            FirmaSimpleFile upgraded = upgradeResponse.getUpgradedFile();
+                            fsf = upgraded;
+                        }
 
-                        fsf = upgraded;
+                        if (fsf.getMime() == null) {
+                            mime = signedFile.getMime();
+                        } else {
+                            mime = fsf.getMime();
+                        }
+
+                        data = fsf.getData();
                     }
-                    
-                    if (fsf.getMime() != null) {
-                        mime = fsf.getMime();                    
-                    }
 
-                    byte[] data = fsf.getData();
-
-                    String newname = evi.getFitxerOriginal().getNom();
+                    String newname;
+                    newname = evi.getFitxerOriginal().getNom();
                     newname = FilenameUtils.getBaseName(newname) + "_signed." + FilenameUtils.getExtension(newname);
 
                     Fitxer fitxer = fitxerLogicaEjb.create(newname, mime, data.length, "");
@@ -350,7 +362,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
                 default: {
                     log.error("L'estat del procés de firma ha tornat un estat desconegut amb valor " + status);
-                    throw new I18NException("error.estatfinaldesconeguti",  String.valueOf(status));
+                    throw new I18NException("error.estatfinaldesconeguti", String.valueOf(status));
                 }
             } // Final Switch Firma
 
@@ -386,7 +398,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             try {
                 this.update(evi);
             } catch (I18NException e) {
-                
+
                 String msg = "Error actualitzant l'evidència despres de signar el document: "
                         + I18NCommonUtils.getMessage(e, languageUI);
                 log.error(msg, e);
@@ -397,7 +409,6 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         return evi;
 
     }
-
 
     /**
      * 
@@ -458,8 +469,8 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             }
 
             // Esborram tots els valors null !!!!
-            while (map.values().remove(null))
-                ;
+            while (map.values().remove(null)) {
+            };
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -502,9 +513,8 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             PdfWriter writer, String url) throws MalformedURLException {
 
         Locale loc = new java.util.Locale(evi.getFirmaIdiomaDocument());
-        
+
         Rectangle page = reader.getPageSize(1);
-        
 
         // "Informació de la Firma"
         String title = I18NCommonUtils.tradueix(loc, "stamp.info");
