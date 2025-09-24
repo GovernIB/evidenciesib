@@ -348,9 +348,6 @@ public class EvidenciesRestService extends RestUtils {
             evi.setCallBackUrl(evidenciaStartRequest.getCallBackUrl());
             evi.setNom(evidenciaStartRequest.getTitolEvidencia());
 
-            // XYZ ZZZ TODO 
-            evi.setFirmaIdiomaDocument(evidenciaStartRequest.getLanguageDocument());
-
             evi.setDataInici(new Timestamp(System.currentTimeMillis()));
             evi.setUsuariPersona(null);
             evi.setUsuariAplicacio(request.getRemoteUser());
