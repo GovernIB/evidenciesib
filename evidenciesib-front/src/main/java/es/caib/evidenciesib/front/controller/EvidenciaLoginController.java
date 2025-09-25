@@ -67,7 +67,8 @@ public class EvidenciaLoginController {
 
     @RequestMapping(Constants.MAPPING_FRONT_LOGIN_START + "/{evidenciaID}")
     public ModelAndView frontLoginStart(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
+            @PathVariable("evidenciaID")
+            Long evidenciaID) throws Exception {
 
         log.info("frontLoginStart =>  evidenciaID=" + evidenciaID);
 
@@ -99,10 +100,9 @@ public class EvidenciaLoginController {
         final String cancelurl = request.getContextPath() + MAPPING_CANCEL_GET + "/" + evidenciaID;
         mav.addObject("cancelurl", cancelurl);
         mav.addObject("thumbnail", request.getContextPath() + THUMBNAIL_PDF_MASSIVE + "/" + evidenciaID);
-        
-        log.info("frontLoginStart =>  action=" +action);
-        log.info("frontLoginStart =>  cancelurl=" +cancelurl);
-        
+
+        log.info("frontLoginStart =>  action=" + action);
+        log.info("frontLoginStart =>  cancelurl=" + cancelurl);
 
         final String base = request.getContextPath();
         final String append = EncrypterDecrypter.encrypt(EncrypterDecrypter.ALGORITHM_AES, Configuracio.getEncryptKey(),
@@ -110,18 +110,72 @@ public class EvidenciaLoginController {
 
         mav.addObject("download", base + DOWNLOAD_PDF + "/" + append);
         mav.addObject("objectpdf", base + OBJECT_PDF + "/" + append);
+
+        configurarEntityHeader(request, mav);
+
         return mav;
 
+    }
+
+    protected void configurarEntityHeader(HttpServletRequest request, ModelAndView mav) {
+        mav.addObject("headerEnabled", false);
+
+        // log.info("\n\n" + "Entitat => " + signaturesSet.getEntitat());
+
+        {
+
+            boolean headerEnabled = Configuracio.isSignatureHeaderEnabled();
+
+            // log.info("\n\n" + "XYZ ZZZ headerEnabled => " + headerEnabled);
+
+            if (headerEnabled) {
+
+                {
+
+                    String backgroundColor = Configuracio.getSignatureHeaderBackgroundColor();
+
+                    if (backgroundColor == null || backgroundColor.trim().length() == 0) {
+                        backgroundColor = Configuracio.getWebuiHeaderColor(); // Color per Defecte
+                    }
+
+                    String logoUrl = Configuracio.getSignatureHeaderLogoUrl();
+                    if (logoUrl == null || logoUrl.trim().length() == 0) {
+                        logoUrl = Configuracio.getWebuiHeaderLogoUrl();
+                        if (logoUrl == null) {
+                            logoUrl = request.getContextPath() + "/img/fundaciobit-logo-cap.png"; // Logo per defecte
+                        }
+                    }
+
+                    String text = Configuracio.getSignatureHeaderText();
+                    if (text == null || text.trim().length() == 0) {
+                        text = "EvidènciesIB";
+                    } else {
+                        if (text.trim().equals("-")) {
+                            text = null;
+                        }
+                    }
+
+                    // TODO XYZ ZZZ 
+                    log.info("\n\n" + " Header Enabled => " + headerEnabled + "\n" + " Background Color => "
+                            + backgroundColor + "\n" + " Logo URL => " + logoUrl + "\n" + " Text => " + text + "\n\n");
+
+                    mav.addObject("headerEnabled", true);
+                    mav.addObject("backgroundColor", backgroundColor);
+                    mav.addObject("logoUrl", logoUrl);
+                    mav.addObject("text", text);
+                }
+            }
+        }
     }
 
     public static final String MAPPING_CANCEL_GET = "/cancelnorepudi";
 
     @RequestMapping(path = MAPPING_CANCEL_GET + "/{evidenciaID}", method = RequestMethod.GET)
-    public String canceGet(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
+    public String canceGet(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
+    Long evidenciaID) throws Exception {
 
         log.info("ENTRA A CANCEL GET => evidenciaID=" + evidenciaID);
-        
+
         if (request.getParameterMap().size() == 0) {
             log.warn("noRepudiPost => NO HI HA PARAMETERS !!!!!!!!");
         } else {
@@ -158,8 +212,8 @@ public class EvidenciaLoginController {
     public static final String MAPPING_NO_REPUDI_POST = "/norepudi";
 
     @RequestMapping(path = MAPPING_NO_REPUDI_POST + "/{evidenciaID}", method = RequestMethod.POST)
-    public String noRepudiPost(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
+    public String noRepudiPost(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
+    Long evidenciaID) throws Exception {
 
         if (request.getParameterMap().size() == 0) {
             log.warn("noRepudiPost => NO HI HA PARAMETERS !!!!!!!!");
@@ -258,7 +312,8 @@ public class EvidenciaLoginController {
 
     @RequestMapping(value = THUMBNAIL_PDF_MASSIVE + "/{evidenciaID}", method = RequestMethod.GET)
     public void createThumbnailPdf(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") Long evidenciaID) throws Exception, I18NException {
+            @PathVariable("evidenciaID")
+            Long evidenciaID) throws Exception, I18NException {
 
         long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERORIGINALID,
                 EvidenciaFields.EVIDENCIAID.equal(evidenciaID));
@@ -332,18 +387,22 @@ public class EvidenciaLoginController {
 
     @RequestMapping(MAPPING_FRONT_LOGIN_END + "/{evidenciaID}")
     public ModelAndView frontLoginEnd(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
+            @PathVariable("evidenciaID")
+            Long evidenciaID) throws Exception {
 
         ModelAndView mav = new ModelAndView("loginend");
 
         mav.addObject("evidenciaID", evidenciaID);
+
+        configurarEntityHeader(request, mav);
 
         return mav;
     }
 
     @RequestMapping(MAPPING_FRONT_POST_LOGIN_END + "/{evidenciaID}")
     public String frontPostLoginEnd(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
+            @PathVariable("evidenciaID")
+            Long evidenciaID) throws Exception {
 
         log.info("frontLoginEnd =>  evidenciaID=" + evidenciaID);
         log.info("frontLoginEnd =>  error=" + request.getSession().getAttribute("error"));
@@ -452,16 +511,16 @@ public class EvidenciaLoginController {
     public static final String DOWNLOAD_PDF = "/downloadpdf";
 
     @RequestMapping(value = DOWNLOAD_PDF + "/{evidenciaID}", method = RequestMethod.GET)
-    public void downloadPdf(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") String evidenciaIDEncrypted) throws Exception, I18NException {
+    public void downloadPdf(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
+    String evidenciaIDEncrypted) throws Exception, I18NException {
         returnPdf(request, response, evidenciaIDEncrypted, true);
     }
 
     public static final String OBJECT_PDF = "/objectpdf";
 
     @RequestMapping(value = OBJECT_PDF + "/{evidenciaID}", method = RequestMethod.GET)
-    public void objectPdf(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") String evidenciaIDEncrypted) throws Exception, I18NException {
+    public void objectPdf(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
+    String evidenciaIDEncrypted) throws Exception, I18NException {
 
         returnPdf(request, response, evidenciaIDEncrypted, false);
 

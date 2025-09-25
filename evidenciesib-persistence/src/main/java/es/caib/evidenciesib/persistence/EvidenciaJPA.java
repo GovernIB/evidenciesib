@@ -591,18 +591,18 @@ public class EvidenciaJPA implements Evidencia {
 
 
 
-  @Override
-  public boolean equals(Object __obj) {
-  boolean __result;
-    if (__obj != null && __obj instanceof Evidencia) {
-      Evidencia __instance = (Evidencia)__obj;
-      __result = true;
-      __result = __result && (this.getEvidenciaID() == __instance.getEvidenciaID()) ;
-    } else {
-      __result = false;
+    @Override
+    public boolean equals(Object __obj) {
+        boolean __result;
+        if (__obj != null && __obj instanceof Evidencia) {
+            Evidencia __instance = (Evidencia)__obj;
+            __result = true;
+            __result = __result && (this.getEvidenciaID() == __instance.getEvidenciaID()) ;
+        } else {
+            __result = false;
+        }
+        return __result;
     }
-    return __result;
-  }
 
 // IMP Field:fitxerid | Table: evi_fitxer | Type: 1  
 

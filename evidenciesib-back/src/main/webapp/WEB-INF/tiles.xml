@@ -137,6 +137,10 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/evidenciaList.jsp" />
     </definition>
     
+    <definition name="keyvalueAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/keyvalue.jsp" />
+    </definition>
+    
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">

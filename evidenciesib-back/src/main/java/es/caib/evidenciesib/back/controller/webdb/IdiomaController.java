@@ -16,7 +16,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.Arrays;
 
 import es.caib.evidenciesib.back.form.webdb.*;
 import es.caib.evidenciesib.back.form.webdb.IdiomaForm;
@@ -34,6 +37,11 @@ import es.caib.evidenciesib.back.validator.webdb.IdiomaWebValidator;
 import es.caib.evidenciesib.persistence.IdiomaJPA;
 import es.caib.evidenciesib.model.entity.Idioma;
 import es.caib.evidenciesib.model.fields.*;
+import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
+import es.caib.evidenciesib.back.utils.Tab;
 
 /**
  * Controller per gestionar un Idioma
@@ -41,9 +49,14 @@ import es.caib.evidenciesib.model.fields.*;
  * 
  * @author GenApp
  */
+@MenuOption(labelCode="idioma.idioma.plural", order=20, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/idioma")
 @SessionAttributes(types = { IdiomaForm.class, IdiomaFilterForm.class })
+@Tile(name="idiomaFormWebDB", contentJsp="/WEB-INF/jsp/webdb/idiomaForm.jsp", extendsTile=Tab.MENU_WEBDB,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="idioma.idioma")})
+@Tile(name="idiomaListWebDB", contentJsp="/WEB-INF/jsp/webdb/idiomaList.jsp", extendsTile=Tab.MENU_WEBDB,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="idioma.idioma") })
 public class IdiomaController
     extends es.caib.evidenciesib.back.controller.EvidenciesIBBaseController<Idioma, java.lang.String> implements IdiomaFields {
 
@@ -305,7 +318,6 @@ public class IdiomaController
 
     if (idioma == null) {
       createMessageWarning(request, "error.notfound", idiomaID);
-      new ModelAndView(new RedirectView(getRedirectWhenCancel(request, idiomaID), true));
       return llistatPaginat(request, response, 1);
     } else {
       ModelAndView mav = new ModelAndView(getTileForm());
@@ -549,12 +561,38 @@ public java.lang.String stringToPK(String value) {
   }
 
 
-  @Override
-  /** Ha de ser igual que el RequestMapping de la Classe */
-  public String getContextWeb() {
-    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
-    return rm.value()[0];
-  }
+    @Override
+    /** Ha de ser igual que el RequestMapping de la Classe */
+    public String getContextWeb() {
+        RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
+        final String[] values = rm.value();
+        if (values.length == 1) {
+            return values[0];
+        } else {
+            final HttpServletRequest request;
+            request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+            final String servletPath = request.getServletPath();
+
+            for (String webcontext : values) {
+                if (servletPath.startsWith(webcontext)) {
+                    return webcontext;
+                }
+            }
+
+            log.warn(" No puc trobar el contextweb associat a la cridada.");
+            log.warn(" ==== RequestMapping::value=" + Arrays.toString(values));
+            log.warn(" ++++ getContextWeb::Scheme: " + request.getScheme());
+            log.warn(" ++++ getContextWeb::PathInfo: " + request.getPathInfo());
+            log.warn(" ++++ getContextWeb::PathTrans: " + request.getPathTranslated());
+            log.warn(" ++++ getContextWeb::ContextPath: " + request.getContextPath());
+            log.warn(" ++++ getContextWeb::ServletPath: " + request.getServletPath());
+            log.warn(" ++++ getContextWeb::getRequestURI: " + request.getRequestURI());
+            log.warn(" ++++ getContextWeb::getRequestURL: " + request.getRequestURL().toString());
+            log.warn(" ++++ getContextWeb::getQueryString: " + request.getQueryString());
+
+            return values[0];
+        }  }
 
   public void preValidate(HttpServletRequest request,IdiomaForm idiomaForm , BindingResult result)  throws I18NException {
   }
@@ -589,12 +627,46 @@ public java.lang.String stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "idiomaFormWebDB";
   }
 
-  public String getTileList() {
-    return "idiomaListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "idiomaListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "Idioma_FilterForm_" + this.getClass().getName();

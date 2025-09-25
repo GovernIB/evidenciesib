@@ -104,3 +104,5 @@ replay_pid*
 /evidenciesib-ejb/src/main/resources/genapp_en.properties
 /evidenciesib-ejb/src/main/resources/logicmissatges_en.properties
 /evidenciesib-api-externa-client-evidencies-v1/test.properties
+/evidenciesib.ear_26-07-2024
+/installCertsWithoutOpenSSL.bat

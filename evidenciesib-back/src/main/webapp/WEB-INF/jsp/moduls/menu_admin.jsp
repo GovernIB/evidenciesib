@@ -7,11 +7,25 @@
     <ul class="tree" style="margin: 3px; padding: 0px;">
     
     
+    <%@page import="es.caib.evidenciesib.back.utils.Tab"%>
+    <%
+    java.util.List<java.util.List<org.fundaciobit.genapp.common.web.menuoptions.MenuItem>> menus;
+    menus = new java.util.ArrayList<java.util.List<org.fundaciobit.genapp.common.web.menuoptions.MenuItem>>();
+    java.util.List<org.fundaciobit.genapp.common.web.menuoptions.MenuItem> discoveredMenus;
+    discoveredMenus = org.fundaciobit.genapp.common.web.menuoptions.MenuOptionManager.getMenuItems(Tab.MENU_ADMIN);
+    menus.add(discoveredMenus);
+    %>
+    <%@ include file="/WEB-INF/jsp/moduls/menu_role_generator.jsp"%>
+    
+    
+    <%--
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/evidencia/list"/>">
         <span style="${(fn:contains(url, '/admin/evidencia'))? "font-weight: bold;" : ""}"><fmt:message key="evidencies.aplicacio.plural" /></span>
       </a>
     </li>
+    
+    --%>
 
     </ul>
 </div>

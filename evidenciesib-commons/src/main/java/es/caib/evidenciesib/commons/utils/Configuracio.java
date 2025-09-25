@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * 
+ * @author anadal
  * @author GenApp
  * 
  */
@@ -25,18 +25,43 @@ public class Configuracio implements Constants {
     public static Properties getFilesProperties() {
 
         if (fileProperties.isEmpty()) {
+            
+            Properties allProperties = new Properties();
+            
             // matches the property name as defined in the system-properties element in
             // WildFly
             String property = Constants.EVIDENCIESIB_PROPERTY_BASE + "properties";
-            loadPropertyFile(property);
+            allProperties.putAll(loadPropertyFile(property));
 
             String propertySystem = Constants.EVIDENCIESIB_PROPERTY_BASE + "system.properties";
-            loadPropertyFile(propertySystem);
+            allProperties.putAll(loadPropertyFile(propertySystem));
+            
+            
+            fileProperties.putAll(allProperties);
         }
 
         return fileProperties;
 
     }
+    
+    
+    public static Properties getAppProperties() {
+        String property = Constants.EVIDENCIESIB_PROPERTY_BASE + "properties";
+        return loadPropertyFile(property); 
+    }
+    
+    
+    public static Properties getAppSystemProperties() {
+        String propertySystem = Constants.EVIDENCIESIB_PROPERTY_BASE + "system.properties";
+        return loadPropertyFile(propertySystem);
+    }
+    
+    public static void reloadProperties() {
+        fileProperties.clear();
+        fileAndSystemProperties.clear();
+        getFilesProperties();
+    }
+    
 
     public static Properties getJavaAndEvidenciesIBFileProperties() {
 
@@ -47,7 +72,7 @@ public class Configuracio implements Constants {
         return fileAndSystemProperties;
     }
 
-    public static void loadPropertyFile(String property) {
+    public static Properties loadPropertyFile(String property) {
 
         String propertyFile = System.getProperty(property);
 
@@ -65,8 +90,9 @@ public class Configuracio implements Constants {
 
         File File = new File(propertyFile);
         try {
-            fileProperties.load(new FileInputStream(File));
-
+            Properties props = new Properties();
+            props.load(new FileInputStream(File));
+            return props;
         } catch (FileNotFoundException e) {
             throw new RuntimeException("La propietat: " + property
                     + " del fitxer standalone apunta a un fitxer que no existeix (" + propertyFile + ")");
@@ -243,6 +269,55 @@ public class Configuracio implements Constants {
 
     public static String getBackHelpTelefon() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "back.help.telefon");
+    }
+    
+
+    /**
+     * Isue: Crear capçalera d'entitat a les pantalles de front #73
+     * Opcional. Nou a la versió 1.0.5. Valor per defecte defecte és #2E8B57. En la pantalla de selecció del
+     *  mòdul de firma posa una capçalera amb color de fons definit per aquesta propietat. Només es mostrarà la
+     *   capçalera si la propietat es.caib.evidenciesib.signatureheader.enabled val true
+     * @param entitatID
+     * @return
+     */
+    public static String getSignatureHeaderBackgroundColor() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.signatureheader.backgroundcolor");
+    }
+
+    /**
+     * Isue: Crear capçalera d'entitat a les pantalles de front #73
+     * Opcional. Nou a la versió 1.0.5. Valor per defect el logo de l´entitat a la capçalera.
+     *  En la pantalla de selecció del mòdul de firma posa una capçalera amb un logo 
+     *  definit per aquesta propietat. Només es mostrarà la capçalera 
+     *  si la propietat es.caib.evidenciesib.signatureheader.enabled val true
+     * @param entitatID
+     * @return
+     */
+    public static String getSignatureHeaderLogoUrl() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.signatureheader.logourl");
+    }
+
+    /**
+     * Isue: Crear capçalera d'entitat a les pantalles de front #73
+     * Opcional. Nou a la versió 1.0.5. Per defecte és el nom de l´entitat. En la pantalla de selecció del mòdul de
+     *  firma posa una capçalera amb un text definit per aquesta propietat. Si no esta definida el valor per
+     *   defecte és el logo de la capçalera de PortaFIB. Només es mostrarà la capçalera 
+     *   si la propietat es.caib.evidenciesib.signatureheader.enabled val true
+     * @param entitatID
+     * @return
+     */
+    public static String getSignatureHeaderText() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.signatureheader.text");
+    }
+
+    /**
+     * Isue: Crear capçalera d'entitat a les pantalles de front #73
+     * Opcional. Valor per defecte false. Nou a la versió 1.0.5. En la pantalla de selecció del mòdul de
+     * firma posa una capçalera si aquesta propietat val true.
+     * @return
+     */
+    public static boolean isSignatureHeaderEnabled() {
+        return "true".equalsIgnoreCase(getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.signatureheader.enabled"));
     }
 
 }

@@ -6,41 +6,15 @@
  <ul class="tree" style="margin:3px; padding:0px;">
  <%-- ==== GENAPP MARK START --%>
 
-
-    <%-- Evidencia --%>
-       <fmt:message var="entityname" key="evidencia.evidencia.plural"/>
-        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/evidencia/list/1"/>" ><span style="${(fn:contains(url, 'evidencia/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
-${entityname}
-        </span></a>
-        </li>
-
-    <%-- Fitxer --%>
-       <fmt:message var="entityname" key="fitxer.fitxer.plural"/>
-        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/fitxer/list/1"/>" ><span style="${(fn:contains(url, 'fitxer/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
-${entityname}
-        </span></a>
-        </li>
-
-    <%-- Idioma --%>
-       <fmt:message var="entityname" key="idioma.idioma.plural"/>
-        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/idioma/list/1"/>" ><span style="${(fn:contains(url, 'idioma/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
-${entityname}
-        </span></a>
-        </li>
-
-    <%-- Plugin --%>
-       <fmt:message var="entityname" key="plugin.plugin.plural"/>
-        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/plugin/list/1"/>" ><span style="${(fn:contains(url, 'plugin/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
-${entityname}
-        </span></a>
-        </li>
-
-    <%-- Traduccio --%>
-       <fmt:message var="entityname" key="traduccio.traduccio.plural"/>
-        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/traduccio/list/1"/>" ><span style="${(fn:contains(url, 'traduccio/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
-${entityname}
-        </span></a>
-        </li>
+    <%@page import="es.caib.evidenciesib.back.utils.Tab"%>
+    <%
+    java.util.List<java.util.List<org.fundaciobit.genapp.common.web.menuoptions.MenuItem>> menus;
+    menus = new java.util.ArrayList<java.util.List<org.fundaciobit.genapp.common.web.menuoptions.MenuItem>>();
+    java.util.List<org.fundaciobit.genapp.common.web.menuoptions.MenuItem> discoveredMenus;
+    discoveredMenus = org.fundaciobit.genapp.common.web.menuoptions.MenuOptionManager.getMenuItems(Tab.MENU_WEBDB);
+    menus.add(discoveredMenus);
+    %>
+    <%@ include file="/WEB-INF/jsp/moduls/menu_role_generator.jsp"%>
 <%-- ==== GENAPP MARK END --%>
  </ul>
  </div>

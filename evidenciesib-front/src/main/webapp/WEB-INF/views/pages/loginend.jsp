@@ -9,6 +9,8 @@
           window.location.href = "<%=request.getContextPath()%>/frontpostloginend/${evidenciaID}";
        }
     </script>
+    
+    <%@include file="/WEB-INF/views/pages/entityheader.jsp"%>
 
 
     <%--  Elemento centrado horizonalmente y verticalmente --%>

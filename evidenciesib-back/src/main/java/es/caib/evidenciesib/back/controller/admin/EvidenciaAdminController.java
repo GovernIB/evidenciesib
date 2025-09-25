@@ -1,5 +1,6 @@
 package es.caib.evidenciesib.back.controller.admin;
 
+import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -7,12 +8,17 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import es.caib.evidenciesib.back.controller.user.EvidenciaUserController;
 import es.caib.evidenciesib.back.form.webdb.EvidenciaFilterForm;
 import es.caib.evidenciesib.back.form.webdb.EvidenciaForm;
+import es.caib.evidenciesib.back.utils.Tab;
 
 /**
  * 
  * @author anadal
  *
  */
+@MenuOption(
+        labelCode = "evidencies.aplicacio.plural",
+        order = 1,
+        group = Tab.MENU_ADMIN)
 @Controller
 @RequestMapping(value = EvidenciaAdminController.CONTEXT_WEB)
 @SessionAttributes(types = { EvidenciaForm.class, EvidenciaFilterForm.class })

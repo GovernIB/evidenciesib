@@ -7,8 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${currentLang}" lang="${pageContext.response.locale.language}">
 <%@include file="/WEB-INF/views/pages/head.jsp"%>
 <body onload="initValues()">
-    <br />
-    <br />
+
+<%@include file="/WEB-INF/views/pages/entityheader.jsp"%>
+
+<br/>
+
     <center>
         <h1><fmt:message key="norepudi.titol" /></h1>
     <%--    <h3>-- <fmt:message key="norepudi.subtitol" /> --</h3> --%>

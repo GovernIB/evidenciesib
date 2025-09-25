@@ -16,6 +16,8 @@ import org.fundaciobit.genapp.common.crypt.FileIDEncrypter;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.web.exportdata.DataExporterManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.fundaciobit.genapp.common.web.menuoptions.DiscoverMenuOptionAnnotations;
+import org.fundaciobit.genapp.common.web.menuoptions.MenuOptionManager;
 import org.fundaciobit.pluginsib.core.v3.utils.PluginsManager;
 import org.fundaciobit.pluginsib.exportdata.IExportDataPlugin;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -25,6 +27,7 @@ import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.utils.I18NLogicUtils;
 import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.commons.utils.Configuracio;
+import es.caib.evidenciesib.commons.utils.Constants;
 
 //import org.fundaciobit.pluginsib.core.utils.PluginsManager;
 //import org.fundaciobit.pluginsib.exportdata.IExportDataPlugin;
@@ -44,12 +47,25 @@ public class InitServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
 
+        // Gestió de menús
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    MenuOptionManager.setDiscoverMenuOptionAnnotations(new DiscoverMenuOptionAnnotations(
+                            Constants.EVIDENCIESIB_PROPERTY_BASE + "back.controller"));
+                } catch (Throwable th) {
+                    log.error("Error inicialitzant sistema de menus: " + th.getMessage(), th);
+                }
+            }
+        }).start();
+
         // Sistema de Fitxers
         try {
             File fd = Configuracio.getFilesDirectory();
             if (fd == null) {
                 throw new Exception("No s'ha definit la propietat de la ubicació dels fitxers ("
-                        +  "es.caib.evidenciesib.filesdirectory)") ;
+                        + "es.caib.evidenciesib.filesdirectory)");
             }
             if (!fd.exists()) {
                 throw new Exception("El directori " + fd.getAbsolutePath() + " no existeix.");
@@ -105,7 +121,7 @@ public class InitServlet extends HttpServlet {
                     "org.fundaciobit.pluginsib.exportdata.ods.ODSPlugin",
                     "org.fundaciobit.pluginsib.exportdata.excel.ExcelPlugin" };
             plugins = new HashSet<Class<? extends IExportDataPlugin>>();
-            
+
             for (String str : classes) {
                 try {
                     Class<?> cls = Class.forName(str);
@@ -124,7 +140,8 @@ public class InitServlet extends HttpServlet {
                         log.warn("No s'ha pogut instanciar Plugin associat a la classe " + class1.getName());
                     } else {
                         log.warn("Registrant DataExporter: " + class1.getName());
-                        DataExporterManager.addDataExporter(new es.caib.evidenciesib.back.utils.EvidenciesIBDataExporter(edp));
+                        DataExporterManager
+                                .addDataExporter(new es.caib.evidenciesib.back.utils.EvidenciesIBDataExporter(edp));
                     }
                 }
             }
