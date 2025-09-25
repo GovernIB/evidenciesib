@@ -27,10 +27,10 @@
                 <div class="col-sm" style>
                     <br/><br/>
                     <div class="form-check">
-                        <input id="checkNoRepudi" name="checkNoRepudi" type="checkbox" style="transform: scale(2)"
-                            class="form-check-input"> <label class="form-check-label" for="checkNoRepudi">
-                            &nbsp;&nbsp;
-                            <fmt:message key="norepudi.casella" />
+                        <input id="checkNoRepudi" name="checkNoRepudi" type="checkbox" style="transform: scale(2); margin-top: 10px;"
+                            class="form-check-input"> 
+                        <label class="form-check-label" for="checkNoRepudi" style="font-size:x-large;">
+                            &nbsp;&nbsp; <fmt:message key="norepudi.casella" />
                         </label>
                     </div>
                     <br />
@@ -65,7 +65,7 @@
 
                             <a href="${download}" target="_blank">
                                 <%-- <img id="waitMessage" src="<c:url value="/images/spinner_40.gif"/>" />  --%>
-                                <img id="thumbnail" src="${thumbnail}" alt="Thumbnail PDF" />
+                                <img id="thumbnail" src="${thumbnail}" alt="Thumbnail PDF"   style="max-width: 90%; width: 90%; height: auto; display: block; margin: 0 auto;" />
                                 <%--  style="display: none;" onload="imageLoaded();" --%>
                             </a>
 

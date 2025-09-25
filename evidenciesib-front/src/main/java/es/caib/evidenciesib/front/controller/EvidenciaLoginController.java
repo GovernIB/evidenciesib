@@ -155,9 +155,10 @@ public class EvidenciaLoginController {
                         }
                     }
 
-                    // TODO XYZ ZZZ 
-                    log.info("\n\n" + " Header Enabled => " + headerEnabled + "\n" + " Background Color => "
+                    if (log.isDebugEnabled())  {
+                      log.debug("\n\n" + " Header Enabled => " + headerEnabled + "\n" + " Background Color => "
                             + backgroundColor + "\n" + " Logo URL => " + logoUrl + "\n" + " Text => " + text + "\n\n");
+                    }
 
                     mav.addObject("headerEnabled", true);
                     mav.addObject("backgroundColor", backgroundColor);
@@ -330,7 +331,7 @@ public class EvidenciaLoginController {
 
             BufferedImage bim = pdfRenderer.renderImage(0, 0.5f);
 
-            BufferedImage scaled = scale(bim, 350);
+            BufferedImage scaled = scale(bim, 640);
 
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
