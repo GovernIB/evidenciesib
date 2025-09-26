@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
 import java.io.File;
@@ -329,15 +330,15 @@ public class EvidenciaLoginController {
             document = PDDocument.load(file);
             PDFRenderer pdfRenderer = new PDFRenderer(document);
 
-            BufferedImage bim = pdfRenderer.renderImage(0, 0.5f);
+            BufferedImage bim = pdfRenderer.renderImage(0, 1.5f, ImageType.GRAY);
 
-            BufferedImage scaled = scale(bim, 640);
+            //BufferedImage scaled = scale(bim, 1024);
 
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
             response.setDateHeader("Expires", -1); // Proxies.
 
-            ImageIO.write(scaled, "PNG", response.getOutputStream());
+            ImageIO.write(bim, "PNG", response.getOutputStream());
 
         } catch (Throwable th) {
             log.error("Error creant THUMBNAIL: " + th.getMessage(), th);

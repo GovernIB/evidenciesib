@@ -10,8 +10,6 @@
 
 <%@include file="/WEB-INF/views/pages/entityheader.jsp"%>
 
-<br/>
-
     <center>
         <h1><fmt:message key="norepudi.titol" /></h1>
     <%--    <h3>-- <fmt:message key="norepudi.subtitol" /> --</h3> --%>

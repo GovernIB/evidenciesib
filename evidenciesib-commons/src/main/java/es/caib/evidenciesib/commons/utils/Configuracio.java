@@ -6,12 +6,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.jboss.logging.Logger;
+
 /**
  * @author anadal
  * @author GenApp
  * 
  */
 public class Configuracio implements Constants {
+    
+    private static final Logger log = Logger.getLogger(Configuracio.class);
 
     private static final Properties fileProperties = new Properties();
 
@@ -25,9 +29,9 @@ public class Configuracio implements Constants {
     public static Properties getFilesProperties() {
 
         if (fileProperties.isEmpty()) {
-            
+
             Properties allProperties = new Properties();
-            
+
             // matches the property name as defined in the system-properties element in
             // WildFly
             String property = Constants.EVIDENCIESIB_PROPERTY_BASE + "properties";
@@ -35,33 +39,29 @@ public class Configuracio implements Constants {
 
             String propertySystem = Constants.EVIDENCIESIB_PROPERTY_BASE + "system.properties";
             allProperties.putAll(loadPropertyFile(propertySystem));
-            
-            
+
             fileProperties.putAll(allProperties);
         }
 
         return fileProperties;
 
     }
-    
-    
+
     public static Properties getAppProperties() {
         String property = Constants.EVIDENCIESIB_PROPERTY_BASE + "properties";
-        return loadPropertyFile(property); 
+        return loadPropertyFile(property);
     }
-    
-    
+
     public static Properties getAppSystemProperties() {
         String propertySystem = Constants.EVIDENCIESIB_PROPERTY_BASE + "system.properties";
         return loadPropertyFile(propertySystem);
     }
-    
+
     public static void reloadProperties() {
         fileProperties.clear();
         fileAndSystemProperties.clear();
         getFilesProperties();
     }
-    
 
     public static Properties getJavaAndEvidenciesIBFileProperties() {
 
@@ -237,11 +237,10 @@ public class Configuracio implements Constants {
     public static String getApiFirmaEnServidorProfile() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.profile");
     }
-    
+
     public static String getApiFirmaEnServidorDefaultAliasCertificate() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.defaultaliascertificate");
     }
-
 
     // ===========================================================
     // ==============   ASPECTE WEB ====================
@@ -270,7 +269,6 @@ public class Configuracio implements Constants {
     public static String getBackHelpTelefon() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "back.help.telefon");
     }
-    
 
     /**
      * Isue: Crear capçalera d'entitat a les pantalles de front #73
@@ -318,6 +316,17 @@ public class Configuracio implements Constants {
      */
     public static boolean isSignatureHeaderEnabled() {
         return "true".equalsIgnoreCase(getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.signatureheader.enabled"));
+    }
+
+    public static String getContentSecurityPolicyFrameAncestors() {
+        String val = getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.csp-frame-ancestors");
+        if (val == null) {
+            val = "";
+        }
+        if (log.isDebugEnabled()) {
+            log.debug("getContentSecurityPolicyFrameAncestors() = " + val);
+        }
+        return val;
     }
 
 }
