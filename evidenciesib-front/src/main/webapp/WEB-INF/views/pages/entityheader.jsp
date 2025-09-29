@@ -67,6 +67,6 @@
             <td style="width: 50%">&nbsp;</td>
         </tr>
     </table>
-    <div style="height: 150px; margin-top: -10px;">&nbsp;</div>
+    <div style="height: ${headerHeight}px;">&nbsp;</div>
     <%-- FINAL DE CAPÇALERA --%>
 </c:if>

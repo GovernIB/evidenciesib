@@ -155,6 +155,9 @@ public class EvidenciaLoginController {
                             text = null;
                         }
                     }
+                    
+                    String headerHeight = Configuracio.getSignatureHeaderHeight();
+                    
 
                     if (log.isDebugEnabled())  {
                       log.debug("\n\n" + " Header Enabled => " + headerEnabled + "\n" + " Background Color => "
@@ -162,6 +165,7 @@ public class EvidenciaLoginController {
                     }
 
                     mav.addObject("headerEnabled", true);
+                    mav.addObject("headerHeight", headerHeight);
                     mav.addObject("backgroundColor", backgroundColor);
                     mav.addObject("logoUrl", logoUrl);
                     mav.addObject("text", text);

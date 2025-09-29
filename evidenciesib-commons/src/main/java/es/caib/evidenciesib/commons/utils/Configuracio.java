@@ -271,7 +271,7 @@ public class Configuracio implements Constants {
     }
 
     /**
-     * Isue: Crear capçalera d'entitat a les pantalles de front #73
+     * Issue: Crear capçalera d'entitat a les pantalles de front #73
      * Opcional. Nou a la versió 1.0.5. Valor per defecte defecte és #2E8B57. En la pantalla de selecció del
      *  mòdul de firma posa una capçalera amb color de fons definit per aquesta propietat. Només es mostrarà la
      *   capçalera si la propietat es.caib.evidenciesib.signatureheader.enabled val true
@@ -283,7 +283,7 @@ public class Configuracio implements Constants {
     }
 
     /**
-     * Isue: Crear capçalera d'entitat a les pantalles de front #73
+     * Issue: Crear capçalera d'entitat a les pantalles de front #73
      * Opcional. Nou a la versió 1.0.5. Valor per defect el logo de l´entitat a la capçalera.
      *  En la pantalla de selecció del mòdul de firma posa una capçalera amb un logo 
      *  definit per aquesta propietat. Només es mostrarà la capçalera 
@@ -296,7 +296,7 @@ public class Configuracio implements Constants {
     }
 
     /**
-     * Isue: Crear capçalera d'entitat a les pantalles de front #73
+     * Issue: Crear capçalera d'entitat a les pantalles de front #73
      * Opcional. Nou a la versió 1.0.5. Per defecte és el nom de l´entitat. En la pantalla de selecció del mòdul de
      *  firma posa una capçalera amb un text definit per aquesta propietat. Si no esta definida el valor per
      *   defecte és el logo de la capçalera de PortaFIB. Només es mostrarà la capçalera 
@@ -307,11 +307,26 @@ public class Configuracio implements Constants {
     public static String getSignatureHeaderText() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.signatureheader.text");
     }
+    
+    
+    /**
+     * Issue: Deixar més espai entre capçalera i títol principal #75
+     * Opcional. Valor per defecte 150. Nou a la versió 1.0.6. Defineix l'amplada de la capçalera en pixels per a
+     * que el títol principal no quedi per davall de la capçalera.
+     * @return
+     */
+    public static String getSignatureHeaderHeight() {
+        String height = getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.signatureheader.height");
+        if (height == null || height.isEmpty()) {
+            height = "150";
+        }
+        return height.trim();        
+    }
 
     /**
-     * Isue: Crear capçalera d'entitat a les pantalles de front #73
-     * Opcional. Valor per defecte false. Nou a la versió 1.0.5. En la pantalla de selecció del mòdul de
-     * firma posa una capçalera si aquesta propietat val true.
+     * Issue: Crear capçalera d'entitat a les pantalles de front #73
+     * Opcional. Valor per defecte false. Nou a la versió 1.0.5. En la pantalla d'acceptacció de la signatura
+     * posa una capçalera si aquesta propietat val true.
      * @return
      */
     public static boolean isSignatureHeaderEnabled() {
