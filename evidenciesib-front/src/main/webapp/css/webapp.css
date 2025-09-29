@@ -15,9 +15,7 @@ a:hover{
 .container-contenido a {
     color: #000566;
 }
-.h2, h2{
-	font-size: 1em !important;
-}
+/* .h2, h2{ 	font-size: 1em !important; } */
 .subtitol{
 	font-size: 0.85em;
 	margin-top: 2%;

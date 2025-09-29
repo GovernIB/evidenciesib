@@ -11,23 +11,19 @@
 <%@include file="/WEB-INF/views/pages/entityheader.jsp"%>
 
     <center>
-        <h1><fmt:message key="norepudi.titol" /></h1>
+        <h2><fmt:message key="norepudi.titol" /></h2>
     <%--    <h3>-- <fmt:message key="norepudi.subtitol" /> --</h3> --%>
     </center>
     <br/>
 
     <form name="norepudiForm" id="norepudiForm" action="${action}" onsubmit="return validateForm()" method="post">
-
         <div class="container">
-
             <div class="row" style="margin-bottom: 20px;">
-
                 <div class="col-sm" style>
-                    <br/><br/>
                     <div class="form-check">
                         <input id="checkNoRepudi" name="checkNoRepudi" type="checkbox" style="transform: scale(2); margin-top: 10px;"
                             class="form-check-input"> 
-                        <label class="form-check-label" for="checkNoRepudi" style="font-size:x-large;">
+                        <label class="form-check-label" for="checkNoRepudi" style="font-size:large;">
                             &nbsp;&nbsp; <fmt:message key="norepudi.casella" />
                         </label>
                     </div>
