@@ -47,7 +47,7 @@
             <td  style="height: 30%; width: 50%;">&nbsp;</td>
             <td style="width: auto;" rowspan=2>
                 <div class="contenedor-central">
-                    <img src="<c:url value="${logoUrl}"/>" alt="Logo Entitat">
+                    <img src="<c:url value="${logoUrl}"/>" alt="Logo Entitat" style="border: none !important; outline: none !important;">
                     <c:if test="${not empty text}">
                         <p>${text}</p>
                     </c:if>
