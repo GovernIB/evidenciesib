@@ -29,7 +29,6 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.pluginsib.core.v3.utils.EncrypterDecrypter;
 import org.fundaciobit.pluginsib.login.api.LoginInfo;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginController;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginManager;
@@ -46,6 +45,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.logic.EvidenciesFrontLogicaService;
+import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 
@@ -68,12 +68,14 @@ public class EvidenciaLoginController {
 
     public static final String MAPPING_FRONT_POST_LOGIN_END = "/frontpostloginend";
 
-    @RequestMapping(Constants.MAPPING_FRONT_LOGIN_START + "/{evidenciaID}")
+    @RequestMapping(Constants.MAPPING_FRONT_LOGIN_START + "/{encryptedEvidenciaID}")
     public ModelAndView frontLoginStart(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID")
-            Long evidenciaID) throws Exception {
+            @PathVariable("encryptedEvidenciaID")
+            String encryptedEvidenciaID) throws Exception {
 
-        log.info("frontLoginStart =>  evidenciaID=" + evidenciaID);
+        log.info("frontLoginStart =>  encryptedEvidenciaID=" + encryptedEvidenciaID);
+
+        Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
 
         // mirar si existeix ID
         EvidenciaJPA evidencia;
@@ -106,7 +108,7 @@ public class EvidenciaLoginController {
 
         log.info("frontLoginStart =>  action=" + action);
         log.info("frontLoginStart =>  cancelurl=" + cancelurl);
-        
+
         // Mantenir Idioma entre pantalla Selecció de Mòdul de firma i Evidències IB #77
         Locale nuevoLocale = new Locale(evidencia.getLanguageUI());
 
@@ -114,11 +116,10 @@ public class EvidenciaLoginController {
         localeResolver.setLocale(request, response, nuevoLocale);
 
         final String base = request.getContextPath();
-        final String append = EncrypterDecrypter.encrypt(EncrypterDecrypter.ALGORITHM_AES, Configuracio.getEncryptKey(),
-                String.valueOf(evidenciaID));
+        //final String append = LogicUtils.encryptEvidenciaID(evidenciaID);
 
-        mav.addObject("download", base + DOWNLOAD_PDF + "/" + append);
-        mav.addObject("objectpdf", base + OBJECT_PDF + "/" + append);
+        mav.addObject("download", base + DOWNLOAD_PDF + "/" + encryptedEvidenciaID);
+        mav.addObject("objectpdf", base + OBJECT_PDF + "/" + encryptedEvidenciaID);
 
         configurarEntityHeader(request, mav);
 
@@ -163,13 +164,13 @@ public class EvidenciaLoginController {
                             text = null;
                         }
                     }
-                    
-                    String headerHeight = Configuracio.getSignatureHeaderHeight();
-                    
 
-                    if (log.isDebugEnabled())  {
-                      log.debug("\n\n" + " Header Enabled => " + headerEnabled + "\n" + " Background Color => "
-                            + backgroundColor + "\n" + " Logo URL => " + logoUrl + "\n" + " Text => " + text + "\n\n");
+                    String headerHeight = Configuracio.getSignatureHeaderHeight();
+
+                    if (log.isDebugEnabled()) {
+                        log.debug("\n\n" + " Header Enabled => " + headerEnabled + "\n" + " Background Color => "
+                                + backgroundColor + "\n" + " Logo URL => " + logoUrl + "\n" + " Text => " + text
+                                + "\n\n");
                     }
 
                     mav.addObject("headerEnabled", true);
@@ -524,16 +525,17 @@ public class EvidenciaLoginController {
 
     public static final String DOWNLOAD_PDF = "/downloadpdf";
 
-    @RequestMapping(value = DOWNLOAD_PDF + "/{evidenciaID}", method = RequestMethod.GET)
-    public void downloadPdf(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
-    String evidenciaIDEncrypted) throws Exception, I18NException {
+    @RequestMapping(value = DOWNLOAD_PDF + "/{evidenciaIDEncrypted}", method = RequestMethod.GET)
+    public void downloadPdf(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("evidenciaIDEncrypted")
+            String evidenciaIDEncrypted) throws Exception, I18NException {
         returnPdf(request, response, evidenciaIDEncrypted, true);
     }
 
     public static final String OBJECT_PDF = "/objectpdf";
 
-    @RequestMapping(value = OBJECT_PDF + "/{evidenciaID}", method = RequestMethod.GET)
-    public void objectPdf(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
+    @RequestMapping(value = OBJECT_PDF + "/{evidenciaIDEncrypted}", method = RequestMethod.GET)
+    public void objectPdf(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaIDEncrypted")
     String evidenciaIDEncrypted) throws Exception, I18NException {
 
         returnPdf(request, response, evidenciaIDEncrypted, false);
@@ -543,10 +545,9 @@ public class EvidenciaLoginController {
     protected void returnPdf(HttpServletRequest request, HttpServletResponse response, String evidenciaIDEncrypted,
             boolean isDownload) throws Exception, I18NException {
 
-        String evidenciaIDDecrypted = EncrypterDecrypter.decrypt(EncrypterDecrypter.ALGORITHM_AES,
-                Configuracio.getEncryptKey(), evidenciaIDEncrypted);
+       
 
-        Long evidenciaID = Long.parseLong(evidenciaIDDecrypted);
+        Long evidenciaID = Long.parseLong(evidenciaIDEncrypted);
 
         long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERORIGINALID,
                 EvidenciaFields.EVIDENCIAID.equal(evidenciaID));

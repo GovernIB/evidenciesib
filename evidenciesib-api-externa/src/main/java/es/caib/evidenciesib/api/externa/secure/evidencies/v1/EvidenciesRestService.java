@@ -44,6 +44,7 @@ import es.caib.evidenciesib.ejb.FitxerService;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.EvidenciaLogicaService;
 import es.caib.evidenciesib.logic.utils.I18NLogicUtils;
+import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
@@ -305,8 +306,9 @@ public class EvidenciesRestService extends RestUtils {
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = RestExceptionInfo.class)) }) })
-    public EvidenciaStartResponse start(@RequestBody EvidenciaStartRequest evidenciaStartRequest,
-            @Parameter(hidden = true) @Context HttpServletRequest request) {
+    public EvidenciaStartResponse start(@RequestBody
+    EvidenciaStartRequest evidenciaStartRequest, @Parameter(hidden = true) @Context
+    HttpServletRequest request) {
 
         log.info(" Entra a EvidenciaStart ...[" + request.getRemoteUser() + "]");
 
@@ -347,7 +349,7 @@ public class EvidenciesRestService extends RestUtils {
 
             evi.setCallBackUrl(evidenciaStartRequest.getCallBackUrl());
             evi.setNom(evidenciaStartRequest.getTitolEvidencia());
-            
+
             evi.setLanguageUI(language);
 
             evi.setDataInici(new Timestamp(System.currentTimeMillis()));
@@ -384,8 +386,8 @@ public class EvidenciesRestService extends RestUtils {
                 // XYZ ZZZ ZZZ
                 final String urlfront = Configuracio.getFrontUrl();
 
-                // XYZ ZZZ TODO Falta un HASH per evitar que gent es connecti directament al FRONT ...
-                final String url = urlfront + Constants.MAPPING_FRONT_LOGIN_START + "/" + evi.getEvidenciaID();
+                final String url = urlfront + Constants.MAPPING_FRONT_LOGIN_START + "/"
+                        + LogicUtils.encryptEvidenciaID(evi.getEvidenciaID());
 
                 response.setEvidenciaUrlRedirect(url);
             }
@@ -452,13 +454,13 @@ public class EvidenciesRestService extends RestUtils {
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = RestExceptionInfo.class)) }), })
-    public EvidenciaWs get(
-            @Parameter(
-                    name = "evidenciaID",
-                    description = "Identificador de l'evidència de la que volem informació",
-                    required = true,
-                    in = ParameterIn.PATH,
-                    schema = @Schema(implementation = Long.class)) @PathParam("evidenciaID") Long evidenciaID,
+    public EvidenciaWs get(@Parameter(
+            name = "evidenciaID",
+            description = "Identificador de l'evidència de la que volem informació",
+            required = true,
+            in = ParameterIn.PATH,
+            schema = @Schema(implementation = Long.class)) @PathParam("evidenciaID")
+    Long evidenciaID,
             @Parameter(
                     name = "language",
                     description = "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
@@ -466,10 +468,9 @@ public class EvidenciesRestService extends RestUtils {
                     required = false,
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(
-                            implementation = String.class,
-                            pattern = "^(|ca|es)$")) @QueryParam("language") String language,
-            @Parameter(hidden = true) @Context HttpServletRequest request) {
+                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$")) @QueryParam("language")
+            String language, @Parameter(hidden = true) @Context
+            HttpServletRequest request) {
 
         log.info("Entra a get  ...[" + request.getRemoteUser() + "]");
 
@@ -480,8 +481,8 @@ public class EvidenciesRestService extends RestUtils {
         if (evidenciaID == null || evidenciaID <= 0) {
 
             // XYZ ZZZ Segons idioma
-            throw new RestException(Status.BAD_REQUEST, "El paràmetre evidenciaID té un valor incorrecte: " + evidenciaID,
-                    "evidenciaID");
+            throw new RestException(Status.BAD_REQUEST,
+                    "El paràmetre evidenciaID té un valor incorrecte: " + evidenciaID, "evidenciaID");
         }
 
         try {
@@ -491,7 +492,8 @@ public class EvidenciesRestService extends RestUtils {
             // Check username aplication
             if (eviBBDD == null) {
                 // XYZ ZZZ Segons idioma
-                throw new RestException(Status.INTERNAL_SERVER_ERROR, "L'evidència amb ID " + evidenciaID + " no existeix.");
+                throw new RestException(Status.INTERNAL_SERVER_ERROR,
+                        "L'evidència amb ID " + evidenciaID + " no existeix.");
             }
 
             // Check username aplication
@@ -574,23 +576,27 @@ public class EvidenciesRestService extends RestUtils {
             in = ParameterIn.QUERY,
             required = false,
             example = "2022-08-29",
-            schema = @Schema(implementation = String.class)) @QueryParam("inici") final String dataIniciRequest,
+            schema = @Schema(implementation = String.class)) @QueryParam("inici")
+    final String dataIniciRequest,
             @Parameter(
                     description = "Data fi, en format yyyy-MM-dd (ISO 8601), fins la qual volem tenir dades",
                     in = ParameterIn.QUERY,
                     required = false,
                     example = "2023-12-31",
-                    schema = @Schema(implementation = String.class)) @QueryParam("fi") final String dataFiRequest,
+                    schema = @Schema(implementation = String.class)) @QueryParam("fi")
+            final String dataFiRequest,
             @Parameter(
                     description = "Pàgina de la que es volen obtenir les dades",
                     in = ParameterIn.QUERY,
                     required = false,
-                    example = "1") @QueryParam("page") Integer page,
+                    example = "1") @QueryParam("page")
+            Integer page,
             @Parameter(
                     description = "Quantitat d'elements a retornar",
                     in = ParameterIn.QUERY,
                     required = false,
-                    example = "10") @QueryParam("pagesize") Integer pagesize,
+                    example = "10") @QueryParam("pagesize")
+            Integer pagesize,
             @Parameter(
                     name = "language",
                     description = "Idioma en que s'han de retornar les dades(Només suportat 'ca' o 'es')",
@@ -598,11 +604,10 @@ public class EvidenciesRestService extends RestUtils {
                     required = false,
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(
-                            implementation = String.class,
-                            pattern = "^(|ca|es)$")) @QueryParam("language") String language,
-            @Parameter(hidden = true) @Context HttpServletRequest request,
-            @Parameter(hidden = true) @Context SecurityContext security) throws RestException {
+                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$")) @QueryParam("language")
+            String language, @Parameter(hidden = true) @Context
+            HttpServletRequest request, @Parameter(hidden = true) @Context
+            SecurityContext security) throws RestException {
 
         log.info(" Entra a list()" + page + " " + pagesize + "...[" + request.getRemoteUser() + "]");
 
@@ -712,15 +717,16 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Identificador de l'evidència de la que volem informació",
                     required = true,
                     in = ParameterIn.PATH,
-                    schema = @Schema(implementation = Long.class)) @PathParam("evidenciaID") Long evidenciaID,
+                    schema = @Schema(implementation = Long.class)) @PathParam("evidenciaID")
+            Long evidenciaID,
 
             @Parameter(
                     name = "encryptedFileID",
                     description = "Identificador encriptat del fitxer que volem descarregar.",
                     required = true,
                     in = ParameterIn.PATH,
-                    schema = @Schema(
-                            implementation = String.class)) @PathParam("encryptedFileID") String encryptedFileID,
+                    schema = @Schema(implementation = String.class)) @PathParam("encryptedFileID")
+            String encryptedFileID,
 
             @Parameter(
                     name = "language",
@@ -729,10 +735,9 @@ public class EvidenciesRestService extends RestUtils {
                     required = false,
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(
-                            implementation = String.class,
-                            pattern = "^(|ca|es)$")) @QueryParam("language") String language,
-            @Parameter(hidden = true) @Context HttpServletRequest request) {
+                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$")) @QueryParam("language")
+            String language, @Parameter(hidden = true) @Context
+            HttpServletRequest request) {
 
         log.info("Entra a getFile ...[" + request.getRemoteUser() + "]");
 
@@ -834,15 +839,16 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Identificador de l'evidència de la que volem informació",
                     required = true,
                     in = ParameterIn.PATH,
-                    schema = @Schema(implementation = Long.class)) @PathParam("evidenciaID") Long evidenciaID,
+                    schema = @Schema(implementation = Long.class)) @PathParam("evidenciaID")
+            Long evidenciaID,
 
             @Parameter(
                     name = "encryptedFileID",
                     description = "Identificador encriptat del fitxer que volem descarregar.",
                     required = true,
                     in = ParameterIn.PATH,
-                    schema = @Schema(
-                            implementation = String.class)) @PathParam("encryptedFileID") String encryptedFileID,
+                    schema = @Schema(implementation = String.class)) @PathParam("encryptedFileID")
+            String encryptedFileID,
 
             @Parameter(
                     name = "language",
@@ -851,10 +857,9 @@ public class EvidenciesRestService extends RestUtils {
                     required = false,
                     examples = { @ExampleObject(name = "Català", value = "ca"),
                             @ExampleObject(name = "Castellano", value = "es") },
-                    schema = @Schema(
-                            implementation = String.class,
-                            pattern = "^(|ca|es)$")) @QueryParam("language") String language,
-            @Parameter(hidden = true) @Context HttpServletRequest request) {
+                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$")) @QueryParam("language")
+            String language, @Parameter(hidden = true) @Context
+            HttpServletRequest request) {
 
         log.info("Entra a getFile ...[" + request.getRemoteUser() + "]");
 

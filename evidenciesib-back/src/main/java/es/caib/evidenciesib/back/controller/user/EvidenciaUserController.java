@@ -40,6 +40,7 @@ import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.EvidenciaLogicaService;
+import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
@@ -343,10 +344,17 @@ public class EvidenciaUserController extends EvidenciaController {
             
         
         } else  */
-        {
+        try {
             // Hem d'anar a FRONT per autenticació Cl@ve o Mock            
             final String urlfront = Configuracio.getFrontUrl();
-            return "redirect:" + urlfront + Constants.MAPPING_FRONT_LOGIN_START + "/" + evi.getEvidenciaID();
+            return "redirect:" + urlfront + Constants.MAPPING_FRONT_LOGIN_START + "/" + LogicUtils.encryptEvidenciaID(evi.getEvidenciaID());
+        } catch(Throwable th) {
+            String msg = "Error redireccionant cap al Front: " + th.getMessage();
+            log.error(msg, th);
+            
+            HtmlUtils.saveMessageError(request, msg);
+            
+            return "redirect:" + getContextWeb() + "/list";
         }
 
     }
