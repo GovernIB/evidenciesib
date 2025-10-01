@@ -472,6 +472,17 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
   }
 
 
+  private java.lang.String languageUI;
+
+  public java.lang.String getLanguageUI() {
+    return this.languageUI;
+  }
+
+  public void setLanguageUI(java.lang.String languageUI) {
+    this.languageUI = languageUI;
+  }
+
+
   public EvidenciaFilterForm() {
   }
   
@@ -518,6 +529,7 @@ public class EvidenciaFilterForm extends EvidenciesIBBaseFilterForm implements E
     this.firmaIdiomaDocument = __toClone.firmaIdiomaDocument;
     this.firmaTipusDocumentalSelect = __toClone.firmaTipusDocumentalSelect;
     this.callBackUrl = __toClone.callBackUrl;
+    this.languageUI = __toClone.languageUI;
     this.mapOfValuesForEstatCodi = __toClone.mapOfValuesForEstatCodi;
     this.mapOfValuesForLoginQaa = __toClone.mapOfValuesForLoginQaa;
     this.mapOfValuesForFirmaIdiomaDocument = __toClone.mapOfValuesForFirmaIdiomaDocument;

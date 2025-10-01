@@ -52,6 +52,7 @@ public interface EvidenciaFields extends java.io.Serializable {
 	 public static final LongField FITXERADAPTATID = new LongField(_TABLE_MODEL, "fitxerAdaptatID", "fitxeradaptatid");
 	 public static final LongField FITXERSIGNATID = new LongField(_TABLE_MODEL, "fitxerSignatID", "fitxersignatid");
 	 public static final StringField CALLBACKURL = new StringField(_TABLE_MODEL, "callBackUrl", "callbackurl");
+	 public static final StringField LANGUAGEUI = new StringField(_TABLE_MODEL, "languageUI", "languageui");
 
 
   public static final Field<?>[] ALL_EVIDENCIA_FIELDS = {
@@ -94,7 +95,8 @@ public interface EvidenciaFields extends java.io.Serializable {
     FITXERORIGINALID,
     FITXERADAPTATID,
     FITXERSIGNATID,
-    CALLBACKURL
+    CALLBACKURL,
+    LANGUAGEUI
   };
 
 

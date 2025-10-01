@@ -171,6 +171,10 @@ public class EvidenciaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), EvidenciaFields.CALLBACKURL);
   }
 
+  public StringField LANGUAGEUI() {
+    return new StringField(getQueryPath(), EvidenciaFields.LANGUAGEUI);
+  }
+
 
 
   @Override

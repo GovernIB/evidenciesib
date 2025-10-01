@@ -628,7 +628,6 @@
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
-          "defaultValue": "\u0027NO_DEFINED\u0027::character varying",
           "filter": false,
           "orderBy": 0,
           "groupBy": false,
@@ -1077,6 +1076,32 @@
           "showInReferenceList": false,
           "transientField": false,
           "defaultValue": "\u0027/user/evidencia/list\u0027::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "languageui",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Idioma UI",
+            "es": "Idioma UI"
+          },
+          "javaName": "languageUI",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "\u0027ca\u0027::character varying",
           "filter": false,
           "orderBy": 0,
           "groupBy": false,

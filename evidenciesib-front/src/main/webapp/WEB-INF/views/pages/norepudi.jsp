@@ -58,7 +58,6 @@
                         <center>
 
                             <a href="${download}" target="_blank">
-                                <%-- <img id="waitMessage" src="<c:url value="/images/spinner_40.gif"/>" />  --%>
                                 <img id="thumbnail" src="${thumbnail}" alt="Thumbnail PDF" style="border: none !important; outline: none !important; max-width: 90%; width: 90%; height: auto; display: block; margin: 0 auto;" />
                                 <%--  style="display: none;" onload="imageLoaded();" --%>
                             </a>

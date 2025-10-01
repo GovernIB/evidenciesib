@@ -236,6 +236,11 @@
           ${evidencia.callBackUrl}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LANGUAGEUI)}">
+          <td>
+          ${evidencia.languageUI}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

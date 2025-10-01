@@ -58,6 +58,10 @@ public class EvidenciaValidator<I extends Evidencia>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CALLBACKURL)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,LANGUAGEUI, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LANGUAGEUI)));
+
     // Check size
     if (__vr.getFieldErrorCount(NOM) == 0) {
       java.lang.String __nom = __target__.getNom();
@@ -315,6 +319,14 @@ public class EvidenciaValidator<I extends Evidencia>
       if (__callbackurl!= null && __callbackurl.length() > 255) {
         __vr.rejectValue(CALLBACKURL, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CALLBACKURL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LANGUAGEUI) == 0) {
+      java.lang.String __languageui = __target__.getLanguageUI();
+      if (__languageui!= null && __languageui.length() > 50) {
+        __vr.rejectValue(LANGUAGEUI, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LANGUAGEUI)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
       }
     }
 

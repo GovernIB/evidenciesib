@@ -13,6 +13,7 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -33,13 +34,14 @@ import org.fundaciobit.pluginsib.login.api.LoginInfo;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginController;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginManager;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginUserDetails;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
@@ -104,6 +106,12 @@ public class EvidenciaLoginController {
 
         log.info("frontLoginStart =>  action=" + action);
         log.info("frontLoginStart =>  cancelurl=" + cancelurl);
+        
+        // Mantenir Idioma entre pantalla Selecció de Mòdul de firma i Evidències IB #77
+        Locale nuevoLocale = new Locale(evidencia.getLanguageUI());
+
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        localeResolver.setLocale(request, response, nuevoLocale);
 
         final String base = request.getContextPath();
         final String append = EncrypterDecrypter.encrypt(EncrypterDecrypter.ALGORITHM_AES, Configuracio.getEncryptKey(),

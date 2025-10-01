@@ -102,9 +102,8 @@ public class EvidenciaJPA implements Evidencia {
     @Type(type = "org.hibernate.type.TextType")
     java.lang.String loginAdditionalProperties;
 
-    @org.hibernate.annotations.ColumnDefault("'NO_DEFINED'")
     @Column(name="loginpropertiessha256",length = 255)
-    java.lang.String loginPropertiesSha256 = "NO_DEFINED";
+    java.lang.String loginPropertiesSha256;
 
     @Column(name="localitzacioip",length = 100)
     java.lang.String localitzacioIp;
@@ -133,15 +132,15 @@ public class EvidenciaJPA implements Evidencia {
     @Column(name="clickproperties",length = 4000)
     java.lang.String clickProperties;
 
-    @org.hibernate.annotations.ColumnDefault("'Rao de la firma'")
     @Column(name="firmareason",nullable = false,length = 255)
+    @org.hibernate.annotations.ColumnDefault("Rao de la firma")
     java.lang.String firmaReason = "Rao de la firma";
 
     @Column(name="firmaidiomadocument",length = 100)
     java.lang.String firmaIdiomaDocument;
 
-    @org.hibernate.annotations.ColumnDefault("99")
     @Column(name="firmatipusdocumental",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("99")
     int firmaTipusDocumental = 99;
 
     @Column(name="fitxeroriginalid",nullable = false,length = 19)
@@ -153,9 +152,13 @@ public class EvidenciaJPA implements Evidencia {
     @Column(name="fitxersignatid",length = 19)
     java.lang.Long fitxerSignatID;
 
-    @org.hibernate.annotations.ColumnDefault("'/user/evidencia/list'")
     @Column(name="callbackurl",nullable = false,length = 255)
+    @org.hibernate.annotations.ColumnDefault("/user/evidencia/list")
     java.lang.String callBackUrl = "/user/evidencia/list";
+
+    @Column(name="languageui",nullable = false,length = 50)
+    @org.hibernate.annotations.ColumnDefault("ca")
+    java.lang.String languageUI = "ca";
 
 
 
@@ -164,7 +167,7 @@ public class EvidenciaJPA implements Evidencia {
   }
 
   /** Constructor amb tots els camps  */
-  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
+  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl , java.lang.String languageUI) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNif=personaNif;
@@ -205,9 +208,10 @@ public class EvidenciaJPA implements Evidencia {
     this.fitxerAdaptatID=fitxerAdaptatID;
     this.fitxerSignatID=fitxerSignatID;
     this.callBackUrl=callBackUrl;
+    this.languageUI=languageUI;
 }
   /** Constructor sense valors autoincrementals */
-  public EvidenciaJPA(java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
+  public EvidenciaJPA(java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl , java.lang.String languageUI) {
     this.nom=nom;
     this.personaNif=personaNif;
     this.personaUsername=personaUsername;
@@ -247,9 +251,10 @@ public class EvidenciaJPA implements Evidencia {
     this.fitxerAdaptatID=fitxerAdaptatID;
     this.fitxerSignatID=fitxerSignatID;
     this.callBackUrl=callBackUrl;
+    this.languageUI=languageUI;
 }
   /** Constructor dels valors Not Null */
-  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.sql.Timestamp dataInici , int estatCodi , java.lang.String firmaReason , int firmaTipusDocumental , long fitxerOriginalID , java.lang.String callBackUrl) {
+  public EvidenciaJPA(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.sql.Timestamp dataInici , int estatCodi , java.lang.String firmaReason , int firmaTipusDocumental , long fitxerOriginalID , java.lang.String callBackUrl , java.lang.String languageUI) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNif=personaNif;
@@ -259,6 +264,7 @@ public class EvidenciaJPA implements Evidencia {
     this.firmaTipusDocumental=firmaTipusDocumental;
     this.fitxerOriginalID=fitxerOriginalID;
     this.callBackUrl=callBackUrl;
+    this.languageUI=languageUI;
 }
   public EvidenciaJPA(Evidencia __bean) {
     this.setEvidenciaID(__bean.getEvidenciaID());
@@ -301,6 +307,7 @@ public class EvidenciaJPA implements Evidencia {
     this.setFitxerAdaptatID(__bean.getFitxerAdaptatID());
     this.setFitxerSignatID(__bean.getFitxerSignatID());
     this.setCallBackUrl(__bean.getCallBackUrl());
+    this.setLanguageUI(__bean.getLanguageUI());
     // Fitxer
     this.setFitxerOriginal(FitxerJPA.toJPA(__bean.getFitxerOriginal()));
     // Fitxer
@@ -589,6 +596,13 @@ public class EvidenciaJPA implements Evidencia {
 		this.callBackUrl = _callBackUrl_;
 	};
 
+	public java.lang.String getLanguageUI() {
+		return(languageUI);
+	};
+	public void setLanguageUI(java.lang.String _languageUI_) {
+		this.languageUI = _languageUI_;
+	};
+
 
 
     @Override
@@ -691,6 +705,7 @@ public class EvidenciaJPA implements Evidencia {
     __tmp.setFitxerAdaptatID(__bean.getFitxerAdaptatID());
     __tmp.setFitxerSignatID(__bean.getFitxerSignatID());
     __tmp.setCallBackUrl(__bean.getCallBackUrl());
+    __tmp.setLanguageUI(__bean.getLanguageUI());
     // Fitxer
     __tmp.setFitxerOriginal(FitxerJPA.toJPA(__bean.getFitxerOriginal()));
     // Fitxer

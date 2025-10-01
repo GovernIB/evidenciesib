@@ -146,7 +146,11 @@ public class EvidenciaUserController extends EvidenciaController {
             evi.setPersonaLlinatge2(user.getSurname2());
             evi.setNom(I18NUtils.tradueix("evidencia.evidencia") + "_" + System.currentTimeMillis());
 
-            evi.setFirmaIdiomaDocument(LocaleContextHolder.getLocale().getLanguage());
+            String languageWeb = LocaleContextHolder.getLocale().getLanguage();
+            
+            // Valor per defecte !!!
+            evi.setFirmaIdiomaDocument(languageWeb);
+            evi.setLanguageUI(languageWeb);
 
             evi.setDataInici(new Timestamp(System.currentTimeMillis()));
             evi.setUsuariPersona(request.getRemoteUser());
@@ -286,15 +290,6 @@ public class EvidenciaUserController extends EvidenciaController {
         return evidenciaForm;
     }
 
-    public static void main(String[] args) {
-
-        for (Field<?> field : ALL_EVIDENCIA_FIELDS) {
-            System.out.println(" if (evi.get" + Character.toUpperCase(field.getJavaName().charAt(0))
-                    + field.getJavaName().substring(1) + "() == null) {\r\n" + "   evidenciaForm.addHiddenField("
-                    + field.getJavaName().toUpperCase() + ");\r\n" + "}");
-        }
-
-    }
 
     @Override
     public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request, ModelAndView mav, Where where)

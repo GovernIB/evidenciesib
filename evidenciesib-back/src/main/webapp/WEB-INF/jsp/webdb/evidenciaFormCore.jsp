@@ -1027,3 +1027,21 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EvidenciaFields.LANGUAGEUI)}">
+        <tr id="evidencia_languageUI_rowid">
+          <td id="evidencia_languageUI_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EvidenciaFields.LANGUAGEUI])?'evidencia.languageUI':__theForm.labels[EvidenciaFields.LANGUAGEUI]}" /> &nbsp;(*)
+             </label>
+              <c:if test="${not empty __theForm.help[EvidenciaFields.LANGUAGEUI]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EvidenciaFields.LANGUAGEUI]}" ></i>
+              </c:if>
+            </td>
+          <td id="evidencia_languageUI_columnvalueid">
+            <form:errors path="evidencia.languageUI" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LANGUAGEUI)? 'true' : 'false'}" cssClass="w-75 form-control  ${gen:contains(__theForm.readOnlyFields ,EvidenciaFields.LANGUAGEUI)? ' uneditable-input' : ''}"  style="" maxlength="50" path="evidencia.languageUI"   />
+
+           </td>
+        </tr>
+        </c:if>
+        

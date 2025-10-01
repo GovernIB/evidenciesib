@@ -18,7 +18,7 @@
         <center>
             <h4><fmt:message key="espera.titol" /></h4>
         </center>
-        <img src="<%=request.getContextPath()%>/images/spinner_40.gif" /><br />
+        <img src="<%=request.getContextPath()%>/images/spinner_40.gif" style="border: none !important; outline: none !important;" /><br />
         <center>
             <fmt:message key="espera" />
         </center>

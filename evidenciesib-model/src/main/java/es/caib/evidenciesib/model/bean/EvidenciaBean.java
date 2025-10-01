@@ -48,6 +48,7 @@ public class EvidenciaBean implements Evidencia {
 	java.lang.Long fitxerAdaptatID;
 	java.lang.Long fitxerSignatID;
 	java.lang.String callBackUrl;
+	java.lang.String languageUI;
 
 
   /** Constructor Buit */
@@ -55,7 +56,7 @@ public class EvidenciaBean implements Evidencia {
   }
 
   /** Constructor amb tots els camps  */
-  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
+  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl , java.lang.String languageUI) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNif=personaNif;
@@ -96,9 +97,10 @@ public class EvidenciaBean implements Evidencia {
     this.fitxerAdaptatID=fitxerAdaptatID;
     this.fitxerSignatID=fitxerSignatID;
     this.callBackUrl=callBackUrl;
+    this.languageUI=languageUI;
 }
   /** Constructor sense valors autoincrementals */
-  public EvidenciaBean(java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl) {
+  public EvidenciaBean(java.lang.String nom , java.lang.String personaNif , java.lang.String personaUsername , java.lang.String personaNom , java.lang.String personaLlinatge1 , java.lang.String personaLlinatge2 , java.lang.String personaEmail , java.lang.String personaMobil , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , java.lang.String usuariAplicacio , java.lang.String usuariPersona , int estatCodi , java.lang.String estatError , java.lang.String estatExcepcio , java.lang.String loginType , java.lang.String loginSubtype , java.lang.String loginAuthMethod , java.lang.String loginQaa , java.lang.String loginId , java.sql.Timestamp loginData , java.lang.String loginAdditionalProperties , java.lang.String loginPropertiesSha256 , java.lang.String localitzacioIp , java.lang.String localitzacioCodiPostal , java.lang.String localitzacioLatitud , java.lang.String localitzacioLongitud , java.lang.String localitzacioRegio , java.lang.String localitzacioCiutat , java.lang.String localitzacioPais , java.lang.String deviceProperties , java.lang.String clickProperties , java.lang.String firmaReason , java.lang.String firmaIdiomaDocument , int firmaTipusDocumental , long fitxerOriginalID , java.lang.Long fitxerAdaptatID , java.lang.Long fitxerSignatID , java.lang.String callBackUrl , java.lang.String languageUI) {
     this.nom=nom;
     this.personaNif=personaNif;
     this.personaUsername=personaUsername;
@@ -138,9 +140,10 @@ public class EvidenciaBean implements Evidencia {
     this.fitxerAdaptatID=fitxerAdaptatID;
     this.fitxerSignatID=fitxerSignatID;
     this.callBackUrl=callBackUrl;
+    this.languageUI=languageUI;
 }
   /** Constructor dels valors Not Null */
-  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.sql.Timestamp dataInici , int estatCodi , java.lang.String firmaReason , int firmaTipusDocumental , long fitxerOriginalID , java.lang.String callBackUrl) {
+  public EvidenciaBean(long evidenciaID , java.lang.String nom , java.lang.String personaNif , java.sql.Timestamp dataInici , int estatCodi , java.lang.String firmaReason , int firmaTipusDocumental , long fitxerOriginalID , java.lang.String callBackUrl , java.lang.String languageUI) {
     this.evidenciaID=evidenciaID;
     this.nom=nom;
     this.personaNif=personaNif;
@@ -150,6 +153,7 @@ public class EvidenciaBean implements Evidencia {
     this.firmaTipusDocumental=firmaTipusDocumental;
     this.fitxerOriginalID=fitxerOriginalID;
     this.callBackUrl=callBackUrl;
+    this.languageUI=languageUI;
 }
   public EvidenciaBean(Evidencia __bean) {
     this.setEvidenciaID(__bean.getEvidenciaID());
@@ -192,6 +196,7 @@ public class EvidenciaBean implements Evidencia {
     this.setFitxerAdaptatID(__bean.getFitxerAdaptatID());
     this.setFitxerSignatID(__bean.getFitxerSignatID());
     this.setCallBackUrl(__bean.getCallBackUrl());
+    this.setLanguageUI(__bean.getLanguageUI());
     // Fitxer
     this.setFitxerOriginal(FitxerBean.toBean(__bean.getFitxerOriginal()));
     // Fitxer
@@ -480,6 +485,13 @@ public class EvidenciaBean implements Evidencia {
 		this.callBackUrl = _callBackUrl_;
 	};
 
+	public java.lang.String getLanguageUI() {
+		return(languageUI);
+	};
+	public void setLanguageUI(java.lang.String _languageUI_) {
+		this.languageUI = _languageUI_;
+	};
+
 
 
   // ======================================
@@ -527,6 +539,7 @@ public class EvidenciaBean implements Evidencia {
     __tmp.setFitxerAdaptatID(__bean.getFitxerAdaptatID());
     __tmp.setFitxerSignatID(__bean.getFitxerSignatID());
     __tmp.setCallBackUrl(__bean.getCallBackUrl());
+    __tmp.setLanguageUI(__bean.getLanguageUI());
     // Fitxer
     __tmp.setFitxerOriginal(FitxerBean.toBean(__bean.getFitxerOriginal()));
     // Fitxer

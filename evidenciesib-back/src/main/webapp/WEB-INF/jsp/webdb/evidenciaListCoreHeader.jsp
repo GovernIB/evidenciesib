@@ -132,6 +132,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.CALLBACKURL)}">
         <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.CALLBACKURL)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EvidenciaFields.LANGUAGEUI)}">
+        <th>${evi:getSortIcons(__theFilterForm,EvidenciaFields.LANGUAGEUI)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

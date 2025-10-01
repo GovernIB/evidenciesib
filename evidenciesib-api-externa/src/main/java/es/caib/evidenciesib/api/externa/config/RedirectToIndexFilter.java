@@ -34,18 +34,18 @@ public class RedirectToIndexFilter implements Filter {
 
         /*
         
-         System.out.println("============================================");
+         log.info("============================================");
         
-        System.out.println("getRequestURL: " + httpRequest.getRequestURL()); 
+        log.info("getRequestURL: " + httpRequest.getRequestURL()); 
         
-        System.out.println("getRequestURI: " + uri);
+        log.info("getRequestURI: " + uri);
         */
 
         final String cp = httpRequest.getContextPath();
-        //System.out.println("getContextPath: " + cp);
+        //log.info("getContextPath: " + cp);
 
         String path = uri.substring(cp.length());
-        //System.out.println("getPathInfo: " + path);
+        //log.info("getPathInfo: " + path);
 
         if (path.startsWith("/public/") || path.startsWith("/secure/")) {
             chain.doFilter(request, response);
