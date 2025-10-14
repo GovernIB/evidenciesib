@@ -4,6 +4,8 @@ API REST EXTERNA de EvidenciesIB - Evidencies
 
 - API version: 1.0-SNAPSHOT
 
+- Generator version: 7.10.0
+
 Conjunt de Serveis REST de EvidenciesIB per ser accedits des de l'exterior
 
   For more information, please visit [https://governdigital.fundaciobit.org](https://governdigital.fundaciobit.org)

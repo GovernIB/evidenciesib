@@ -90,7 +90,8 @@ paths:
       summary: Retorna informació d'una evidència a partir del seu id
       tags:
       - Evidencies
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /secure/evidencies/getfile/{evidenciaID}/{encryptedFileID}:
     get:
       operationId: getfile
@@ -165,7 +166,8 @@ paths:
       summary: Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID
       tags:
       - Evidencies
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /secure/evidencies/getfilebase64/{evidenciaID}/{encryptedFileID}:
     get:
       operationId: getfilebase64
@@ -240,7 +242,8 @@ paths:
       summary: Retorna informació d'un fitxer d'una evidència a partir del encryptedFileID
       tags:
       - Evidencies
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /secure/evidencies/list:
     get:
       operationId: list
@@ -338,7 +341,8 @@ paths:
       summary: 'Retorna un llistat de les evidencies '
       tags:
       - Evidencies
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /secure/evidencies/start:
     post:
       operationId: start
@@ -385,7 +389,8 @@ paths:
       tags:
       - Evidencies
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /secure/evidencies/versio:
     get:
       operationId: versio
@@ -425,7 +430,8 @@ paths:
       summary: Retorna la versió d'aquest Servei
       tags:
       - Evidencies
-      x-accepts: application/json
+      x-accepts:
+      - application/json
 components:
   schemas:
     EvidenciaFile:

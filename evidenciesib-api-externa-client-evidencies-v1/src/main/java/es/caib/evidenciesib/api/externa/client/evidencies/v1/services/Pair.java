@@ -13,7 +13,7 @@
 
 package es.caib.evidenciesib.api.externa.client.evidencies.v1.services;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class Pair {
     private String name = "";
     private String value = "";

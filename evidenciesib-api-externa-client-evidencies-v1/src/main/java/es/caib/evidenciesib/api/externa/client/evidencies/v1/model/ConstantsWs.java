@@ -35,26 +35,33 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   ConstantsWs.JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A,
   ConstantsWs.JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class ConstantsWs {
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R = "EVIDENCIA_ESTAT_CODI_ERROR";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_ERROR = -1;
 
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O = "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO = 1;
 
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_L_O_G_I_N = "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN = 2;
 
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A = "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA = 3;
 
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T = "EVIDENCIA_ESTAT_CODI_SIGNAT";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_SIGNAT = 10;
 
   public ConstantsWs() {
   }
-
+  /**
+   * Constructor with only readonly parameters
+   */
   @JsonCreator
   public ConstantsWs(
     @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R) Integer EVIDENCIA_ESTAT_CODI_ERROR, 
@@ -71,11 +78,11 @@ public class ConstantsWs {
     this.EVIDENCIA_ESTAT_CODI_SIGNAT = EVIDENCIA_ESTAT_CODI_SIGNAT;
   }
 
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica un error
    * @return EVIDENCIA_ESTAT_CODI_ERROR
    * @deprecated
-  **/
+   */
   @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R)
@@ -87,12 +94,11 @@ public class ConstantsWs {
 
 
 
-
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica que esta en procés de creació
    * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO
    * @deprecated
-  **/
+   */
   @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O)
@@ -104,12 +110,11 @@ public class ConstantsWs {
 
 
 
-
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica que esta realitzant el login
    * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN
    * @deprecated
-  **/
+   */
   @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_L_O_G_I_N)
@@ -121,12 +126,11 @@ public class ConstantsWs {
 
 
 
-
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica que esta realitzant la firma del document
    * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA
    * @deprecated
-  **/
+   */
   @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A)
@@ -138,12 +142,11 @@ public class ConstantsWs {
 
 
 
-
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica que ha finalitzat correctament
    * @return EVIDENCIA_ESTAT_CODI_SIGNAT
    * @deprecated
-  **/
+   */
   @Deprecated
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T)

@@ -31,27 +31,29 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   EvidenciaStartResponse.JSON_PROPERTY_EVIDENCIA_I_D,
   EvidenciaStartResponse.JSON_PROPERTY_EVIDENCIA_URL_REDIRECT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class EvidenciaStartResponse {
   public static final String JSON_PROPERTY_EVIDENCIA_I_D = "evidenciaID";
+  @javax.annotation.Nonnull
   private Long evidenciaID;
 
   public static final String JSON_PROPERTY_EVIDENCIA_URL_REDIRECT = "evidenciaUrlRedirect";
+  @javax.annotation.Nonnull
   private URI evidenciaUrlRedirect;
 
   public EvidenciaStartResponse() {
   }
 
-  public EvidenciaStartResponse evidenciaID(Long evidenciaID) {
+  public EvidenciaStartResponse evidenciaID(@javax.annotation.Nonnull Long evidenciaID) {
     
     this.evidenciaID = evidenciaID;
     return this;
   }
 
-   /**
+  /**
    * Identificador del nou procés de recolecció d&#39;evidències
    * @return evidenciaID
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_EVIDENCIA_I_D)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -63,21 +65,20 @@ public class EvidenciaStartResponse {
 
   @JsonProperty(JSON_PROPERTY_EVIDENCIA_I_D)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setEvidenciaID(Long evidenciaID) {
+  public void setEvidenciaID(@javax.annotation.Nonnull Long evidenciaID) {
     this.evidenciaID = evidenciaID;
   }
 
-
-  public EvidenciaStartResponse evidenciaUrlRedirect(URI evidenciaUrlRedirect) {
+  public EvidenciaStartResponse evidenciaUrlRedirect(@javax.annotation.Nonnull URI evidenciaUrlRedirect) {
     
     this.evidenciaUrlRedirect = evidenciaUrlRedirect;
     return this;
   }
 
-   /**
+  /**
    * Adreça a on redirigir el navegador del client per iniciar la recolecció d&#39;evidències
    * @return evidenciaUrlRedirect
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_EVIDENCIA_URL_REDIRECT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -89,7 +90,7 @@ public class EvidenciaStartResponse {
 
   @JsonProperty(JSON_PROPERTY_EVIDENCIA_URL_REDIRECT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setEvidenciaUrlRedirect(URI evidenciaUrlRedirect) {
+  public void setEvidenciaUrlRedirect(@javax.annotation.Nonnull URI evidenciaUrlRedirect) {
     this.evidenciaUrlRedirect = evidenciaUrlRedirect;
   }
 

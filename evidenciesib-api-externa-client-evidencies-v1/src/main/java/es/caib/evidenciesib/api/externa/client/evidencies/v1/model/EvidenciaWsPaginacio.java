@@ -37,36 +37,41 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   EvidenciaWsPaginacio.JSON_PROPERTY_TOTALCOUNT,
   EvidenciaWsPaginacio.JSON_PROPERTY_DATA
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class EvidenciaWsPaginacio {
   public static final String JSON_PROPERTY_PAGE = "page";
+  @javax.annotation.Nonnull
   private Integer page;
 
   public static final String JSON_PROPERTY_PAGESIZE = "pagesize";
+  @javax.annotation.Nonnull
   private Integer pagesize;
 
   public static final String JSON_PROPERTY_TOTALPAGES = "totalpages";
+  @javax.annotation.Nonnull
   private Integer totalpages;
 
   public static final String JSON_PROPERTY_TOTALCOUNT = "totalcount";
+  @javax.annotation.Nonnull
   private Integer totalcount;
 
   public static final String JSON_PROPERTY_DATA = "data";
+  @javax.annotation.Nonnull
   private List<EvidenciaWs> data = new ArrayList<>();
 
   public EvidenciaWsPaginacio() {
   }
 
-  public EvidenciaWsPaginacio page(Integer page) {
+  public EvidenciaWsPaginacio page(@javax.annotation.Nonnull Integer page) {
     
     this.page = page;
     return this;
   }
 
-   /**
+  /**
    * Número pàgina. Comença per 1.
    * @return page
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -78,21 +83,20 @@ public class EvidenciaWsPaginacio {
 
   @JsonProperty(JSON_PROPERTY_PAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPage(Integer page) {
+  public void setPage(@javax.annotation.Nonnull Integer page) {
     this.page = page;
   }
 
-
-  public EvidenciaWsPaginacio pagesize(Integer pagesize) {
+  public EvidenciaWsPaginacio pagesize(@javax.annotation.Nonnull Integer pagesize) {
     
     this.pagesize = pagesize;
     return this;
   }
 
-   /**
+  /**
    * Mida de pàgina
    * @return pagesize
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PAGESIZE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -104,21 +108,20 @@ public class EvidenciaWsPaginacio {
 
   @JsonProperty(JSON_PROPERTY_PAGESIZE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPagesize(Integer pagesize) {
+  public void setPagesize(@javax.annotation.Nonnull Integer pagesize) {
     this.pagesize = pagesize;
   }
 
-
-  public EvidenciaWsPaginacio totalpages(Integer totalpages) {
+  public EvidenciaWsPaginacio totalpages(@javax.annotation.Nonnull Integer totalpages) {
     
     this.totalpages = totalpages;
     return this;
   }
 
-   /**
+  /**
    * Número total de pàgines
    * @return totalpages
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TOTALPAGES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -130,21 +133,20 @@ public class EvidenciaWsPaginacio {
 
   @JsonProperty(JSON_PROPERTY_TOTALPAGES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setTotalpages(Integer totalpages) {
+  public void setTotalpages(@javax.annotation.Nonnull Integer totalpages) {
     this.totalpages = totalpages;
   }
 
-
-  public EvidenciaWsPaginacio totalcount(Integer totalcount) {
+  public EvidenciaWsPaginacio totalcount(@javax.annotation.Nonnull Integer totalcount) {
     
     this.totalcount = totalcount;
     return this;
   }
 
-   /**
+  /**
    * Numero total d&#39;elements
    * @return totalcount
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TOTALCOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -156,12 +158,11 @@ public class EvidenciaWsPaginacio {
 
   @JsonProperty(JSON_PROPERTY_TOTALCOUNT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setTotalcount(Integer totalcount) {
+  public void setTotalcount(@javax.annotation.Nonnull Integer totalcount) {
     this.totalcount = totalcount;
   }
 
-
-  public EvidenciaWsPaginacio data(List<EvidenciaWs> data) {
+  public EvidenciaWsPaginacio data(@javax.annotation.Nonnull List<EvidenciaWs> data) {
     
     this.data = data;
     return this;
@@ -175,10 +176,10 @@ public class EvidenciaWsPaginacio {
     return this;
   }
 
-   /**
+  /**
    * Elements retornats
    * @return data
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -190,7 +191,7 @@ public class EvidenciaWsPaginacio {
 
   @JsonProperty(JSON_PROPERTY_DATA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setData(List<EvidenciaWs> data) {
+  public void setData(@javax.annotation.Nonnull List<EvidenciaWs> data) {
     this.data = data;
   }
 

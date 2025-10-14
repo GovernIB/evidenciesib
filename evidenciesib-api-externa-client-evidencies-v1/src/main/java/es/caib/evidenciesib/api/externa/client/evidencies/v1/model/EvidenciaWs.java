@@ -70,131 +70,173 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   EvidenciaWs.JSON_PROPERTY_FITXER_ADAPTAT,
   EvidenciaWs.JSON_PROPERTY_FITXER_SIGNAT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class EvidenciaWs {
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R = "EVIDENCIA_ESTAT_CODI_ERROR";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_ERROR = -1;
 
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O = "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO = 1;
 
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_L_O_G_I_N = "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN = 2;
 
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A = "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA = 3;
 
   public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T = "EVIDENCIA_ESTAT_CODI_SIGNAT";
+  @javax.annotation.Nonnull
   private Integer EVIDENCIA_ESTAT_CODI_SIGNAT = 10;
 
   public static final String JSON_PROPERTY_EVIDENCIA_I_D = "evidenciaID";
+  @javax.annotation.Nullable
   private Long evidenciaID;
 
   public static final String JSON_PROPERTY_NOM = "nom";
+  @javax.annotation.Nullable
   private String nom;
 
   public static final String JSON_PROPERTY_PERSONA_NOM = "personaNom";
+  @javax.annotation.Nonnull
   private String personaNom;
 
   public static final String JSON_PROPERTY_PERSONA_LLINATGE1 = "personaLlinatge1";
+  @javax.annotation.Nonnull
   private String personaLlinatge1;
 
   public static final String JSON_PROPERTY_PERSONA_LLINATGE2 = "personaLlinatge2";
+  @javax.annotation.Nonnull
   private String personaLlinatge2;
 
   public static final String JSON_PROPERTY_PERSONA_NIF = "personaNif";
+  @javax.annotation.Nonnull
   private String personaNif;
 
   public static final String JSON_PROPERTY_PERSONA_EMAIL = "personaEmail";
+  @javax.annotation.Nullable
   private String personaEmail;
 
   public static final String JSON_PROPERTY_PERSONA_MOBIL = "personaMobil";
+  @javax.annotation.Nullable
   private String personaMobil;
 
   public static final String JSON_PROPERTY_DATA_INICI = "dataInici";
+  @javax.annotation.Nonnull
   private OffsetDateTime dataInici;
 
   public static final String JSON_PROPERTY_DATA_FI = "dataFi";
+  @javax.annotation.Nullable
   private OffsetDateTime dataFi;
 
   public static final String JSON_PROPERTY_ESTAT_CODI = "estatCodi";
+  @javax.annotation.Nullable
   private Integer estatCodi;
 
   public static final String JSON_PROPERTY_ESTAT_CODI_DESCRIPCIO = "estatCodiDescripcio";
+  @javax.annotation.Nullable
   private String estatCodiDescripcio;
 
   public static final String JSON_PROPERTY_ESTAT_ERROR = "estatError";
+  @javax.annotation.Nullable
   private String estatError;
 
   public static final String JSON_PROPERTY_ESTAT_EXCEPCIO = "estatExcepcio";
+  @javax.annotation.Nullable
   private String estatExcepcio;
 
   public static final String JSON_PROPERTY_LOGIN_TYPE = "loginType";
+  @javax.annotation.Nonnull
   private String loginType;
 
   public static final String JSON_PROPERTY_LOGIN_SUBTYPE = "loginSubtype";
+  @javax.annotation.Nonnull
   private String loginSubtype;
 
   public static final String JSON_PROPERTY_LOGIN_QAA = "loginQaa";
+  @javax.annotation.Nonnull
   private String loginQaa;
 
   public static final String JSON_PROPERTY_LOGIN_DATA = "loginData";
+  @javax.annotation.Nonnull
   private OffsetDateTime loginData;
 
   public static final String JSON_PROPERTY_LOGIN_ID = "loginId";
+  @javax.annotation.Nonnull
   private String loginId;
 
   public static final String JSON_PROPERTY_LOGIN_AUTH_METHOD = "loginAuthMethod";
+  @javax.annotation.Nullable
   private String loginAuthMethod;
 
   public static final String JSON_PROPERTY_LOGIN_ADDITIONAL_PROPERTIES = "loginAdditionalProperties";
+  @javax.annotation.Nullable
   private String loginAdditionalProperties;
 
   public static final String JSON_PROPERTY_LOCALITZACIO_IP = "localitzacioIp";
+  @javax.annotation.Nullable
   private String localitzacioIp;
 
   public static final String JSON_PROPERTY_LOCALITZACIO_CODI_POSTAL = "localitzacioCodiPostal";
+  @javax.annotation.Nullable
   private String localitzacioCodiPostal;
 
   public static final String JSON_PROPERTY_LOCALITZACIO_LATITUD = "localitzacioLatitud";
+  @javax.annotation.Nullable
   private String localitzacioLatitud;
 
   public static final String JSON_PROPERTY_LOCALITZACIO_LONGITUD = "localitzacioLongitud";
+  @javax.annotation.Nullable
   private String localitzacioLongitud;
 
   public static final String JSON_PROPERTY_LOCALITZACIO_CIUTAT = "localitzacioCiutat";
+  @javax.annotation.Nullable
   private String localitzacioCiutat;
 
   public static final String JSON_PROPERTY_LOCALITZACIO_REGIO = "localitzacioRegio";
+  @javax.annotation.Nullable
   private String localitzacioRegio;
 
   public static final String JSON_PROPERTY_LOCALITZACIO_PAIS = "localitzacioPais";
+  @javax.annotation.Nullable
   private String localitzacioPais;
 
   public static final String JSON_PROPERTY_FIRMA_REASON = "firmaReason";
+  @javax.annotation.Nonnull
   private String firmaReason;
 
   public static final String JSON_PROPERTY_FIRMA_IDIOMA_DOCUMENT = "firmaIdiomaDocument";
+  @javax.annotation.Nonnull
   private String firmaIdiomaDocument;
 
   public static final String JSON_PROPERTY_FIRMA_TIPUS_DOCUMENTAL = "firmaTipusDocumental";
+  @javax.annotation.Nonnull
   private Integer firmaTipusDocumental;
 
   public static final String JSON_PROPERTY_FIRMA_TIPUS_DOCUMENTAL_DESCRIPCIO = "firmaTipusDocumentalDescripcio";
+  @javax.annotation.Nonnull
   private String firmaTipusDocumentalDescripcio;
 
   public static final String JSON_PROPERTY_FITXER_ORIGINAL = "fitxerOriginal";
+  @javax.annotation.Nonnull
   private EvidenciaFile fitxerOriginal;
 
   public static final String JSON_PROPERTY_FITXER_ADAPTAT = "fitxerAdaptat";
+  @javax.annotation.Nullable
   private EvidenciaFile fitxerAdaptat;
 
   public static final String JSON_PROPERTY_FITXER_SIGNAT = "fitxerSignat";
+  @javax.annotation.Nullable
   private EvidenciaFile fitxerSignat;
 
   public EvidenciaWs() {
   }
-
+  /**
+   * Constructor with only readonly parameters
+   */
   @JsonCreator
   public EvidenciaWs(
     @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R) Integer EVIDENCIA_ESTAT_CODI_ERROR, 
@@ -211,10 +253,10 @@ public class EvidenciaWs {
     this.EVIDENCIA_ESTAT_CODI_SIGNAT = EVIDENCIA_ESTAT_CODI_SIGNAT;
   }
 
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica un error
    * @return EVIDENCIA_ESTAT_CODI_ERROR
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -225,11 +267,10 @@ public class EvidenciaWs {
 
 
 
-
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica que esta en procés de creació
    * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -240,11 +281,10 @@ public class EvidenciaWs {
 
 
 
-
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica que esta realitzant el login
    * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_L_O_G_I_N)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -255,11 +295,10 @@ public class EvidenciaWs {
 
 
 
-
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica que esta realitzant la firma del document
    * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -270,11 +309,10 @@ public class EvidenciaWs {
 
 
 
-
-   /**
+  /**
    * Codi d&#39;estat d&#39;una evidència que indica que ha finalitzat correctament
    * @return EVIDENCIA_ESTAT_CODI_SIGNAT
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -285,17 +323,16 @@ public class EvidenciaWs {
 
 
 
-
-  public EvidenciaWs evidenciaID(Long evidenciaID) {
+  public EvidenciaWs evidenciaID(@javax.annotation.Nullable Long evidenciaID) {
     
     this.evidenciaID = evidenciaID;
     return this;
   }
 
-   /**
+  /**
    * Identificador únic de l&#39;evidència.
    * @return evidenciaID
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EVIDENCIA_I_D)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -307,21 +344,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_EVIDENCIA_I_D)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEvidenciaID(Long evidenciaID) {
+  public void setEvidenciaID(@javax.annotation.Nullable Long evidenciaID) {
     this.evidenciaID = evidenciaID;
   }
 
-
-  public EvidenciaWs nom(String nom) {
+  public EvidenciaWs nom(@javax.annotation.Nullable String nom) {
     
     this.nom = nom;
     return this;
   }
 
-   /**
+  /**
    * Nom descriptiu de l&#39;evidència.
    * @return nom
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -333,21 +369,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_NOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setNom(String nom) {
+  public void setNom(@javax.annotation.Nullable String nom) {
     this.nom = nom;
   }
 
-
-  public EvidenciaWs personaNom(String personaNom) {
+  public EvidenciaWs personaNom(@javax.annotation.Nonnull String personaNom) {
     
     this.personaNom = personaNom;
     return this;
   }
 
-   /**
+  /**
    * Nom de la persona
    * @return personaNom
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PERSONA_NOM)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -359,21 +394,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_NOM)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPersonaNom(String personaNom) {
+  public void setPersonaNom(@javax.annotation.Nonnull String personaNom) {
     this.personaNom = personaNom;
   }
 
-
-  public EvidenciaWs personaLlinatge1(String personaLlinatge1) {
+  public EvidenciaWs personaLlinatge1(@javax.annotation.Nonnull String personaLlinatge1) {
     
     this.personaLlinatge1 = personaLlinatge1;
     return this;
   }
 
-   /**
+  /**
    * Primer llinatge de la persona
    * @return personaLlinatge1
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PERSONA_LLINATGE1)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -385,21 +419,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_LLINATGE1)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPersonaLlinatge1(String personaLlinatge1) {
+  public void setPersonaLlinatge1(@javax.annotation.Nonnull String personaLlinatge1) {
     this.personaLlinatge1 = personaLlinatge1;
   }
 
-
-  public EvidenciaWs personaLlinatge2(String personaLlinatge2) {
+  public EvidenciaWs personaLlinatge2(@javax.annotation.Nonnull String personaLlinatge2) {
     
     this.personaLlinatge2 = personaLlinatge2;
     return this;
   }
 
-   /**
+  /**
    * Segon llintge de la persona
    * @return personaLlinatge2
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PERSONA_LLINATGE2)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -411,21 +444,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_LLINATGE2)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPersonaLlinatge2(String personaLlinatge2) {
+  public void setPersonaLlinatge2(@javax.annotation.Nonnull String personaLlinatge2) {
     this.personaLlinatge2 = personaLlinatge2;
   }
 
-
-  public EvidenciaWs personaNif(String personaNif) {
+  public EvidenciaWs personaNif(@javax.annotation.Nonnull String personaNif) {
     
     this.personaNif = personaNif;
     return this;
   }
 
-   /**
+  /**
    * Nif de la persona
    * @return personaNif
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PERSONA_NIF)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -437,21 +469,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_NIF)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPersonaNif(String personaNif) {
+  public void setPersonaNif(@javax.annotation.Nonnull String personaNif) {
     this.personaNif = personaNif;
   }
 
-
-  public EvidenciaWs personaEmail(String personaEmail) {
+  public EvidenciaWs personaEmail(@javax.annotation.Nullable String personaEmail) {
     
     this.personaEmail = personaEmail;
     return this;
   }
 
-   /**
+  /**
    * Email de la persona
    * @return personaEmail
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONA_EMAIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -463,21 +494,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_EMAIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaEmail(String personaEmail) {
+  public void setPersonaEmail(@javax.annotation.Nullable String personaEmail) {
     this.personaEmail = personaEmail;
   }
 
-
-  public EvidenciaWs personaMobil(String personaMobil) {
+  public EvidenciaWs personaMobil(@javax.annotation.Nullable String personaMobil) {
     
     this.personaMobil = personaMobil;
     return this;
   }
 
-   /**
+  /**
    * Mòbil de la persona
    * @return personaMobil
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONA_MOBIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -489,21 +519,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_MOBIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaMobil(String personaMobil) {
+  public void setPersonaMobil(@javax.annotation.Nullable String personaMobil) {
     this.personaMobil = personaMobil;
   }
 
-
-  public EvidenciaWs dataInici(OffsetDateTime dataInici) {
+  public EvidenciaWs dataInici(@javax.annotation.Nonnull OffsetDateTime dataInici) {
     
     this.dataInici = dataInici;
     return this;
   }
 
-   /**
+  /**
    * Data de creació de l&#39;evidència
    * @return dataInici
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATA_INICI)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -515,21 +544,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_DATA_INICI)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setDataInici(OffsetDateTime dataInici) {
+  public void setDataInici(@javax.annotation.Nonnull OffsetDateTime dataInici) {
     this.dataInici = dataInici;
   }
 
-
-  public EvidenciaWs dataFi(OffsetDateTime dataFi) {
+  public EvidenciaWs dataFi(@javax.annotation.Nullable OffsetDateTime dataFi) {
     
     this.dataFi = dataFi;
     return this;
   }
 
-   /**
+  /**
    * Data final de l&#39;evidència
    * @return dataFi
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATA_FI)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -541,21 +569,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_DATA_FI)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDataFi(OffsetDateTime dataFi) {
+  public void setDataFi(@javax.annotation.Nullable OffsetDateTime dataFi) {
     this.dataFi = dataFi;
   }
 
-
-  public EvidenciaWs estatCodi(Integer estatCodi) {
+  public EvidenciaWs estatCodi(@javax.annotation.Nullable Integer estatCodi) {
     
     this.estatCodi = estatCodi;
     return this;
   }
 
-   /**
+  /**
    * Estat en que ha finalitzat l&#39;evidència. Posibles estats:      public static final int EVIDENCIA_ESTAT_CODI_ERROR &#x3D; -1;      public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO &#x3D; 1;      public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN &#x3D; 2;      public static final int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA &#x3D; 3;      public static final int EVIDENCIA_ESTAT_CODI_SIGNAT &#x3D; 10;
    * @return estatCodi
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ESTAT_CODI)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -567,21 +594,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_ESTAT_CODI)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEstatCodi(Integer estatCodi) {
+  public void setEstatCodi(@javax.annotation.Nullable Integer estatCodi) {
     this.estatCodi = estatCodi;
   }
 
-
-  public EvidenciaWs estatCodiDescripcio(String estatCodiDescripcio) {
+  public EvidenciaWs estatCodiDescripcio(@javax.annotation.Nullable String estatCodiDescripcio) {
     
     this.estatCodiDescripcio = estatCodiDescripcio;
     return this;
   }
 
-   /**
+  /**
    * Descripció del camp estatCodi
    * @return estatCodiDescripcio
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ESTAT_CODI_DESCRIPCIO)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -593,21 +619,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_ESTAT_CODI_DESCRIPCIO)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEstatCodiDescripcio(String estatCodiDescripcio) {
+  public void setEstatCodiDescripcio(@javax.annotation.Nullable String estatCodiDescripcio) {
     this.estatCodiDescripcio = estatCodiDescripcio;
   }
 
-
-  public EvidenciaWs estatError(String estatError) {
+  public EvidenciaWs estatError(@javax.annotation.Nullable String estatError) {
     
     this.estatError = estatError;
     return this;
   }
 
-   /**
+  /**
    * Missatge de l&#39;error
    * @return estatError
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ESTAT_ERROR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -619,21 +644,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_ESTAT_ERROR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEstatError(String estatError) {
+  public void setEstatError(@javax.annotation.Nullable String estatError) {
     this.estatError = estatError;
   }
 
-
-  public EvidenciaWs estatExcepcio(String estatExcepcio) {
+  public EvidenciaWs estatExcepcio(@javax.annotation.Nullable String estatExcepcio) {
     
     this.estatExcepcio = estatExcepcio;
     return this;
   }
 
-   /**
+  /**
    * Stacktrace de l&#39;excepció si n&#39;hi hagues
    * @return estatExcepcio
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ESTAT_EXCEPCIO)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -645,21 +669,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_ESTAT_EXCEPCIO)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEstatExcepcio(String estatExcepcio) {
+  public void setEstatExcepcio(@javax.annotation.Nullable String estatExcepcio) {
     this.estatExcepcio = estatExcepcio;
   }
 
-
-  public EvidenciaWs loginType(String loginType) {
+  public EvidenciaWs loginType(@javax.annotation.Nonnull String loginType) {
     
     this.loginType = loginType;
     return this;
   }
 
-   /**
+  /**
    * Tipus de Login
    * @return loginType
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LOGIN_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -671,21 +694,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOGIN_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setLoginType(String loginType) {
+  public void setLoginType(@javax.annotation.Nonnull String loginType) {
     this.loginType = loginType;
   }
 
-
-  public EvidenciaWs loginSubtype(String loginSubtype) {
+  public EvidenciaWs loginSubtype(@javax.annotation.Nonnull String loginSubtype) {
     
     this.loginSubtype = loginSubtype;
     return this;
   }
 
-   /**
+  /**
    * Subtipus de login
    * @return loginSubtype
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LOGIN_SUBTYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -697,21 +719,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOGIN_SUBTYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setLoginSubtype(String loginSubtype) {
+  public void setLoginSubtype(@javax.annotation.Nonnull String loginSubtype) {
     this.loginSubtype = loginSubtype;
   }
 
-
-  public EvidenciaWs loginQaa(String loginQaa) {
+  public EvidenciaWs loginQaa(@javax.annotation.Nonnull String loginQaa) {
     
     this.loginQaa = loginQaa;
     return this;
   }
 
-   /**
+  /**
    * Nivell des eguretat de login
    * @return loginQaa
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LOGIN_QAA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -723,21 +744,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOGIN_QAA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setLoginQaa(String loginQaa) {
+  public void setLoginQaa(@javax.annotation.Nonnull String loginQaa) {
     this.loginQaa = loginQaa;
   }
 
-
-  public EvidenciaWs loginData(OffsetDateTime loginData) {
+  public EvidenciaWs loginData(@javax.annotation.Nonnull OffsetDateTime loginData) {
     
     this.loginData = loginData;
     return this;
   }
 
-   /**
+  /**
    * Data de realització del login
    * @return loginData
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LOGIN_DATA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -749,21 +769,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOGIN_DATA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setLoginData(OffsetDateTime loginData) {
+  public void setLoginData(@javax.annotation.Nonnull OffsetDateTime loginData) {
     this.loginData = loginData;
   }
 
-
-  public EvidenciaWs loginId(String loginId) {
+  public EvidenciaWs loginId(@javax.annotation.Nonnull String loginId) {
     
     this.loginId = loginId;
     return this;
   }
 
-   /**
+  /**
    * Identificador del login realitzat.
    * @return loginId
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LOGIN_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -775,21 +794,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOGIN_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setLoginId(String loginId) {
+  public void setLoginId(@javax.annotation.Nonnull String loginId) {
     this.loginId = loginId;
   }
 
-
-  public EvidenciaWs loginAuthMethod(String loginAuthMethod) {
+  public EvidenciaWs loginAuthMethod(@javax.annotation.Nullable String loginAuthMethod) {
     
     this.loginAuthMethod = loginAuthMethod;
     return this;
   }
 
-   /**
+  /**
    * Get loginAuthMethod
    * @return loginAuthMethod
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOGIN_AUTH_METHOD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -801,21 +819,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOGIN_AUTH_METHOD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLoginAuthMethod(String loginAuthMethod) {
+  public void setLoginAuthMethod(@javax.annotation.Nullable String loginAuthMethod) {
     this.loginAuthMethod = loginAuthMethod;
   }
 
-
-  public EvidenciaWs loginAdditionalProperties(String loginAdditionalProperties) {
+  public EvidenciaWs loginAdditionalProperties(@javax.annotation.Nullable String loginAdditionalProperties) {
     
     this.loginAdditionalProperties = loginAdditionalProperties;
     return this;
   }
 
-   /**
+  /**
    * Get loginAdditionalProperties
    * @return loginAdditionalProperties
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOGIN_ADDITIONAL_PROPERTIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -827,21 +844,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOGIN_ADDITIONAL_PROPERTIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLoginAdditionalProperties(String loginAdditionalProperties) {
+  public void setLoginAdditionalProperties(@javax.annotation.Nullable String loginAdditionalProperties) {
     this.loginAdditionalProperties = loginAdditionalProperties;
   }
 
-
-  public EvidenciaWs localitzacioIp(String localitzacioIp) {
+  public EvidenciaWs localitzacioIp(@javax.annotation.Nullable String localitzacioIp) {
     
     this.localitzacioIp = localitzacioIp;
     return this;
   }
 
-   /**
+  /**
    * IP des d&#39;on està connectat el ciutadà
    * @return localitzacioIp
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_IP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -853,21 +869,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_IP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLocalitzacioIp(String localitzacioIp) {
+  public void setLocalitzacioIp(@javax.annotation.Nullable String localitzacioIp) {
     this.localitzacioIp = localitzacioIp;
   }
 
-
-  public EvidenciaWs localitzacioCodiPostal(String localitzacioCodiPostal) {
+  public EvidenciaWs localitzacioCodiPostal(@javax.annotation.Nullable String localitzacioCodiPostal) {
     
     this.localitzacioCodiPostal = localitzacioCodiPostal;
     return this;
   }
 
-   /**
+  /**
    * Codi postal des d&#39;on està connectat el ciutadà.
    * @return localitzacioCodiPostal
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_CODI_POSTAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -879,21 +894,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_CODI_POSTAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLocalitzacioCodiPostal(String localitzacioCodiPostal) {
+  public void setLocalitzacioCodiPostal(@javax.annotation.Nullable String localitzacioCodiPostal) {
     this.localitzacioCodiPostal = localitzacioCodiPostal;
   }
 
-
-  public EvidenciaWs localitzacioLatitud(String localitzacioLatitud) {
+  public EvidenciaWs localitzacioLatitud(@javax.annotation.Nullable String localitzacioLatitud) {
     
     this.localitzacioLatitud = localitzacioLatitud;
     return this;
   }
 
-   /**
+  /**
    * Latitud des d&#39;on està connectat el ciutadà.
    * @return localitzacioLatitud
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_LATITUD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -905,21 +919,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_LATITUD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLocalitzacioLatitud(String localitzacioLatitud) {
+  public void setLocalitzacioLatitud(@javax.annotation.Nullable String localitzacioLatitud) {
     this.localitzacioLatitud = localitzacioLatitud;
   }
 
-
-  public EvidenciaWs localitzacioLongitud(String localitzacioLongitud) {
+  public EvidenciaWs localitzacioLongitud(@javax.annotation.Nullable String localitzacioLongitud) {
     
     this.localitzacioLongitud = localitzacioLongitud;
     return this;
   }
 
-   /**
+  /**
    * Longitud des d&#39;on està connectat el ciutadà.
    * @return localitzacioLongitud
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_LONGITUD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -931,21 +944,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_LONGITUD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLocalitzacioLongitud(String localitzacioLongitud) {
+  public void setLocalitzacioLongitud(@javax.annotation.Nullable String localitzacioLongitud) {
     this.localitzacioLongitud = localitzacioLongitud;
   }
 
-
-  public EvidenciaWs localitzacioCiutat(String localitzacioCiutat) {
+  public EvidenciaWs localitzacioCiutat(@javax.annotation.Nullable String localitzacioCiutat) {
     
     this.localitzacioCiutat = localitzacioCiutat;
     return this;
   }
 
-   /**
+  /**
    * Localitat des d&#39;on està connectat el ciutadà.
    * @return localitzacioCiutat
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_CIUTAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -957,21 +969,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_CIUTAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLocalitzacioCiutat(String localitzacioCiutat) {
+  public void setLocalitzacioCiutat(@javax.annotation.Nullable String localitzacioCiutat) {
     this.localitzacioCiutat = localitzacioCiutat;
   }
 
-
-  public EvidenciaWs localitzacioRegio(String localitzacioRegio) {
+  public EvidenciaWs localitzacioRegio(@javax.annotation.Nullable String localitzacioRegio) {
     
     this.localitzacioRegio = localitzacioRegio;
     return this;
   }
 
-   /**
+  /**
    * Regió (Si és Espanya Comunitat Autonoma) des d&#39;on està connectat el ciutadà.
    * @return localitzacioRegio
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_REGIO)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -983,21 +994,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_REGIO)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLocalitzacioRegio(String localitzacioRegio) {
+  public void setLocalitzacioRegio(@javax.annotation.Nullable String localitzacioRegio) {
     this.localitzacioRegio = localitzacioRegio;
   }
 
-
-  public EvidenciaWs localitzacioPais(String localitzacioPais) {
+  public EvidenciaWs localitzacioPais(@javax.annotation.Nullable String localitzacioPais) {
     
     this.localitzacioPais = localitzacioPais;
     return this;
   }
 
-   /**
+  /**
    * Pais des d&#39;on està connectat el ciutadà.
    * @return localitzacioPais
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_PAIS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -1009,21 +1019,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_LOCALITZACIO_PAIS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLocalitzacioPais(String localitzacioPais) {
+  public void setLocalitzacioPais(@javax.annotation.Nullable String localitzacioPais) {
     this.localitzacioPais = localitzacioPais;
   }
 
-
-  public EvidenciaWs firmaReason(String firmaReason) {
+  public EvidenciaWs firmaReason(@javax.annotation.Nonnull String firmaReason) {
     
     this.firmaReason = firmaReason;
     return this;
   }
 
-   /**
+  /**
    * Raó de firma.
    * @return firmaReason
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_FIRMA_REASON)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -1035,21 +1044,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_FIRMA_REASON)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setFirmaReason(String firmaReason) {
+  public void setFirmaReason(@javax.annotation.Nonnull String firmaReason) {
     this.firmaReason = firmaReason;
   }
 
-
-  public EvidenciaWs firmaIdiomaDocument(String firmaIdiomaDocument) {
+  public EvidenciaWs firmaIdiomaDocument(@javax.annotation.Nonnull String firmaIdiomaDocument) {
     
     this.firmaIdiomaDocument = firmaIdiomaDocument;
     return this;
   }
 
-   /**
+  /**
    * Idioma en que està escrit el document.
    * @return firmaIdiomaDocument
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_FIRMA_IDIOMA_DOCUMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -1061,21 +1069,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_FIRMA_IDIOMA_DOCUMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setFirmaIdiomaDocument(String firmaIdiomaDocument) {
+  public void setFirmaIdiomaDocument(@javax.annotation.Nonnull String firmaIdiomaDocument) {
     this.firmaIdiomaDocument = firmaIdiomaDocument;
   }
 
-
-  public EvidenciaWs firmaTipusDocumental(Integer firmaTipusDocumental) {
+  public EvidenciaWs firmaTipusDocumental(@javax.annotation.Nonnull Integer firmaTipusDocumental) {
     
     this.firmaTipusDocumental = firmaTipusDocumental;
     return this;
   }
 
-   /**
+  /**
    * Tipus documental de la Firma. Veure https://administracionelectronica.gob.es/pae_Home/dam/jcr:26d90313-7af0-4f69-9d62-c853d55d7627/Esquema_Metadatos_e-EMGDE_2016.pdf
    * @return firmaTipusDocumental
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_FIRMA_TIPUS_DOCUMENTAL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -1087,21 +1094,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_FIRMA_TIPUS_DOCUMENTAL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setFirmaTipusDocumental(Integer firmaTipusDocumental) {
+  public void setFirmaTipusDocumental(@javax.annotation.Nonnull Integer firmaTipusDocumental) {
     this.firmaTipusDocumental = firmaTipusDocumental;
   }
 
-
-  public EvidenciaWs firmaTipusDocumentalDescripcio(String firmaTipusDocumentalDescripcio) {
+  public EvidenciaWs firmaTipusDocumentalDescripcio(@javax.annotation.Nonnull String firmaTipusDocumentalDescripcio) {
     
     this.firmaTipusDocumentalDescripcio = firmaTipusDocumentalDescripcio;
     return this;
   }
 
-   /**
+  /**
    * DescripcioTipus documental de la Firma.Per exemple per 1 retorna &#39;Resolución(TD01)&#39;
    * @return firmaTipusDocumentalDescripcio
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_FIRMA_TIPUS_DOCUMENTAL_DESCRIPCIO)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -1113,21 +1119,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_FIRMA_TIPUS_DOCUMENTAL_DESCRIPCIO)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setFirmaTipusDocumentalDescripcio(String firmaTipusDocumentalDescripcio) {
+  public void setFirmaTipusDocumentalDescripcio(@javax.annotation.Nonnull String firmaTipusDocumentalDescripcio) {
     this.firmaTipusDocumentalDescripcio = firmaTipusDocumentalDescripcio;
   }
 
-
-  public EvidenciaWs fitxerOriginal(EvidenciaFile fitxerOriginal) {
+  public EvidenciaWs fitxerOriginal(@javax.annotation.Nonnull EvidenciaFile fitxerOriginal) {
     
     this.fitxerOriginal = fitxerOriginal;
     return this;
   }
 
-   /**
+  /**
    * Get fitxerOriginal
    * @return fitxerOriginal
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_FITXER_ORIGINAL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -1139,21 +1144,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_FITXER_ORIGINAL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setFitxerOriginal(EvidenciaFile fitxerOriginal) {
+  public void setFitxerOriginal(@javax.annotation.Nonnull EvidenciaFile fitxerOriginal) {
     this.fitxerOriginal = fitxerOriginal;
   }
 
-
-  public EvidenciaWs fitxerAdaptat(EvidenciaFile fitxerAdaptat) {
+  public EvidenciaWs fitxerAdaptat(@javax.annotation.Nullable EvidenciaFile fitxerAdaptat) {
     
     this.fitxerAdaptat = fitxerAdaptat;
     return this;
   }
 
-   /**
+  /**
    * Get fitxerAdaptat
    * @return fitxerAdaptat
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FITXER_ADAPTAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -1165,21 +1169,20 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_FITXER_ADAPTAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFitxerAdaptat(EvidenciaFile fitxerAdaptat) {
+  public void setFitxerAdaptat(@javax.annotation.Nullable EvidenciaFile fitxerAdaptat) {
     this.fitxerAdaptat = fitxerAdaptat;
   }
 
-
-  public EvidenciaWs fitxerSignat(EvidenciaFile fitxerSignat) {
+  public EvidenciaWs fitxerSignat(@javax.annotation.Nullable EvidenciaFile fitxerSignat) {
     
     this.fitxerSignat = fitxerSignat;
     return this;
   }
 
-   /**
+  /**
    * Get fitxerSignat
    * @return fitxerSignat
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FITXER_SIGNAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -1191,7 +1194,7 @@ public class EvidenciaWs {
 
   @JsonProperty(JSON_PROPERTY_FITXER_SIGNAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFitxerSignat(EvidenciaFile fitxerSignat) {
+  public void setFitxerSignat(@javax.annotation.Nullable EvidenciaFile fitxerSignat) {
     this.fitxerSignat = fitxerSignat;
   }
 

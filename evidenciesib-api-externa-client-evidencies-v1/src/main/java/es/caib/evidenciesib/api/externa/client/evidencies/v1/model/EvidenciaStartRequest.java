@@ -42,60 +42,73 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   EvidenciaStartRequest.JSON_PROPERTY_CALL_BACK_URL,
   EvidenciaStartRequest.JSON_PROPERTY_LANGUAGE_U_I
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class EvidenciaStartRequest {
   public static final String JSON_PROPERTY_TITOL_EVIDENCIA = "titolEvidencia";
+  @javax.annotation.Nonnull
   private String titolEvidencia;
 
   public static final String JSON_PROPERTY_PERSONA_NIF = "personaNif";
+  @javax.annotation.Nonnull
   private String personaNif;
 
   public static final String JSON_PROPERTY_PERSONA_USERNAME = "personaUsername";
+  @javax.annotation.Nullable
   private String personaUsername;
 
   public static final String JSON_PROPERTY_PERSONA_NOM = "personaNom";
+  @javax.annotation.Nullable
   private String personaNom;
 
   public static final String JSON_PROPERTY_PERSONA_LLINATGE1 = "personaLlinatge1";
+  @javax.annotation.Nullable
   private String personaLlinatge1;
 
   public static final String JSON_PROPERTY_PERSONA_LLINATGE2 = "personaLlinatge2";
+  @javax.annotation.Nullable
   private String personaLlinatge2;
 
   public static final String JSON_PROPERTY_PERSONA_EMAIL = "personaEmail";
+  @javax.annotation.Nullable
   private String personaEmail;
 
   public static final String JSON_PROPERTY_PERSONA_MOBIL = "personaMobil";
+  @javax.annotation.Nullable
   private String personaMobil;
 
   public static final String JSON_PROPERTY_RAO_DE_LA_FIRMA = "raoDeLaFirma";
+  @javax.annotation.Nonnull
   private String raoDeLaFirma;
 
   public static final String JSON_PROPERTY_LANGUAGE_DOCUMENT = "languageDocument";
+  @javax.annotation.Nonnull
   private String languageDocument = "ca";
 
   public static final String JSON_PROPERTY_DOCUMENT_A_SIGNAR = "documentASignar";
+  @javax.annotation.Nonnull
   private EvidenciaFile documentASignar;
 
   public static final String JSON_PROPERTY_CALL_BACK_URL = "callBackUrl";
+  @javax.annotation.Nonnull
   private String callBackUrl;
 
   public static final String JSON_PROPERTY_LANGUAGE_U_I = "languageUI";
+  @javax.annotation.Nonnull
   private String languageUI = "ca";
 
   public EvidenciaStartRequest() {
   }
 
-  public EvidenciaStartRequest titolEvidencia(String titolEvidencia) {
+  public EvidenciaStartRequest titolEvidencia(@javax.annotation.Nonnull String titolEvidencia) {
     
     this.titolEvidencia = titolEvidencia;
     return this;
   }
 
-   /**
+  /**
    * Titol descriptiu de l&#39;evidència que es durà a terme
    * @return titolEvidencia
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TITOL_EVIDENCIA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -107,21 +120,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_TITOL_EVIDENCIA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setTitolEvidencia(String titolEvidencia) {
+  public void setTitolEvidencia(@javax.annotation.Nonnull String titolEvidencia) {
     this.titolEvidencia = titolEvidencia;
   }
 
-
-  public EvidenciaStartRequest personaNif(String personaNif) {
+  public EvidenciaStartRequest personaNif(@javax.annotation.Nonnull String personaNif) {
     
     this.personaNif = personaNif;
     return this;
   }
 
-   /**
+  /**
    * Nif de la persona
    * @return personaNif
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PERSONA_NIF)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -133,21 +145,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_NIF)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPersonaNif(String personaNif) {
+  public void setPersonaNif(@javax.annotation.Nonnull String personaNif) {
     this.personaNif = personaNif;
   }
 
-
-  public EvidenciaStartRequest personaUsername(String personaUsername) {
+  public EvidenciaStartRequest personaUsername(@javax.annotation.Nullable String personaUsername) {
     
     this.personaUsername = personaUsername;
     return this;
   }
 
-   /**
+  /**
    * Username de la persona
    * @return personaUsername
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONA_USERNAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -159,21 +170,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_USERNAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaUsername(String personaUsername) {
+  public void setPersonaUsername(@javax.annotation.Nullable String personaUsername) {
     this.personaUsername = personaUsername;
   }
 
-
-  public EvidenciaStartRequest personaNom(String personaNom) {
+  public EvidenciaStartRequest personaNom(@javax.annotation.Nullable String personaNom) {
     
     this.personaNom = personaNom;
     return this;
   }
 
-   /**
+  /**
    * Nom de la persona
    * @return personaNom
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONA_NOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -185,21 +195,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_NOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaNom(String personaNom) {
+  public void setPersonaNom(@javax.annotation.Nullable String personaNom) {
     this.personaNom = personaNom;
   }
 
-
-  public EvidenciaStartRequest personaLlinatge1(String personaLlinatge1) {
+  public EvidenciaStartRequest personaLlinatge1(@javax.annotation.Nullable String personaLlinatge1) {
     
     this.personaLlinatge1 = personaLlinatge1;
     return this;
   }
 
-   /**
+  /**
    * Primer llinatge de la persona
    * @return personaLlinatge1
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONA_LLINATGE1)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -211,21 +220,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_LLINATGE1)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaLlinatge1(String personaLlinatge1) {
+  public void setPersonaLlinatge1(@javax.annotation.Nullable String personaLlinatge1) {
     this.personaLlinatge1 = personaLlinatge1;
   }
 
-
-  public EvidenciaStartRequest personaLlinatge2(String personaLlinatge2) {
+  public EvidenciaStartRequest personaLlinatge2(@javax.annotation.Nullable String personaLlinatge2) {
     
     this.personaLlinatge2 = personaLlinatge2;
     return this;
   }
 
-   /**
+  /**
    * Segon llintge de la persona
    * @return personaLlinatge2
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONA_LLINATGE2)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -237,21 +245,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_LLINATGE2)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaLlinatge2(String personaLlinatge2) {
+  public void setPersonaLlinatge2(@javax.annotation.Nullable String personaLlinatge2) {
     this.personaLlinatge2 = personaLlinatge2;
   }
 
-
-  public EvidenciaStartRequest personaEmail(String personaEmail) {
+  public EvidenciaStartRequest personaEmail(@javax.annotation.Nullable String personaEmail) {
     
     this.personaEmail = personaEmail;
     return this;
   }
 
-   /**
+  /**
    * Correu electrònic de la persona
    * @return personaEmail
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONA_EMAIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -263,21 +270,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_EMAIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaEmail(String personaEmail) {
+  public void setPersonaEmail(@javax.annotation.Nullable String personaEmail) {
     this.personaEmail = personaEmail;
   }
 
-
-  public EvidenciaStartRequest personaMobil(String personaMobil) {
+  public EvidenciaStartRequest personaMobil(@javax.annotation.Nullable String personaMobil) {
     
     this.personaMobil = personaMobil;
     return this;
   }
 
-   /**
+  /**
    * Mòbil de la persona
    * @return personaMobil
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONA_MOBIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -289,21 +295,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_PERSONA_MOBIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaMobil(String personaMobil) {
+  public void setPersonaMobil(@javax.annotation.Nullable String personaMobil) {
     this.personaMobil = personaMobil;
   }
 
-
-  public EvidenciaStartRequest raoDeLaFirma(String raoDeLaFirma) {
+  public EvidenciaStartRequest raoDeLaFirma(@javax.annotation.Nonnull String raoDeLaFirma) {
     
     this.raoDeLaFirma = raoDeLaFirma;
     return this;
   }
 
-   /**
+  /**
    * Raó per la qual es requereix aquesta signatura
    * @return raoDeLaFirma
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_RAO_DE_LA_FIRMA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -315,21 +320,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_RAO_DE_LA_FIRMA)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setRaoDeLaFirma(String raoDeLaFirma) {
+  public void setRaoDeLaFirma(@javax.annotation.Nonnull String raoDeLaFirma) {
     this.raoDeLaFirma = raoDeLaFirma;
   }
 
-
-  public EvidenciaStartRequest languageDocument(String languageDocument) {
+  public EvidenciaStartRequest languageDocument(@javax.annotation.Nonnull String languageDocument) {
     
     this.languageDocument = languageDocument;
     return this;
   }
 
-   /**
+  /**
    * Idioma del document en ISO 639-1. Valors permesos &#39;ca&#39; i &#39;es&#39;
    * @return languageDocument
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LANGUAGE_DOCUMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -341,21 +345,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_LANGUAGE_DOCUMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setLanguageDocument(String languageDocument) {
+  public void setLanguageDocument(@javax.annotation.Nonnull String languageDocument) {
     this.languageDocument = languageDocument;
   }
 
-
-  public EvidenciaStartRequest documentASignar(EvidenciaFile documentASignar) {
+  public EvidenciaStartRequest documentASignar(@javax.annotation.Nonnull EvidenciaFile documentASignar) {
     
     this.documentASignar = documentASignar;
     return this;
   }
 
-   /**
+  /**
    * Get documentASignar
    * @return documentASignar
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DOCUMENT_A_SIGNAR)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -367,21 +370,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_DOCUMENT_A_SIGNAR)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setDocumentASignar(EvidenciaFile documentASignar) {
+  public void setDocumentASignar(@javax.annotation.Nonnull EvidenciaFile documentASignar) {
     this.documentASignar = documentASignar;
   }
 
-
-  public EvidenciaStartRequest callBackUrl(String callBackUrl) {
+  public EvidenciaStartRequest callBackUrl(@javax.annotation.Nonnull String callBackUrl) {
     
     this.callBackUrl = callBackUrl;
     return this;
   }
 
-   /**
+  /**
    * URL de retorn quan el proces d&#39;evidències hagi acabat. A la URL la cadena {0} es substituirà per l&#39;identificador de l&#39;evidència (evidenciaID)
    * @return callBackUrl
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CALL_BACK_URL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -393,21 +395,20 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_CALL_BACK_URL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setCallBackUrl(String callBackUrl) {
+  public void setCallBackUrl(@javax.annotation.Nonnull String callBackUrl) {
     this.callBackUrl = callBackUrl;
   }
 
-
-  public EvidenciaStartRequest languageUI(String languageUI) {
+  public EvidenciaStartRequest languageUI(@javax.annotation.Nonnull String languageUI) {
     
     this.languageUI = languageUI;
     return this;
   }
 
-   /**
+  /**
    * Idioma del missatges d&#39;error en format ISO 639-1. Valors permesos &#39;ca&#39; i &#39;es&#39;
    * @return languageUI
-  **/
+   */
   @javax.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LANGUAGE_U_I)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -419,7 +420,7 @@ public class EvidenciaStartRequest {
 
   @JsonProperty(JSON_PROPERTY_LANGUAGE_U_I)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setLanguageUI(String languageUI) {
+  public void setLanguageUI(@javax.annotation.Nonnull String languageUI) {
     this.languageUI = languageUI;
   }
 

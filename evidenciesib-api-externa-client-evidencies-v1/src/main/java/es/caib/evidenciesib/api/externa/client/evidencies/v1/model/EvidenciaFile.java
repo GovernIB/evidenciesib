@@ -34,39 +34,45 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   EvidenciaFile.JSON_PROPERTY_ENCRYPTED_FILE_I_D,
   EvidenciaFile.JSON_PROPERTY_DOCUMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class EvidenciaFile {
   public static final String JSON_PROPERTY_NAME = "name";
+  @javax.annotation.Nullable
   private String name;
 
   public static final String JSON_PROPERTY_MIME = "mime";
+  @javax.annotation.Nullable
   private String mime;
 
   public static final String JSON_PROPERTY_SIZE = "size";
+  @javax.annotation.Nullable
   private Long size;
 
   public static final String JSON_PROPERTY_DESCRIPTION = "description";
+  @javax.annotation.Nullable
   private String description;
 
   public static final String JSON_PROPERTY_ENCRYPTED_FILE_I_D = "encryptedFileID";
+  @javax.annotation.Nullable
   private String encryptedFileID;
 
   public static final String JSON_PROPERTY_DOCUMENT = "document";
+  @javax.annotation.Nullable
   private byte[] document;
 
   public EvidenciaFile() {
   }
 
-  public EvidenciaFile name(String name) {
+  public EvidenciaFile name(@javax.annotation.Nullable String name) {
     
     this.name = name;
     return this;
   }
 
-   /**
+  /**
    * Nom del fitxer
    * @return name
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -78,21 +84,20 @@ public class EvidenciaFile {
 
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nullable String name) {
     this.name = name;
   }
 
-
-  public EvidenciaFile mime(String mime) {
+  public EvidenciaFile mime(@javax.annotation.Nullable String mime) {
     
     this.mime = mime;
     return this;
   }
 
-   /**
+  /**
    * Tipus MIME del Fitxer
    * @return mime
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -104,21 +109,20 @@ public class EvidenciaFile {
 
   @JsonProperty(JSON_PROPERTY_MIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setMime(String mime) {
+  public void setMime(@javax.annotation.Nullable String mime) {
     this.mime = mime;
   }
 
-
-  public EvidenciaFile size(Long size) {
+  public EvidenciaFile size(@javax.annotation.Nullable Long size) {
     
     this.size = size;
     return this;
   }
 
-   /**
+  /**
    * Mida en bytes del document
    * @return size
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -130,21 +134,20 @@ public class EvidenciaFile {
 
   @JsonProperty(JSON_PROPERTY_SIZE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSize(Long size) {
+  public void setSize(@javax.annotation.Nullable Long size) {
     this.size = size;
   }
 
-
-  public EvidenciaFile description(String description) {
+  public EvidenciaFile description(@javax.annotation.Nullable String description) {
     
     this.description = description;
     return this;
   }
 
-   /**
+  /**
    * Descripció del Fitxer
    * @return description
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -156,21 +159,20 @@ public class EvidenciaFile {
 
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDescription(String description) {
+  public void setDescription(@javax.annotation.Nullable String description) {
     this.description = description;
   }
 
-
-  public EvidenciaFile encryptedFileID(String encryptedFileID) {
+  public EvidenciaFile encryptedFileID(@javax.annotation.Nullable String encryptedFileID) {
     
     this.encryptedFileID = encryptedFileID;
     return this;
   }
 
-   /**
+  /**
    * Identificar del fitxer per poder-ho recuperar en una segona fase. Només apareix en llistats per no incloure el contingut del fitxer.
    * @return encryptedFileID
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ENCRYPTED_FILE_I_D)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -182,21 +184,20 @@ public class EvidenciaFile {
 
   @JsonProperty(JSON_PROPERTY_ENCRYPTED_FILE_I_D)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEncryptedFileID(String encryptedFileID) {
+  public void setEncryptedFileID(@javax.annotation.Nullable String encryptedFileID) {
     this.encryptedFileID = encryptedFileID;
   }
 
-
-  public EvidenciaFile document(byte[] document) {
+  public EvidenciaFile document(@javax.annotation.Nullable byte[] document) {
     
     this.document = document;
     return this;
   }
 
-   /**
+  /**
    * Contingut del fitxer. En llistats aquest camp vendrà buit.
    * @return document
-  **/
+   */
   @javax.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DOCUMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -208,7 +209,7 @@ public class EvidenciaFile {
 
   @JsonProperty(JSON_PROPERTY_DOCUMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDocument(byte[] document) {
+  public void setDocument(@javax.annotation.Nullable byte[] document) {
     this.document = document;
   }
 
