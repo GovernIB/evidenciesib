@@ -382,7 +382,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
         } catch (Throwable th) {
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
-            final String msg = "Error no controllat signant document: " + th.getMessage();
+            final String msg = "Error no controlat signant document dins EvidènciesIB: " + th.getMessage();
             evi.setEstatError(StringUtils.abbreviate(msg, 4000));
             if (th.getCause() != null) {
                 evi.setEstatExcepcio(ExceptionUtils.getStackTrace(th));
