@@ -42,5 +42,11 @@ public interface Constants {
     public static final String MAPPING_BACK_PUBLIC_EVIDENCE = "/public/evidencia";
     public static final String MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION =  "/sign/";
     public static final String MAPPING_BACK_PUBLIC_EVIDENCE_INFO_OPERATION =  "/info/";
+    
+    public static final String MAPPING_FULL_PUBLIC_EVIDENCE_INFO = MAPPING_BACK_PUBLIC_EVIDENCE + MAPPING_BACK_PUBLIC_EVIDENCE_INFO_OPERATION;
+    
+    
+    public static final String MAPPING_PUBLIC_ARXIU = "/public/arxiu/";
+    
 
 }

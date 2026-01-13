@@ -1,6 +1,9 @@
 package es.caib.evidenciesib.back.controller;
 
 
+import es.caib.evidenciesib.back.controller.all.FileDownloadPublicController;
+import es.caib.evidenciesib.commons.utils.Configuracio;
+import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.model.entity.Fitxer;
 
@@ -32,6 +35,8 @@ import java.net.URLEncoder;
 public class FileDownloadController {
 
     protected static final Logger log = Logger.getLogger(FileDownloadController.class);
+    
+    public static final ThreadLocal<Boolean> usarContextWebPublicDelFront = new ThreadLocal<Boolean>();
     
     
     protected static final String CONTEXTWEB = "/common/arxiu/";
@@ -123,6 +128,11 @@ public class FileDownloadController {
     }
     
     
+    /**
+     * Retorna la URL per descarregar un fitxer
+     * @param arxiu
+     * @return
+     */
     public static String fileUrl(Fitxer arxiu) {
       if (arxiu == null) {
         // TODO Llançar error
@@ -130,8 +140,20 @@ public class FileDownloadController {
       } else {
         // {arxiuId}/{filename}/{contentType}
         String idfile = HibernateFileUtil.encryptFileID(arxiu.getFitxerID());
-
-        String base = CONTEXTWEB + idfile;
+        
+        
+        
+        // Recollir variable booleana  del ThreadLocal
+        
+        Boolean isPublic = usarContextWebPublicDelFront.get();
+        
+        String base;
+        if (isPublic == null || isPublic.booleanValue() == false) {
+            base = CONTEXTWEB + idfile;
+        } else {
+            base = Configuracio.getFrontUrl() + Constants.MAPPING_PUBLIC_ARXIU + idfile;
+        }
+        
         String nombre = arxiu.getNom(); 
         if (nombre == null) {
            return base;

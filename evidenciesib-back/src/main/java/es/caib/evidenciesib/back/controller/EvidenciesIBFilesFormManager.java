@@ -8,7 +8,7 @@ import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 
 
 /**
- * Gestiona Multiples Fitxers d'un Form
+ * Gestiona Multiples Fitxers d'un Form XXXXXXXXXXXXXXXXXX
  * 
  * @author anadal
  * 

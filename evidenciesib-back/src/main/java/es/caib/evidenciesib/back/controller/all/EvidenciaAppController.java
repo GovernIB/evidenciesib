@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import es.caib.evidenciesib.back.controller.FileDownloadController;
 import es.caib.evidenciesib.back.controller.user.EvidenciaUserController;
 import es.caib.evidenciesib.back.form.webdb.EvidenciaFilterForm;
 import es.caib.evidenciesib.back.form.webdb.EvidenciaForm;
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
+import es.caib.evidenciesib.model.entity.Fitxer;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 
@@ -137,6 +139,9 @@ public class EvidenciaAppController extends EvidenciaUserController {
         evidenciaForm.setHiddenFields(hiddenFields);
         
         evidenciaForm.setCancelButtonVisible(false);
+        
+        // Això fa que les URLs de descàrrega d'arxius usin el context web públic del front
+        FileDownloadController.usarContextWebPublicDelFront.set(Boolean.TRUE);
 
         return evidenciaForm;
     }
@@ -146,5 +151,11 @@ public class EvidenciaAppController extends EvidenciaUserController {
     public String getTileForm() {
         return "evidenciaFormApp";
     }
+    
+    
+    public String fileUrl(Fitxer arxiu) {
+        return FileDownloadController.fileUrl(arxiu);
+    }
+    
 
 }

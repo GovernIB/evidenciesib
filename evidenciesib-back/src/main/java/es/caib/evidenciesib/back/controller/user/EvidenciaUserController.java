@@ -383,11 +383,10 @@ public class EvidenciaUserController extends EvidenciaController {
         // AQUEST IDIOMA HA DE SER EL QUE DIGUI EVIDENCIA 
         final String languageUI = LocaleContextHolder.getLocale().getLanguage();
 
-        String url = Configuracio.getBackUrl() + Constants.MAPPING_BACK_PUBLIC_EVIDENCE
-                + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_INFO_OPERATION
+        String urlStamp = Configuracio.getFrontUrl() + Constants.MAPPING_FULL_PUBLIC_EVIDENCE_INFO
                 + HibernateFileUtil.encryptFileID(evi.getEvidenciaID());
 
-        evi = this.evidenciaLogicaEjb.createAdaptedFileAndSignDocument(evi, languageUI, url);
+        evi = this.evidenciaLogicaEjb.createAdaptedFileAndSignDocument(evi, languageUI, urlStamp);
 
         messagesInternalSignDocument(request, evi);
 
