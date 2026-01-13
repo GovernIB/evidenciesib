@@ -106,3 +106,5 @@ replay_pid*
 /evidenciesib-api-externa-client-evidencies-v1/test.properties
 /evidenciesib.ear_26-07-2024
 /installCertsWithoutOpenSSL.bat
+/target
+/scripts/target
