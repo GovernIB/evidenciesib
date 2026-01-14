@@ -1,7 +1,5 @@
 package es.caib.evidenciesib.back.controller;
 
-
-import es.caib.evidenciesib.back.controller.all.FileDownloadPublicController;
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
@@ -36,13 +37,65 @@ public class EvidenciaPublicController {
     public String showBasicInfo(@PathVariable("encriptedEvidenciaID")
     String encriptedEvidenciaID, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        RestTemplate restTemplate = new RestTemplate();
+        boolean headerEnabled = Configuracio.isSignatureHeaderEnabled();
 
-        String urlBack = Configuracio.getBackUrl() + Constants.MAPPING_FULL_PUBLIC_EVIDENCE_INFO + encriptedEvidenciaID;
+        StringBuilder html = new StringBuilder();
 
-        //log.info("\nInvocant a URL BACK per obtenir informació bàsica de l'evidència: " + urlBack + "\n");
+        String urlEvidenciesBack = Configuracio.getBackUrl() + Constants.MAPPING_FULL_PUBLIC_EVIDENCE_INFO
+                + encriptedEvidenciaID;
 
-        return restTemplate.getForObject(urlBack, String.class);
+        if (headerEnabled) {
+            RestTemplate restTemplate = new RestTemplate();
+
+            String onlyHeader = Configuracio.getFrontUrl() + ENTITY_HEADER_CONTEXTWEB;
+
+            //log.info("\nInvocant a URL BACK per obtenir informació bàsica de l'evidència: " + urlBack + "\n");
+
+            html.append(
+                    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n");
+            html.append("<html>\n");
+
+            html.append("<head>\n");
+            html.append("<script src='" + request.getContextPath() + "/js/jquery-3.5.0.js'></script>\n");
+            html.append("<script src='" + request.getContextPath() + "/js/jquery-ui.min.js'></script>\n");
+            html.append("</head>\n");
+            html.append("<body>\n");
+
+            html.append(restTemplate.getForObject(onlyHeader, String.class));
+
+            html.append("<iframe id='miIframe' style='width:100%; height:1800px; border:none;' src='"
+                    + urlEvidenciesBack + "'>\n");
+
+            html.append("</iframe>");
+
+            html.append("</body></html>");
+        } else {
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            //log.info("\nInvocant a URL BACK per obtenir informació bàsica de l'evidència: " + urlBack + "\n");
+
+            html.append(restTemplate.getForObject(urlEvidenciesBack, String.class));
+
+        }
+
+        //String htmlEvidenciesIBInfo =  restTemplate.getForObject(urlBack, String.class);
+
+        return html.toString();
+    }
+
+    public static final String ENTITY_HEADER_CONTEXTWEB = "/public/onlyheader";
+
+    @RequestMapping(value = ENTITY_HEADER_CONTEXTWEB, method = RequestMethod.GET)
+    public ModelAndView onlyHeader(HttpServletRequest request, HttpServletResponse response) {
+
+        // /evidenciesib-front/src/main/webapp/WEB-INF/views/pages/entityheader.jsp
+        ModelAndView mav = new ModelAndView("entityheader");
+
+        EvidenciaLoginController.configurarEntityHeader(request, mav, log);
+
+        return mav;
+
     }
 
     @RequestMapping(value = Constants.MAPPING_PUBLIC_ARXIU + "{encriptedEvidenciaID}", method = RequestMethod.GET)

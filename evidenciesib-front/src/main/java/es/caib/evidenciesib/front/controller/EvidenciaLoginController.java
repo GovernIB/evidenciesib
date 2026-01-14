@@ -24,7 +24,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -33,6 +32,7 @@ import org.fundaciobit.pluginsib.login.api.LoginInfo;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginController;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginManager;
 import org.fundaciobit.pluginsib.login.springutils.PluginLoginUserDetails;
+import org.jboss.logging.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -121,13 +121,13 @@ public class EvidenciaLoginController {
         mav.addObject("download", base + DOWNLOAD_PDF + "/" + encryptedEvidenciaID);
         mav.addObject("objectpdf", base + OBJECT_PDF + "/" + encryptedEvidenciaID);
 
-        configurarEntityHeader(request, mav);
+        configurarEntityHeader(request, mav,log);
 
         return mav;
 
     }
 
-    protected void configurarEntityHeader(HttpServletRequest request, ModelAndView mav) {
+    public static void configurarEntityHeader(HttpServletRequest request, ModelAndView mav, Logger log) {
         mav.addObject("headerEnabled", false);
 
         // log.info("\n\n" + "Entitat => " + signaturesSet.getEntitat());
@@ -409,7 +409,7 @@ public class EvidenciaLoginController {
 
         mav.addObject("evidenciaID", evidenciaID);
 
-        configurarEntityHeader(request, mav);
+        configurarEntityHeader(request, mav, log);
 
         return mav;
     }
