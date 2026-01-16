@@ -11,6 +11,7 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import java.io.File;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
 import java.util.Locale;
@@ -121,7 +122,7 @@ public class EvidenciaLoginController {
         mav.addObject("download", base + DOWNLOAD_PDF + "/" + encryptedEvidenciaID);
         mav.addObject("objectpdf", base + OBJECT_PDF + "/" + encryptedEvidenciaID);
 
-        configurarEntityHeader(request, mav,log);
+        configurarEntityHeader(request, mav, log);
 
         return mav;
 
@@ -278,6 +279,9 @@ public class EvidenciaLoginController {
 
         String ciutat = request
                 .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCIUTAT.javaName);
+
+        ciutat = canviarCodificacioUTF(ciutat);
+
         String codipostal = request
                 .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName);
         String ip = request.getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOIP.javaName);
@@ -287,8 +291,10 @@ public class EvidenciaLoginController {
                 .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOLONGITUD.javaName);
         String pais = request
                 .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOPAIS.javaName);
+        pais = canviarCodificacioUTF(pais);
         String regio = request
                 .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOREGIO.javaName);
+        regio = canviarCodificacioUTF(regio);
 
         log.info("setLocationPost:: ciutat => " + ciutat);
         log.info("setLocationPost:: pais => " + pais);
@@ -317,6 +323,14 @@ public class EvidenciaLoginController {
 
         return "redirect:" + PluginLoginController.MAPPING_LOGIN;
 
+    }
+
+    protected String canviarCodificacioUTF(String ciutat) throws UnsupportedEncodingException {
+        if (ciutat == null) {
+            return null;
+        } else {
+            return new String(ciutat.getBytes("ISO-8859-1"), "UTF-8");
+        }
     }
 
     protected String getRedirectUrl(Long evidenciaID) {
@@ -535,8 +549,9 @@ public class EvidenciaLoginController {
     public static final String OBJECT_PDF = "/objectpdf";
 
     @RequestMapping(value = OBJECT_PDF + "/{evidenciaIDEncrypted}", method = RequestMethod.GET)
-    public void objectPdf(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaIDEncrypted")
-    String evidenciaIDEncrypted) throws Exception, I18NException {
+    public void objectPdf(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("evidenciaIDEncrypted")
+            String evidenciaIDEncrypted) throws Exception, I18NException {
 
         returnPdf(request, response, evidenciaIDEncrypted, false);
 
@@ -544,8 +559,6 @@ public class EvidenciaLoginController {
 
     protected void returnPdf(HttpServletRequest request, HttpServletResponse response, String evidenciaIDEncrypted,
             boolean isDownload) throws Exception, I18NException {
-
-       
 
         Long evidenciaID = Long.parseLong(evidenciaIDEncrypted);
 

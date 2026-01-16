@@ -1,6 +1,6 @@
 <%@page import="es.caib.evidenciesib.front.controller.EvidenciaLoginController"%>
 <%@page import="es.caib.evidenciesib.model.fields.EvidenciaFields"%>
-<%@page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/pages/taglib.jsp"%>
 <c:set var="currentLang" value="${pageContext.response.locale.language}" />
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
     </center>
     <br/>
 
-    <form name="norepudiForm" id="norepudiForm" action="${action}" onsubmit="return validateForm()" method="post">
+    <form name="norepudiForm" id="norepudiForm" action="${action}" onsubmit="return validateForm()" method="post" accept-charset="UTF-8">
         <div class="container">
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col-sm" style>
@@ -184,7 +184,7 @@
         function initLocation() {
 
             var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "https://ipapi.co/json/", true);
+            xhttp.open("GET", "https://ipapi.co/json", true);
             xhttp.responseType = 'json';
             xhttp.onload = function() {
                 var status = xhttp.status;
