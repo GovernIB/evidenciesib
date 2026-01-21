@@ -25,7 +25,6 @@ try {
 
 	log.error("LANNNNNNG: " + LocaleContextHolder.getLocale().toString());
 
-	String e = (String) request.getAttribute("error");
 	if (response.getStatus() == 500 && exception != null) {
 		msg = exception.getMessage();
 
@@ -36,7 +35,18 @@ try {
 		stackTrace = sw.toString();
 
 	} else {
-		msg = I18NUtils.tradueix("error.jsp." + response.getStatus());
+
+		msg = (String) request.getAttribute("error");
+
+		if (msg == null || msg.trim().isEmpty()) {
+			int status = response.getStatus();
+
+			if (status == 200) {
+				msg = "No s'ha produït cap error";
+			} else {
+				msg = I18NUtils.tradueix("error.jsp." + response.getStatus());
+			}
+		}
 	}
 
 } catch (Throwable th) {
@@ -53,10 +63,10 @@ request.setAttribute("stacktrace", stackTrace);
 <body>
 
     <script type="text/javascript">
-        function tornaEnrera(path) {
-            window.location.href = "/";
-        }
-    </script>
+                    function tornaEnrera(path) {
+                        window.location.href = "/";
+                    }
+                </script>
 
 
     <div class="alert alert-danger" role="alert">
@@ -67,13 +77,19 @@ request.setAttribute("stacktrace", stackTrace);
         <br />
         <div>
             <b>Error:</b>${msg}</div>
+
+        <%
+        if (stackTrace != null) {
+        %>
         <b>StackTrace:</b><br>
         <textarea row="50" cols="120"> ${stacktrace}</textarea>
-
+        <%
+        }
+        %>
         <div>
             <br /> <br />
 
-            <!-- Mostram el botó de tornar a principal -->
+            <!-- Aquí va el botó de tornar a principal -->
             <a class="btn btn-primary" role="button" href="<c:url value="/"/>"><%=etiquetaBoto%></a>
 
         </div>

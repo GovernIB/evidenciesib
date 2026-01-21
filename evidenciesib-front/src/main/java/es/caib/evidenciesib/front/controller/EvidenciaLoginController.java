@@ -187,7 +187,7 @@ public class EvidenciaLoginController {
     public static final String MAPPING_CANCEL_GET = "/cancelnorepudi";
 
     @RequestMapping(path = MAPPING_CANCEL_GET + "/{evidenciaID}", method = RequestMethod.GET)
-    public String canceGet(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
+    public String cancelGet(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
     Long evidenciaID) throws Exception {
 
         log.info("ENTRA A CANCEL GET => evidenciaID=" + evidenciaID);

@@ -54,6 +54,11 @@
     </definition>
     
     
+    <definition name="errorSimple" template="/WEB-INF/jsp/layout/onlycontentlayout.jsp">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/all/buit.jsp" />
+    </definition>
+    
+    
     
 
     

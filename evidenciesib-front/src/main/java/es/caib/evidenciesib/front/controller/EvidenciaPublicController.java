@@ -45,9 +45,8 @@ public class EvidenciaPublicController {
                 + encriptedEvidenciaID;
 
         if (headerEnabled) {
-            RestTemplate restTemplate = new RestTemplate();
 
-            String onlyHeader = Configuracio.getFrontUrl() + ENTITY_HEADER_CONTEXTWEB;
+            RestTemplate restTemplate = new RestTemplate();
 
             //log.info("\nInvocant a URL BACK per obtenir informació bàsica de l'evidència: " + urlBack + "\n");
 
@@ -61,7 +60,10 @@ public class EvidenciaPublicController {
             html.append("</head>\n");
             html.append("<body>\n");
 
-            html.append(restTemplate.getForObject(onlyHeader, String.class));
+            final String onlyHeader = Configuracio.getFrontUrl() + ENTITY_HEADER_CONTEXTWEB;
+            
+            final String header = restTemplate.getForObject(onlyHeader, String.class);
+            html.append(header);
 
             html.append("<iframe id='miIframe' style='width:100%; height:1800px; border:none;' src='"
                     + urlEvidenciesBack + "'>\n");
