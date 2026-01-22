@@ -124,6 +124,8 @@ public class EvidenciaLoginController {
 
         configurarEntityHeader(request, mav, log);
 
+        mav.addObject("ignorargeolocalitzacio", Configuracio.ignorarGeolocalitzacio());
+
         return mav;
 
     }
@@ -277,36 +279,44 @@ public class EvidenciaLoginController {
 
         }
 
-        String ciutat = request
-                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCIUTAT.javaName);
+        if (Configuracio.ignorarGeolocalitzacio()) {
+            log.info("XYZ ZZZ setLocationPost:: S'IGNORA la Geolocalització segons configuració.");
 
-        ciutat = canviarCodificacioUTF(ciutat);
+        } else {
 
-        String codipostal = request
-                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName);
-        String ip = request.getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOIP.javaName);
-        String latitud = request
-                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOLATITUD.javaName);
-        String longitud = request
-                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOLONGITUD.javaName);
-        String pais = request
-                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOPAIS.javaName);
-        pais = canviarCodificacioUTF(pais);
-        String regio = request
-                .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOREGIO.javaName);
-        regio = canviarCodificacioUTF(regio);
+            String ciutat = request
+                    .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCIUTAT.javaName);
 
-        log.info("setLocationPost:: ciutat => " + ciutat);
-        log.info("setLocationPost:: pais => " + pais);
-        log.info("setLocationPost:: ip => " + ip);
+            ciutat = canviarCodificacioUTF(ciutat);
 
-        evidencia.setLocalitzacioCiutat(ciutat);
-        evidencia.setLocalitzacioCodiPostal(codipostal);
-        evidencia.setLocalitzacioIp(ip);
-        evidencia.setLocalitzacioLatitud(latitud);
-        evidencia.setLocalitzacioLongitud(longitud);
-        evidencia.setLocalitzacioPais(pais);
-        evidencia.setLocalitzacioRegio(regio);
+            String codipostal = request
+                    .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName);
+            String ip = request
+                    .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOIP.javaName);
+            String latitud = request
+                    .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOLATITUD.javaName);
+            String longitud = request
+                    .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOLONGITUD.javaName);
+            String pais = request
+                    .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOPAIS.javaName);
+            pais = canviarCodificacioUTF(pais);
+            String regio = request
+                    .getParameter(EvidenciaFields._TABLE_MODEL + "." + EvidenciaFields.LOCALITZACIOREGIO.javaName);
+            regio = canviarCodificacioUTF(regio);
+
+            log.info("setLocationPost:: ciutat => " + ciutat);
+            log.info("setLocationPost:: pais => " + pais);
+            log.info("setLocationPost:: ip => " + ip);
+
+            evidencia.setLocalitzacioCiutat(ciutat);
+            evidencia.setLocalitzacioCodiPostal(codipostal);
+            evidencia.setLocalitzacioIp(ip);
+            evidencia.setLocalitzacioLatitud(latitud);
+            evidencia.setLocalitzacioLongitud(longitud);
+            evidencia.setLocalitzacioPais(pais);
+            evidencia.setLocalitzacioRegio(regio);
+
+        }
 
         evidenciaLogicaEjb.update(evidencia);
 

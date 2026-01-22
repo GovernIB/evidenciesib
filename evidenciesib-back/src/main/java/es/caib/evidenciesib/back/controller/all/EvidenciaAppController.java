@@ -23,6 +23,7 @@ import es.caib.evidenciesib.back.form.webdb.EvidenciaFilterForm;
 import es.caib.evidenciesib.back.form.webdb.EvidenciaForm;
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
+import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.entity.Fitxer;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
@@ -137,8 +138,6 @@ public class EvidenciaAppController extends EvidenciaUserController {
         hiddenFields.remove(EvidenciaFields.PERSONANOM);
         hiddenFields.remove(EvidenciaFields.PERSONALLINATGE1);
         hiddenFields.remove(EvidenciaFields.PERSONALLINATGE2);
-        hiddenFields.remove(EvidenciaFields.PERSONAEMAIL);
-        hiddenFields.remove(EvidenciaFields.PERSONAMOBIL);
         hiddenFields.remove(EvidenciaFields.DATAINICI);
         hiddenFields.remove(EvidenciaFields.DATAFI);
         hiddenFields.remove(EvidenciaFields.LOGINSUBTYPE);
@@ -147,13 +146,29 @@ public class EvidenciaAppController extends EvidenciaUserController {
         hiddenFields.remove(EvidenciaFields.LOGINID);
         hiddenFields.remove(EvidenciaFields.LOGINAUTHMETHOD);
         hiddenFields.remove(EvidenciaFields.LOGINADDITIONALPROPERTIES);
-        hiddenFields.remove(EvidenciaFields.LOCALITZACIOIP);
-        hiddenFields.remove(EvidenciaFields.LOCALITZACIOCODIPOSTAL);
-        hiddenFields.remove(EvidenciaFields.LOCALITZACIOLATITUD);
-        hiddenFields.remove(EvidenciaFields.LOCALITZACIOLONGITUD);
-        hiddenFields.remove(EvidenciaFields.LOCALITZACIOREGIO);
-        hiddenFields.remove(EvidenciaFields.LOCALITZACIOCIUTAT);
-        hiddenFields.remove(EvidenciaFields.LOCALITZACIOPAIS);
+        
+        Evidencia evi = evidenciaForm.getEvidencia();
+        if (evi.getLocalitzacioIp() != null) {
+            hiddenFields.remove(EvidenciaFields.LOCALITZACIOIP);
+        }
+        if (evi.getLocalitzacioCodiPostal() != null) {
+            hiddenFields.remove(EvidenciaFields.LOCALITZACIOCODIPOSTAL);
+        }
+        if (evi.getLocalitzacioLatitud() != null) {
+            hiddenFields.remove(EvidenciaFields.LOCALITZACIOLATITUD);
+        }        
+        if (evi.getLocalitzacioLongitud() != null) {
+            hiddenFields.remove(EvidenciaFields.LOCALITZACIOLONGITUD);
+        }        
+        if (evi.getLocalitzacioRegio() != null) {
+            hiddenFields.remove(EvidenciaFields.LOCALITZACIOREGIO);
+        }        
+        if (evi.getLocalitzacioCiutat() != null) {
+            hiddenFields.remove(EvidenciaFields.LOCALITZACIOCIUTAT);
+        }        
+        if (evi.getLocalitzacioPais() != null) {
+            hiddenFields.remove(EvidenciaFields.LOCALITZACIOPAIS);
+        }        
         hiddenFields.remove(EvidenciaFields.FIRMAREASON);
         hiddenFields.remove(EvidenciaFields.FIRMAIDIOMADOCUMENT);
         hiddenFields.remove(EvidenciaFields.FIRMATIPUSDOCUMENTAL);

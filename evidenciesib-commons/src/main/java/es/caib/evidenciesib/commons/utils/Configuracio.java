@@ -344,4 +344,9 @@ public class Configuracio implements Constants {
         return val;
     }
 
+    
+    public static final boolean ignorarGeolocalitzacio() {
+        return "true".equalsIgnoreCase(getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.ignorargeolocalitzacio"));
+    }
+    
 }

@@ -72,6 +72,8 @@
         
         <input type="hidden" name="deviceInfo" id="deviceInfo" value=""/>
         
+        <c:if test="${ignorargeolocalitzacio == false}">
+        
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOCIUTAT.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOCIUTAT.javaName%>" />
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOCODIPOSTAL.javaName%>" />
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOIP.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOIP.javaName%>" />
@@ -79,6 +81,8 @@
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOLONGITUD.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOLONGITUD.javaName%>" />
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOPAIS.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOPAIS.javaName%>" />
         <input type="hidden" id="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOREGIO.javaName%>" name="<%=EvidenciaFields._TABLE_MODEL + "." +EvidenciaFields.LOCALITZACIOREGIO.javaName%>" />
+
+        </c:if>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -182,7 +186,7 @@
         }
 
         function initLocation() {
-
+<c:if test="${ignorargeolocalitzacio == false}">
             var xhttp = new XMLHttpRequest();
             xhttp.open("GET", "https://ipapi.co/json", true);
             xhttp.responseType = 'json';
@@ -202,7 +206,7 @@
                 }
             };
             xhttp.send();
-
+     </c:if>
         };
 
         function setValorLoc(camp, valor) {
