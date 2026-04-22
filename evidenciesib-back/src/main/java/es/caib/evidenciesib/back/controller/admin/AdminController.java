@@ -1,10 +1,13 @@
 package es.caib.evidenciesib.back.controller.admin;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,8 +21,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.caib.evidenciesib.back.utils.Tab;
 import es.caib.evidenciesib.commons.utils.Configuracio;
+import es.caib.evidenciesib.logic.SampleLogicaService;
+import es.caib.evidenciesib.back.utils.Tab;
 
 /**
  * 
@@ -43,58 +47,69 @@ import es.caib.evidenciesib.commons.utils.Configuracio;
         baseLink = "/admin/option2",
         relativeLink = "",
         addSeparatorBefore = true)
-        
-@Tile(name = "option2Admin", extendsTile = "option1Admin", type = TileType.ANOTHER)*/
+@Tile(name = "option2Admin", extendsTile =  "option1Admin", type = TileType.ANOTHER)
+*/
 @MenuOption(
-        labelCode = "=Contingut del fitxer evidenciesib.properties",
+        labelCode = "=Contents of evidencies.properties file",
         order = 1000,
         group = Tab.MENU_ADMIN,
         baseLink = "/admin/properties",
         relativeLink = "",
         addSeparatorBefore = true)
 @MenuOption(
-        labelCode = "=Contingut del fitxer evidenciesib.system.properties",
+        labelCode = "=Contents of evidenciesib.system.properties file",
         order = 1010,
         group = Tab.MENU_ADMIN,
         baseLink = "/admin/systemproperties",
         relativeLink = "")
 @MenuOption(
-        labelCode = "=Recarregar fitxers de properties",
+        labelCode = "=Reload contents of property files",
         order = 1020,
         group = Tab.MENU_ADMIN,
         baseLink = "/admin/reloadproperties",
         relativeLink = "")
+@MenuOption(
+        labelCode = "=Size of database tables",
+        order = 1030,
+        group = Tab.MENU_ADMIN,
+        baseLink = "/admin/sizeofdatabasetables",
+        relativeLink = "",
+        addSeparatorBefore = true)
 @Tile(
         name = AdminController.KEYVALUE_ADMIN_TILE,
         extendsTile = Tab.MENU_ADMIN,
         contentJsp = "/WEB-INF/jsp/common/keyvalue.jsp",
-        attributes = { @TileAttribute(name = "titol", value = "admin.admin") },
+        attributes = {
+            @TileAttribute(name = "titol", value = "admin.admin")
+        },
         type = TileType.ANOTHER)
 public class AdminController {
 
     public static final String KEYVALUE_ADMIN_TILE = "keyvalueAdmin";
-
-    /*
+    
+    @EJB(mappedName=SampleLogicaService.JNDI_NAME)
+    SampleLogicaService sampleLogicaService;
+/*
     @RequestMapping(value = "/option1")
     public ModelAndView option1(HttpSession session, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-    
+
         ModelAndView mav = new ModelAndView("option1Admin");
         mav.addObject("optionNumber", "OPCIÓ ADMIN -1-");
         return mav;
-    
+
     }
-    
+
     @RequestMapping(value = "/option2")
     public ModelAndView option2(HttpSession session, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-    
+
         ModelAndView mav = new ModelAndView("option2Admin");
         mav.addObject("optionNumber", "OPCIÓ ADMIN -2-");
         return mav;
     }
-    
-    */
+*/
+
     @RequestMapping(value = "/properties")
     public ModelAndView properties(HttpSession session, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -111,7 +126,7 @@ public class AdminController {
         Collections.sort(keyValuelist);
 
         ModelAndView mav = new ModelAndView("keyvalueAdmin");
-        mav.addObject("title", "Item list of evidencies.properties file");
+        mav.addObject("title", "Item list of evidenciesib.app.properties file");
         mav.addObject("subtitle", "");
         mav.addObject("keyValueList", keyValuelist);
         return mav;
@@ -202,5 +217,27 @@ public class AdminController {
             return this.getKey().compareTo(o2.getKey());
         }
     }
+    
+    @RequestMapping(value = "/sizeofdatabasetables")
+    public ModelAndView tablesize(HttpSession session, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+        Map<String, Long> sizes = sampleLogicaService.getTableSizes();
+
+        List<KeyValueItem> keyValuelist = new ArrayList<KeyValueItem>();
+
+        for (Map.Entry<String, Long> entry : sizes.entrySet()) {
+            keyValuelist.add(new KeyValueItem((String) entry.getKey(), entry.getValue() + " bytes" ));
+        }
+
+        Collections.sort(keyValuelist);
+
+        ModelAndView mav = new ModelAndView("keyvalueAdmin");
+        mav.addObject("title", "Size of database tables");
+        mav.addObject("subtitle", "");
+        mav.addObject("keyValueList", keyValuelist);
+        return mav;
+    }
+
 
 }

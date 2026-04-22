@@ -58,10 +58,14 @@ import es.caib.evidenciesib.back.utils.Tab;
 @Controller
 @RequestMapping(value = "/webdb/evidencia")
 @SessionAttributes(types = { EvidenciaForm.class, EvidenciaFilterForm.class })
-@Tile(name="evidenciaFormWebDB", contentJsp="/WEB-INF/jsp/webdb/evidenciaForm.jsp", extendsTile=Tab.MENU_WEBDB,
-      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="evidencia.evidencia")})
-@Tile(name="evidenciaListWebDB", contentJsp="/WEB-INF/jsp/webdb/evidenciaList.jsp", extendsTile=Tab.MENU_WEBDB,
-       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="evidencia.evidencia") })
+@Tile(name="evidenciaFormWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe
+    contentJsp="/WEB-INF/jsp/webdb/evidenciaForm.jsp", type=TileType.WEBDB_FORM,
+    attributes={ @TileAttribute(name="titol", value="evidencia.evidencia")})
+@Tile(name="evidenciaListWebDB", extendsTile=Tab.MENU_WEBDB,
+    // Els següents atributs no són necessaris si heredes aquesta classe 
+    contentJsp="/WEB-INF/jsp/webdb/evidenciaList.jsp", type=TileType.WEBDB_LIST,
+    attributes={ @TileAttribute(name="titol", value="evidencia.evidencia")})
 public class EvidenciaController
     extends es.caib.evidenciesib.back.controller.EvidenciesIBFilesBaseController<Evidencia, java.lang.Long, EvidenciaForm> implements EvidenciaFields {
 
