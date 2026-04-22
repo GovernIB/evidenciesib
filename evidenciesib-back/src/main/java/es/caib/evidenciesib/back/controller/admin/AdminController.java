@@ -227,7 +227,7 @@ public class AdminController {
         List<KeyValueItem> keyValuelist = new ArrayList<KeyValueItem>();
 
         for (Map.Entry<String, Long> entry : sizes.entrySet()) {
-            keyValuelist.add(new KeyValueItem((String) entry.getKey(), entry.getValue() + " bytes" ));
+            keyValuelist.add(new KeyValueItem((String) entry.getKey(), entry.getValue() + " bytes", "<i class=\"fas fa-database\"></i>", ""));
         }
 
         Collections.sort(keyValuelist);
