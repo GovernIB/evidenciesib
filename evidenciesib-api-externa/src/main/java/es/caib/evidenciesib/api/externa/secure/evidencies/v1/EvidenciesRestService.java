@@ -475,7 +475,7 @@ public class EvidenciesRestService extends RestUtils {
             String language, @Parameter(hidden = true) @Context
             HttpServletRequest request) {
 
-        log.info("\n\nXYZ DEBUG Entra a getByEncryptedId(" + encryptedEvidenceID + ")\n\n");
+        log.info("Entra a getBasicProperties(" + encryptedEvidenceID + ") [" + request.getRemoteUser() + "]");
 
         try {
 
