@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -65,7 +66,9 @@ import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.commons.utils.StaticVersion;
 import es.caib.evidenciesib.ejb.EvidenciaEJB;
+import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.utils.I18NLogicUtils;
+import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.entity.Fitxer;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
@@ -100,7 +103,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         return super.update(instance);
     }
 
-    private EvidenciaJPA createEvidenciaAdaptedFile(EvidenciaJPA evi, Locale langUI, String url) throws I18NException {
+    private EvidenciaJPA createEvidenciaAdaptedFile(EvidenciaJPA evi, Locale langUI) throws I18NException {
 
         File dst_pdf = null;
         try {
@@ -123,9 +126,9 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
                 stamper = new PdfStamper(reader, fos, '\0', true);
                 PdfWriter writer = stamper.getWriter();
 
-                generarAnnexJsonDeLesEvidencies(evi, reader, stamper, writer);
+                String urlWeb = generarAnnexJsonDeLesEvidencies(evi, reader, stamper, writer);
 
-                afegirSegellAmbInformacioEvidencia(evi, reader, stamper, writer, url);
+                afegirSegellAmbInformacioEvidencia(evi, reader, stamper, writer, urlWeb);
 
             } finally {
 
@@ -207,14 +210,14 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
      */
     @PermitAll
     @Override
-    public EvidenciaJPA createAdaptedFileAndSignDocument(EvidenciaJPA evi, String idiomaUI, String url) {
+    public EvidenciaJPA createAdaptedFileAndSignDocument(EvidenciaJPA evi, String idiomaUI) {
 
         Locale languageUI = new Locale(idiomaUI);
 
         FirmaSimpleFile fileToSign;
         try { // Global
 
-            evi = this.createEvidenciaAdaptedFile(evi, languageUI, url);
+            evi = this.createEvidenciaAdaptedFile(evi, languageUI);
 
             try {
 
@@ -420,7 +423,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
      * @throws I18NException
      * @throws DocumentException
      */
-    protected void generarAnnexJsonDeLesEvidencies(Evidencia evi, PdfReader reader, PdfStamper stamper,
+    protected String generarAnnexJsonDeLesEvidencies(Evidencia evi, PdfReader reader, PdfStamper stamper,
             PdfWriter writer) throws IOException, I18NException, DocumentException {
 
         // Attach JSON  to PDF
@@ -429,53 +432,19 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
         // 1.3.- Attach Files
 
+        Map<String, String> map = getBasicPropertiesOfEvidence(evi);
+
         File fileEviJson = null;
-        Map<String, Object> map = new TreeMap<String, Object>();
         try {
-            String name = "evidencies.json";
 
             fileEviJson = File.createTempFile("evidenciesib_evidencies_", ".json");
             fileEviJson.deleteOnExit();
-
-            map.put("EvidenciaID", evi.getEvidenciaID());
-
-            map.put("person.name", evi.getPersonaNom());
-            map.put("person.surname1", evi.getPersonaLlinatge1());
-            map.put("person.surname2", evi.getPersonaLlinatge2());
-            map.put("person.administrationid", evi.getPersonaNif());
-
-            map.put("login.type", evi.getLoginType());
-            map.put("login.subtype", evi.getLoginSubtype());
-            map.put("login.id", evi.getLoginId());
-            map.put("login.date", ISO8601.dateToISO8601(evi.getLoginData()));
-            map.put("login.properties.sha256", evi.getLoginPropertiesSha256());
-            map.put("login.qaa", evi.getLoginQaa());
-
-            String clickProperties = evi.getClickProperties();
-            if (clickProperties != null && clickProperties.trim().length() != 0) {
-
-                Properties prop = new Properties();
-                prop.load(new StringReader(clickProperties));
-                String datemsStr = prop.getProperty("date.ms");
-                if (datemsStr != null) {
-                    try {
-                        long dateMs = Long.parseLong(datemsStr);
-                        map.put("sign.intention.date", ISO8601.dateToISO8601(new Date(dateMs)));
-                    } catch (Exception e) {
-                        log.error("No s'ha pogut parsejar la data de la voluntat de firma: " + e.getMessage(), e);
-                    }
-
-                }
-            }
-
-            // Esborram tots els valors null !!!!
-            while (map.values().remove(null)) {
-            };
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
+            Gson gson = new GsonBuilder()
+                    .setPrettyPrinting()
+                    .disableHtmlEscaping() 
+                    .create();;
             org.apache.commons.io.FileUtils.write(fileEviJson, gson.toJson(map), StandardCharsets.UTF_8);
-
+            final String name = "evidencies.json";
             PdfFileSpecification fs = PdfFileSpecification.fileEmbedded(stamper.getWriter(),
                     fileEviJson.getAbsolutePath(), name, null);
 
@@ -491,14 +460,108 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         Map<String, String> info = reader.getInfo();
         info.put("EvidenciesIB.versio", StaticVersion.VERSION);
 
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
-            Object val = entry.getValue();
-            info.put("EvidenciesIB." + key, String.valueOf(val));
+            String val = entry.getValue();
+            info.put("EvidenciesIB." + key, val);
         }
 
         stamper.setMoreInfo(info);
 
+        return (String) map.get("url.web");
+
+    }
+
+    public Map<String, String> getBasicPropertiesOfEvidence(String encryptedEvidenceID) throws I18NException {
+
+        Long evidenciaID;
+
+        try {
+            evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenceID);
+        } catch (Exception e) {
+            String msg = "Error desencriptant l'ID de l'evidència(" + encryptedEvidenceID + "): " + e.getMessage();
+            log.error(msg, e);
+            throw new I18NException(e, "genapp.comodi", msg);
+        }
+
+        Evidencia evi = this.findByPrimaryKey(evidenciaID);
+
+        if (evi == null) {
+
+            // error.notfound=No s´ha trobat cap {0} amb {1} igual a {2}
+            throw new I18NException("error.notfound", new I18NArgumentString("Evidència"),
+                    new I18NArgumentString("'ID encriptat'"), new I18NArgumentString(encryptedEvidenceID));
+        }
+
+        Map<String, String> map = getBasicPropertiesOfEvidence(evi);
+
+        return map;
+    }
+
+    /**
+     * 
+     * @param evi
+     * @return
+     */
+    protected Map<String, String> getBasicPropertiesOfEvidence(Evidencia evi) {
+        Map<String, String> map = new TreeMap<String, String>();
+
+        map.put("EvidenciaID", String.valueOf(evi.getEvidenciaID()));
+        map.put("EvidenciaID.encrypted", HibernateFileUtil.encryptFileID(evi.getEvidenciaID()));
+
+        final String encryptedEvidenciaIdForUrl = URLEncoder
+                .encode(HibernateFileUtil.encryptFileID(evi.getEvidenciaID()), StandardCharsets.UTF_8);
+
+        final String urlWeb;
+        urlWeb = Configuracio.getFrontUrl() + Constants.MAPPING_FULL_PUBLIC_EVIDENCE_INFO + encryptedEvidenciaIdForUrl;
+        map.put("url.web", urlWeb);
+
+        final String urlFile = Configuracio.getFrontUrl() + Constants.MAPPING_PUBLIC_ARXIU + encryptedEvidenciaIdForUrl;
+        map.put("url.downloadfile", urlFile);
+
+        /*
+        final String urlJson = Configuracio.getFrontUrl().replace("front", "api/externa")
+                + "/secure/evidencies/getbyencryptedid/" + encryptedEvidenciaIdForUrl;
+        map.put("url.json", urlJson);
+        */
+
+        map.put("person.name", evi.getPersonaNom());
+        map.put("person.surname1", evi.getPersonaLlinatge1());
+        map.put("person.surname2", evi.getPersonaLlinatge2());
+        map.put("person.administrationid", evi.getPersonaNif());
+
+        map.put("login.type", evi.getLoginType());
+        map.put("login.subtype", evi.getLoginSubtype());
+        map.put("login.id", evi.getLoginId());
+        map.put("login.date", ISO8601.dateToISO8601(evi.getLoginData()));
+        map.put("login.properties.sha256", evi.getLoginPropertiesSha256());
+        map.put("login.qaa", evi.getLoginQaa());
+
+        String clickProperties = evi.getClickProperties();
+        if (clickProperties != null && clickProperties.trim().length() != 0) {
+
+            Properties prop = new Properties();
+            try {
+                prop.load(new StringReader(clickProperties));
+            } catch (IOException e) {
+            }
+            String datemsStr = prop.getProperty("date.ms");
+            if (datemsStr != null) {
+                try {
+                    long dateMs = Long.parseLong(datemsStr);
+                    map.put("sign.intention.date", ISO8601.dateToISO8601(new Date(dateMs)));
+                } catch (Exception e) {
+                    log.error("No s'ha pogut parsejar la data de la voluntat de firma: " + e.getMessage(), e);
+                }
+
+            }
+        }
+
+        // Esborram tots els valors null !!!!
+        while (map.values().remove(null)) {
+        }
+
+        return map;
     }
 
     /**

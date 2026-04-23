@@ -89,7 +89,7 @@ public class EvidenciesApi {
     return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
       }
   /**
-   * Retorna informació d&#39;una evidència a partir del seu id
+   * Retorna informació d&#39;una evidència a partir del seu id. Nota: Requereix que l&#39;usuari aplicació que faci la petició sigui el mateix que l&#39;ha creada. En cas de no ser el mateix s&#39;ha d&#39;usar l&#39;operacio &#39;getbyencryptedid&#39;.
    * 
    * @param evidenciaID Identificador de l&#39;evidència de la que volem informació (required)
    * @param language Idioma en que s&#39;han de retornar les dades i errors(Només suportat &#39;ca&#39; o &#39;es&#39;) (optional)
@@ -132,6 +132,52 @@ public class EvidenciesApi {
     String[] localVarAuthNames = new String[] { "BasicAuth" };
 
     GenericType<EvidenciaWs> localVarReturnType = new GenericType<EvidenciaWs>() {};
+    return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+      }
+  /**
+   * Retorna informació bàsica d&#39;una evidència usant un Map a partir del seu id encriptat
+   * 
+   * @param encryptedEvidenceID Identificador encriptat de l&#39;evidència de la que volem informació (required)
+   * @param language Idioma en que s&#39;han de retornar les dades i errors(Només suportat &#39;ca&#39; o &#39;es&#39;) (optional)
+   * @return a {@code String}
+   * @throws ApiException if fails to make API call
+   */
+  public String getbasicproperties(String encryptedEvidenceID, String language) throws ApiException {
+    Object localVarPostBody = null;
+    
+    // verify the required parameter 'encryptedEvidenceID' is set
+    if (encryptedEvidenceID == null) {
+      throw new ApiException(400, "Missing the required parameter 'encryptedEvidenceID' when calling getbasicproperties");
+    }
+    
+    // create path and map variables
+    String localVarPath = "/secure/evidencies/getbasicproperties/{encryptedEvidenceID}".replaceAll("\\{format\\}","json")
+      .replaceAll("\\{" + "encryptedEvidenceID" + "\\}", apiClient.escapeString(encryptedEvidenceID.toString()));
+
+    // query params
+    List<Pair> localVarQueryParams = new ArrayList<Pair>();
+    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+    Map<String, String> localVarCookieParams = new HashMap<String, String>();
+    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+    localVarQueryParams.addAll(apiClient.parameterToPairs("", "language", language));
+
+    
+    
+    
+    final String[] localVarAccepts = {
+      "application/json"
+    };
+    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+
+    final String[] localVarContentTypes = {
+      
+    };
+    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+    String[] localVarAuthNames = new String[] { "BasicAuth" };
+
+    GenericType<String> localVarReturnType = new GenericType<String>() {};
     return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
       }
   /**

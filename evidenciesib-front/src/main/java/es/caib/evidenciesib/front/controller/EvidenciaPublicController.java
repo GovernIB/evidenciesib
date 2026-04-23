@@ -1,13 +1,17 @@
 package es.caib.evidenciesib.front.controller;
 
-import java.io.InputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
+import javax.activation.MimetypesFileTypeMap;
+import javax.annotation.security.PermitAll;
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
+import es.caib.evidenciesib.hibernate.HibernateFileUtil;
+import es.caib.evidenciesib.logic.EvidenciaLogicaService;
+import es.caib.evidenciesib.logic.FitxerLogicaService;
+import es.caib.evidenciesib.model.fields.EvidenciaFields;
+import es.caib.evidenciesib.persistence.FitxerJPA;
 
 /**
  * 
@@ -29,6 +38,13 @@ import es.caib.evidenciesib.commons.utils.Constants;
 public class EvidenciaPublicController {
 
     protected Logger log = Logger.getLogger(getClass());
+
+    @EJB(mappedName = FitxerLogicaService.JNDI_NAME)
+    private FitxerLogicaService fitxerEjb;
+
+    // EJB Lògica d'Evidències
+    @EJB(mappedName = EvidenciaLogicaService.JNDI_NAME)
+    private EvidenciaLogicaService evidenciaLogicaEjb;
 
     @ResponseBody
     @RequestMapping(
@@ -61,7 +77,7 @@ public class EvidenciaPublicController {
             html.append("<body>\n");
 
             final String onlyHeader = Configuracio.getFrontUrl() + ENTITY_HEADER_CONTEXTWEB;
-            
+
             final String header = restTemplate.getForObject(onlyHeader, String.class);
             html.append(header);
 
@@ -101,36 +117,54 @@ public class EvidenciaPublicController {
     }
 
     @RequestMapping(value = Constants.MAPPING_PUBLIC_ARXIU + "{encriptedEvidenciaID}", method = RequestMethod.GET)
-    public void descargar(@PathVariable("encriptedEvidenciaID")
+    @PermitAll
+    public void descaregarFitxerSignat(@PathVariable("encriptedEvidenciaID")
     String encriptedEvidenciaID, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+        try {
+            Long evidenciaID = HibernateFileUtil.decryptFileID(encriptedEvidenciaID);
+
+            Long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERSIGNATID,
+                    EvidenciaFields.EVIDENCIAID.equal(evidenciaID));
+
+            FitxerJPA fitxer = fitxerEjb.findByPrimaryKey(fitxerID);
+
+            fullDownload(fitxerID, fitxer.getNom(), fitxer.getMime(), response, log);
+
+        } catch (Exception e) {
+            log.error("Error desencriptando el ID del archivo: " + encriptedEvidenciaID, e);
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de archivo no válido: " + e.getMessage());
+            return;
+        }
+
+        /*
         // Query string original (nom=...&mime=...)
         String query = request.getQueryString();
-
+        
         // Construir URL destí sense tocar paràmetres
         StringBuilder urlBack = new StringBuilder();
         urlBack.append(Configuracio.getBackUrl());
         urlBack.append(Constants.MAPPING_PUBLIC_ARXIU);
         urlBack.append(encriptedEvidenciaID);
-
+        
         if (query != null && !query.isEmpty()) {
             urlBack.append("?").append(query);
         }
-
+        
         URL url = new URL(urlBack.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setDoInput(true);
-
+        
         // Reenviar headers importants
         response.setStatus(conn.getResponseCode());
         response.setContentType(conn.getContentType());
-
+        
         String disposition = conn.getHeaderField("Content-Disposition");
         if (disposition != null) {
             response.setHeader("Content-Disposition", disposition);
         }
-
+        
         // Streaming
         try (InputStream in = conn.getInputStream(); OutputStream out = response.getOutputStream()) {
             byte[] buffer = new byte[8192];
@@ -140,6 +174,65 @@ public class EvidenciaPublicController {
             }
             out.flush();
         }
+        */
+    }
+    
+    
+    
+    /**
+     * 
+     * @param arxiuId
+     * @param filename
+     * @param contentType
+     * @param response
+     */
+    public static void fullDownload(long arxiuId, String filename, String contentType, 
+      HttpServletResponse response, Logger log) {
+
+      FileInputStream input = null;
+      OutputStream output = null;
+      
+
+      try {
+        File file = FileSystemManager.getFile(arxiuId);
+
+        if (!file.exists()) {
+          // TODO TRADUIR Fitxer no trobat
+          String msg = "Fitxer amb ID=" + arxiuId + " no existeix.";
+          response.setHeader("MsgEvidenciesIB", msg);
+          response.sendError(HttpServletResponse.SC_NOT_FOUND);
+          return;
+        }
+        
+        if (filename == null) {
+          filename = "file"; // arxiu.getNombre()
+        }
+        if (contentType == null) {
+          MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
+          contentType = mimeTypesMap.getContentType(file);
+        }
+        response.setContentType(contentType);
+        response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
+        response.setContentLength((int) file.length());
+
+        output = response.getOutputStream();
+        input = new FileInputStream(file);
+        
+        FileSystemManager.copy(input, output);
+       
+        input.close();
+        output.close();
+
+      }  catch (Exception e) {
+        String msg = "Error descarregant fitxer amb ID = " + arxiuId + "(" + e.getMessage() + ")"; 
+        log.error(msg, e);
+        response.setHeader("MsgEvidenciesIB", msg);
+        try {
+          response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        } catch (IOException e1) {
+          response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+      }
     }
 
 }

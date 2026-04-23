@@ -126,7 +126,8 @@ All URIs are relative to */evidenciesibapi/externa*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *EvidenciesApi* | [**callList**](docs/EvidenciesApi.md#callList) | **GET** /secure/evidencies/list | Retorna un llistat de les evidencies 
-*EvidenciesApi* | [**get**](docs/EvidenciesApi.md#get) | **GET** /secure/evidencies/get/{evidenciaID} | Retorna informació d&#39;una evidència a partir del seu id
+*EvidenciesApi* | [**get**](docs/EvidenciesApi.md#get) | **GET** /secure/evidencies/get/{evidenciaID} | Retorna informació d&#39;una evidència a partir del seu id. Nota: Requereix que l&#39;usuari aplicació que faci la petició sigui el mateix que l&#39;ha creada. En cas de no ser el mateix s&#39;ha d&#39;usar l&#39;operacio &#39;getbyencryptedid&#39;.
+*EvidenciesApi* | [**getbasicproperties**](docs/EvidenciesApi.md#getbasicproperties) | **GET** /secure/evidencies/getbasicproperties/{encryptedEvidenceID} | Retorna informació bàsica d&#39;una evidència usant un Map a partir del seu id encriptat
 *EvidenciesApi* | [**getfile**](docs/EvidenciesApi.md#getfile) | **GET** /secure/evidencies/getfile/{evidenciaID}/{encryptedFileID} | Retorna informació d&#39;un fitxer d&#39;una evidència a partir del encryptedFileID
 *EvidenciesApi* | [**getfilebase64**](docs/EvidenciesApi.md#getfilebase64) | **GET** /secure/evidencies/getfilebase64/{evidenciaID}/{encryptedFileID} | Retorna informació d&#39;un fitxer d&#39;una evidència a partir del encryptedFileID
 *EvidenciesApi* | [**start**](docs/EvidenciesApi.md#start) | **POST** /secure/evidencies/start | Primera cridada a realitzar per iniciar un procés d&#39;evidències

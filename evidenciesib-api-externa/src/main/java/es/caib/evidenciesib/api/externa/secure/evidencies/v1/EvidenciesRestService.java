@@ -412,6 +412,100 @@ public class EvidenciesRestService extends RestUtils {
 
     }
 
+    /**
+     *  Obté le spropietats bàsiques d'una evidència. Són les mateixes que les que s'adjunten dis del fitxer
+     *  evidencies.json i les que s'afegeixen a les propietats del PDF.
+     */
+    @Path("/getbasicproperties/{encryptedEvidenceID}")
+    @GET
+    @RolesAllowed({ Constants.EVI_WS })
+    @SecurityRequirement(name = SECURITY_NAME)
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Operation(
+            tags = { TAG_NAME },
+            operationId = "getbasicproperties",
+            summary = "Retorna informació bàsica d'una evidència usant un Map a partir del seu id encriptat")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Retornada correctament la informació de l'evidència",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = Map.class)) }),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Paràmetres incorrectes",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "No Autenticat",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "No Autoritzat",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Error no controlat",
+                    content = { @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = RestExceptionInfo.class)) }), })
+    public Map<String, String> getBasicProperties(@Parameter(
+            name = "encryptedEvidenceID",
+            description = "Identificador encriptat de l'evidència de la que volem informació",
+            required = true,
+            in = ParameterIn.PATH,
+            schema = @Schema(implementation = String.class)) @PathParam("encryptedEvidenceID")
+    String encryptedEvidenceID,
+            @Parameter(
+                    name = "language",
+                    description = "Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')",
+                    in = ParameterIn.QUERY,
+                    required = false,
+                    examples = { @ExampleObject(name = "Català", value = "ca"),
+                            @ExampleObject(name = "Castellano", value = "es") },
+                    schema = @Schema(implementation = String.class, pattern = "^(|ca|es)$")) @QueryParam("language")
+            String language, @Parameter(hidden = true) @Context
+            HttpServletRequest request) {
+
+        log.info("\n\nXYZ DEBUG Entra a getByEncryptedId(" + encryptedEvidenceID + ")\n\n");
+
+        try {
+
+            return this.evidenciaLogicaEjb.getBasicPropertiesOfEvidence(encryptedEvidenceID);
+
+        } catch (Throwable th) {
+
+            String msg;
+            if (th instanceof I18NException) {
+                msg = I18NLogicUtils.getMessage((I18NException) th, new Locale(language));
+            } else {
+                msg = th.getMessage();
+            }
+
+            // XYZ ZZZ Segons idioma
+            msg = "Error intentant obtenir propietats bàsiques evidenciaID encriptada '" + encryptedEvidenceID + ": "
+                    + msg;
+
+            log.error(msg, th);
+
+            try {
+                Thread.sleep(1500);
+            } catch (Throwable e) {
+            }
+
+            throw new RestException(Status.INTERNAL_SERVER_ERROR, msg, th);
+        }
+
+    }
+
     // obtenir evidencia
     @Path("/get/{evidenciaID}")
     @GET
@@ -422,7 +516,9 @@ public class EvidenciesRestService extends RestUtils {
     @Operation(
             tags = { TAG_NAME },
             operationId = "get",
-            summary = "Retorna informació d'una evidència a partir del seu id")
+            summary = "Retorna informació d'una evidència a partir del seu id. "
+                    + "Nota: Requereix que l'usuari aplicació que faci la petició sigui el mateix"
+                    + " que l'ha creada. En cas de no ser el mateix s'ha d'usar l'operacio 'getbasicproperties'.")
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
@@ -472,7 +568,8 @@ public class EvidenciesRestService extends RestUtils {
             String language, @Parameter(hidden = true) @Context
             HttpServletRequest request) {
 
-        log.info("Entra a get  ...[" + request.getRemoteUser() + "]");
+       
+        log.info("Entra a get  evidenciaID =]" + evidenciaID + "[");
 
         // Check de language
         language = checkLanguage(language);
@@ -528,7 +625,6 @@ public class EvidenciesRestService extends RestUtils {
             log.error(msg, th);
             throw new RestException(Status.INTERNAL_SERVER_ERROR, msg, th);
         }
-
     }
 
     // obtenir llista d'evidències filtre per nom, aplicacio i dates

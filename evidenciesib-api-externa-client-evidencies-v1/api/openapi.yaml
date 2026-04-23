@@ -87,7 +87,77 @@ paths:
           description: Error no controlat
       security:
       - BasicAuth: []
-      summary: Retorna informació d'una evidència a partir del seu id
+      summary: "Retorna informació d'una evidència a partir del seu id. Nota: Requereix\
+        \ que l'usuari aplicació que faci la petició sigui el mateix que l'ha creada.\
+        \ En cas de no ser el mateix s'ha d'usar l'operacio 'getbyencryptedid'."
+      tags:
+      - Evidencies
+      x-accepts:
+      - application/json
+  /secure/evidencies/getbasicproperties/{encryptedEvidenceID}:
+    get:
+      operationId: getbasicproperties
+      parameters:
+      - description: Identificador encriptat de l'evidència de la que volem informació
+        explode: false
+        in: path
+        name: encryptedEvidenceID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Idioma en que s'han de retornar les dades i errors(Només suportat
+          'ca' o 'es')
+        examples:
+          Català:
+            description: Català
+            value: ca
+          Castellano:
+            description: Castellano
+            value: es
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          pattern: ^(|ca|es)$
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Retornada correctament la informació de l'evidència
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Paràmetres incorrectes
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: No Autenticat
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: No Autoritzat
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestExceptionInfo'
+          description: Error no controlat
+      security:
+      - BasicAuth: []
+      summary: Retorna informació bàsica d'una evidència usant un Map a partir del
+        seu id encriptat
       tags:
       - Evidencies
       x-accepts:

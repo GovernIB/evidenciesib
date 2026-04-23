@@ -38,7 +38,6 @@ import es.caib.evidenciesib.back.form.webdb.EvidenciaForm;
 import es.caib.evidenciesib.back.security.LoginInfo;
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
-import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.EvidenciaLogicaService;
 import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.model.entity.Evidencia;
@@ -148,7 +147,7 @@ public class EvidenciaUserController extends EvidenciaController {
             evi.setNom(I18NUtils.tradueix("evidencia.evidencia") + "_" + System.currentTimeMillis());
 
             String languageWeb = LocaleContextHolder.getLocale().getLanguage();
-            
+
             // Valor per defecte !!!
             evi.setFirmaIdiomaDocument(languageWeb);
             evi.setLanguageUI(languageWeb);
@@ -291,7 +290,6 @@ public class EvidenciaUserController extends EvidenciaController {
         return evidenciaForm;
     }
 
-
     @Override
     public List<StringKeyValue> getReferenceListForEstatCodi(HttpServletRequest request, ModelAndView mav, Where where)
             throws I18NException {
@@ -347,13 +345,14 @@ public class EvidenciaUserController extends EvidenciaController {
         try {
             // Hem d'anar a FRONT per autenticació Cl@ve o Mock            
             final String urlfront = Configuracio.getFrontUrl();
-            return "redirect:" + urlfront + Constants.MAPPING_FRONT_LOGIN_START + "/" + LogicUtils.encryptEvidenciaID(evi.getEvidenciaID());
-        } catch(Throwable th) {
+            return "redirect:" + urlfront + Constants.MAPPING_FRONT_LOGIN_START + "/"
+                    + LogicUtils.encryptEvidenciaID(evi.getEvidenciaID());
+        } catch (Throwable th) {
             String msg = "Error redireccionant cap al Front: " + th.getMessage();
             log.error(msg, th);
-            
+
             HtmlUtils.saveMessageError(request, msg);
-            
+
             return "redirect:" + getContextWeb() + "/list";
         }
 
@@ -375,18 +374,16 @@ public class EvidenciaUserController extends EvidenciaController {
     @RequestMapping(
             value = Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + "{evidenciaID}",
             method = RequestMethod.GET)
-    public String signEvidenciaRequest(@PathVariable("evidenciaID") java.lang.Long evidenciaID,
-            HttpServletRequest request, HttpServletResponse response) throws I18NException {
+    public String signEvidenciaRequest(@PathVariable("evidenciaID")
+    java.lang.Long evidenciaID, HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         EvidenciaJPA evi = findByPrimaryKey(request, evidenciaID);
 
         // AQUEST IDIOMA HA DE SER EL QUE DIGUI EVIDENCIA 
         final String languageUI = LocaleContextHolder.getLocale().getLanguage();
 
-        String urlStamp = Configuracio.getFrontUrl() + Constants.MAPPING_FULL_PUBLIC_EVIDENCE_INFO
-                + HibernateFileUtil.encryptFileID(evi.getEvidenciaID());
 
-        evi = this.evidenciaLogicaEjb.createAdaptedFileAndSignDocument(evi, languageUI, urlStamp);
+        evi = this.evidenciaLogicaEjb.createAdaptedFileAndSignDocument(evi, languageUI);
 
         messagesInternalSignDocument(request, evi);
 

@@ -5,7 +5,8 @@ All URIs are relative to */evidenciesibapi/externa*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**callList**](EvidenciesApi.md#callList) | **GET** /secure/evidencies/list | Retorna un llistat de les evidencies  |
-| [**get**](EvidenciesApi.md#get) | **GET** /secure/evidencies/get/{evidenciaID} | Retorna informació d&#39;una evidència a partir del seu id |
+| [**get**](EvidenciesApi.md#get) | **GET** /secure/evidencies/get/{evidenciaID} | Retorna informació d&#39;una evidència a partir del seu id. Nota: Requereix que l&#39;usuari aplicació que faci la petició sigui el mateix que l&#39;ha creada. En cas de no ser el mateix s&#39;ha d&#39;usar l&#39;operacio &#39;getbyencryptedid&#39;. |
+| [**getbasicproperties**](EvidenciesApi.md#getbasicproperties) | **GET** /secure/evidencies/getbasicproperties/{encryptedEvidenceID} | Retorna informació bàsica d&#39;una evidència usant un Map a partir del seu id encriptat |
 | [**getfile**](EvidenciesApi.md#getfile) | **GET** /secure/evidencies/getfile/{evidenciaID}/{encryptedFileID} | Retorna informació d&#39;un fitxer d&#39;una evidència a partir del encryptedFileID |
 | [**getfilebase64**](EvidenciesApi.md#getfilebase64) | **GET** /secure/evidencies/getfilebase64/{evidenciaID}/{encryptedFileID} | Retorna informació d&#39;un fitxer d&#39;una evidència a partir del encryptedFileID |
 | [**start**](EvidenciesApi.md#start) | **POST** /secure/evidencies/start | Primera cridada a realitzar per iniciar un procés d&#39;evidències |
@@ -99,7 +100,7 @@ public class Example {
 
 > EvidenciaWs get(evidenciaID, language)
 
-Retorna informació d&#39;una evidència a partir del seu id
+Retorna informació d&#39;una evidència a partir del seu id. Nota: Requereix que l&#39;usuari aplicació que faci la petició sigui el mateix que l&#39;ha creada. En cas de no ser el mateix s&#39;ha d&#39;usar l&#39;operacio &#39;getbyencryptedid&#39;.
 
 ### Example
 
@@ -150,6 +151,82 @@ public class Example {
 ### Return type
 
 [**EvidenciaWs**](EvidenciaWs.md)
+
+### Authorization
+
+[BasicAuth](../README.md#BasicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Retornada correctament la informació de l&#39;evidència |  -  |
+| **400** | Paràmetres incorrectes |  -  |
+| **401** | No Autenticat |  -  |
+| **403** | No Autoritzat |  -  |
+| **500** | Error no controlat |  -  |
+
+
+## getbasicproperties
+
+> String getbasicproperties(encryptedEvidenceID, language)
+
+Retorna informació bàsica d&#39;una evidència usant un Map a partir del seu id encriptat
+
+### Example
+
+```java
+// Import classes:
+import es.caib.evidenciesib.api.externa.client.evidencies.v1.services.ApiClient;
+import es.caib.evidenciesib.api.externa.client.evidencies.v1.services.ApiException;
+import es.caib.evidenciesib.api.externa.client.evidencies.v1.services.Configuration;
+import es.caib.evidenciesib.api.externa.client.evidencies.v1.services.auth.*;
+import es.caib.evidenciesib.api.externa.client.evidencies.v1.services.models.*;
+import es.caib.evidenciesib.api.externa.client.evidencies.v1.api.EvidenciesApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("/evidenciesibapi/externa");
+        
+        // Configure HTTP basic authorization: BasicAuth
+        HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
+        BasicAuth.setUsername("YOUR USERNAME");
+        BasicAuth.setPassword("YOUR PASSWORD");
+
+        EvidenciesApi apiInstance = new EvidenciesApi(defaultClient);
+        String encryptedEvidenceID = "encryptedEvidenceID_example"; // String | Identificador encriptat de l'evidència de la que volem informació
+        String language = "ca"; // String | Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')
+        try {
+            String result = apiInstance.getbasicproperties(encryptedEvidenceID, language);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling EvidenciesApi#getbasicproperties");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **encryptedEvidenceID** | **String**| Identificador encriptat de l&#39;evidència de la que volem informació | |
+| **language** | **String**| Idioma en que s&#39;han de retornar les dades i errors(Només suportat &#39;ca&#39; o &#39;es&#39;) | [optional] |
+
+### Return type
+
+**String**
 
 ### Authorization
 
