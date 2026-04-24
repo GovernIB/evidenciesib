@@ -27,18 +27,15 @@ import java.util.Properties;
 public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends PluginLogicaEJB
         implements AbstractPluginLogicaService<I> {
 
-
-    
     protected abstract Where getWhereTipusDePlugin();
 
     protected abstract String getName();
 
     @Override
     public List<Plugin> getAllPlugins() throws I18NException {
-        return getAllPlugins(null); 
+        return getAllPlugins(null);
     }
-    
-    
+
     @Override
     public List<Plugin> getAllPlugins(Where w) throws I18NException {
         Where where;
@@ -47,14 +44,11 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
         } else {
             where = Where.AND(w, getWhereTipusDePlugin(), ACTIU.equal(true));
         }
-        
-        
+
         //log.info("\n\n getAllPlugins(): WHERE => " + where.toSQL());
-        
-        
+
         return select(where);
     }
-    
 
     @Override
     public Where getWhere() {
@@ -64,8 +58,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
         // Where.OR(ENTITATID.isNull(), ENTITATID.equal(entitatID))
         );
     }
-   
-    
+
     @Override
     public boolean existsInstanceForPluginID(long pluginID) throws I18NException {
         IPluginIB pluginInstance = getPluginFromCache(pluginID);
@@ -76,8 +69,6 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
             return true;
         }
     }
-    
-
 
     @Override
     public I getInstanceByPluginID(long pluginID) throws I18NException {
@@ -98,17 +89,17 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
                 try {
                     Map<String, Object> map = new HashMap<String, Object>();
                     map.put("SP", Configuracio.getJavaAndEvidenciesIBFileProperties());
-                    
+
                     String plantilla = plugin.getPropietats();
-                    String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));
-                    
+                    String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map,
+                            new Locale("ca"));
+
                     //log.error("PROPIETATS DESPRES DE generat:\n" + generat + "\n");
                     prop.load(new StringReader(generat));
-                                        
+
                 } catch (Exception e) {
-                   throw new I18NException(e, "genapp.comodi", 
-                      new I18NArgumentString("Error desconegut processant propietats del plugin "
-                        + pluginID + ": " + e.getMessage()));
+                    throw new I18NException(e, "genapp.comodi", new I18NArgumentString(
+                            "Error desconegut processant propietats del plugin " + pluginID + ": " + e.getMessage()));
                 }
             }
 
@@ -125,7 +116,6 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
         return ((I) pluginInstance);
 
     }
-
 
     @Override
     public List<I> getPluginInstancesBy(List<Long> filterByPluginID, List<String> filterByPluginCode)
@@ -153,6 +143,5 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
         return plugins;
 
     }
-    
-  
+
 }

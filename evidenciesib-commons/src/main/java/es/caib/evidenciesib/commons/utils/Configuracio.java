@@ -215,30 +215,64 @@ public class Configuracio implements Constants {
     public static String getFileSystemManager() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "filesystemmanagerclass");
     }
+    
+    
+    
+    public static String getTipusFirmaEnServidor() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "tipusfirmaenservidor");
+    }
+    
+    // ===========================================================
+    // ===========================================================
+    // ======   API FIRMA EN SERVIDOR - UTILITATSFIRMA  ==========
+    // ===========================================================
+    // ===========================================================
+    
+    
+    public static String getUtilitatsFirmaApiV2Url() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "utilitatsfirma.url");
+    }
+
+    public static String getUtilitatsFirmaApiV2Username() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "utilitatsfirma.username");
+    }
+
+    public static String getUtilitatsFirmaApiV2Password() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "utilitatsfirma.password");
+    }
+
+    public static String getUtilitatsFirmaApiV2Profile() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "utilitatsfirma.profile");
+    }
+
+    public static String getUtilitatsFirmaApiV2DefaultAliasCertificate() {
+        return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.defaultaliascertificate");
+    }
+    
 
     // ===========================================================
     // ===========================================================
-    // ==============   API FIRMA EN SERVIDOR ====================
+    // ======   API FIRMA EN SERVIDOR - PORTAFIB  ================
     // ===========================================================
     // ===========================================================
 
-    public static String getApiFirmaEnServidorUrl() {
+    public static String getPortafibApiFirmaEnServidorUrl() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.url");
     }
 
-    public static String getApiFirmaEnServidorUsername() {
+    public static String getPortafibApiFirmaEnServidorUsername() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.username");
     }
 
-    public static String getApiFirmaEnServidorPassword() {
+    public static String getPortafibApiFirmaEnServidorPassword() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.password");
     }
 
-    public static String getApiFirmaEnServidorProfile() {
+    public static String getPortafibApiFirmaEnServidorProfile() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.profile");
     }
 
-    public static String getApiFirmaEnServidorDefaultAliasCertificate() {
+    public static String getPortafibApiFirmaEnServidorDefaultAliasCertificate() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.defaultaliascertificate");
     }
 

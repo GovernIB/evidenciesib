@@ -89,7 +89,7 @@ paths:
       - BasicAuth: []
       summary: "Retorna informació d'una evidència a partir del seu id. Nota: Requereix\
         \ que l'usuari aplicació que faci la petició sigui el mateix que l'ha creada.\
-        \ En cas de no ser el mateix s'ha d'usar l'operacio 'getbyencryptedid'."
+        \ En cas de no ser el mateix s'ha d'usar l'operacio 'getbasicproperties'."
       tags:
       - Evidencies
       x-accepts:

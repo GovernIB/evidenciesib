@@ -89,7 +89,7 @@ public class EvidenciesApi {
     return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
       }
   /**
-   * Retorna informació d&#39;una evidència a partir del seu id. Nota: Requereix que l&#39;usuari aplicació que faci la petició sigui el mateix que l&#39;ha creada. En cas de no ser el mateix s&#39;ha d&#39;usar l&#39;operacio &#39;getbyencryptedid&#39;.
+   * Retorna informació d&#39;una evidència a partir del seu id. Nota: Requereix que l&#39;usuari aplicació que faci la petició sigui el mateix que l&#39;ha creada. En cas de no ser el mateix s&#39;ha d&#39;usar l&#39;operacio &#39;getbasicproperties&#39;.
    * 
    * @param evidenciaID Identificador de l&#39;evidència de la que volem informació (required)
    * @param language Idioma en que s&#39;han de retornar les dades i errors(Només suportat &#39;ca&#39; o &#39;es&#39;) (optional)

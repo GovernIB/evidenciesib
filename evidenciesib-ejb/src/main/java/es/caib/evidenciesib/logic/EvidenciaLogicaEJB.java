@@ -73,6 +73,19 @@ import es.caib.evidenciesib.model.entity.Evidencia;
 import es.caib.evidenciesib.model.entity.Fitxer;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 import es.caib.evidenciesib.persistence.FitxerJPA;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.api.UtilitatsFirmaV2Api;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.CommonInfo;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.FileInfoSignature;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.MultipartNameAndMime;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.ProcessStatus;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.SignDocumentRequest;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.SignedDocumentInformation;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.SignedDocumentResponseMultipart;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.SignedFileInfo;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.StatusConstants;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.model.UpgradeResponseMultipart;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.services.ApiException;
+import es.caib.utilitatsfirma.api.interna.client.utilitatsfirma.v2.servicesforutilitatsfirma.ApiClientWithJsonSupport;
 
 /**
  *
@@ -214,29 +227,12 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
         Locale languageUI = new Locale(idiomaUI);
 
-        FirmaSimpleFile fileToSign;
         try { // Global
 
             evi = this.createEvidenciaAdaptedFile(evi, languageUI);
 
-            try {
-
-                Fitxer fitxerOriginal = fitxerLogicaEjb.findByPrimaryKey(evi.getFitxerOriginalID());
-
-                Fitxer fitxerAdaptat = fitxerLogicaEjb.findByPrimaryKey(evi.getFitxerAdaptatID());
-
-                fileToSign = new FirmaSimpleFile(fitxerOriginal.getNom(), fitxerAdaptat.getMime(),
-                        FileSystemManager.getFileContent(fitxerAdaptat.getFitxerID()));
-
-            } catch (IOException e) {
-                // "Error llegint el fitxer a signar (fitxer original): " + e.getMessage();
-                String msg = I18NCommonUtils.tradueix(languageUI, "error.llegintoriginal", e.getMessage());
-                log.error(msg, e);
-                throw new I18NException(e, "genapp.comodi", new I18NArgumentString(msg));
-            }
-
             final String signID = "1";
-            final String name = fileToSign.getNom();
+            final String name = evi.getNom();
             final String reason = evi.getFirmaReason();
             final String location = evi.getLocalitzacioCiutat();
 
@@ -245,129 +241,27 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
             final String languageSign = evi.getFirmaIdiomaDocument();
             final long tipusDocumentalID = evi.getFirmaTipusDocumental(); // =TD99
 
-            FirmaSimpleFileInfoSignature fileInfoSignature = new FirmaSimpleFileInfoSignature(fileToSign, signID, name,
-                    reason, location, signNumber, languageSign, tipusDocumentalID);
-
-            // Es la configuració del Servidor (deixam el valor per defecte)
-            final String certificat = Configuracio.getApiFirmaEnServidorDefaultAliasCertificate();
-
-            final String perfil = Configuracio.getApiFirmaEnServidorProfile();
-            FirmaSimpleCommonInfo commonInfo;
             // En firmes en servidor el NIF no es de cap persona sinó de del d'entitat en que es firmi
             final String nif = null;
-            commonInfo = new FirmaSimpleCommonInfo(perfil, idiomaUI, certificat, nif, evi.getPersonaEmail());
 
-            FirmaSimpleSignDocumentRequest signature;
-            signature = new FirmaSimpleSignDocumentRequest(commonInfo, fileInfoSignature);
+            String tipusFirma = Configuracio.getTipusFirmaEnServidor();
 
-            ApiFirmaEnServidorSimple api = new ApiFirmaEnServidorSimpleJersey(Configuracio.getApiFirmaEnServidorUrl(),
-                    Configuracio.getApiFirmaEnServidorUsername(), Configuracio.getApiFirmaEnServidorPassword());
-
-            FirmaSimpleSignatureResult fullResults;
-            try {
-                fullResults = api.signDocument(signature);
-            } catch (AbstractApisIBException e) {
-                log.error("Error signant el fitxer: " + e.getMessage() + "(" + e.getDescription() + ")", e);
-                // error.signant=Error signant el fitxer: {0} ({1})
-                throw new I18NException("error.signant", e.getMessage(), e.getDescription());
-            }
-
-            FirmaSimpleStatus transactionStatus = fullResults.getStatus();
-
-            int status = transactionStatus.getStatus();
-
-            switch (status) {
-
-                case FirmaSimpleStatus.STATUS_INITIALIZING: // = 0;
-                {
-                    log.error(
-                            "L'estat del procés de firma ha tornat el control però encara està en estat INICIALITZANT");
-                    throw new I18NException("error.encarainicialitzant");
-                }
-
-                case FirmaSimpleStatus.STATUS_IN_PROGRESS: // = 1;
-                {
-                    log.error("L'estat del procés de firma ha tornat el control però encara està en estat EN PROGRESS");
-                    throw new I18NException("error.encaraenproces");
-                }
-
-                case FirmaSimpleStatus.STATUS_FINAL_ERROR: // = -1;
-                {
-                    log.error("Error durant la realització de les firmes: " + transactionStatus.getErrorMessage());
-                    String stack = transactionStatus.getErrorStackTrace();
-                    if (stack != null) {
-                        evi.setEstatExcepcio(stack);
-                        log.error(stack);
-                    }
-                    throw new I18NException("error.estatfinalerror", transactionStatus.getErrorMessage());
-                }
-
-                case FirmaSimpleStatus.STATUS_CANCELLED: // = -2;
-                {
-                    log.warn("El procés de firma ha tornat el control amb estat CANCEL·LAT");
-                    throw new I18NException("error.procescancelat");
-                }
-
-                case FirmaSimpleStatus.STATUS_FINAL_OK: // = 2;
-                {
-                    // Firma document
-                    FirmaSimpleFile signedFile = fullResults.getSignedFile();
-
-                    FirmaSimpleSignedFileInfo signedFileInfo = fullResults.getSignedFileInfo();
-                    log.info(FirmaSimpleSignedFileInfo.toString(signedFileInfo));
-
-                    String mime;
-                    byte[] data;
-
-                    // La normativa de Signatura no criptogràfica obliga a que el 
-                    // document signat  inclogui un Segell de Temps.
-                    // NOTA: El plugin de @firma a dia 30/01/2025 no permetia fer firmes PADES-T
-                    //       cosa que implicava que no duia segell de temps per això s'ha de fer l'upgrade.
-                    if (fullResults.getSignedFileInfo().isTimeStampIncluded()) {
-                        data = signedFile.getData();
-                        mime = signedFile.getMime();
-                    } else {
-                        // Com que no duu segell de temps llavors hem 
-                        // d'afegir Segell de Temps emprant l'upgrade de firma
-                        FirmaSimpleFile fsf;
-                        {
-                            final FirmaSimpleFile fileToUpgrade = signedFile;
-                            final FirmaSimpleFile documentDetached = null;
-                            FirmaSimpleUpgradeResponse upgradeResponse = api
-                                    .upgradeSignature(new FirmaSimpleUpgradeRequest(perfil, fileToUpgrade,
-                                            documentDetached, null, idiomaUI));
-                            FirmaSimpleFile upgraded = upgradeResponse.getUpgradedFile();
-                            fsf = upgraded;
-                        }
-
-                        if (fsf.getMime() == null) {
-                            mime = signedFile.getMime();
-                        } else {
-                            mime = fsf.getMime();
-                        }
-
-                        data = fsf.getData();
-                    }
-
-                    String newname;
-                    newname = evi.getFitxerOriginal().getNom();
-                    newname = FilenameUtils.getBaseName(newname) + "_signed." + FilenameUtils.getExtension(newname);
-
-                    Fitxer fitxer = fitxerLogicaEjb.create(newname, mime, data.length, "");
-                    FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
-
-                    evi.setFitxerSignatID(fitxer.getFitxerID());
-
-                    evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_SIGNAT);
-
-                } // Final Case Firma OK
+            // 
+            switch (tipusFirma) {
+                case "apifirmaenservidor":
+                    this.firmaEnServidorUtilitzantApiFirmaSimplePortaFIB(evi, idiomaUI, signID, name, reason, location,
+                            signNumber, languageSign, tipusDocumentalID, nif);
                 break;
 
-                default: {
-                    log.error("L'estat del procés de firma ha tornat un estat desconegut amb valor " + status);
-                    throw new I18NException("error.estatfinaldesconeguti", String.valueOf(status));
-                }
-            } // Final Switch Firma
+                case "utilitatsfirma":
+                    this.firmaEnServidorUtilitzantUtilitatsFirmaApiV2(evi, idiomaUI, signID, name, reason, location,
+                            signNumber, languageSign, tipusDocumentalID, nif);
+                break;
+                default:
+                    log.error("Tipus de firma en servidor no reconegut: " + tipusFirma);
+                    // XYZ ZZZ Traduir
+                    throw new I18NException("genapp.comodi", tipusFirma);
+            }
 
         } catch (I18NException th) {
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
@@ -413,6 +307,334 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
     }
 
+    // public static final int STATUS_INITIALIZING = 0;
+    /*static {
+        STATUS_INITIALIZING = 0; //(int) StatusConstants.STATUS_INITIALIZING.getValue();
+    }
+    
+    /*
+    ) {
+        throw new EstatFinalNoOK(status, "Rebut estat Initializing ...Unknown Error (???)");
+    
+    } else if (status == (int) StatusConstants.STATUS_IN_PROGRESS.getValue()) {
+        throw new EstatFinalNoOK(status, "Rebut estat IN_PROGRESS ... Unknown Error (????) ");
+    
+    } else if (status == (int) StatusConstants.STATUS_FINAL_ERROR.getValue()) {
+    
+        throw new EstatFinalNoOK(status, "Rebut estat ERROR: " + transactionStatus.getErrorMessage(),
+                transactionStatus.getErrorStackTrace());
+    
+    } else if (status == (int) StatusConstants.STATUS_CANCELLED.getValue()) {
+        throw new EstatFinalNoOK(status, "Rebut estat CANCELED: S'ha cancel·lat el procés de firmat.");
+    
+    } else if (status == (int) StatusConstants.STATUS_FINAL_OK.getValue()
+    */
+
+    public final void firmaEnServidorUtilitzantUtilitatsFirmaApiV2(EvidenciaJPA evi, String languageUI,
+            final String signID, final String name, final String reason, final String location, final int signNumber,
+            final String languageSign, final long tipusDocumentalID, final String nif)
+            throws I18NException, AbstractApisIBException {
+        // Es la configuració del Servidor (deixam el valor per defecte)
+        final String certificat = Configuracio.getUtilitatsFirmaApiV2DefaultAliasCertificate();
+
+        final String perfil = Configuracio.getUtilitatsFirmaApiV2Profile();
+
+        // (perfil, idiomaUI, certificat, nif, evi.getPersonaEmail());
+        CommonInfo commonInfo;
+        commonInfo = new CommonInfo().signProfile(perfil).languageUI(languageUI).username(certificat)
+                .administrationID(nif).signerEmail(evi.getPersonaEmail());
+
+        // fileToSign, signID, name,   reason, location, signNumber, languageSign, tipusDocumentalID
+        FileInfoSignature fileInfoSignature = new FileInfoSignature().signID(signID).name(name).reason(reason)
+                .location(location).signNumber(signNumber).languageSign(languageSign).documentType(tipusDocumentalID);
+
+        SignDocumentRequest signature;
+        signature = new SignDocumentRequest().commonInfo(commonInfo).fileInfoSignature(fileInfoSignature);
+
+        ApiClientWithJsonSupport client = new ApiClientWithJsonSupport();
+        client.setBasePath(Configuracio.getUtilitatsFirmaApiV2Url());
+        client.setUsername(Configuracio.getUtilitatsFirmaApiV2Username());
+        client.setPassword(Configuracio.getUtilitatsFirmaApiV2Password());
+
+        client.setDebugging(true);
+
+        client.addDefaultHeader("Accept-Language", languageUI);
+
+        UtilitatsFirmaV2Api api = new UtilitatsFirmaV2Api(client);
+
+        SignedDocumentResponseMultipart fullResults;
+
+        Fitxer fitxerAdaptat = fitxerLogicaEjb.findByPrimaryKey(evi.getFitxerAdaptatID());
+
+        File file = FileSystemManager.getFile(fitxerAdaptat.getFitxerID());
+
+        try {
+            fullResults = api.signdocument(signature, file, null);
+        } catch (ApiException e) {            
+            log.error("Error signant el fitxer emprant API : " + e.getMessage() + "(" + e.getCode() + ")", e);
+            // error.signant=Error signant el fitxer: {0} ({1})
+            throw new I18NException("error.signant", e.getMessage() + "(Code= " + e.getCode() + ")");
+        }
+
+        SignedDocumentInformation info = fullResults.getSignedDocumentInformation();
+
+        ProcessStatus transactionStatus = info.getStatus();
+
+        int status = transactionStatus.getStatus();
+
+        StatusConstants statusEnum = StatusConstants.fromValue(status);
+
+        switch (statusEnum) {
+
+            case STATUS_INITIALIZING: // = 0;
+            {
+                log.error("L'estat del procés de firma ha tornat el control però encara està en estat INICIALITZANT");
+                throw new I18NException("error.encarainicialitzant");
+            }
+
+            case STATUS_IN_PROGRESS: // = 1;
+            {
+                log.error("L'estat del procés de firma ha tornat el control però encara està en estat EN PROGRESS");
+                throw new I18NException("error.encaraenproces");
+            }
+
+            case STATUS_FINAL_ERROR: // = -1;
+            {
+                log.error("Error durant la realització de les firmes: " + transactionStatus.getErrorMessage());
+                String stack = transactionStatus.getErrorStackTrace();
+                if (stack != null) {
+                    evi.setEstatExcepcio(stack);
+                    log.error(stack);
+                }
+                throw new I18NException("error.estatfinalerror", transactionStatus.getErrorMessage());
+            }
+
+            case STATUS_CANCELLED: // = -2;
+            {
+                log.warn("El procés de firma ha tornat el control amb estat CANCEL·LAT");
+                throw new I18NException("error.procescancelat");
+            }
+
+            case STATUS_FINAL_OK: // = 2;
+            {
+                // Firma document
+
+                SignedFileInfo signedFileInfo = info.getSignedFileInfo();
+
+                //FirmaSimpleSignedFileInfo signedFileInfo = fullResults.getSignedFileInfo();
+                // XYZ DEBUG
+                log.info(signedFileInfo);
+
+                MultipartNameAndMime signedFilePartInfo = fullResults.getSignedFilePartInfo();
+                String mime = signedFilePartInfo.getContentType();
+
+                File data = fullResults.getSignedFile();
+                ;
+
+                // La normativa de Signatura no criptogràfica obliga a que el 
+                // document signat  inclogui un Segell de Temps.
+                // NOTA: El plugin de @firma a dia 30/01/2025 no permetia fer firmes PADES-T
+                //       cosa que implicava que no duia segell de temps per això s'ha de fer l'upgrade.
+                if (!Boolean.TRUE.equals(signedFileInfo.getTimeStampIncluded())) {
+
+                    // Com que no duu segell de temps llavors hem 
+                    // d'afegir Segell de Temps emprant l'upgrade de firma
+
+                    final File signature2 = data;
+                    final File detachedDocument = null;
+                    final File targetCertificate = null;
+
+                    UpgradeResponseMultipart upgradeResponse;
+                    try {
+                        upgradeResponse = api.upgradeSignature(languageUI, perfil, signature2, detachedDocument,
+                                targetCertificate);
+                    } catch (ApiException e) {
+                        String msg = "[UtilitatsFirmaApiV2] S'ha produït un error durant l'upgrade de la firma per"
+                                + " afegir segell de temps: " + e.getMessage() + "(" + e.getCode() + ")";
+                        log.error(msg, e);
+                        throw new I18NException(e, "genapp.comodi", msg);
+                    }
+                    File upgraded = upgradeResponse.getUpgradedFile();
+
+                    File oldData = data;
+
+                    data = upgraded;
+
+                    if (!oldData.delete()) {
+                        oldData.deleteOnExit();
+                    }
+                }
+
+                String newname;
+                newname = evi.getFitxerOriginal().getNom();
+                newname = FilenameUtils.getBaseName(newname) + "_signed." + FilenameUtils.getExtension(newname);
+
+                Fitxer fitxer = fitxerLogicaEjb.create(newname, mime, data.length(), "");
+                FileSystemManager.crearFitxer(data, fitxer.getFitxerID());
+
+                evi.setFitxerSignatID(fitxer.getFitxerID());
+
+                evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_SIGNAT);
+
+            } // Final Case Firma OK
+            break;
+
+            default: {
+                log.error("L'estat del procés de firma ha tornat un estat desconegut amb valor " + status);
+                throw new I18NException("error.estatfinaldesconeguti", String.valueOf(status));
+            }
+        } // Final Switch Firma
+    }
+
+    public final void firmaEnServidorUtilitzantApiFirmaSimplePortaFIB(EvidenciaJPA evi, String idiomaUI,
+            final String signID, final String name, final String reason, final String location, final int signNumber,
+            final String languageSign, final long tipusDocumentalID, final String nif) throws I18NException {
+
+        FirmaSimpleFile fileToSign;
+        try {
+
+            Fitxer fitxerOriginal = fitxerLogicaEjb.findByPrimaryKey(evi.getFitxerOriginalID());
+
+            Fitxer fitxerAdaptat = fitxerLogicaEjb.findByPrimaryKey(evi.getFitxerAdaptatID());
+
+            fileToSign = new FirmaSimpleFile(fitxerOriginal.getNom(), fitxerAdaptat.getMime(),
+                    FileSystemManager.getFileContent(fitxerAdaptat.getFitxerID()));
+
+        } catch (IOException e) {
+            // 
+            String msg = "Error llegint el fitxer a signar (fitxer original): " + e.getMessage();
+            log.error(msg, e);
+            throw new I18NException(e, "genapp.comodi", new I18NArgumentString(msg));
+        }
+
+        // Es la configuració del Servidor (deixam el valor per defecte)
+        final String certificat = Configuracio.getPortafibApiFirmaEnServidorDefaultAliasCertificate();
+
+        final String perfil = Configuracio.getPortafibApiFirmaEnServidorProfile();
+
+        FirmaSimpleCommonInfo commonInfo;
+        commonInfo = new FirmaSimpleCommonInfo(perfil, idiomaUI, certificat, nif, evi.getPersonaEmail());
+
+        FirmaSimpleFileInfoSignature fileInfoSignature = new FirmaSimpleFileInfoSignature(fileToSign, signID, name,
+                reason, location, signNumber, languageSign, tipusDocumentalID);
+
+        FirmaSimpleSignDocumentRequest signature;
+        signature = new FirmaSimpleSignDocumentRequest(commonInfo, fileInfoSignature);
+
+        ApiFirmaEnServidorSimple api = new ApiFirmaEnServidorSimpleJersey(
+                Configuracio.getPortafibApiFirmaEnServidorUrl(), Configuracio.getPortafibApiFirmaEnServidorUsername(),
+                Configuracio.getPortafibApiFirmaEnServidorPassword());
+
+        FirmaSimpleSignatureResult fullResults;
+        try {
+            fullResults = api.signDocument(signature);
+        } catch (AbstractApisIBException e) {
+            log.error("Error signant el fitxer: " + e.getMessage() + "(" + e.getDescription() + ")", e);
+            // error.signant=Error signant el fitxer: {0} ({1})
+            throw new I18NException("error.signant", e.getMessage(), e.getDescription());
+        }
+
+        FirmaSimpleStatus transactionStatus = fullResults.getStatus();
+
+        int status = transactionStatus.getStatus();
+
+        switch (status) {
+
+            case FirmaSimpleStatus.STATUS_INITIALIZING: // = 0;
+            {
+                log.error("L'estat del procés de firma ha tornat el control però encara està en estat INICIALITZANT");
+                throw new I18NException("error.encarainicialitzant");
+            }
+
+            case FirmaSimpleStatus.STATUS_IN_PROGRESS: // = 1;
+            {
+                log.error("L'estat del procés de firma ha tornat el control però encara està en estat EN PROGRESS");
+                throw new I18NException("error.encaraenproces");
+            }
+
+            case FirmaSimpleStatus.STATUS_FINAL_ERROR: // = -1;
+            {
+                log.error("Error durant la realització de les firmes: " + transactionStatus.getErrorMessage());
+                String stack = transactionStatus.getErrorStackTrace();
+                if (stack != null) {
+                    evi.setEstatExcepcio(stack);
+                    log.error(stack);
+                }
+                throw new I18NException("error.estatfinalerror", transactionStatus.getErrorMessage());
+            }
+
+            case FirmaSimpleStatus.STATUS_CANCELLED: // = -2;
+            {
+                log.warn("El procés de firma ha tornat el control amb estat CANCEL·LAT");
+                throw new I18NException("error.procescancelat");
+            }
+
+            case FirmaSimpleStatus.STATUS_FINAL_OK: // = 2;
+            {
+                // Firma document
+                FirmaSimpleFile signedFile = fullResults.getSignedFile();
+
+                FirmaSimpleSignedFileInfo signedFileInfo = fullResults.getSignedFileInfo();
+                log.info(FirmaSimpleSignedFileInfo.toString(signedFileInfo));
+
+                String mime;
+                byte[] data;
+
+                // La normativa de Signatura no criptogràfica obliga a que el 
+                // document signat  inclogui un Segell de Temps.
+                // NOTA: El plugin de @firma a dia 30/01/2025 no permetia fer firmes PADES-T
+                //       cosa que implicava que no duia segell de temps per això s'ha de fer l'upgrade.
+                if (fullResults.getSignedFileInfo().isTimeStampIncluded()) {
+                    data = signedFile.getData();
+                    mime = signedFile.getMime();
+                } else {
+                    // Com que no duu segell de temps llavors hem 
+                    // d'afegir Segell de Temps emprant l'upgrade de firma
+                    FirmaSimpleFile fsf;
+                    try {
+                        final FirmaSimpleFile fileToUpgrade = signedFile;
+                        final FirmaSimpleFile documentDetached = null;
+                        FirmaSimpleUpgradeResponse upgradeResponse = api.upgradeSignature(
+                                new FirmaSimpleUpgradeRequest(perfil, fileToUpgrade, documentDetached, null, idiomaUI));
+                        FirmaSimpleFile upgraded = upgradeResponse.getUpgradedFile();
+                        fsf = upgraded;
+                    } catch (AbstractApisIBException e) {
+                        String msg = "[ApiFirmaSimplePortaFIB] S'ha produït un error durant l'upgrade de la firma "
+                                + "per afegir segell de temps: " + e.getMessage() + "(" + e.getDescription() + ")";
+                        log.error(msg, e);
+                        throw new I18NException(e, "genapp.comodi", msg);
+                    }
+
+                    if (fsf.getMime() == null) {
+                        mime = signedFile.getMime();
+                    } else {
+                        mime = fsf.getMime();
+                    }
+
+                    data = fsf.getData();
+                }
+
+                String newname;
+                newname = evi.getFitxerOriginal().getNom();
+                newname = FilenameUtils.getBaseName(newname) + "_signed." + FilenameUtils.getExtension(newname);
+
+                Fitxer fitxer = fitxerLogicaEjb.create(newname, mime, data.length, "");
+                FileSystemManager.crearFitxer(new ByteArrayInputStream(data), fitxer.getFitxerID());
+
+                evi.setFitxerSignatID(fitxer.getFitxerID());
+
+                evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_SIGNAT);
+
+            } // Final Case Firma OK
+            break;
+
+            default: {
+                log.error("L'estat del procés de firma ha tornat un estat desconegut amb valor " + status);
+                throw new I18NException("error.estatfinaldesconeguti", String.valueOf(status));
+            }
+        } // Final Switch Firma
+    }
+
     /**
      * 
      * @param evi
@@ -439,10 +661,8 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
             fileEviJson = File.createTempFile("evidenciesib_evidencies_", ".json");
             fileEviJson.deleteOnExit();
-            Gson gson = new GsonBuilder()
-                    .setPrettyPrinting()
-                    .disableHtmlEscaping() 
-                    .create();;
+            Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+            ;
             org.apache.commons.io.FileUtils.write(fileEviJson, gson.toJson(map), StandardCharsets.UTF_8);
             final String name = "evidencies.json";
             PdfFileSpecification fs = PdfFileSpecification.fileEmbedded(stamper.getWriter(),
