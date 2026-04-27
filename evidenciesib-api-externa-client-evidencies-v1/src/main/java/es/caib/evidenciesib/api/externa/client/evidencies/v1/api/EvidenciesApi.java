@@ -139,10 +139,10 @@ public class EvidenciesApi {
    * 
    * @param encryptedEvidenceID Identificador encriptat de l&#39;evidència de la que volem informació (required)
    * @param language Idioma en que s&#39;han de retornar les dades i errors(Només suportat &#39;ca&#39; o &#39;es&#39;) (optional)
-   * @return a {@code String}
+   * @return a {@code Map<String, Object>}
    * @throws ApiException if fails to make API call
    */
-  public String getbasicproperties(String encryptedEvidenceID, String language) throws ApiException {
+  public Map<String, Object> getbasicproperties(String encryptedEvidenceID, String language) throws ApiException {
     Object localVarPostBody = null;
     
     // verify the required parameter 'encryptedEvidenceID' is set
@@ -177,7 +177,7 @@ public class EvidenciesApi {
 
     String[] localVarAuthNames = new String[] { "BasicAuth" };
 
-    GenericType<String> localVarReturnType = new GenericType<String>() {};
+    GenericType<Map<String, Object>> localVarReturnType = new GenericType<Map<String, Object>>() {};
     return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
       }
   /**

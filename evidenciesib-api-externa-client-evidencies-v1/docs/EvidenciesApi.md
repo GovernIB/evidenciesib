@@ -174,7 +174,7 @@ public class Example {
 
 ## getbasicproperties
 
-> String getbasicproperties(encryptedEvidenceID, language)
+> Map&lt;String, Object&gt; getbasicproperties(encryptedEvidenceID, language)
 
 Retorna informació bàsica d&#39;una evidència usant un Map a partir del seu id encriptat
 
@@ -203,7 +203,7 @@ public class Example {
         String encryptedEvidenceID = "encryptedEvidenceID_example"; // String | Identificador encriptat de l'evidència de la que volem informació
         String language = "ca"; // String | Idioma en que s'han de retornar les dades i errors(Només suportat 'ca' o 'es')
         try {
-            String result = apiInstance.getbasicproperties(encryptedEvidenceID, language);
+            Map<String, Object> result = apiInstance.getbasicproperties(encryptedEvidenceID, language);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling EvidenciesApi#getbasicproperties");
@@ -226,7 +226,7 @@ public class Example {
 
 ### Return type
 
-**String**
+**Map&lt;String, Object&gt;**
 
 ### Authorization
 

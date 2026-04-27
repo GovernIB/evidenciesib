@@ -164,7 +164,13 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "type" : "object",
+                  "additionalProperties" : true,
+                  "description" : "Mapa de pares clave-valor (String-String)",
+                  "example" : {
+                    "key1" : "value1",
+                    "key2" : "value2"
+                  }
                 }
               }
             }

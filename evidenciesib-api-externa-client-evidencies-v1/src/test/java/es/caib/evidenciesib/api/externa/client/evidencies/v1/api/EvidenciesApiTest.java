@@ -46,6 +46,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -70,7 +71,10 @@ public class EvidenciesApiTest extends ConstantsWs {
 
             //test.getTest(api, props);
 
-            test.startTest(api, props);
+            //test.startTest(api, props);
+            
+            test.basicPropertiesTest(api, props);
+            
 
             //test.versioTest(api);
 
@@ -89,6 +93,30 @@ public class EvidenciesApiTest extends ConstantsWs {
             e.printStackTrace();
         }
     }
+    
+    
+    
+    
+    protected void basicPropertiesTest(EvidenciesApi api, Properties props) throws ApiException {
+        
+        System.out.println("TEST BASIC PROPERTIES");
+        
+        System.out.println("Host: " + props.getProperty("host"));
+        System.out.println("Username: " + props.getProperty("username"));
+        System.out.println("Password: " + props.getProperty("password"));
+
+        String encEviID = props.getProperty("test.evidenciaencrypted");
+
+        Map<String, Object> map = api.getbasicproperties(encEviID, props.getProperty("test.language"));
+         
+        for (String key : map.keySet()) {
+            System.out.println(key + " => " + map.get(key));
+        }
+
+    }
+    
+    
+    
 
     protected static EvidenciesApi getApi(Properties props) throws IOException {
 

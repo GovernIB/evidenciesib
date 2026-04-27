@@ -412,6 +412,7 @@ public class EvidenciesRestService extends RestUtils {
 
     }
 
+
     /**
      *  Obté le spropietats bàsiques d'una evidència. Són les mateixes que les que s'adjunten dis del fitxer
      *  evidencies.json i les que s'afegeixen a les propietats del PDF.
@@ -427,12 +428,19 @@ public class EvidenciesRestService extends RestUtils {
             operationId = "getbasicproperties",
             summary = "Retorna informació bàsica d'una evidència usant un Map a partir del seu id encriptat")
     @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Retornada correctament la informació de l'evidència",
-                    content = { @Content(
+    @ApiResponse(
+            responseCode = "200",
+            description = "Retornada correctament la informació de l'evidència",
+            content = { 
+                    @Content(                            
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = Map.class)) }),
+                            schema = @Schema(type = "object", 
+                                    additionalProperties = Schema.AdditionalPropertiesValue.TRUE,
+                                    description = "Mapa de pares clave-valor (String-String)",
+                                    example = "{\"key1\": \"value1\", \"key2\": \"value2\"}"
+                            )) 
+            }
+            ),         
             @ApiResponse(
                     responseCode = "400",
                     description = "Paràmetres incorrectes",
@@ -457,7 +465,7 @@ public class EvidenciesRestService extends RestUtils {
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = RestExceptionInfo.class)) }), })
-    public Map<String, String> getBasicProperties(@Parameter(
+    public Map<String,String> getBasicProperties(@Parameter(
             name = "encryptedEvidenceID",
             description = "Identificador encriptat de l'evidència de la que volem informació",
             required = true,
@@ -480,7 +488,7 @@ public class EvidenciesRestService extends RestUtils {
         try {
 
             return this.evidenciaLogicaEjb.getBasicPropertiesOfEvidence(encryptedEvidenceID);
-
+            
         } catch (Throwable th) {
 
             String msg;

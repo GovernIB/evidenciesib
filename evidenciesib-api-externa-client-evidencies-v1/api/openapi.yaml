@@ -128,7 +128,12 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                additionalProperties: true
+                description: Mapa de pares clave-valor (String-String)
+                example:
+                  key1: value1
+                  key2: value2
+                type: object
           description: Retornada correctament la informació de l'evidència
         "400":
           content:
