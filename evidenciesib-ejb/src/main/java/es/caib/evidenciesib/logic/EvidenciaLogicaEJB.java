@@ -246,7 +246,7 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
             String tipusFirma = Configuracio.getTipusFirmaEnServidor();
 
-            // 
+            // TODO Falta controlar que no sigui NULLL
             switch (tipusFirma) {
                 case "apifirmaenservidor":
                     this.firmaEnServidorUtilitzantApiFirmaSimplePortaFIB(evi, idiomaUI, signID, name, reason, location,
@@ -373,7 +373,8 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
         } catch (ApiException e) {            
             log.error("Error signant el fitxer emprant API : " + e.getMessage() + "(" + e.getCode() + ")", e);
             // error.signant=Error signant el fitxer: {0} ({1})
-            throw new I18NException("error.signant", e.getMessage() + "(Code= " + e.getCode() + ")");
+            throw new I18NException(e, "error.signant", 
+                    new I18NArgumentString(e.getMessage()) , new I18NArgumentString("Code= " + e.getCode()) );
         }
 
         SignedDocumentInformation info = fullResults.getSignedDocumentInformation();
