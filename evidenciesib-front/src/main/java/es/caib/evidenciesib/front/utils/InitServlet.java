@@ -4,14 +4,7 @@ import es.caib.evidenciesib.commons.utils.Constants;
 import org.apache.log4j.Logger;
 
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.pluginsib.core.v3.utils.PluginsManager;
-import org.fundaciobit.pluginsib.login.api.IPluginLogin;
-import org.fundaciobit.pluginsib.login.springutils.PluginLoginManager;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-
-import es.caib.evidenciesib.commons.utils.Configuracio;
-
-import java.util.Properties;
 
 import javax.annotation.security.RunAs;
 import javax.servlet.ServletConfig;
@@ -45,8 +38,10 @@ public class InitServlet extends HttpServlet {
             log.error("Error inicialitzant el sistema de traduccions web: " + th.getMessage(), th);
         }
 
+        /*
         IPluginLogin pl = (IPluginLogin) getPluginLogin();
         PluginLoginManager.setPluginLogin(pl);
+        */
 
     }
 
@@ -55,17 +50,18 @@ public class InitServlet extends HttpServlet {
      * @return
      * @throws Exception
      */
+    /*
     private IPluginLogin getPluginLogin() throws ServletException {
-
+    
         Properties properties = new Properties();
         properties.putAll(Configuracio.getFilesProperties());
-
+    
         final String baseProps = Constants.EVIDENCIESIB_PROPERTY_BASE;
-
+    
         final String propClass = baseProps + IPluginLogin.PLUGIN_LOGIN_PROPERTY_BASE + "class";
-
+    
         String pluginClassName = properties.getProperty(propClass);
-
+    
         // Carregant la classe ja que els plugins es troben en el WAR de FRONT
         log.info("Carregant classe " + pluginClassName + " ...");
         Class<?> pluginClass;
@@ -77,21 +73,22 @@ public class InitServlet extends HttpServlet {
             log.error(msg, ex);
             throw new ServletException(msg, ex);
         }
-
+    
         if (pluginClass == null) {
             throw new ServletException(
                     "No s'ha definit la propietat ´" + propClass + "´ dins dels fitxers de propietats de l'aplicació.");
         } else {
             Object obj = PluginsManager.instancePluginByClass(pluginClass, baseProps, properties);
-
+    
             if (obj == null) {
                 throw new ServletException("Per alguna raó desconeguda no s'ha pogut carregar la classe " + pluginClass
                         + ". Consulti el log de l'aplicació per obtenir més detalls del problema.");
             }
-
+    
             return (IPluginLogin) obj;
         }
-
+    
     }
+    */
 
 }

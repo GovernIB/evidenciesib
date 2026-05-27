@@ -44,15 +44,12 @@
             <groupId>org.fundaciobit.pluginsib.login</groupId>
             <version>${pluginsib.login.version}</version>
         </dependency>
-        <dependency>
-            <artifactId>pluginsib-login-mock</artifactId>
-            <groupId>org.fundaciobit.pluginsib.login</groupId>
-            <version>${pluginsib.login.version}</version>
-        </dependency>
-        <dependency>
-            <artifactId>pluginsib-login-loginib</artifactId>
-            <groupId>org.fundaciobit.pluginsib.login</groupId>
-            <version>${pluginsib.login.version}</version>
+
+        
+         <dependency>
+            <artifactId>pluginsib-core</artifactId>
+            <groupId>org.fundaciobit.pluginsib.core.v3</groupId>
+            <version>${pluginsib.core.version}</version>
         </dependency>
         
         <dependency>
@@ -61,11 +58,7 @@
             <version>${pluginsib.login.version}</version>
         </dependency>
 
-        <dependency>
-            <artifactId>pluginsib-core</artifactId>
-            <groupId>org.fundaciobit.pluginsib.core.v3</groupId>
-            <version>${pluginsib.core.version}</version>
-        </dependency>
+
 
         <!-- Spring MVC -->
         <dependency>

@@ -25,78 +25,69 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class PrincipalController {
 
-	protected final Logger log = Logger.getLogger(getClass());
-	
-	
-	
+    protected final Logger log = Logger.getLogger(getClass());
 
-	
-	
-	
-	
+    @RequestMapping(value = "/common/principal.html")
+    public ModelAndView principal(HttpSession session, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
 
-	@RequestMapping(value = "/common/principal.html")
-	public ModelAndView principal(HttpSession session, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+        Boolean initialized = (Boolean) session.getAttribute("inicialitzat");
 
-		Boolean initialized = (Boolean) session.getAttribute("inicialitzat");
+        if (initialized == null) {
+            HtmlUtils.saveMessageInfo(request, "Benvingut a EvidenciesIB");
+            session.setAttribute("inicialitzat", true);
+        }
 
-		if (initialized == null) {
-			HtmlUtils.saveMessageInfo(request, "Benvingut a EvidenciesIB");
-			session.setAttribute("inicialitzat", true);
-		}
+        return new ModelAndView("principal");
 
-		return new ModelAndView("principal");
+    }
 
-	}
+    @RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
+    public ModelAndView canviarIdioma(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable(name = "idioma")
+            String idioma) throws Exception {
+        es.caib.evidenciesib.back.utils.EvidenciesIBSessionLocaleResolver.setLocaleManually(request, idioma);
+        return new ModelAndView("principal");
+    }
 
+    @RequestMapping(value = "/canviarPipella", method = RequestMethod.GET)
+    public ModelAndView canviarPipella(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return canviarPipella(request, response, null);
+    }
 
-	@RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
-	public ModelAndView canviarIdioma(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(name = "idioma") String idioma) throws Exception {
-		es.caib.evidenciesib.back.utils.EvidenciesIBSessionLocaleResolver.setLocaleManually(request, idioma);		
-		return new ModelAndView("principal");
-	}
+    @RequestMapping(value = "/canviarPipella/{pipella}", method = RequestMethod.GET)
+    public ModelAndView canviarPipella(HttpServletRequest request, HttpServletResponse response, @PathVariable
+    String pipella) throws Exception {
 
+        if (pipella != null && pipella.trim().length() != 0) {
 
-	@RequestMapping(value = "/canviarPipella", method = RequestMethod.GET)
-	public ModelAndView canviarPipella(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return canviarPipella(request, response, null);
-	}
+            // TODO GENAPP Afegir altres pipelles !!!!!
+            /*
+             * if ("ROLE_ADEN".equals(pipella)) { //return new ModelAndView("role_aden");
+             * return new ModelAndView(new RedirectView("/aden/peticionscaducades/list/1",
+             * true)); }
+             */
 
-	@RequestMapping(value = "/canviarPipella/{pipella}", method = RequestMethod.GET)
-	public ModelAndView canviarPipella(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable String pipella) throws Exception {
+            if ("admin".equals(pipella)) {
+                return new ModelAndView(new RedirectView(EvidenciaAdminController.CONTEXT_WEB + "/list", true));
+            }
 
-		if (pipella != null && pipella.trim().length() != 0) {
+            if ("user".equals(pipella)) {
+                return new ModelAndView(new RedirectView(EvidenciaUserController.CONTEXT_WEB + "/list", true));
+            }
 
-			// TODO GENAPP Afegir altres pipelles !!!!!
-			/*
-			 * if ("ROLE_ADEN".equals(pipella)) { //return new ModelAndView("role_aden");
-			 * return new ModelAndView(new RedirectView("/aden/peticionscaducades/list/1",
-			 * true)); }
-			 */
+            if ("webdb".equals(pipella)) {
+                return new ModelAndView("webdb");
+            }
 
-			if ("admin".equals(pipella)) {
-				return new ModelAndView(new RedirectView(EvidenciaAdminController.CONTEXT_WEB + "/list", true));
-			}
+            if (Configuracio.isDesenvolupament() && "desenvolupament".equals(pipella)) {
+                return new ModelAndView("desenvolupament");
+            }
 
-			if ("user".equals(pipella)) {
-				return new ModelAndView(new RedirectView(EvidenciaUserController.CONTEXT_WEB + "/list", true));
-			}
+            log.error("S'ha accedit a canviarPipella amb un paràmetre desconegut: " + pipella);
+        }
 
-			if ("webdb".equals(pipella)) {
-				return new ModelAndView("webdb");
-			}
-
-			if (Configuracio.isDesenvolupament() && "desenvolupament".equals(pipella)) {
-				return new ModelAndView("desenvolupament");
-			}
-
-			log.error("S'ha accedit a canviarPipella amb un paràmetre desconegut: " + pipella);
-		}
-
-		return new ModelAndView("principal");
-	}
+        return new ModelAndView("principal");
+    }
 
 }

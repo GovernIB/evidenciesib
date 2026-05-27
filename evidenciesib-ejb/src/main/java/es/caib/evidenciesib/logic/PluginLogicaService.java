@@ -28,4 +28,6 @@ public interface PluginLogicaService extends es.caib.evidenciesib.ejb.PluginServ
 
     public boolean deleteFull(Long pluginID) throws I18NException;
 
+    public void enablePlugin(long pluginID, int tipus) throws I18NException;
+
 }

@@ -1247,7 +1247,7 @@
           "labels": {
             "de": "Size",
             "en": "Size",
-            "ca": "Tamany",
+            "ca": "Mida",
             "es": "Tamaño"
           },
           "javaName": "tamany",
@@ -1568,7 +1568,7 @@
           "showInWebList": true,
           "showInReferenceList": false,
           "transientField": false,
-          "minAllowedValue": "1,2,3",
+          "minAllowedValue": "1(Plugin Tipus Login Front),2(Plugin Tipus Firma en Servidor)",
           "filter": false,
           "orderBy": 0,
           "groupBy": false,

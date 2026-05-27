@@ -1,6 +1,8 @@
 package es.caib.evidenciesib.logic;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.UpdateItemValue;
+import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.pluginsib.core.v3.IPluginIB;
 
 import javax.annotation.security.PermitAll;
@@ -87,10 +89,21 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
     @Override
     @PermitAll
     public boolean deleteFull(Long pluginID) throws I18NException {
-
         delete(pluginID);
-
         return true;
+    }
+
+    /**
+     * Activa el plugin i descativa la resta del mateix tipus
+     */
+    @Override
+    public void enablePlugin(long pluginID, int tipus) throws I18NException {
+        
+        clearCache();
+
+        this.update(Where.AND(TIPUS.equal(tipus), ACTIU.equal(true)), new UpdateItemValue<Boolean>(ACTIU, false));
+
+        this.update(PLUGINID.equal(pluginID), new UpdateItemValue<Boolean>(ACTIU, true));
 
     }
 

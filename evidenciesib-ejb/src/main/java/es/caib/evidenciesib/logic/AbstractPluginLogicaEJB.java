@@ -3,6 +3,7 @@ package es.caib.evidenciesib.logic;
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.persistence.PluginJPA;
 import es.caib.evidenciesib.model.entity.Plugin;
+import es.caib.evidenciesib.model.fields.PluginFields;
 
 import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -27,9 +28,13 @@ import java.util.Properties;
 public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends PluginLogicaEJB
         implements AbstractPluginLogicaService<I> {
 
-    protected abstract Where getWhereTipusDePlugin();
+    protected final Where getWhereTipusDePlugin() {
+        return PluginFields.TIPUS.equal(getTipus());
+    }
 
-    protected abstract String getName();
+    public abstract int getTipus();
+
+    public abstract String getName();
 
     @Override
     public List<Plugin> getAllPlugins() throws I18NException {
@@ -40,23 +45,14 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
     public List<Plugin> getAllPlugins(Where w) throws I18NException {
         Where where;
         if (w == null) {
-            where = Where.AND(getWhereTipusDePlugin(), ACTIU.equal(true));
+            where = Where.AND(getWhereTipusDePlugin());
         } else {
-            where = Where.AND(w, getWhereTipusDePlugin(), ACTIU.equal(true));
+            where = Where.AND(w, getWhereTipusDePlugin());
         }
 
         //log.info("\n\n getAllPlugins(): WHERE => " + where.toSQL());
 
         return select(where);
-    }
-
-    @Override
-    public Where getWhere() {
-        return Where.AND(getWhereTipusDePlugin(), ACTIU.equal(true)
-
-        // TODO Elegim plugin entre les genèriques o entre els específics per l'entitat
-        // Where.OR(ENTITATID.isNull(), ENTITATID.equal(entitatID))
-        );
     }
 
     @Override
@@ -68,6 +64,25 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
         } else {
             return true;
         }
+    }
+
+    /**
+     * Selecciona el plugin amb enable (només n'hi ha d'haver un) i retorna la seva instància. Si no n'hi ha cap llança un excepció
+     * @return
+     * @throws I18NException
+     */
+    @Override
+    public I getCurrentEnabledInstance() throws I18NException {
+
+        Long pluginID = executeQueryOne(PLUGINID, Where.AND(getWhereTipusDePlugin(), ACTIU.equal(true)));
+
+        if (pluginID == null) {
+            throw new I18NException("genapp.comodi",
+                    "No existeix cap plugin actiu del tipus " + getName() + "(" + getTipus() + ")");
+        }
+        
+        return getInstanceByPluginID(pluginID);
+
     }
 
     @Override

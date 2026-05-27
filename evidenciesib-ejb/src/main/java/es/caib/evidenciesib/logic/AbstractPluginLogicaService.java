@@ -31,6 +31,10 @@ public interface AbstractPluginLogicaService<I> extends PluginLogicaService {
     public List<I> getPluginInstancesBy(List<Long> filterByPluginID, List<String> filterByPluginCode)
             throws I18NException;
 
-    public Where getWhere();
+    public I getCurrentEnabledInstance() throws I18NException;
+    
+    public int getTipus();
+
+    public String getName();
 
 }

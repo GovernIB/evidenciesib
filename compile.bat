@@ -2,7 +2,7 @@
 
 echo optional parameters -Dcaib -Psqlgen
 
-cmd /C mvn clean install -DskipTests %* 
+cmd /C mvn clean install -DskipTests %MAVEN_OPTS2% %* 
 
 if %errorlevel% EQU 0 (
 

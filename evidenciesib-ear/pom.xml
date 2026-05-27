@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>evidenciesib-ear</artifactId>
@@ -95,7 +97,7 @@
             <artifactId>pluginsib-userinformation-ldap</artifactId>
             <version>${pluginsib.userinformation.version}</version>
         </dependency>
-        
+
         <dependency>
             <artifactId>pluginsib-userinformation-soffid</artifactId>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
@@ -137,6 +139,40 @@
             <artifactId>pluginsib-exportdata-csv</artifactId>
             <version>${pluginsib.exportdata.version}</version>
         </dependency>
+        
+        
+        <!-- ============================================ -->
+        <!-- ========== PLUGINS DE LOGIN =========== -->
+        <!-- ============================================ -->
+        <dependency>
+            <artifactId>pluginsib-login-api</artifactId>
+            <groupId>org.fundaciobit.pluginsib.login</groupId>
+            <version>${pluginsib.login.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>pluginsib-login-mock</artifactId>
+            <groupId>org.fundaciobit.pluginsib.login</groupId>
+            <version>${pluginsib.login.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>pluginsib-login-loginibswagger</artifactId>
+            <groupId>org.fundaciobit.pluginsib.login</groupId>
+            <version>${pluginsib.login.version}</version>
+        </dependency>
+        
+        
+        <!--  Onbsolet: INclou SpringWeb i des de capa EJB no ho pot carregar  -->
+        <!--
+        <dependency>
+            <artifactId>pluginsib-login-loginib</artifactId>
+            <groupId>org.fundaciobit.pluginsib.login</groupId>
+            <version>${pluginsib.login.version}</version>
+        </dependency>
+        -->
+        
+        
+        
 
         <!-- Commons Dependencies -->
         <dependency>
@@ -182,50 +218,50 @@
                     <packagingExcludes>
 
                         <!-- Requereix afegir mòdul 'com.fasterxml.jackson.core.jackson-annotations' a jboss-deployment-structure.xml -->
-                         **/jackson-annotations*redhat*.jar,
+                        **/jackson-annotations*redhat*.jar,
                         <!-- Requereix afegir mòdul 'com.fasterxml.jackson.core.jackson-core' a jboss-deployment-structure.xml -->
-                         **/jackson-core*redhat*.jar,
+                        **/jackson-core*redhat*.jar,
                         <!-- Requereix afegir mòdul 'com.fasterxml.jackson.core.jackson-databind' a jboss-deployment-structure.xml -->
-                         **/jackson-databind*redhat*.jar,
+                        **/jackson-databind*redhat*.jar,
                         <!-- Requereix afegir mòdul 'com.google.code.gson' a jboss-deployment-structure.xml -->
-                         **/gson*redhat*.jar,
+                        **/gson*redhat*.jar,
                         <!-- Requereix afegir mòdul 'javax.activation.api' a jboss-deployment-structure.xml -->
-                         **/activation*redhat*.jar,
+                        **/activation*redhat*.jar,
                         <!-- Requereix afegir mòdul 'javax.annotation.api' a jboss-deployment-structure.xml -->
-                         **/jboss-annotations-api_1.3_spec*redhat*.jar,
+                        **/jboss-annotations-api_1.3_spec*redhat*.jar,
                         <!-- Requereix afegir mòdul 'javax.persistence.api' a jboss-deployment-structure.xml -->
-                         **/javax.persistence-api*redhat*.jar,
+                        **/javax.persistence-api*redhat*.jar,
                         <!-- Requereix afegir mòdul 'javax.xml.bind.api' a jboss-deployment-structure.xml -->
-                         **/jboss-jaxb-api_2.3_spec*redhat*.jar,
+                        **/jboss-jaxb-api_2.3_spec*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.apache.commons.codec' a jboss-deployment-structure.xml -->
-                         **/commons-codec*redhat*.jar,
+                        **/commons-codec*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.apache.commons.io' a jboss-deployment-structure.xml -->
-                         **/commons-io*redhat*.jar,
+                        **/commons-io*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.apache.commons.lang3' a jboss-deployment-structure.xml -->
-                         **/commons-lang3*redhat*.jar,
+                        **/commons-lang3*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.apache.httpcomponents.core' a jboss-deployment-structure.xml -->
-                         **/httpclient*redhat*.jar,
-                         **/httpcore*redhat*.jar,
+                        **/httpclient*redhat*.jar,
+                        **/httpcore*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.bouncycastle' a jboss-deployment-structure.xml -->
-                         **/bcprov-jdk15on*redhat*.jar,
-                         **/bcmail-jdk15on*redhat*.jar,
-                         **/bcpkix-jdk15on*redhat*.jar,
+                        **/bcprov-jdk15on*redhat*.jar,
+                        **/bcmail-jdk15on*redhat*.jar,
+                        **/bcpkix-jdk15on*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-core-asl' a jboss-deployment-structure.xml -->
-                         **/jackson-core-asl*redhat*.jar,
+                        **/jackson-core-asl*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-jaxrs' a jboss-deployment-structure.xml -->
-                         **/jackson-jaxrs*redhat*.jar,
+                        **/jackson-jaxrs*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-mapper-asl' a jboss-deployment-structure.xml -->
-                         **/jackson-mapper-asl*redhat*.jar,
+                        **/jackson-mapper-asl*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.codehaus.jackson.jackson-xc' a jboss-deployment-structure.xml -->
-                         **/jackson-xc*redhat*.jar,
+                        **/jackson-xc*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.codehaus.jettison' a jboss-deployment-structure.xml -->
-                         **/jettison*redhat*.jar,
+                        **/jettison*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.jboss.logging' a jboss-deployment-structure.xml -->
-                         **/jboss-logging*redhat*.jar,
+                        **/jboss-logging*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.jboss.logging.commons.logging' a jboss-deployment-structure.xml -->
-                         **/commons-logging-jboss-logging*redhat*.jar,
+                        **/commons-logging-jboss-logging*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.slf4j' a jboss-deployment-structure.xml -->
-                         **/slf4j-api*redhat*.jar,
+                        **/slf4j-api*redhat*.jar,
                          
                          
                         <!-- CASOS ESPECIALS !!!!   -->
@@ -235,7 +271,7 @@
                         <!-- Requereix afegir mòdul 'org.apache.log4j' a jboss-deployment-structure.xml -->
                         **/log4j-*.jar,
                         <!-- Requereix afegir mòdul 'com.fasterxml.jackson.datatype.jackson-datatype-jsr310' a jboss-deployment-structure.xml -->
-                         **/jackson-datatype-jsr310*redhat*.jar,
+                        **/jackson-datatype-jsr310*redhat*.jar,
                         <!-- Requereix afegir mòdul 'com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider' a jboss-deployment-structure.xml -->
                         **/jackson-jaxrs-json-provider*redhat*.jar,
                         **/jackson-jaxrs-base*redhat*.jar,
@@ -281,7 +317,7 @@
                         **/resteasy-multipart-provider*redhat*.jar,
                         <!-- Requereix afegir mòdul 'org.reactivestreams' a jboss-deployment-structure.xml -->
                         **/reactive-streams*redhat*.jar,
-                         
+
                     </packagingExcludes>
                     <includeLibInApplicationXml>false</includeLibInApplicationXml>
                     <!--suppress UnresolvedMavenProperty -->

@@ -91,6 +91,14 @@
             <version>2.0-SNAPSHOT</version>
         </dependency>
 
+
+        <dependency>
+            <artifactId>pluginsib-login-api</artifactId>
+            <groupId>org.fundaciobit.pluginsib.login</groupId>
+            <version>${pluginsib.login.version}</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
