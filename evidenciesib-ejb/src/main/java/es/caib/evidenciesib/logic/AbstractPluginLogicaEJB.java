@@ -89,23 +89,45 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
     public I getInstanceByPluginID(long pluginID) throws I18NException {
 
         IPluginIB pluginInstance = getPluginFromCache(pluginID);
+        
+        
+        //log.info("CRIDANT A getInstanceByPluginID: pluginID=" + pluginID + " ||  pluginInstance=" + pluginInstance
+        //    + "|| " + pluginsCache.get(pluginID));
 
         if (pluginInstance == null) {
+            
+            
 
             PluginJPA plugin = (PluginJPA) findByPrimaryKey(pluginID);
 
             if (plugin == null) {
                 return null;
             }
+            
+
+            //log.info("Instanciant plugin " + plugin.getNom() + " amb ID=" + pluginID );
 
             Properties prop = new Properties();
 
             if (plugin.getPropietats() != null && plugin.getPropietats().trim().length() != 0) {
                 try {
                     Map<String, Object> map = new HashMap<String, Object>();
-                    map.put("SP", Configuracio.getJavaAndEvidenciesIBFileProperties());
+                    
+                    Properties prop22 = Configuracio.getJavaAndEvidenciesIBFileProperties();
+                    StringBuilder all = new StringBuilder();
+                    // Imprimir propietats
+                    prop22.forEach((key, value) -> {
+                         all.append(key + " = " + value + "\n");
+                    });
+                    
+                    log.info("Propietats EJB:\n\n " + all.toString() + "\n\n");
+                    
+                    
+                    map.put("SP", prop22);
 
                     String plantilla = plugin.getPropietats();
+                    // [=foo.bar]
+                    // [=SP["es.caib.evidenciesib.password"]]
                     String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map,
                             new Locale("ca"));
 
@@ -158,5 +180,8 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
         return plugins;
 
     }
+    
+    
+
 
 }

@@ -422,15 +422,12 @@ public class EvidenciaLogicaEJB extends EvidenciaEJB implements EvidenciaLogicaS
 
                 SignedFileInfo signedFileInfo = info.getSignedFileInfo();
 
-                //FirmaSimpleSignedFileInfo signedFileInfo = fullResults.getSignedFileInfo();
-                // XYZ DEBUG
-                log.info(signedFileInfo);
 
                 MultipartNameAndMime signedFilePartInfo = fullResults.getSignedFilePartInfo();
                 String mime = signedFilePartInfo.getContentType();
 
                 File data = fullResults.getSignedFile();
-                ;
+                
 
                 // La normativa de Signatura no criptogràfica obliga a que el 
                 // document signat  inclogui un Segell de Temps.

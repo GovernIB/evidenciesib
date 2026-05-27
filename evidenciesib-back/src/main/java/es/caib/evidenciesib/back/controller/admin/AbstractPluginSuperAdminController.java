@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -19,13 +19,14 @@ import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.html.IconUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.evidenciesib.back.controller.webdb.PluginController;
 import es.caib.evidenciesib.back.form.webdb.PluginFilterForm;
 import es.caib.evidenciesib.back.form.webdb.PluginForm;
-import es.caib.evidenciesib.logic.PluginLogicaService;
+import es.caib.evidenciesib.logic.AbstractPluginLogicaService;
 import es.caib.evidenciesib.persistence.PluginJPA;
 import es.caib.evidenciesib.model.entity.Plugin;
 import es.caib.evidenciesib.model.fields.PluginFields;
@@ -35,10 +36,10 @@ import es.caib.evidenciesib.model.fields.PluginFields;
  * @author anadal
  *
  */
-public abstract class AbstractPluginSuperAdminController extends PluginController {
+public abstract class AbstractPluginSuperAdminController<I> extends PluginController {
 
-    @EJB(mappedName = PluginLogicaService.JNDI_NAME)
-    protected PluginLogicaService pluginLogicaEJB;
+    /*@EJB(mappedName = PluginLogicaService.JNDI_NAME)
+    protected PluginLogicaService pluginLogicaEJB;*/
 
     @Override
     public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request, ModelAndView mav, Where where)
@@ -89,9 +90,9 @@ public abstract class AbstractPluginSuperAdminController extends PluginControlle
     }
 
     @RequestMapping(value = "/enable/{pluginID}")
-    public String enablePlugin(HttpServletRequest request, ModelAndView mav, @QueryParam("pluginID")
+    public String enablePlugin(HttpServletRequest request, ModelAndView mav, @PathVariable("pluginID")
     Long pluginID) throws I18NException {
-        pluginLogicaEJB.enablePlugin(pluginID, getTipus());
+        getPluginLogicaEJB().enablePlugin(pluginID, getTipus());
         return "redirect:" + getContextWeb() + "/list";
     }
 
@@ -99,10 +100,44 @@ public abstract class AbstractPluginSuperAdminController extends PluginControlle
      * Accio per resetejar un plugin
      */
     @RequestMapping(value = "/reset/{pluginID}")
-    public String resetPlugin(HttpServletRequest request, ModelAndView mav, @QueryParam("pluginID")
+    public String resetPlugin(HttpServletRequest request, ModelAndView mav, @PathVariable("pluginID")
     Long pluginID) throws I18NException {
-        pluginLogicaEJB.deleteOfCache(pluginID);
+        getPluginLogicaEJB().deleteOfCache(pluginID);
         HtmlUtils.saveMessageSuccess(request, "Plugin resetejat correctament");
+
+        return "redirect:" + getContextWeb() + "/list";
+    }
+
+    /**
+     * Accio per verificar que el plugin s'instancia bé i es pot carregar correctament. Si no es pot carregar, es mostra un error a l'usuari
+     */
+    @RequestMapping(value = "/verify/{pluginID}")
+    public String verifyPlugin(HttpServletRequest request, ModelAndView mav, @PathVariable("pluginID")
+    Long pluginID) throws I18NException {
+        try {
+            AbstractPluginLogicaService<I> ejb = getPluginLogicaEJB();
+            ejb.deleteOfCache(pluginID);
+            I instance = ejb.getCurrentEnabledInstance();
+            if (instance == null) {
+                HtmlUtils.saveMessageError(request,
+                        "El procés de instanciació ha retornat un valor null. Revisi logs.");
+            } else {
+
+                // XYZ ZZZ TRA
+                HtmlUtils.saveMessageSuccess(request,
+                        "Plugin s'ha instanciat correctament (Nota: No s'ha verificat que funcioni correctament)");
+            }
+        } catch (Throwable e) {
+
+            String msg;
+            if (e instanceof I18NException) {
+                msg = I18NUtils.getMessage((I18NException) e);
+            } else {
+                msg = e.getMessage();
+            }
+
+            HtmlUtils.saveMessageError(request, "Error durant la instanciació del plugin: " + msg);
+        }
 
         return "redirect:" + getContextWeb() + "/list";
     }
@@ -128,6 +163,9 @@ public abstract class AbstractPluginSuperAdminController extends PluginControlle
 
             pluginFilterForm.addAdditionalButtonForEachItem(new AdditionalButton(IconUtils.ICON_RELOAD, "=Reset",
                     getContextWeb() + "/reset/{0}", AdditionalButtonStyle.WARNING));
+
+            pluginFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-heartbeat",
+                    "=Validar Instanciació", getContextWeb() + "/verify/{0}", AdditionalButtonStyle.INFO));
 
         }
 
@@ -169,5 +207,7 @@ public abstract class AbstractPluginSuperAdminController extends PluginControlle
     }
 
     public abstract int getTipus();
+
+    public abstract AbstractPluginLogicaService<I> getPluginLogicaEJB();
 
 }

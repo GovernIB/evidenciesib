@@ -14,7 +14,7 @@ import org.jboss.logging.Logger;
  * 
  */
 public class Configuracio implements Constants {
-    
+
     private static final Logger log = Logger.getLogger(Configuracio.class);
 
     private static final Properties fileProperties = new Properties();
@@ -30,17 +30,17 @@ public class Configuracio implements Constants {
 
         if (fileProperties.isEmpty()) {
 
-            Properties allProperties = new Properties();
+            Properties propertiesBase = getAppProperties();
+            Properties propertiesSystem = getAppSystemProperties();
 
-            // matches the property name as defined in the system-properties element in
-            // WildFly
-            String property = Constants.EVIDENCIESIB_PROPERTY_BASE + "properties";
-            allProperties.putAll(loadPropertyFile(property));
+            fileProperties.putAll(propertiesBase);
+            fileProperties.putAll(propertiesSystem);
 
-            String propertySystem = Constants.EVIDENCIESIB_PROPERTY_BASE + "system.properties";
-            allProperties.putAll(loadPropertyFile(propertySystem));
+            fileAndSystemProperties.clear();
+            fileAndSystemProperties.putAll(propertiesBase);
+            fileAndSystemProperties.putAll(propertiesSystem);
+            fileAndSystemProperties.putAll(System.getProperties());
 
-            fileProperties.putAll(allProperties);
         }
 
         return fileProperties;
@@ -215,20 +215,17 @@ public class Configuracio implements Constants {
     public static String getFileSystemManager() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "filesystemmanagerclass");
     }
-    
-    
-    
+
     public static String getTipusFirmaEnServidor() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "tipusfirmaenservidor");
     }
-    
+
     // ===========================================================
     // ===========================================================
     // ======   API FIRMA EN SERVIDOR - UTILITATSFIRMA  ==========
     // ===========================================================
     // ===========================================================
-    
-    
+
     public static String getUtilitatsFirmaApiV2Url() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "utilitatsfirma.url");
     }
@@ -248,7 +245,6 @@ public class Configuracio implements Constants {
     public static String getUtilitatsFirmaApiV2DefaultAliasCertificate() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "apifirmaenservidor.defaultaliascertificate");
     }
-    
 
     // ===========================================================
     // ===========================================================
@@ -341,8 +337,7 @@ public class Configuracio implements Constants {
     public static String getSignatureHeaderText() {
         return getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.signatureheader.text");
     }
-    
-    
+
     /**
      * Issue: Deixar més espai entre capçalera i títol principal #75
      * Opcional. Valor per defecte 150. Nou a la versió 1.0.6. Defineix l'amplada de la capçalera en pixels per a
@@ -354,7 +349,7 @@ public class Configuracio implements Constants {
         if (height == null || height.isEmpty()) {
             height = "150";
         }
-        return height.trim();        
+        return height.trim();
     }
 
     /**
@@ -378,9 +373,8 @@ public class Configuracio implements Constants {
         return val;
     }
 
-    
     public static final boolean ignorarGeolocalitzacio() {
         return "true".equalsIgnoreCase(getProperty(EVIDENCIESIB_PROPERTY_BASE + "front.ignorargeolocalitzacio"));
     }
-    
+
 }

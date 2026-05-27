@@ -52,7 +52,7 @@
                         <% if(request.getUserPrincipal()== null || LoginInfo.getInstance() == null) { %> 
                            ANONIM
                         <% } else {  %> 
-                        <%=request.getRemoteUser() %> | ${loginInfo.userInfo.name}  ${loginInfo.userInfo.surname1}  ${empty loginInfo.userInfo.surname2?'':loginInfo.userInfo.surname2}
+                        <%=request.getRemoteUser() %> | ${loginInfo.userInfo.name} &nbsp; ${loginInfo.userInfo.surname1}  ${empty loginInfo.userInfo.surname2?'':loginInfo.userInfo.surname2}
                         <% }  %>
                     </span>
                 </div>

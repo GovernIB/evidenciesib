@@ -24,6 +24,7 @@ import java.util.Map;
 @Stateless
 public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
 
+
     private static final Map<Long, IPluginIB> pluginsCache = new HashMap<Long, IPluginIB>();
 
     @EJB(mappedName = es.caib.evidenciesib.ejb.TraduccioService.JNDI_NAME)
@@ -40,7 +41,7 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
     @Override
     public boolean deleteOfCache(Long pluginID) {
         synchronized (pluginsCache) {
-            IPluginIB p = pluginsCache.remove(pluginID);
+            IPluginIB p = pluginsCache.remove(pluginID);            
             return p != null;
         }
     }
