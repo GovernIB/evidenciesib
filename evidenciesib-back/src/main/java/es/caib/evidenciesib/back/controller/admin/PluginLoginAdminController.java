@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  * 25 may 2026 15:05:55
  */
 @Controller
-@RequestMapping(value = "/admin/moduldefirmaenservidor")
+@RequestMapping(value = "/admin/modulpluginloginfront")
 @SessionAttributes(types = { PluginForm.class, PluginFilterForm.class })
 @MenuOption(
         group = Tab.MENU_ADMIN,
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class PluginLoginAdminController extends AbstractPluginSuperAdminController<IPluginLogin> {
 
     @EJB(mappedName = PluginLoginFrontLogicaService.JNDI_NAME)
-    PluginLoginFrontLogicaService PluginLoginFrontLogicaEjb; // extends AbstractPluginLogicaService<IPluginLogin>
+    protected PluginLoginFrontLogicaService pluginLoginFrontLogicaEjb; // extends AbstractPluginLogicaService<IPluginLogin>
 
     @Override
     public int getTipus() {
@@ -40,7 +40,7 @@ public class PluginLoginAdminController extends AbstractPluginSuperAdminControll
     @Override
     public PluginLoginFrontLogicaService getPluginLogicaEJB() {
 
-        return PluginLoginFrontLogicaEjb;
+        return pluginLoginFrontLogicaEjb;
     }
 
 }

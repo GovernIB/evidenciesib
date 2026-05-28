@@ -78,7 +78,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
 
         if (pluginID == null) {
             throw new I18NException("genapp.comodi",
-                    "No existeix cap plugin actiu del tipus " + getName() + "(" + getTipus() + ")");
+                    "No existeix cap plugin actiu del tipus " + getName() + " (Codi tipus plugin " + getTipus() + ")");
         }
         
         return getInstanceByPluginID(pluginID);
@@ -114,15 +114,6 @@ public abstract class AbstractPluginLogicaEJB<I extends IPluginIB> extends Plugi
                     Map<String, Object> map = new HashMap<String, Object>();
                     
                     Properties prop22 = Configuracio.getJavaAndEvidenciesIBFileProperties();
-                    StringBuilder all = new StringBuilder();
-                    // Imprimir propietats
-                    prop22.forEach((key, value) -> {
-                         all.append(key + " = " + value + "\n");
-                    });
-                    
-                    log.info("Propietats EJB:\n\n " + all.toString() + "\n\n");
-                    
-                    
                     map.put("SP", prop22);
 
                     String plantilla = plugin.getPropietats();

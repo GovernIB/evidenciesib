@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -74,8 +72,6 @@ public abstract class AbstractPluginSuperAdminController<I> extends PluginContro
         if (pluginForm.isNou()) {
             pluginForm.getPlugin().setTipus(getTipus());
             pluginForm.getPlugin().setActiu(false);
-            pluginForm.addReadOnlyField(ACTIU);
-
         } else {
 
             if (!pluginForm.getPlugin().isActiu()) {
@@ -85,6 +81,7 @@ public abstract class AbstractPluginSuperAdminController<I> extends PluginContro
                         AdditionalButtonStyle.WARNING));
             }
         }
+        pluginForm.addReadOnlyField(ACTIU);
 
         return pluginForm;
     }
