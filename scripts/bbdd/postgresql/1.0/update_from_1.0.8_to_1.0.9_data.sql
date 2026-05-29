@@ -44,6 +44,13 @@ es.caib.evidenciesib.utilitatsfirma.username=[=SP["es.caib.evidenciesib.utilitat
 es.caib.evidenciesib.utilitatsfirma.password=[=SP["es.caib.evidenciesib.utilitatsfirma.password"]]
 
 es.caib.evidenciesib.utilitatsfirma.profile=PROFILE_PADES
-es.caib.evidenciesib.utilitatsfirma.defaultaliascertificate=afirmades-firma', true);
+es.caib.evidenciesib.utilitatsfirma.defaultaliascertificate=afirmades-firma
+
+# Indica si s´ha d´utilitzar segell de temps en la firma. Només farà cas a aquest valor si la
+# Configuració de Firma d´UtilitstasFirma té definit en el camp "Politica de Segell de Temps"
+# el valor "L´usuari elegirà si vol segellat de temps" (default si o default no)
+# es.caib.evidenciesib.utilitatsfirma.usetimestamp=true
+
+', true);
 
 

@@ -13,7 +13,7 @@
     <%@include file="/WEB-INF/views/pages/entityheader.jsp"%>
 
 
-    <%--  Elemento centrado horizonalmente y verticalmente --%>
+    <%--  Element centrat horitzontalment i verticalment --%>
     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <center>
             <h4><fmt:message key="espera.titol" /></h4>
@@ -23,7 +23,7 @@
             <fmt:message key="espera" />
         </center>
     </div>
-    <%-- Enviar página a /loginpostend utilizando javascript --%>
+    <%-- Enviar pàgina a /loginpostend utilizant javascript --%>
     <script type="text/javascript">
           setTimeout(() => {gotoPage()}, 50);
     </script>
