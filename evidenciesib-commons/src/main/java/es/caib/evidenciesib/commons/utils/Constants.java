@@ -1,5 +1,8 @@
 package es.caib.evidenciesib.commons.utils;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author anadal
@@ -48,5 +51,41 @@ public interface Constants {
     // TIPUS DE PLUGINS
     public static final int PLUGINSIB_TIPUS_LOGIN_FRONT = 1;
     public static final int PLUGINSIB_TIPUS_FIRMA_EN_SERVIDOR = 2;
+    
+    
+    
+    // ESTADISTIQUES
+    
+    public static final int CATEGORIA_PETICIONS_EVIDENCIES = 1;
+
+    public static final int ESTADISTICA_GRUP_PETICIONS_EVIDENCIESIB = 1;
+
+    public static final Map<Integer, String> GRUP_LABELS = Map.of(
+
+            // ----------------
+            ESTADISTICA_GRUP_PETICIONS_EVIDENCIESIB, "Peticions a EvidènciesIB"
+
+
+    );
+
+    public static final Map<Integer, List<Integer>> GRUPS_PER_CATEGORIES = Map.of(
+
+            // --------- CATEGORIA_FIRMA_EN_SERVIDOR_UPGRADE
+            CATEGORIA_PETICIONS_EVIDENCIES, List.of(ESTADISTICA_GRUP_PETICIONS_EVIDENCIESIB)
+
+    );
+
+    public static final Map<Integer, List<Integer>> ESTADISTIQUES_BY_GRUP = Map.of(
+
+            // --------- ESTADISTICA_GRUP_PETICIONS_EVIDENCIESIB
+            ESTADISTICA_GRUP_PETICIONS_EVIDENCIESIB, List.of(Constants.EVIDENCIA_ESTAT_CODI_ERROR, // Error
+                    Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO, // Create
+                    Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN, // Create
+                    Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA, // Create
+                    Constants.EVIDENCIA_ESTAT_CODI_SIGNAT) // OK 
+
+    );
+    
+    
 
 }

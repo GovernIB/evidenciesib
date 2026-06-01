@@ -162,7 +162,7 @@
         </dependency>
         
         
-        <!--  Onbsolet: INclou SpringWeb i des de capa EJB no ho pot carregar  -->
+        <!--  Obsolet: INclou SpringWeb i des de capa EJB no ho pot carregar  -->
         <!--
         <dependency>
             <artifactId>pluginsib-login-loginib</artifactId>

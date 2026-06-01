@@ -24,13 +24,13 @@ public class EvidenciaFile {
     private String description = null;
 
     @Schema(
-            required = false,
+            requiredMode = Schema.RequiredMode.NOT_REQUIRED,
             description = "Identificar del fitxer per poder-ho recuperar en una segona fase. Només apareix en llistats per no incloure el contingut del fitxer.")
     private String encryptedFileID;
 
     @Schema(
             description = "Contingut del fitxer. En llistats aquest camp vendrà buit.",
-            required = false,
+            requiredMode = Schema.RequiredMode.NOT_REQUIRED,
             type = "string",
             format = "byte")
     protected byte[] document;

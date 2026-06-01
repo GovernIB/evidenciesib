@@ -10,52 +10,52 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Estructura de dades a enviar al servidor per iniciar un procés d'Evidències")
 public class EvidenciaStartRequest {
 
-    @Schema(required = true, description = "Titol descriptiu de l'evidència que es durà a terme")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Titol descriptiu de l'evidència que es durà a terme")
     protected java.lang.String titolEvidencia;
 
-    @Schema(required = true, description = "Nif de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Nif de la persona")
     protected java.lang.String personaNif;
 
-    @Schema(required = false, description = "Username de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Username de la persona")
     protected java.lang.String personaUsername;
 
-    @Schema(required = false, description = "Nom de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Nom de la persona")
     protected java.lang.String personaNom;
 
-    @Schema(required = false, description = "Primer llinatge de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Primer llinatge de la persona")
     protected java.lang.String personaLlinatge1;
 
-    @Schema(required = false, description = "Segon llintge de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Segon llintge de la persona")
     protected java.lang.String personaLlinatge2;
 
-    @Schema(required = false, description = "Correu electrònic de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Correu electrònic de la persona")
     protected java.lang.String personaEmail;
 
-    @Schema(required = false, description = "Mòbil de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Mòbil de la persona")
     java.lang.String personaMobil;
 
-    @Schema(required = true, description = "Raó per la qual es requereix aquesta signatura")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Raó per la qual es requereix aquesta signatura")
     protected java.lang.String raoDeLaFirma;
 
     @Schema(
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             example = "ca",
             defaultValue = "ca",
             description = "Idioma del document en ISO 639-1. Valors permesos 'ca' i 'es'")
     protected java.lang.String languageDocument;
 
-    @Schema(required = true, description = "Informació del fitxer a signar")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Informació del fitxer a signar")
     protected EvidenciaFile documentASignar;
 
     @Schema(
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             example = "http://host:port/myappback/mycallbackcontroller/callbackevidencies?evidenciaid={0}",
             description = "URL de retorn quan el proces d'evidències hagi acabat. A la URL la cadena {0}"
                     + " es substituirà per l'identificador de l'evidència (evidenciaID)")
     protected String callBackUrl;
 
     @Schema(
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             example = "ca",
             defaultValue = "ca",
             description = "Idioma del missatges d'error en format ISO 639-1. Valors permesos 'ca' i 'es'")

@@ -207,6 +207,7 @@ public class EvidenciesRestService extends RestUtils {
      *  
      * @return
      */
+    @SuppressWarnings("deprecation")
     @Path("/versio")
     @GET
     @RolesAllowed({ Constants.EVI_WS })
@@ -271,7 +272,7 @@ public class EvidenciesRestService extends RestUtils {
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(
                                     name = "evidenciaStartRequest",
-                                    required = true,
+                                            requiredMode = Schema.RequiredMode.REQUIRED,
                                     implementation = EvidenciaStartRequest.class))),
             summary = "Primera cridada a realitzar per iniciar un procés d'evidències")
 

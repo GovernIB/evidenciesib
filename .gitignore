@@ -108,3 +108,5 @@ replay_pid*
 /installCertsWithoutOpenSSL.bat
 /target
 /scripts/target
+/evidenciesib-api-externa-client-evidencies-v1/src/test/java/es/caib/evidenciesib/api/externa/client/evidencies/v1/api/MyEvidenciesApiTest.java
+/evidenciesib-api-externa-client-evidencies-v1/testresults

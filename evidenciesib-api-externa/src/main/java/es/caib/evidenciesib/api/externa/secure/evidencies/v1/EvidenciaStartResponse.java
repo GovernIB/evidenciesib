@@ -9,11 +9,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 public class EvidenciaStartResponse {
 
-    @Schema(required = true, description = "Identificador del nou procés de recolecció d'evidències")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Identificador del nou procés de recolecció d'evidències")
     protected long evidenciaID;
 
     @Schema(
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             description = "Adreça a on redirigir el navegador del client per iniciar la recolecció d'evidències",
             format = "uri")
     protected String evidenciaUrlRedirect;

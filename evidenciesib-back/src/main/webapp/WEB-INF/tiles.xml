@@ -146,6 +146,13 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/keyvalue.jsp" />
     </definition>
     
+    
+    <definition name="estadisticaAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/admin/estadisticagrafica.jsp" />
+    </definition>
+    
+
+    
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">

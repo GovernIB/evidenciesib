@@ -19,7 +19,7 @@ public class EvidenciaWs {
             nullable = false,
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_ERROR,
             implementation = Integer.class,
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             accessMode = AccessMode.READ_ONLY)
     public int EVIDENCIA_ESTAT_CODI_ERROR;
 
@@ -28,7 +28,7 @@ public class EvidenciaWs {
             nullable = false,
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO,
             implementation = Integer.class,
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             accessMode = AccessMode.READ_ONLY)
     public int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO;
 
@@ -37,7 +37,7 @@ public class EvidenciaWs {
             nullable = false,
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN,
             implementation = Integer.class,
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             accessMode = AccessMode.READ_ONLY)
     public int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN;
 
@@ -46,7 +46,7 @@ public class EvidenciaWs {
             nullable = false,
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA,
             implementation = Integer.class,
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             accessMode = AccessMode.READ_ONLY)
     public int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA;
 
@@ -55,7 +55,7 @@ public class EvidenciaWs {
             nullable = false,
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_SIGNAT,
             implementation = Integer.class,
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             accessMode = AccessMode.READ_ONLY)
     public int EVIDENCIA_ESTAT_CODI_SIGNAT;
 
@@ -65,28 +65,28 @@ public class EvidenciaWs {
     @Schema(description = "Nom descriptiu de l'evidència.")
     java.lang.String nom;
 
-    @Schema(required = true, description = "Nom de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Nom de la persona")
     protected java.lang.String personaNom;
 
-    @Schema(required = true, description = "Primer llinatge de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Primer llinatge de la persona")
     protected java.lang.String personaLlinatge1;
 
-    @Schema(required = true, description = "Segon llintge de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Segon llintge de la persona")
     protected java.lang.String personaLlinatge2;
 
-    @Schema(required = true, description = "Nif de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Nif de la persona")
     protected java.lang.String personaNif;
 
-    @Schema(required = false, description = "Email de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Email de la persona")
     java.lang.String personaEmail;
 
-    @Schema(required = false, description = "Mòbil de la persona")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Mòbil de la persona")
     java.lang.String personaMobil;
 
-    @Schema(required = true, description = "Data de creació de l'evidència",  type="string",format="date-time", pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Data de creació de l'evidència",  type="string",format="date-time", pattern = "yyyy-MM-dd'T'HH:mm:ss")
     java.sql.Timestamp dataInici;
 
-    @Schema(required = false, description = "Data final de l'evidència",  type="string", format="date-time", pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Data final de l'evidència",  type="string", format="date-time", pattern = "yyyy-MM-dd'T'HH:mm:ss")
     java.sql.Timestamp dataFi;
 
     @Schema(
@@ -101,70 +101,70 @@ public class EvidenciaWs {
     @Schema(description = "Descripció del camp estatCodi")
     String estatCodiDescripcio;
 
-    @Schema(required = false, description = "Missatge de l'error")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Missatge de l'error")
     java.lang.String estatError;
-    @Schema(required = false, description = "Stacktrace de l'excepció si n'hi hagues")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Stacktrace de l'excepció si n'hi hagues")
     java.lang.String estatExcepcio;
 
-    @Schema(required = true, description = "Tipus de Login")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Tipus de Login")
     String loginType;
 
-    @Schema(required = true, description = "Subtipus de login")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Subtipus de login")
     java.lang.String loginSubtype;
 
-    @Schema(required = true, description = "Nivell des eguretat de login")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Nivell des eguretat de login")
     java.lang.String loginQaa;
 
-    @Schema(required = true, description = "Data de realització del login", type="string", format="date-time", pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Data de realització del login", type="string", format="date-time", pattern = "yyyy-MM-dd'T'HH:mm:ss")
     java.sql.Timestamp loginData;
 
-    @Schema(required = true, description = "Identificador del login realitzat.")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Identificador del login realitzat.")
     java.lang.String loginId;
     java.lang.String loginAuthMethod;
     java.lang.String loginAdditionalProperties;
 
-    @Schema(required = false, description = "IP des d'on està connectat el ciutadà")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "IP des d'on està connectat el ciutadà")
     java.lang.String localitzacioIp;
-    @Schema(required = false, description = "Codi postal des d'on està connectat el ciutadà.")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Codi postal des d'on està connectat el ciutadà.")
     java.lang.String localitzacioCodiPostal;
-    @Schema(required = false, description = "Latitud des d'on està connectat el ciutadà.")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Latitud des d'on està connectat el ciutadà.")
     java.lang.String localitzacioLatitud;
-    @Schema(required = false, description = "Longitud des d'on està connectat el ciutadà.")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Longitud des d'on està connectat el ciutadà.")
     java.lang.String localitzacioLongitud;
-    @Schema(required = false, description = "Localitat des d'on està connectat el ciutadà.")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Localitat des d'on està connectat el ciutadà.")
     java.lang.String localitzacioCiutat;
     @Schema(
-            required = false,
+            requiredMode = Schema.RequiredMode.NOT_REQUIRED,
             description = "Regió (Si és Espanya Comunitat Autonoma) des d'on està connectat el ciutadà.")
     java.lang.String localitzacioRegio;
-    @Schema(required = false, description = "Pais des d'on està connectat el ciutadà.")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Pais des d'on està connectat el ciutadà.")
     java.lang.String localitzacioPais;
 
-    @Schema(required = true, description = "Raó de firma.")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Raó de firma.")
     java.lang.String firmaReason;
 
-    @Schema(required = true, description = "Idioma en que està escrit el document.")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Idioma en que està escrit el document.")
     java.lang.String firmaIdiomaDocument;
 
     @Schema(
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             description = "Tipus documental de la Firma. Veure https://administracionelectronica.gob.es/pae_Home/dam/jcr:26d90313-7af0-4f69-9d62-c853d55d7627/Esquema_Metadatos_e-EMGDE_2016.pdf",
             example = "Exemples: 1 -> Resolución(TD01), 2 -> Acuerdo(TD02), 3 -> Contrato(TD03), 4 -> Convenio(TD04)\n ...")
     int firmaTipusDocumental;
 
     @Schema(
-            required = true,
+            requiredMode = Schema.RequiredMode.REQUIRED,
             description = "DescripcioTipus documental de la Firma.Per exemple per 1 retorna 'Resolución(TD01)'",
             example = "1")
     String firmaTipusDocumentalDescripcio;
 
-    @Schema(required = true, description = "Fitxer original. No inclou contingut")
+    @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Fitxer original. No inclou contingut")
     protected EvidenciaFile fitxerOriginal;
 
-    @Schema(required = false, description = "Fitxer adaptat. No inclou contingut")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Fitxer adaptat. No inclou contingut")
     protected EvidenciaFile fitxerAdaptat;
 
-    @Schema(required = false, description = "Fitxer signat. No inclou contingut")
+    @Schema(requiredMode = Schema.RequiredMode.NOT_REQUIRED, description = "Fitxer signat. No inclou contingut")
     protected EvidenciaFile fitxerSignat;
 
     /** Constructor Buit */

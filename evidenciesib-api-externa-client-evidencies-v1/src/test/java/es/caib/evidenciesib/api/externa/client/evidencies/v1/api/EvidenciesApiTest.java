@@ -15,7 +15,6 @@ package es.caib.evidenciesib.api.externa.client.evidencies.v1.api;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.services.ApiClient;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.services.ApiException;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaWs;
-import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.ConstantsWs;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaFile;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaFileBase64;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaStartRequest;
@@ -50,10 +49,12 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * API tests for EvidenciesApi
+ * API REST EXTERNA de EvidenciesIB
+ * @author anadal (u80067)
+ * 1 jun 2026 7:54:41
  */
 @Ignore
-public class EvidenciesApiTest extends ConstantsWs {
+public class EvidenciesApiTest  {
 
     public static final String MIME_APPLICATION_PDF = "application/pdf";
 
@@ -67,16 +68,15 @@ public class EvidenciesApiTest extends ConstantsWs {
 
             EvidenciesApiTest test = new EvidenciesApiTest();
 
-            //test.listTest(api);
+            test.listTest(api);
 
-            //test.getTest(api, props);
+            test.getTest(api, props);
 
-            //test.startTest(api, props);
-            
+            test.startTest(api, props);
+
             test.basicPropertiesTest(api, props);
-            
 
-            //test.versioTest(api);
+            test.versioTest(api);
 
             System.out.println("FINAL");
 
@@ -93,14 +93,11 @@ public class EvidenciesApiTest extends ConstantsWs {
             e.printStackTrace();
         }
     }
-    
-    
-    
-    
+
     protected void basicPropertiesTest(EvidenciesApi api, Properties props) throws ApiException {
-        
+
         System.out.println("TEST BASIC PROPERTIES");
-        
+
         System.out.println("Host: " + props.getProperty("host"));
         System.out.println("Username: " + props.getProperty("username"));
         System.out.println("Password: " + props.getProperty("password"));
@@ -108,15 +105,12 @@ public class EvidenciesApiTest extends ConstantsWs {
         String encEviID = props.getProperty("test.evidenciaencrypted");
 
         Map<String, Object> map = api.getbasicproperties(encEviID, props.getProperty("test.language"));
-         
+
         for (String key : map.keySet()) {
             System.out.println(key + " => " + map.get(key));
         }
 
     }
-    
-    
-    
 
     protected static EvidenciesApi getApi(Properties props) throws IOException {
 
@@ -187,7 +181,7 @@ public class EvidenciesApiTest extends ConstantsWs {
          */
         EvidenciaFile evifile;
         String type;
-        if (evi.getEstatCodi() == getEVIDENCIAESTATCODISIGNAT()) {
+        if (new EvidenciaWs().getEVIDENCIAESTATCODISIGNAT().equals(evi.getEstatCodi())) {
 
             System.out.println(" ------------- DOWNLOAD SIGNED FILE ---------------");
             evifile = evi.getFitxerSignat();
@@ -227,8 +221,7 @@ public class EvidenciesApiTest extends ConstantsWs {
 
         return odt.atZoneSameInstant(java.time.ZoneId.systemDefault()).toLocalDateTime().toString();
     }
-    
-    
+
     public static String formatOffsetDateTimeToLocalTime(java.util.Date date) {
         String formatted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(date);
         return formatted.substring(0, 22) + ":" + formatted.substring(22);
@@ -333,7 +326,12 @@ public class EvidenciesApiTest extends ConstantsWs {
 
         EvidenciaFileBase64 file = api.getfilebase64(evidenciaID, encryptedFile, language);
 
-        File f = new File("EVI_" + evidenciaID + "_" + fileType + "_" + file.getName());
+        File parent = new File("testresults");
+        if (!parent.exists()) {
+            parent.mkdirs();
+        }
+         
+        File f = new File(parent, "EVI_" + evidenciaID + "_" + fileType + "_" + file.getName());
 
         FileOutputStream fos = new FileOutputStream(f);
         fos.write(Base64.decodeBase64(file.getDocumentBase64()));

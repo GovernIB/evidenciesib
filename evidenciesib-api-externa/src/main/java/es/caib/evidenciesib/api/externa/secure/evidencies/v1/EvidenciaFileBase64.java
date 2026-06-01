@@ -39,11 +39,13 @@ public class EvidenciaFileBase64 {
     private String description = null;
 
     @Schema(
-            required = false,
+            requiredMode = Schema.RequiredMode.NOT_REQUIRED,
             description = "Identificar del fitxer per poder-ho recuperar en una segona fase. Només apareix en llistats per no incloure el contingut del fitxer.")
     private String encryptedFileID;
 
-    @Schema(description = "Contingut del fitxer en Base64. En llistats aquest camp vendrà buit.", required = false)
+    @Schema(
+            requiredMode = Schema.RequiredMode.NOT_REQUIRED,
+            description = "Contingut del fitxer en Base64. En llistats aquest camp vendrà buit.")
     protected String documentBase64;
 
     public String getName() {
