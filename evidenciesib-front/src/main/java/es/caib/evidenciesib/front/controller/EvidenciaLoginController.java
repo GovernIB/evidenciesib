@@ -45,6 +45,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
+import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.EvidenciesFrontLogicaService;
 import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
@@ -444,7 +445,7 @@ public class EvidenciaLoginController {
             Long evidenciaID) throws Exception {
 
         log.info("frontLoginEnd =>  evidenciaID=" + evidenciaID);
-        log.info("frontLoginEnd =>  error=" + request.getSession().getAttribute("error"));
+        log.info("frontLoginEnd =>  error=" + request.getSession().getAttribute(PluginLoginController.SESSION_PLUGIN_LOGIN_ERROR_MESSAGE));
 
         EvidenciaJPA evi = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
 
@@ -570,7 +571,7 @@ public class EvidenciaLoginController {
     protected void returnPdf(HttpServletRequest request, HttpServletResponse response, String evidenciaIDEncrypted,
             boolean isDownload) throws Exception, I18NException {
 
-        Long evidenciaID = Long.parseLong(evidenciaIDEncrypted);
+        Long evidenciaID = HibernateFileUtil.decryptFileID(evidenciaIDEncrypted);
 
         long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERORIGINALID,
                 EvidenciaFields.EVIDENCIAID.equal(evidenciaID));

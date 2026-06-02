@@ -71,7 +71,9 @@ public class EvidenciesIBSecurityConfig extends WebSecurityConfigurerAdapter {
                         EvidenciaLoginController.MAPPING_FRONT_POST_LOGIN_END  + "/**", 
                         Constants.MAPPING_FRONT_LOGIN_START + "/**",
                         // Plugin Login
-                        PluginLoginController.MAPPING_PRELOGIN + "/**", PluginLoginController.MAPPING_LOGOUT, 
+                        PluginLoginController.MAPPING_PRELOGIN + "/**",                        
+                        PluginLoginController.MAPPING_ERROR_LOGIN + "/**",
+                        PluginLoginController.MAPPING_LOGOUT, 
                         "/js/**", "/error", "/css/**", "/images/**", "/fonts/**", "/webfonts/**").permitAll()
                 .and()
                 .authorizeRequests().anyRequest().access("isAuthenticated()")
