@@ -7,6 +7,8 @@
 
 
 INSERT INTO evi_plugin(pluginid, nom, descripcio, classe, tipus, propietats, actiu) VALUES (evi_plugin_seq.nextval, 'Plugin de Login de LoginIB', 'Plugin de Login de LoginIB', 'org.fundaciobit.pluginsib.login.loginibswagger.PluginLoginLoginIBSwagger', 1, '# =========  PLUGIN DE LOGIN  LOGINIB
+# Mètodes d´autenticació a mostrar separats per punt i coma.
+# Valors disponibles: ANONIMO, CLAVE_CERTIFICADO, CLAVE_MOVIL i CLAVE_PERMANENTE
 es.caib.evidenciesib.pluginsib.login.loginibswagger.metodos_auth=CLAVE_CERTIFICADO;CLAVE_MOVIL;CLAVE_PERMANENTE
 es.caib.evidenciesib.pluginsib.login.loginibswagger.entidad=A04003003
 es.caib.evidenciesib.pluginsib.login.loginibswagger.aplicacion=CLIENT_TEST
