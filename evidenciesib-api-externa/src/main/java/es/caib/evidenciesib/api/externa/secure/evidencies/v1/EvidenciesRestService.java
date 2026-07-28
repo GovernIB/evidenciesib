@@ -246,7 +246,7 @@ public class EvidenciesRestService extends RestUtils {
                     description = "Només s'utilitza per crear fitxer de constants...",
                     content = { @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(implementation = ConstantsWs.class)) }) })
+                            schema = @Schema(implementation = EvidenciaStatus.class)) }) })
     public String versio() {
         return "1.0";
     }

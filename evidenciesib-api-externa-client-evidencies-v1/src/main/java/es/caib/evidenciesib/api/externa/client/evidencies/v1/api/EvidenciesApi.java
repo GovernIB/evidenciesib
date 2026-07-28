@@ -7,11 +7,11 @@ import es.caib.evidenciesib.api.externa.client.evidencies.v1.services.Pair;
 
 import javax.ws.rs.core.GenericType;
 
-import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.ConstantsWs;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaFile;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaFileBase64;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaStartRequest;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaStartResponse;
+import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaStatus;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaWs;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaWsPaginacio;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.RestExceptionInfo;

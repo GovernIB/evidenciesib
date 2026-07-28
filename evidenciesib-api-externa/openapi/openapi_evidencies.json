@@ -655,7 +655,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ConstantsWs"
+                  "$ref" : "#/components/schemas/EvidenciaStatus"
                 }
               }
             }
@@ -702,44 +702,9 @@
         "description" : "Objecte per enviar i rebre fitxers així com la informació associada a aquest."
       },
       "EvidenciaWs" : {
-        "required" : [ "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN", "EVIDENCIA_ESTAT_CODI_ERROR", "EVIDENCIA_ESTAT_CODI_SIGNAT", "dataInici", "firmaIdiomaDocument", "firmaReason", "firmaTipusDocumental", "firmaTipusDocumentalDescripcio", "fitxerOriginal", "loginData", "loginId", "loginQaa", "loginSubtype", "loginType", "personaLlinatge1", "personaLlinatge2", "personaNif", "personaNom" ],
+        "required" : [ "dataInici", "firmaIdiomaDocument", "firmaReason", "firmaTipusDocumental", "firmaTipusDocumentalDescripcio", "fitxerOriginal", "loginData", "loginId", "loginQaa", "loginSubtype", "loginType", "personaLlinatge1", "personaLlinatge2", "personaNif", "personaNom" ],
         "type" : "object",
         "properties" : {
-          "EVIDENCIA_ESTAT_CODI_ERROR" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica un error",
-            "format" : "int32",
-            "readOnly" : true,
-            "default" : -1
-          },
-          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica que esta en procés de creació",
-            "format" : "int32",
-            "readOnly" : true,
-            "default" : 1
-          },
-          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica que esta realitzant el login",
-            "format" : "int32",
-            "readOnly" : true,
-            "default" : 2
-          },
-          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica que esta realitzant la firma del document",
-            "format" : "int32",
-            "readOnly" : true,
-            "default" : 3
-          },
-          "EVIDENCIA_ESTAT_CODI_SIGNAT" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica que ha finalitzat correctament",
-            "format" : "int32",
-            "readOnly" : true,
-            "default" : 10
-          },
           "evidenciaID" : {
             "type" : "integer",
             "description" : "Identificador únic de l'evidència.",
@@ -1059,52 +1024,14 @@
           }
         }
       },
-      "ConstantsWs" : {
-        "required" : [ "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN", "EVIDENCIA_ESTAT_CODI_ERROR", "EVIDENCIA_ESTAT_CODI_SIGNAT" ],
-        "type" : "object",
-        "properties" : {
-          "EVIDENCIA_ESTAT_CODI_ERROR" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica un error",
-            "format" : "int32",
-            "readOnly" : true,
-            "deprecated" : true,
-            "default" : -1
-          },
-          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica que esta en procés de creació",
-            "format" : "int32",
-            "readOnly" : true,
-            "deprecated" : true,
-            "default" : 1
-          },
-          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica que esta realitzant el login",
-            "format" : "int32",
-            "readOnly" : true,
-            "deprecated" : true,
-            "default" : 2
-          },
-          "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica que esta realitzant la firma del document",
-            "format" : "int32",
-            "readOnly" : true,
-            "deprecated" : true,
-            "default" : 3
-          },
-          "EVIDENCIA_ESTAT_CODI_SIGNAT" : {
-            "type" : "integer",
-            "description" : "Codi d'estat d'una evidència que indica que ha finalitzat correctament",
-            "format" : "int32",
-            "readOnly" : true,
-            "deprecated" : true,
-            "default" : 10
-          }
-        },
-        "deprecated" : true
+      "EvidenciaStatus" : {
+        "type" : "string",
+        "description" : "Valors:\n• EVIDENCIA_ESTAT_CODI_ERROR=-1(Codi d'estat d'una evidència que indica un error)\n• EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO=1(Codi d'estat d'una evidència que indica que esta en procés de creació)\n• EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN=2(Codi d'estat d'una evidència que indica que esta realitzant el login)\n• EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA=3(Codi d'estat d'una evidència que indica que esta realitzant la firma del document)\n• EVIDENCIA_ESTAT_CODI_SIGNAT=10(Codi d'estat d'una evidència que indica que ha finalitzat correctament)",
+        "format" : "int",
+        "example" : "EVIDENCIA_ESTAT_CODI_ERROR(Codi d'estat d'una evidència que indica un error)|EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO(Codi d'estat d'una evidència que indica que esta en procés de creació)|EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN(Codi d'estat d'una evidència que indica que esta realitzant el login)|EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA(Codi d'estat d'una evidència que indica que esta realitzant la firma del document)|EVIDENCIA_ESTAT_CODI_SIGNAT(Codi d'estat d'una evidència que indica que ha finalitzat correctament)",
+        "enum" : [ "-1", "1", "2", "3", "10" ],
+        "x-enum-descriptions" : [ "Codi d'estat d'una evidència que indica un error", "Codi d'estat d'una evidència que indica que esta en procés de creació", "Codi d'estat d'una evidència que indica que esta realitzant el login", "Codi d'estat d'una evidència que indica que esta realitzant la firma del document", "Codi d'estat d'una evidència que indica que ha finalitzat correctament" ],
+        "x-enum-varnames" : [ "EVIDENCIA_ESTAT_CODI_ERROR", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN", "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA", "EVIDENCIA_ESTAT_CODI_SIGNAT" ]
       }
     },
     "securitySchemes" : {

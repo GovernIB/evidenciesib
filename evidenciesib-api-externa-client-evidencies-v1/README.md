@@ -136,11 +136,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [ConstantsWs](docs/ConstantsWs.md)
  - [EvidenciaFile](docs/EvidenciaFile.md)
  - [EvidenciaFileBase64](docs/EvidenciaFileBase64.md)
  - [EvidenciaStartRequest](docs/EvidenciaStartRequest.md)
  - [EvidenciaStartResponse](docs/EvidenciaStartResponse.md)
+ - [EvidenciaStatus](docs/EvidenciaStatus.md)
  - [EvidenciaWs](docs/EvidenciaWs.md)
  - [EvidenciaWsPaginacio](docs/EvidenciaWsPaginacio.md)
  - [RestExceptionInfo](docs/RestExceptionInfo.md)

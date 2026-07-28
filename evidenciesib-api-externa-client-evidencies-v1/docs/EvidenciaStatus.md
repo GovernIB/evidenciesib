@@ -1,0 +1,19 @@
+
+
+# EvidenciaStatus
+
+## Enum
+
+
+* `EVIDENCIA_ESTAT_CODI_ERROR` (value: `-1`)
+
+* `EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO` (value: `1`)
+
+* `EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN` (value: `2`)
+
+* `EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA` (value: `3`)
+
+* `EVIDENCIA_ESTAT_CODI_SIGNAT` (value: `10`)
+
+
+

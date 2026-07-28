@@ -498,7 +498,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstantsWs'
+                $ref: '#/components/schemas/EvidenciaStatus'
           description: Només s'utilitza per crear fitxer de constants...
       security:
       - BasicAuth: []
@@ -513,7 +513,7 @@ components:
       description: Objecte per enviar i rebre fitxers així com la informació associada
         a aquest.
       example:
-        size: 3
+        size: 5
         mime: mime
         document: document
         name: name
@@ -547,16 +547,13 @@ components:
       example:
         localitzacioIp: localitzacioIp
         estatExcepcio: estatExcepcio
-        EVIDENCIA_ESTAT_CODI_ERROR: 0
         loginId: loginId
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: 5
         loginType: loginType
         personaNif: personaNif
-        estatCodi: 7
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO: 6
-        evidenciaID: 2
+        estatCodi: 6
+        evidenciaID: 0
         fitxerAdaptat:
-          size: 3
+          size: 5
           mime: mime
           document: document
           name: name
@@ -570,11 +567,11 @@ components:
         localitzacioCiutat: localitzacioCiutat
         localitzacioLatitud: localitzacioLatitud
         loginAdditionalProperties: loginAdditionalProperties
-        firmaTipusDocumental: 9
+        firmaTipusDocumental: 1
         dataInici: 2000-01-23T04:56:07.000+00:00
         localitzacioPais: localitzacioPais
         fitxerSignat:
-          size: 3
+          size: 5
           mime: mime
           document: document
           name: name
@@ -584,18 +581,16 @@ components:
         firmaIdiomaDocument: firmaIdiomaDocument
         personaEmail: personaEmail
         fitxerOriginal:
-          size: 3
+          size: 5
           mime: mime
           document: document
           name: name
           description: description
           encryptedFileID: encryptedFileID
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN: 1
         localitzacioLongitud: localitzacioLongitud
         localitzacioRegio: localitzacioRegio
         loginSubtype: loginSubtype
         localitzacioCodiPostal: localitzacioCodiPostal
-        EVIDENCIA_ESTAT_CODI_SIGNAT: 5
         firmaTipusDocumentalDescripcio: "1"
         loginQaa: loginQaa
         firmaReason: firmaReason
@@ -604,39 +599,6 @@ components:
         dataFi: 2000-01-23T04:56:07.000+00:00
         estatError: estatError
       properties:
-        EVIDENCIA_ESTAT_CODI_ERROR:
-          default: -1
-          description: Codi d'estat d'una evidència que indica un error
-          format: int32
-          readOnly: true
-          type: integer
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO:
-          default: 1
-          description: Codi d'estat d'una evidència que indica que esta en procés
-            de creació
-          format: int32
-          readOnly: true
-          type: integer
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN:
-          default: 2
-          description: Codi d'estat d'una evidència que indica que esta realitzant
-            el login
-          format: int32
-          readOnly: true
-          type: integer
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA:
-          default: 3
-          description: Codi d'estat d'una evidència que indica que esta realitzant
-            la firma del document
-          format: int32
-          readOnly: true
-          type: integer
-        EVIDENCIA_ESTAT_CODI_SIGNAT:
-          default: 10
-          description: Codi d'estat d'una evidència que indica que ha finalitzat correctament
-          format: int32
-          readOnly: true
-          type: integer
         evidenciaID:
           description: Identificador únic de l'evidència.
           format: int64
@@ -755,11 +717,6 @@ components:
         fitxerSignat:
           $ref: '#/components/schemas/EvidenciaFile'
       required:
-      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO
-      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA
-      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN
-      - EVIDENCIA_ESTAT_CODI_ERROR
-      - EVIDENCIA_ESTAT_CODI_SIGNAT
       - dataInici
       - firmaIdiomaDocument
       - firmaReason
@@ -782,7 +739,7 @@ components:
         field: field
         errorMessage: errorMessage
         stackTraceCause: stackTraceCause
-        errorCode: 2
+        errorCode: 5
         stackTrace: stackTrace
       properties:
         errorCode:
@@ -845,16 +802,13 @@ components:
         data:
         - localitzacioIp: localitzacioIp
           estatExcepcio: estatExcepcio
-          EVIDENCIA_ESTAT_CODI_ERROR: 0
           loginId: loginId
-          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: 5
           loginType: loginType
           personaNif: personaNif
-          estatCodi: 7
-          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO: 6
-          evidenciaID: 2
+          estatCodi: 6
+          evidenciaID: 0
           fitxerAdaptat:
-            size: 3
+            size: 5
             mime: mime
             document: document
             name: name
@@ -868,11 +822,11 @@ components:
           localitzacioCiutat: localitzacioCiutat
           localitzacioLatitud: localitzacioLatitud
           loginAdditionalProperties: loginAdditionalProperties
-          firmaTipusDocumental: 9
+          firmaTipusDocumental: 1
           dataInici: 2000-01-23T04:56:07.000+00:00
           localitzacioPais: localitzacioPais
           fitxerSignat:
-            size: 3
+            size: 5
             mime: mime
             document: document
             name: name
@@ -882,18 +836,16 @@ components:
           firmaIdiomaDocument: firmaIdiomaDocument
           personaEmail: personaEmail
           fitxerOriginal:
-            size: 3
+            size: 5
             mime: mime
             document: document
             name: name
             description: description
             encryptedFileID: encryptedFileID
-          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN: 1
           localitzacioLongitud: localitzacioLongitud
           localitzacioRegio: localitzacioRegio
           loginSubtype: loginSubtype
           localitzacioCodiPostal: localitzacioCodiPostal
-          EVIDENCIA_ESTAT_CODI_SIGNAT: 5
           firmaTipusDocumentalDescripcio: "1"
           loginQaa: loginQaa
           firmaReason: firmaReason
@@ -903,16 +855,13 @@ components:
           estatError: estatError
         - localitzacioIp: localitzacioIp
           estatExcepcio: estatExcepcio
-          EVIDENCIA_ESTAT_CODI_ERROR: 0
           loginId: loginId
-          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: 5
           loginType: loginType
           personaNif: personaNif
-          estatCodi: 7
-          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO: 6
-          evidenciaID: 2
+          estatCodi: 6
+          evidenciaID: 0
           fitxerAdaptat:
-            size: 3
+            size: 5
             mime: mime
             document: document
             name: name
@@ -926,11 +875,11 @@ components:
           localitzacioCiutat: localitzacioCiutat
           localitzacioLatitud: localitzacioLatitud
           loginAdditionalProperties: loginAdditionalProperties
-          firmaTipusDocumental: 9
+          firmaTipusDocumental: 1
           dataInici: 2000-01-23T04:56:07.000+00:00
           localitzacioPais: localitzacioPais
           fitxerSignat:
-            size: 3
+            size: 5
             mime: mime
             document: document
             name: name
@@ -940,18 +889,16 @@ components:
           firmaIdiomaDocument: firmaIdiomaDocument
           personaEmail: personaEmail
           fitxerOriginal:
-            size: 3
+            size: 5
             mime: mime
             document: document
             name: name
             description: description
             encryptedFileID: encryptedFileID
-          EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN: 1
           localitzacioLongitud: localitzacioLongitud
           localitzacioRegio: localitzacioRegio
           loginSubtype: loginSubtype
           localitzacioCodiPostal: localitzacioCodiPostal
-          EVIDENCIA_ESTAT_CODI_SIGNAT: 5
           firmaTipusDocumentalDescripcio: "1"
           loginQaa: loginQaa
           firmaReason: firmaReason
@@ -996,7 +943,7 @@ components:
         d'Evidències
       example:
         documentASignar:
-          size: 3
+          size: 5
           mime: mime
           document: document
           name: name
@@ -1088,60 +1035,40 @@ components:
       - evidenciaID
       - evidenciaUrlRedirect
       type: object
-    ConstantsWs:
-      deprecated: true
-      example:
-        EVIDENCIA_ESTAT_CODI_ERROR: 0
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: 5
-        EVIDENCIA_ESTAT_CODI_SIGNAT: 5
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO: 6
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN: 1
-      properties:
-        EVIDENCIA_ESTAT_CODI_ERROR:
-          default: -1
-          deprecated: true
-          description: Codi d'estat d'una evidència que indica un error
-          format: int32
-          readOnly: true
-          type: integer
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO:
-          default: 1
-          deprecated: true
-          description: Codi d'estat d'una evidència que indica que esta en procés
-            de creació
-          format: int32
-          readOnly: true
-          type: integer
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN:
-          default: 2
-          deprecated: true
-          description: Codi d'estat d'una evidència que indica que esta realitzant
-            el login
-          format: int32
-          readOnly: true
-          type: integer
-        EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA:
-          default: 3
-          deprecated: true
-          description: Codi d'estat d'una evidència que indica que esta realitzant
-            la firma del document
-          format: int32
-          readOnly: true
-          type: integer
-        EVIDENCIA_ESTAT_CODI_SIGNAT:
-          default: 10
-          deprecated: true
-          description: Codi d'estat d'una evidència que indica que ha finalitzat correctament
-          format: int32
-          readOnly: true
-          type: integer
-      required:
-      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO
-      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA
-      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN
+    EvidenciaStatus:
+      description: |-
+        Valors:
+        • EVIDENCIA_ESTAT_CODI_ERROR=-1(Codi d'estat d'una evidència que indica un error)
+        • EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO=1(Codi d'estat d'una evidència que indica que esta en procés de creació)
+        • EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN=2(Codi d'estat d'una evidència que indica que esta realitzant el login)
+        • EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA=3(Codi d'estat d'una evidència que indica que esta realitzant la firma del document)
+        • EVIDENCIA_ESTAT_CODI_SIGNAT=10(Codi d'estat d'una evidència que indica que ha finalitzat correctament)
+      enum:
+      - "-1"
+      - "1"
+      - "2"
+      - "3"
+      - "10"
+      example: EVIDENCIA_ESTAT_CODI_ERROR(Codi d'estat d'una evidència que indica
+        un error)|EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO(Codi d'estat d'una evidència
+        que indica que esta en procés de creació)|EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN(Codi
+        d'estat d'una evidència que indica que esta realitzant el login)|EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA(Codi
+        d'estat d'una evidència que indica que esta realitzant la firma del document)|EVIDENCIA_ESTAT_CODI_SIGNAT(Codi
+        d'estat d'una evidència que indica que ha finalitzat correctament)
+      format: int
+      type: string
+      x-enum-descriptions:
+      - Codi d'estat d'una evidència que indica un error
+      - Codi d'estat d'una evidència que indica que esta en procés de creació
+      - Codi d'estat d'una evidència que indica que esta realitzant el login
+      - Codi d'estat d'una evidència que indica que esta realitzant la firma del document
+      - Codi d'estat d'una evidència que indica que ha finalitzat correctament
+      x-enum-varnames:
       - EVIDENCIA_ESTAT_CODI_ERROR
+      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO
+      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN
+      - EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA
       - EVIDENCIA_ESTAT_CODI_SIGNAT
-      type: object
   securitySchemes:
     BasicAuth:
       scheme: basic

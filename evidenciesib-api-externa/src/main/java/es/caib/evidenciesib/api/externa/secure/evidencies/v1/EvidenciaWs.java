@@ -1,9 +1,7 @@
 package es.caib.evidenciesib.api.externa.secure.evidencies.v1;
 
 
-import es.caib.evidenciesib.commons.utils.Constants;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
 
 /**
  * 
@@ -14,13 +12,16 @@ import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
 public class EvidenciaWs {
     
 
+    /*
     @Schema(
             description = "Codi d'estat d'una evidència que indica un error",
             nullable = false,
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_ERROR,
             implementation = Integer.class,
             requiredMode = Schema.RequiredMode.REQUIRED,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
+    @Deprecated
     public int EVIDENCIA_ESTAT_CODI_ERROR;
 
     @Schema(
@@ -29,7 +30,9 @@ public class EvidenciaWs {
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO,
             implementation = Integer.class,
             requiredMode = Schema.RequiredMode.REQUIRED,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
+    @Deprecated
     public int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO;
 
     @Schema(
@@ -38,7 +41,9 @@ public class EvidenciaWs {
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN,
             implementation = Integer.class,
             requiredMode = Schema.RequiredMode.REQUIRED,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
+    @Deprecated
     public int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN;
 
     @Schema(
@@ -47,7 +52,9 @@ public class EvidenciaWs {
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA,
             implementation = Integer.class,
             requiredMode = Schema.RequiredMode.REQUIRED,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
+    @Deprecated
     public int EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA;
 
     @Schema(
@@ -56,8 +63,11 @@ public class EvidenciaWs {
             defaultValue = "" + Constants.EVIDENCIA_ESTAT_CODI_SIGNAT,
             implementation = Integer.class,
             requiredMode = Schema.RequiredMode.REQUIRED,
-            accessMode = AccessMode.READ_ONLY)
+            accessMode = AccessMode.READ_ONLY,
+            deprecated = true)
+    @Deprecated
     public int EVIDENCIA_ESTAT_CODI_SIGNAT;
+    */
 
     @Schema(description = "Identificador únic de l'evidència.")
     long evidenciaID;// PK

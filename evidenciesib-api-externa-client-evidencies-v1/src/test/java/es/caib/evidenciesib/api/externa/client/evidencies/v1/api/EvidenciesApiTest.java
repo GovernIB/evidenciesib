@@ -19,6 +19,7 @@ import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaFile
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaFileBase64;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaStartRequest;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaStartResponse;
+import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaStatus;
 import es.caib.evidenciesib.api.externa.client.evidencies.v1.model.EvidenciaWsPaginacio;
 import org.junit.Test;
 
@@ -181,7 +182,8 @@ public class EvidenciesApiTest  {
          */
         EvidenciaFile evifile;
         String type;
-        if (new EvidenciaWs().getEVIDENCIAESTATCODISIGNAT().equals(evi.getEstatCodi())) {
+        // EVIDENCIAESTATCODISIGNAT
+        if (EvidenciaStatus.EVIDENCIA_ESTAT_CODI_SIGNAT.getValue().equals(evi.getEstatCodi())) {
 
             System.out.println(" ------------- DOWNLOAD SIGNED FILE ---------------");
             evifile = evi.getFitxerSignat();

@@ -29,11 +29,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * Estructura que inclou tota la informació de l&#39;evidència.
  */
 @JsonPropertyOrder({
-  EvidenciaWs.JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R,
-  EvidenciaWs.JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O,
-  EvidenciaWs.JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_L_O_G_I_N,
-  EvidenciaWs.JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A,
-  EvidenciaWs.JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T,
   EvidenciaWs.JSON_PROPERTY_EVIDENCIA_I_D,
   EvidenciaWs.JSON_PROPERTY_NOM,
   EvidenciaWs.JSON_PROPERTY_PERSONA_NOM,
@@ -72,26 +67,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.10.0")
 public class EvidenciaWs {
-  public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R = "EVIDENCIA_ESTAT_CODI_ERROR";
-  @javax.annotation.Nonnull
-  private Integer EVIDENCIA_ESTAT_CODI_ERROR = -1;
-
-  public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O = "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO";
-  @javax.annotation.Nonnull
-  private Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO = 1;
-
-  public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_L_O_G_I_N = "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN";
-  @javax.annotation.Nonnull
-  private Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN = 2;
-
-  public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A = "EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA";
-  @javax.annotation.Nonnull
-  private Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA = 3;
-
-  public static final String JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T = "EVIDENCIA_ESTAT_CODI_SIGNAT";
-  @javax.annotation.Nonnull
-  private Integer EVIDENCIA_ESTAT_CODI_SIGNAT = 10;
-
   public static final String JSON_PROPERTY_EVIDENCIA_I_D = "evidenciaID";
   @javax.annotation.Nullable
   private Long evidenciaID;
@@ -234,94 +209,6 @@ public class EvidenciaWs {
 
   public EvidenciaWs() {
   }
-  /**
-   * Constructor with only readonly parameters
-   */
-  @JsonCreator
-  public EvidenciaWs(
-    @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R) Integer EVIDENCIA_ESTAT_CODI_ERROR, 
-    @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O) Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO, 
-    @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_L_O_G_I_N) Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN, 
-    @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A) Integer EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA, 
-    @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T) Integer EVIDENCIA_ESTAT_CODI_SIGNAT
-  ) {
-    this();
-    this.EVIDENCIA_ESTAT_CODI_ERROR = EVIDENCIA_ESTAT_CODI_ERROR;
-    this.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO = EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO;
-    this.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN = EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN;
-    this.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA = EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA;
-    this.EVIDENCIA_ESTAT_CODI_SIGNAT = EVIDENCIA_ESTAT_CODI_SIGNAT;
-  }
-
-  /**
-   * Codi d&#39;estat d&#39;una evidència que indica un error
-   * @return EVIDENCIA_ESTAT_CODI_ERROR
-   */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_R_R_O_R)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public Integer getEVIDENCIAESTATCODIERROR() {
-    return EVIDENCIA_ESTAT_CODI_ERROR;
-  }
-
-
-
-  /**
-   * Codi d&#39;estat d&#39;una evidència que indica que esta en procés de creació
-   * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO
-   */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_C_R_E_A_C_I_O)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public Integer getEVIDENCIAESTATCODIENPROCESDECREACIO() {
-    return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO;
-  }
-
-
-
-  /**
-   * Codi d&#39;estat d&#39;una evidència que indica que esta realitzant el login
-   * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN
-   */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_L_O_G_I_N)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public Integer getEVIDENCIAESTATCODIENPROCESDELOGIN() {
-    return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN;
-  }
-
-
-
-  /**
-   * Codi d&#39;estat d&#39;una evidència que indica que esta realitzant la firma del document
-   * @return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA
-   */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_E_N_P_R_O_C_E_S_D_E_F_I_R_M_A)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public Integer getEVIDENCIAESTATCODIENPROCESDEFIRMA() {
-    return EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA;
-  }
-
-
-
-  /**
-   * Codi d&#39;estat d&#39;una evidència que indica que ha finalitzat correctament
-   * @return EVIDENCIA_ESTAT_CODI_SIGNAT
-   */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_E_V_I_D_E_N_C_I_A_E_S_T_A_T_C_O_D_I_S_I_G_N_A_T)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public Integer getEVIDENCIAESTATCODISIGNAT() {
-    return EVIDENCIA_ESTAT_CODI_SIGNAT;
-  }
-
-
 
   public EvidenciaWs evidenciaID(@javax.annotation.Nullable Long evidenciaID) {
     
@@ -1207,12 +1094,7 @@ public class EvidenciaWs {
       return false;
     }
     EvidenciaWs evidenciaWs = (EvidenciaWs) o;
-    return Objects.equals(this.EVIDENCIA_ESTAT_CODI_ERROR, evidenciaWs.EVIDENCIA_ESTAT_CODI_ERROR) &&
-        Objects.equals(this.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO, evidenciaWs.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO) &&
-        Objects.equals(this.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN, evidenciaWs.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN) &&
-        Objects.equals(this.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA, evidenciaWs.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA) &&
-        Objects.equals(this.EVIDENCIA_ESTAT_CODI_SIGNAT, evidenciaWs.EVIDENCIA_ESTAT_CODI_SIGNAT) &&
-        Objects.equals(this.evidenciaID, evidenciaWs.evidenciaID) &&
+    return Objects.equals(this.evidenciaID, evidenciaWs.evidenciaID) &&
         Objects.equals(this.nom, evidenciaWs.nom) &&
         Objects.equals(this.personaNom, evidenciaWs.personaNom) &&
         Objects.equals(this.personaLlinatge1, evidenciaWs.personaLlinatge1) &&
@@ -1251,18 +1133,13 @@ public class EvidenciaWs {
 
   @Override
   public int hashCode() {
-    return Objects.hash(EVIDENCIA_ESTAT_CODI_ERROR, EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO, EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN, EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA, EVIDENCIA_ESTAT_CODI_SIGNAT, evidenciaID, nom, personaNom, personaLlinatge1, personaLlinatge2, personaNif, personaEmail, personaMobil, dataInici, dataFi, estatCodi, estatCodiDescripcio, estatError, estatExcepcio, loginType, loginSubtype, loginQaa, loginData, loginId, loginAuthMethod, loginAdditionalProperties, localitzacioIp, localitzacioCodiPostal, localitzacioLatitud, localitzacioLongitud, localitzacioCiutat, localitzacioRegio, localitzacioPais, firmaReason, firmaIdiomaDocument, firmaTipusDocumental, firmaTipusDocumentalDescripcio, fitxerOriginal, fitxerAdaptat, fitxerSignat);
+    return Objects.hash(evidenciaID, nom, personaNom, personaLlinatge1, personaLlinatge2, personaNif, personaEmail, personaMobil, dataInici, dataFi, estatCodi, estatCodiDescripcio, estatError, estatExcepcio, loginType, loginSubtype, loginQaa, loginData, loginId, loginAuthMethod, loginAdditionalProperties, localitzacioIp, localitzacioCodiPostal, localitzacioLatitud, localitzacioLongitud, localitzacioCiutat, localitzacioRegio, localitzacioPais, firmaReason, firmaIdiomaDocument, firmaTipusDocumental, firmaTipusDocumentalDescripcio, fitxerOriginal, fitxerAdaptat, fitxerSignat);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EvidenciaWs {\n");
-    sb.append("    EVIDENCIA_ESTAT_CODI_ERROR: ").append(toIndentedString(EVIDENCIA_ESTAT_CODI_ERROR)).append("\n");
-    sb.append("    EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO: ").append(toIndentedString(EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO)).append("\n");
-    sb.append("    EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN: ").append(toIndentedString(EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN)).append("\n");
-    sb.append("    EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA: ").append(toIndentedString(EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA)).append("\n");
-    sb.append("    EVIDENCIA_ESTAT_CODI_SIGNAT: ").append(toIndentedString(EVIDENCIA_ESTAT_CODI_SIGNAT)).append("\n");
     sb.append("    evidenciaID: ").append(toIndentedString(evidenciaID)).append("\n");
     sb.append("    nom: ").append(toIndentedString(nom)).append("\n");
     sb.append("    personaNom: ").append(toIndentedString(personaNom)).append("\n");
