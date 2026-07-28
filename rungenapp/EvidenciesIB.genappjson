@@ -1827,6 +1827,6 @@
   ],
   "generateBack": true,
   "generateFront": false,
-  "generateApiInterna": false,
+  "generateApiInterna": true,
   "generateApiExterna": true
 }

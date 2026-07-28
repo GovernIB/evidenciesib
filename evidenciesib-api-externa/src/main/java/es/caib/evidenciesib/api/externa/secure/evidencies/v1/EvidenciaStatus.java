@@ -11,44 +11,31 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author anadal
  *
  */
-
 @Schema(
         name = "EvidenciaStatus",
-        description = "Valors:\n"
-                + "• EVIDENCIA_ESTAT_CODI_ERROR=-1(Codi d'estat d'una evidència que indica un error)\n"
-                + "• EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO=1(Codi d'estat d'una evidència que indica que esta en procés de creació)\n"
-                + "• EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN=2(Codi d'estat d'una evidència que indica que esta realitzant el login)\n"
-                + "• EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA=3(Codi d'estat d'una evidència que indica que esta realitzant la firma del document)\n"
-                + "• EVIDENCIA_ESTAT_CODI_SIGNAT=10(Codi d'estat d'una evidència que indica que ha finalitzat correctament)",
-        //type = "integer",
+        description = "Possibles estats d'una evidència",
         format = "int",
         enumAsRef = true,
-        /** Parxe utilitzat per a la generació correcta dels noms dels enums dins de l'openapi.json */
-        example = "EVIDENCIA_ESTAT_CODI_ERROR(Codi d'estat d'una evidència que indica un error)"
-                + "|EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO(Codi d'estat d'una evidència que indica que esta en procés de creació)"
-                + "|EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN(Codi d'estat d'una evidència que indica que esta realitzant el login)"
-                + "|EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA(Codi d'estat d'una evidència que indica que esta realitzant la firma del document)"
-                + "|EVIDENCIA_ESTAT_CODI_SIGNAT(Codi d'estat d'una evidència que indica que ha finalitzat correctament)",
-                extensions = {
-                        @Extension(properties = {
-                            @ExtensionProperty(
-                                name = "enum-varnames",
-                                parseValue = true,
-                                value = "[\"EVIDENCIA_ESTAT_CODI_ERROR\","
-                                      + "\"EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO\","
-                                      + "\"EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN\","
-                                      + "\"EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA\","
-                                      + "\"EVIDENCIA_ESTAT_CODI_SIGNAT\"]"),
-                            @ExtensionProperty(
-                                    name = "enum-descriptions",
-                                    parseValue = true,
-                                    value = "[\"Codi d'estat d'una evidència que indica un error\","
-                                          + "\"Codi d'estat d'una evidència que indica que esta en procés de creació\","
-                                          + "\"Codi d'estat d'una evidència que indica que esta realitzant el login\","
-                                          + "\"Codi d'estat d'una evidència que indica que esta realitzant la firma del document\","
-                                          + "\"Codi d'estat d'una evidència que indica que ha finalitzat correctament\"]")
-                        })
-                    })
+        extensions = {
+                @Extension(properties = {
+                    @ExtensionProperty(
+                        name = "enum-varnames",
+                        parseValue = true,
+                        value = "[\"EVIDENCIA_ESTAT_CODI_ERROR\","
+                              + "\"EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO\","
+                              + "\"EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN\","
+                              + "\"EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA\","
+                              + "\"EVIDENCIA_ESTAT_CODI_SIGNAT\"]"),
+                    @ExtensionProperty(
+                            name = "enum-descriptions",
+                            parseValue = true,
+                            value = "[\"Codi d'estat d'una evidència que indica un error\","
+                                  + "\"Codi d'estat d'una evidència que indica que esta en procés de creació\","
+                                  + "\"Codi d'estat d'una evidència que indica que esta realitzant el login\","
+                                  + "\"Codi d'estat d'una evidència que indica que esta realitzant la firma del document\","
+                                  + "\"Codi d'estat d'una evidència que indica que ha finalitzat correctament\"]")
+                })
+            })
 public enum EvidenciaStatus {
 
     EVIDENCIA_ESTAT_CODI_ERROR(Constants.EVIDENCIA_ESTAT_CODI_ERROR), //  -1;

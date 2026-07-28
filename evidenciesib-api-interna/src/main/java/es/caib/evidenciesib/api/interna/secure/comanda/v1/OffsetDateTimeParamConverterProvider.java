@@ -1,4 +1,4 @@
-package es.caib.evidenciesib.api.externa.secure.comanda.v1;
+package es.caib.evidenciesib.api.interna.secure.comanda.v1;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;

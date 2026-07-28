@@ -3,9 +3,4 @@
         "url": "./openapi_evidencies.json",
         "name": "Evidencies"
     }
-,
-    {
-        "url": "./openapi_comanda.json",
-        "name": "Comanda"
-    }
 ]

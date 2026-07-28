@@ -18,6 +18,7 @@
         <module>evidenciesib-ejb</module>
         <module>evidenciesib-commons</module>
         <module>evidenciesib-api-externa</module>
+        <module>evidenciesib-api-interna</module>
         <module>evidenciesib-back</module>
         <module>evidenciesib-front</module>
         <module>evidenciesib-ear</module>

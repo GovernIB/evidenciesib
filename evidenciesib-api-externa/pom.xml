@@ -78,18 +78,7 @@
         </dependency>
         
         
-        <!--   COMANDA -->
-        <dependency>
-            <groupId>es.caib.comanda</groupId>
-            <artifactId>comanda-api-server-monitoring</artifactId>
-            <version>1.0.0</version>
-        </dependency>
 
-        <dependency>
-            <groupId>es.caib.comanda</groupId>
-            <artifactId>comanda-api-utils</artifactId>
-            <version>1.0.0</version>
-        </dependency>
         
 
         <!-- Dependències de test -->
@@ -132,21 +121,7 @@
                         </configuration>
                     </execution>
                     
-                    <execution>
-                        <id>openapi2</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>resolve</goal>
-                        </goals>
-                        <configuration>
-                            <contextId>Comanda</contextId>
-                            <outputFileName>openapi_comanda</outputFileName>
-                            <resourcePackages>
-                                <package>es.caib.evidenciesib.api.externa.config</package>
-                                <package>es.caib.evidenciesib.api.externa.secure.comanda.v1</package>
-                            </resourcePackages>
-                        </configuration>
-                    </execution>
+                    
                 </executions>
             </plugin>
 

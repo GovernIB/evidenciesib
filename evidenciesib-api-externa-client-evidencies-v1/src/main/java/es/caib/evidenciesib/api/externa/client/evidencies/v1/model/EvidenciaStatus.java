@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Valors: • EVIDENCIA_ESTAT_CODI_ERROR&#x3D;-1(Codi d&#39;estat d&#39;una evidència que indica un error) • EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO&#x3D;1(Codi d&#39;estat d&#39;una evidència que indica que esta en procés de creació) • EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_LOGIN&#x3D;2(Codi d&#39;estat d&#39;una evidència que indica que esta realitzant el login) • EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA&#x3D;3(Codi d&#39;estat d&#39;una evidència que indica que esta realitzant la firma del document) • EVIDENCIA_ESTAT_CODI_SIGNAT&#x3D;10(Codi d&#39;estat d&#39;una evidència que indica que ha finalitzat correctament)
+ * Possibles estats d&#39;una evidència
  */
 public enum EvidenciaStatus {
   
