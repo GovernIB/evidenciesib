@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.evidenciesib.back.controller.user.EvidenciaUserController;
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.commons.utils.Version;
+import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.EvidenciesFrontLogicaService;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 
@@ -52,9 +53,11 @@ public class PublicController {
         }
     }
 
-    @RequestMapping(value = Constants.MAPPING_BACK_LOGIN_END + "/{evidenciaID}")
+    @RequestMapping(value = Constants.MAPPING_BACK_LOGIN_END + "/{encryptedEvidenciaID}")
     public String postLoginFront(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID") Long evidenciaID) throws Exception {
+            @PathVariable("encryptedEvidenciaID") String encryptedEvidenciaID) throws Exception {
+        
+        Long evidenciaID = HibernateFileUtil.decryptFileID(encryptedEvidenciaID);
 
         log.info("Entra a postLoginFront[EviID:" + evidenciaID + "]");
 

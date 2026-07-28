@@ -6,7 +6,7 @@
 <body>
     <script type="text/javascript">
        function gotoPage() {
-          window.location.href = "<%=request.getContextPath()%>/frontpostloginend/${evidenciaID}";
+          window.location.href = "${redirectURL}";
        }
     </script>
     

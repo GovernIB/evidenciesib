@@ -102,11 +102,11 @@ public class EvidenciaLoginController {
 
         ModelAndView mav = new ModelAndView("norepudi");
         mav.addObject("evidenciaID", evidenciaID);
-        final String action = request.getContextPath() + MAPPING_NO_REPUDI_POST + "/" + evidenciaID;
+        final String action = request.getContextPath() + MAPPING_NO_REPUDI_POST + "/" + encryptedEvidenciaID;
         mav.addObject("action", action);
-        final String cancelurl = request.getContextPath() + MAPPING_CANCEL_GET + "/" + evidenciaID;
+        final String cancelurl = request.getContextPath() + MAPPING_CANCEL_GET + "/" + encryptedEvidenciaID;
         mav.addObject("cancelurl", cancelurl);
-        mav.addObject("thumbnail", request.getContextPath() + THUMBNAIL_PDF_MASSIVE + "/" + evidenciaID);
+        mav.addObject("thumbnail", request.getContextPath() + THUMBNAIL_PDF_MASSIVE + "/" + encryptedEvidenciaID);
 
         log.info("frontLoginStart =>  action=" + action);
         log.info("frontLoginStart =>  cancelurl=" + cancelurl);
@@ -189,10 +189,12 @@ public class EvidenciaLoginController {
 
     public static final String MAPPING_CANCEL_GET = "/cancelnorepudi";
 
-    @RequestMapping(path = MAPPING_CANCEL_GET + "/{evidenciaID}", method = RequestMethod.GET)
-    public String cancelGet(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
-    Long evidenciaID) throws Exception {
+    @RequestMapping(path = MAPPING_CANCEL_GET + "/{encryptedEvidenciaID}", method = RequestMethod.GET)
+    public String cancelGet(HttpServletRequest request, HttpServletResponse response,  @PathVariable("encryptedEvidenciaID")
+    String encryptedEvidenciaID) throws Exception {
 
+        Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
+        
         log.info("ENTRA A CANCEL GET => evidenciaID=" + evidenciaID);
 
         if (request.getParameterMap().size() == 0) {
@@ -230,9 +232,9 @@ public class EvidenciaLoginController {
 
     public static final String MAPPING_NO_REPUDI_POST = "/norepudi";
 
-    @RequestMapping(path = MAPPING_NO_REPUDI_POST + "/{evidenciaID}", method = RequestMethod.POST)
-    public String noRepudiPost(HttpServletRequest request, HttpServletResponse response, @PathVariable("evidenciaID")
-    Long evidenciaID) throws Exception {
+    @RequestMapping(path = MAPPING_NO_REPUDI_POST + "/{encryptedEvidenciaID}", method = RequestMethod.POST)
+    public String noRepudiPost(HttpServletRequest request, HttpServletResponse response, @PathVariable("encryptedEvidenciaID")
+    String encryptedEvidenciaID) throws Exception {
 
         if (request.getParameterMap().size() == 0) {
             log.warn("noRepudiPost => NO HI HA PARAMETERS !!!!!!!!");
@@ -241,6 +243,8 @@ public class EvidenciaLoginController {
                 log.info("noRepudiPost => Parameter[" + entry.getKey() + "] => |" + entry.getValue() + "|");
             }
         }
+        
+        Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
 
         EvidenciaJPA evidencia;
         evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
@@ -330,7 +334,7 @@ public class EvidenciaLoginController {
         httpSession.setAttribute(PluginLoginController.URL_BASE_LOGIN, urlfront);
 
         httpSession.setAttribute(PluginLoginController.SESSION_RETURN_URL_POST_LOGIN,
-                urlfront + MAPPING_FRONT_LOGIN_END + "/" + evidenciaID);
+                urlfront + MAPPING_FRONT_LOGIN_END + "/" + encryptedEvidenciaID);
 
         return "redirect:" + PluginLoginController.MAPPING_LOGIN;
 
@@ -345,15 +349,17 @@ public class EvidenciaLoginController {
     }
 
     protected String getRedirectUrl(Long evidenciaID) {
-        return Configuracio.getBackUrl() + Constants.MAPPING_BACK_LOGIN_END + "/" + evidenciaID;
+        return Configuracio.getBackUrl() + Constants.MAPPING_BACK_LOGIN_END + "/" +  HibernateFileUtil.encryptFileID(evidenciaID);
     }
 
     public static final String THUMBNAIL_PDF_MASSIVE = "/thumbnailpdf";
 
-    @RequestMapping(value = THUMBNAIL_PDF_MASSIVE + "/{evidenciaID}", method = RequestMethod.GET)
+    @RequestMapping(value = THUMBNAIL_PDF_MASSIVE + "/{encryptedEvidenciaID}", method = RequestMethod.GET)
     public void createThumbnailPdf(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID")
-            Long evidenciaID) throws Exception, I18NException {
+            @PathVariable("encryptedEvidenciaID")
+    String encryptedEvidenciaID) throws Exception, I18NException {
+        
+        Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
 
         long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERORIGINALID,
                 EvidenciaFields.EVIDENCIAID.equal(evidenciaID));
@@ -425,27 +431,32 @@ public class EvidenciaLoginController {
         return bimage;
     }
 
-    @RequestMapping(MAPPING_FRONT_LOGIN_END + "/{evidenciaID}")
+    @RequestMapping(MAPPING_FRONT_LOGIN_END + "/{encryptedEvidenciaID}")
     public ModelAndView frontLoginEnd(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID")
-            Long evidenciaID) throws Exception {
+            @PathVariable("encryptedEvidenciaID")
+    String encryptedEvidenciaID) throws Exception {
+
 
         ModelAndView mav = new ModelAndView("loginend");
+        
+        String redirectURL = request.getContextPath() + MAPPING_FRONT_POST_LOGIN_END + "/" + encryptedEvidenciaID;
 
-        mav.addObject("evidenciaID", evidenciaID);
+        mav.addObject("redirectURL", redirectURL);
 
         configurarEntityHeader(request, mav, log);
 
         return mav;
     }
 
-    @RequestMapping(MAPPING_FRONT_POST_LOGIN_END + "/{evidenciaID}")
+    @RequestMapping(MAPPING_FRONT_POST_LOGIN_END + "/{encryptedEvidenciaID}")
     public String frontPostLoginEnd(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("evidenciaID")
-            Long evidenciaID) throws Exception {
+            @PathVariable("encryptedEvidenciaID")
+    String encryptedEvidenciaID) throws Exception {
+        
+        Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
 
-        log.info("frontLoginEnd =>  evidenciaID=" + evidenciaID);
-        log.info("frontLoginEnd =>  error=" + request.getSession().getAttribute(PluginLoginController.SESSION_PLUGIN_LOGIN_ERROR_MESSAGE));
+        log.info(MAPPING_FRONT_POST_LOGIN_END + " =>  evidenciaID=" + evidenciaID);
+        log.info(MAPPING_FRONT_POST_LOGIN_END + " =>  error=" + request.getSession().getAttribute(PluginLoginController.SESSION_PLUGIN_LOGIN_ERROR_MESSAGE));
 
         EvidenciaJPA evi = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
 
