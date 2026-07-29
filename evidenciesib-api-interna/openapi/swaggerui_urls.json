@@ -1,10 +1,5 @@
 [
     {
-        "url": "./openapi_interna_public.json",
-        "name": "Exemple Interna Public"
-    }
-,
-    {
         "url": "./openapi_comanda.json",
         "name": "Comanda"
     }

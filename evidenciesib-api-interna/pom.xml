@@ -99,23 +99,7 @@
                 </configuration>
 
                 <executions>
-                    <!--
-                    <execution>
-                        <id>openapi_interna_1</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>resolve</goal>
-                        </goals>
-                        <configuration>
-                            <contextId>Exemple Interna Public</contextId>
-                            <outputFileName>openapi_interna_public</outputFileName>
-                            <resourcePackages>
-                                <package>es.caib.evidenciesib.api.interna.config</package>
-                                <package>es.caib.evidenciesib.api.interna.all.exemplepublic</package>
-                            </resourcePackages>
-                        </configuration>
-                    </execution>
-                    -->
+
                     <execution>
                         <id>openapi2</id>
                         <phase>compile</phase>
@@ -193,76 +177,6 @@
                 <version>7.10.0</version>
 
                 <executions>
-                          <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
-                            <!-- <configHelp>true</configHelp> -->
-                <!--
-                    <execution>
-                        <id>openapi_interna_1</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/openapi/openapi_interna_public.json</inputSpec>
-                            <generatorName>java</generatorName>
-                            <skipValidateSpec>true</skipValidateSpec>
-                            <configHelp>java</configHelp>
-                            <library>resteasy</library>
-                  
-                            <addCompileSourceRoot>false</addCompileSourceRoot>
-                            <output>${project.basedir}/../evidenciesib-api-interna-client-exemplepublic-v1</output>
-                            <apiPackage>${client.default.package}.exemplepublic.v1.api</apiPackage>
-                            <modelPackage>${client.default.package}.exemplepublic.v1.model</modelPackage>
-                            <invokerPackage>${client.default.package}.exemplepublic.v1.services</invokerPackage>
-                            <generateModelTests>false</generateModelTests>
-                            <configOptions>
-                                <groupId>es.caib.evidenciesib</groupId>
-                                <artifactId>evidenciesib-api-interna-client-exemplepublic-v1</artifactId>
-                                <artifactVersion>1.0-SNAPSHOT</artifactVersion>
-                                <artifactDescription>EvidenciesIB - API Rest - Interna Client - Exemple Public v1</artifactDescription>
-                                <dateLibrary>java8</dateLibrary>
-                                <useTags>true</useTags>
-                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                <java11>true</java11>
-                            </configOptions>
-                        </configuration>
-                    </execution>
-                    -->
-                    <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
-                            <!-- <configHelp>true</configHelp> -->
-                            <!--
-                    <execution>
-                        <id>openapi_interna_2</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/openapi/openapi_interna_secure.json</inputSpec>
-                            <generatorName>java</generatorName>
-                            <skipValidateSpec>true</skipValidateSpec>
-                            <configHelp>java</configHelp>
-                            <library>resteasy</library>
-                            
-                            <addCompileSourceRoot>false</addCompileSourceRoot>
-                            <output>${project.basedir}/../evidenciesib-api-interna-client-exemplesecure-v1</output>
-                            <apiPackage>${client.default.package}.exemplesecure.v1.api</apiPackage>
-                            <modelPackage>${client.default.package}.exemplesecure.v1.model</modelPackage>
-                            <invokerPackage>${client.default.package}.exemplesecure.v1.services</invokerPackage>
-                            <generateModelTests>false</generateModelTests>
-                            <configOptions>
-                                <groupId>es.caib.evidenciesib</groupId>
-                                <artifactId>evidenciesib-api-interna-client-exemplesecure-v1</artifactId>
-                                <artifactVersion>1.0-SNAPSHOT</artifactVersion>
-                                <artifactDescription>EvidenciesIB - API Rest - Interna Client - Exemple Secure v1</artifactDescription>
-                                <dateLibrary>java8</dateLibrary>
-                                <useTags>true</useTags>
-                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                                <java11>true</java11>
-                            </configOptions>
-                        </configuration>
-                    </execution>
-                    -->
                     <!-- openapi2: Comanda No necessita Client Java -->
                     <!-- openapi3:  Dades Obertes no necessita Client JAVA -->
                 </executions>
