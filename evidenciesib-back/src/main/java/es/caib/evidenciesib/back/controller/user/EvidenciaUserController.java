@@ -28,7 +28,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -156,7 +155,7 @@ public class EvidenciaUserController extends EvidenciaController {
             evi.setUsuariPersona(request.getRemoteUser());
             evi.setUsuariAplicacio(null);
             evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO);
-            evi.setCallBackUrl(getContextWeb() + "/list");
+            evi.setCallBackUrl(Configuracio.getBackUrl() + getContextWeb() + MAPPING_BACK_LOGIN_END + "/{0}");
 
             Set<Field<?>> hiddenFields = new HashSet<Field<?>>();
 
@@ -175,27 +174,6 @@ public class EvidenciaUserController extends EvidenciaController {
             hiddenFields.remove(EvidenciaFields.FITXERORIGINALID);
 
             evidenciaForm.setHiddenFields(hiddenFields);
-
-            /*
-            evidenciaForm.addHiddenField(FITXERADAPTATID);
-            evidenciaForm.addHiddenField(FITXERSIGNATID);
-            evidenciaForm.addHiddenField(DATAINICI);
-            evidenciaForm.addHiddenField(DATAFI);
-            evidenciaForm.addHiddenField(USUARIAPLICACIO);
-            evidenciaForm.addHiddenField(USUARIPERSONA);
-            
-            evidenciaForm.addHiddenField(ESTATCODI);
-            evidenciaForm.addHiddenField(ESTATERROR);
-            evidenciaForm.addHiddenField(ESTATEXCEPCIO);
-            
-            evidenciaForm.addHiddenField(LOGINDATA);
-            evidenciaForm.addHiddenField(LOGINTYPE);
-            evidenciaForm.addHiddenField(LOGINID);
-            evidenciaForm.addHiddenField(LOGINSUBTYPE);
-            evidenciaForm.addHiddenField(LOGINQAA);
-            evidenciaForm.addHiddenField(LOGINAUTHMETHOD);
-            evidenciaForm.addHiddenField(LOGINADDITIONALPROPERTIES);
-            */
 
         } else if (__isView) {
 
@@ -314,34 +292,6 @@ public class EvidenciaUserController extends EvidenciaController {
 
         EvidenciaJPA evi = evidenciaForm.getEvidencia();
 
-        /*
-        if (evidenciaForm.getEvidencia().getLoginType() == Constants.EVIDENCIA_TIPUS_LOGIN_AUTENTICACIO_BACK) {
-            
-            
-            // ja podem anara a signar
-            evi.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_FIRMA);
-            try {
-                evidenciaEjb.update(evi);
-            } catch (I18NException e) {
-                
-                String msg = "Error actualitzant l'evidència despres de signar el document: " + I18NUtils.getMessage(e);
-                log.error(msg, e);
-                HtmlUtils.saveMessageError(request, msg);
-            }
-        
-            
-            String url =  Configuracio.getBackUrl() + "/public/evidencia/"  + HibernateFileUtil.encryptFileID(evi.getEvidenciaID());
-            
-            final String languageUI = LocaleContextHolder.getLocale().getLanguage();
-        
-            evi = this.evidenciaLogicaEjb.createAdaptedFileAndSignDocument(evi, languageUI, url);
-        
-            messagesInternalSignDocument(request, evi);
-        
-            return "redirect:" + getContextWeb() + "/list";
-            
-        
-        } else  */
         try {
             // Hem d'anar a FRONT per autenticació Cl@ve o Mock            
             final String urlfront = Configuracio.getFrontUrl();
@@ -355,43 +305,6 @@ public class EvidenciaUserController extends EvidenciaController {
 
             return "redirect:" + getContextWeb() + "/list";
         }
-
-    }
-
-    protected void messagesInternalSignDocument(HttpServletRequest request, EvidenciaJPA evi) {
-        if (evi.getUsuariPersona() != null) {
-            String error = evi.getEstatError();
-            if (error == null) {
-                // generadaok=La evidencia se ha generado correctamente !!!
-                HtmlUtils.saveMessageSuccess(request, I18NUtils.tradueix("generadaok"));
-            } else {
-                HtmlUtils.deleteMessages(request);
-                HtmlUtils.saveMessageError(request, error);
-            }
-        }
-    }
-
-    @RequestMapping(
-            value = Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + "{evidenciaID}",
-            method = RequestMethod.GET)
-    public String signEvidenciaRequest(@PathVariable("evidenciaID")
-    java.lang.Long evidenciaID, HttpServletRequest request, HttpServletResponse response) throws I18NException {
-
-        EvidenciaJPA evi = findByPrimaryKey(request, evidenciaID);
-
-        // AQUEST IDIOMA HA DE SER EL QUE DIGUI EVIDENCIA 
-        final String languageUI = LocaleContextHolder.getLocale().getLanguage();
-
-
-        evi = this.evidenciaLogicaEjb.createAdaptedFileAndSignDocument(evi, languageUI);
-
-        messagesInternalSignDocument(request, evi);
-
-        final String redirect = evi.getCallBackUrl().replace("{0}", String.valueOf(evi.getEvidenciaID()));
-
-        log.info(" Callback[" + evi.getEvidenciaID() + "]  => " + redirect);
-
-        return "redirect:" + redirect;
 
     }
 
@@ -570,6 +483,37 @@ public class EvidenciaUserController extends EvidenciaController {
         __tmp.add(new StringKeyValue("3", I18NUtils.tradueix("qaa.3", "3")));
         __tmp.add(new StringKeyValue("4", I18NUtils.tradueix("qaa.4", "4")));
         return __tmp;
+    }
+
+    public static final String MAPPING_BACK_LOGIN_END = "/callBackFromFront";
+
+    @RequestMapping(value = MAPPING_BACK_LOGIN_END + "/{evidenciaID}")
+    public String callBackFromFront(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("evidenciaID")
+            Long evidenciaID) throws Exception {
+
+        log.info("callBackFromFront:: Entra a callBackFromFront[EviID:" + evidenciaID + "]");
+
+        EvidenciaJPA evi = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
+
+        // Error o Cancel ?
+        if (evi.getEstatCodi() == Constants.EVIDENCIA_ESTAT_CODI_ERROR) {
+            final String redirect = evi.getCallBackUrl().replace("{0}", String.valueOf(evi.getEvidenciaID()));
+
+            log.warn("callBackFromFront:: Error en el front ... [" + evi.getEvidenciaID() + "]  => " + redirect);
+
+            // ES BACK
+            HtmlUtils.deleteMessages(request);
+            HtmlUtils.saveMessageError(request, I18NUtils.tradueix("evidencia.error", evi.getEstatError()));
+
+        } else {
+            // generadaok=La evidencia se ha generado correctamente !!!
+            HtmlUtils.deleteMessages(request);
+            HtmlUtils.saveMessageSuccess(request, I18NUtils.tradueix("generadaok"));
+        }
+
+        return "redirect:" + getContextWeb() + "/view/" + evidenciaID;
+
     }
 
 }

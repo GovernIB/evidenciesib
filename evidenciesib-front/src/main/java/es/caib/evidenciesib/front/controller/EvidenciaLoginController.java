@@ -190,11 +190,12 @@ public class EvidenciaLoginController {
     public static final String MAPPING_CANCEL_GET = "/cancelnorepudi";
 
     @RequestMapping(path = MAPPING_CANCEL_GET + "/{encryptedEvidenciaID}", method = RequestMethod.GET)
-    public String cancelGet(HttpServletRequest request, HttpServletResponse response,  @PathVariable("encryptedEvidenciaID")
-    String encryptedEvidenciaID) throws Exception {
+    public String cancelGet(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("encryptedEvidenciaID")
+            String encryptedEvidenciaID) throws Exception {
 
         Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
-        
+
         log.info("ENTRA A CANCEL GET => evidenciaID=" + evidenciaID);
 
         if (request.getParameterMap().size() == 0) {
@@ -222,7 +223,7 @@ public class EvidenciaLoginController {
 
         evidenciaLogicaEjb.update(evidencia);
 
-        String r = "redirect:" + getRedirectUrl(evidenciaID);
+        String r = getRedirectUrl(evidencia);
         log.info("Cancel usuari. Redirect => " + r);
 
         return r;
@@ -233,8 +234,9 @@ public class EvidenciaLoginController {
     public static final String MAPPING_NO_REPUDI_POST = "/norepudi";
 
     @RequestMapping(path = MAPPING_NO_REPUDI_POST + "/{encryptedEvidenciaID}", method = RequestMethod.POST)
-    public String noRepudiPost(HttpServletRequest request, HttpServletResponse response, @PathVariable("encryptedEvidenciaID")
-    String encryptedEvidenciaID) throws Exception {
+    public String noRepudiPost(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("encryptedEvidenciaID")
+            String encryptedEvidenciaID) throws Exception {
 
         if (request.getParameterMap().size() == 0) {
             log.warn("noRepudiPost => NO HI HA PARAMETERS !!!!!!!!");
@@ -243,31 +245,12 @@ public class EvidenciaLoginController {
                 log.info("noRepudiPost => Parameter[" + entry.getKey() + "] => |" + entry.getValue() + "|");
             }
         }
-        
+
         Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
 
         EvidenciaJPA evidencia;
         evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
 
-        /*
-        // S'ha pitjat "CANCEL"
-        String submitCancel = request.getParameter("submitCancel");
-        if ("cancel".equals(submitCancel)) {
-        
-            evidencia.setEstatCodi(Constants.EVIDENCIA_ESTAT_CODI_ERROR);
-        
-            evidencia.setEstatError(StringUtils.abbreviate(I18NUtils.tradueix("usuari.cancelat"), 4000));
-        
-            evidencia.setDataFi(new Timestamp(System.currentTimeMillis()));
-        
-            evidenciaLogicaEjb.update(evidencia);
-        
-            String r = "redirect:" + getRedirectUrl(evidenciaID);
-            log.info("Cancel usuari. Redirect => " + r);
-        
-            return r;
-        }
-        */
 
         evidencia.setClickProperties(request.getParameter("clickInfo"));
 
@@ -348,8 +331,12 @@ public class EvidenciaLoginController {
         }
     }
 
-    protected String getRedirectUrl(Long evidenciaID) {
-        return Configuracio.getBackUrl() + Constants.MAPPING_BACK_LOGIN_END + "/" +  HibernateFileUtil.encryptFileID(evidenciaID);
+    protected String getRedirectUrl(EvidenciaJPA evi) {
+
+        final String redirect = evi.getCallBackUrl().replace("{0}", String.valueOf(evi.getEvidenciaID()));
+
+        return "redirect:" + redirect;
+
     }
 
     public static final String THUMBNAIL_PDF_MASSIVE = "/thumbnailpdf";
@@ -357,8 +344,8 @@ public class EvidenciaLoginController {
     @RequestMapping(value = THUMBNAIL_PDF_MASSIVE + "/{encryptedEvidenciaID}", method = RequestMethod.GET)
     public void createThumbnailPdf(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("encryptedEvidenciaID")
-    String encryptedEvidenciaID) throws Exception, I18NException {
-        
+            String encryptedEvidenciaID) throws Exception, I18NException {
+
         Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
 
         long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERORIGINALID,
@@ -434,11 +421,11 @@ public class EvidenciaLoginController {
     @RequestMapping(MAPPING_FRONT_LOGIN_END + "/{encryptedEvidenciaID}")
     public ModelAndView frontLoginEnd(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("encryptedEvidenciaID")
-    String encryptedEvidenciaID) throws Exception {
+            String encryptedEvidenciaID) throws Exception {
 
-
+        //  MOSTRAR ESPERA MENTRE ES FAN LES FIRMES ...
         ModelAndView mav = new ModelAndView("loginend");
-        
+
         String redirectURL = request.getContextPath() + MAPPING_FRONT_POST_LOGIN_END + "/" + encryptedEvidenciaID;
 
         mav.addObject("redirectURL", redirectURL);
@@ -451,12 +438,13 @@ public class EvidenciaLoginController {
     @RequestMapping(MAPPING_FRONT_POST_LOGIN_END + "/{encryptedEvidenciaID}")
     public String frontPostLoginEnd(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("encryptedEvidenciaID")
-    String encryptedEvidenciaID) throws Exception {
-        
+            String encryptedEvidenciaID) throws Exception {
+
         Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
 
         log.info(MAPPING_FRONT_POST_LOGIN_END + " =>  evidenciaID=" + evidenciaID);
-        log.info(MAPPING_FRONT_POST_LOGIN_END + " =>  error=" + request.getSession().getAttribute(PluginLoginController.SESSION_PLUGIN_LOGIN_ERROR_MESSAGE));
+        log.info(MAPPING_FRONT_POST_LOGIN_END + " =>  error="
+                + request.getSession().getAttribute(PluginLoginController.SESSION_PLUGIN_LOGIN_ERROR_MESSAGE));
 
         EvidenciaJPA evi = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
 
@@ -468,7 +456,7 @@ public class EvidenciaLoginController {
             throw new Exception(msg);
         }
 
-        final String r = "redirect:" + getRedirectUrl(evidenciaID);
+        final String r = getRedirectUrl(evi);
 
         evi.setLoginData(new Timestamp(System.currentTimeMillis()));
 
@@ -555,6 +543,15 @@ public class EvidenciaLoginController {
         }
 
         evidenciaLogicaEjb.update(evi);
+
+        // FER LA FIRMA 
+        // AQUEST IDIOMA HA DE SER EL QUE DIGUI EVIDENCIA 
+        final String languageUI = evi.getLanguageUI();
+
+        log.info("frontPostLoginEnd =>  Cridant a createAdaptedFileAndSignDocument ...");
+        evi = this.evidenciaLogicaEjb.createAdaptedFileAndSignDocument(evi, languageUI);
+
+        log.info("frontPostLoginEnd => Redirect => " + r);
 
         return r;
     }

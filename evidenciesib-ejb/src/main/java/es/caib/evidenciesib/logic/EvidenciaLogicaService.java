@@ -1,6 +1,5 @@
 package es.caib.evidenciesib.logic;
 
-import java.util.Map;
 
 import javax.ejb.Local;
 
@@ -29,21 +28,12 @@ public interface EvidenciaLogicaService extends es.caib.evidenciesib.ejb.Evidenc
     
     @Override
     public Evidencia update(Evidencia instance) throws I18NException;
-    
+
     /**
      * 
-     * @param evi
-     * @param languageUI
-     * @return
+     * @param pdf
+     * @throws I18NException
      */
-    public EvidenciaJPA createAdaptedFileAndSignDocument(EvidenciaJPA evi,  String languageUI) throws I18NException;
-    
-    
-    public Map<String, String> getBasicPropertiesOfEvidence(String encriptedEvidenciaID) throws I18NException;
-    
-    
-    
-    
-    public void validatePdfForEvidencies(byte[] pdf) throws I18NException;
+    void validatePdfForEvidencies(byte[] pdf) throws I18NException;
     
 }

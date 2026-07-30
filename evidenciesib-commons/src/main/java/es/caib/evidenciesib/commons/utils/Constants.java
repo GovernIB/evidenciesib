@@ -37,25 +37,17 @@ public interface Constants {
 
     // CONSTANTS ENTRE BACK I FRONT
     public static final String MAPPING_FRONT_LOGIN_START = "/frontloginstart";
-    public static final String MAPPING_BACK_LOGIN_END = "/public/backloginend";
 
-    public static final String MAPPING_BACK_PUBLIC_EVIDENCE = "/public/evidencia";
-    public static final String MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION = "/sign/";
-    public static final String MAPPING_BACK_PUBLIC_EVIDENCE_INFO_OPERATION = "/info/";
-
-    public static final String MAPPING_FULL_PUBLIC_EVIDENCE_INFO = MAPPING_BACK_PUBLIC_EVIDENCE
-            + MAPPING_BACK_PUBLIC_EVIDENCE_INFO_OPERATION;
+    public static final String MAPPING_FRONT_FULL_PUBLIC_EVIDENCE_INFO = "/public/evidencia/info/";
 
     public static final String MAPPING_PUBLIC_ARXIU = "/public/arxiu/";
 
     // TIPUS DE PLUGINS
     public static final int PLUGINSIB_TIPUS_LOGIN_FRONT = 1;
     public static final int PLUGINSIB_TIPUS_FIRMA_EN_SERVIDOR = 2;
-    
-    
-    
+
     // ESTADISTIQUES
-    
+
     public static final int CATEGORIA_PETICIONS_EVIDENCIES = 1;
 
     public static final int ESTADISTICA_GRUP_PETICIONS_EVIDENCIESIB = 1;
@@ -64,7 +56,6 @@ public interface Constants {
 
             // ----------------
             ESTADISTICA_GRUP_PETICIONS_EVIDENCIESIB, "Peticions a EvidènciesIB"
-
 
     );
 
@@ -85,7 +76,5 @@ public interface Constants {
                     Constants.EVIDENCIA_ESTAT_CODI_SIGNAT) // OK 
 
     );
-    
-    
 
 }

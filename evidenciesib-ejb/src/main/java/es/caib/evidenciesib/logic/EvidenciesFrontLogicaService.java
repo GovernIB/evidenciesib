@@ -1,5 +1,7 @@
 package es.caib.evidenciesib.logic;
 
+import java.util.Map;
+
 import javax.annotation.security.PermitAll;
 import javax.ejb.Local;
 
@@ -22,7 +24,7 @@ public interface EvidenciesFrontLogicaService extends es.caib.evidenciesib.ejb.E
     @PermitAll
     @Override
     public EvidenciaJPA findByPrimaryKey(Long _ID_);
-    
+
     @PermitAll
     @Override
     public Evidencia findByPrimaryKey(long _ID_);
@@ -34,5 +36,23 @@ public interface EvidenciesFrontLogicaService extends es.caib.evidenciesib.ejb.E
     @PermitAll
     @Override
     Evidencia update(Evidencia entity) throws I18NException;
+
+    /**
+     * 
+     * @param evi
+     * @param languageUI
+     * @return
+     */
+    public EvidenciaJPA createAdaptedFileAndSignDocument(EvidenciaJPA evi, String languageUI) throws I18NException;
+
+    /**
+     * 
+     * @param encriptedEvidenciaID
+     * @return
+     * @throws I18NException
+     */
+    public Map<String, String> getBasicPropertiesOfEvidence(String encriptedEvidenciaID) throws I18NException;
+
+
 
 }

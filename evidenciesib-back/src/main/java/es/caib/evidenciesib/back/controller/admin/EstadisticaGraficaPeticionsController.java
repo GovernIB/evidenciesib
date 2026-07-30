@@ -3,9 +3,6 @@ package es.caib.evidenciesib.back.controller.admin;
 import java.util.List;
 
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
-import org.fundaciobit.genapp.common.web.tiles.Tile;
-import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
-import org.fundaciobit.genapp.common.web.tiles.TileType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

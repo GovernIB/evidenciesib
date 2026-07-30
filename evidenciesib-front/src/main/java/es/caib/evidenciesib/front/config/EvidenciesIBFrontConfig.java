@@ -65,7 +65,10 @@ public class EvidenciesIBFrontConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("missatges");
+        // Els fitxers de traducció es copien des de l'EJB cap a /WEB-INF/classes (veure pom.xml).
+        // A més de 'missatges' cal incloure els bundles generats per genapp perquè les
+        // etiquetes dels camps de l'evidència (evidencia.*) es tradueixin correctament.
+        messageSource.setBasenames("missatges", "logicmissatges", "genapp", "evidenciesib_genapp");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }

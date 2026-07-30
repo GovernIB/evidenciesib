@@ -43,6 +43,7 @@ import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.ejb.FitxerService;
 import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.EvidenciaLogicaService;
+import es.caib.evidenciesib.logic.EvidenciesFrontLogicaService;
 import es.caib.evidenciesib.logic.utils.I18NLogicUtils;
 import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.model.entity.Evidencia;
@@ -199,6 +200,10 @@ public class EvidenciesRestService extends RestUtils {
 
     @EJB(mappedName = EvidenciaLogicaService.JNDI_NAME)
     protected EvidenciaLogicaService evidenciaLogicaEjb;
+    
+    
+    @EJB(mappedName = EvidenciesFrontLogicaService.JNDI_NAME)
+    protected EvidenciesFrontLogicaService evidenciaFrontLogicaEjb;
 
     @EJB(mappedName = FitxerService.JNDI_NAME)
     protected FitxerService fitxerEjb;
@@ -207,7 +212,6 @@ public class EvidenciesRestService extends RestUtils {
      *  
      * @return
      */
-    @SuppressWarnings("deprecation")
     @Path("/versio")
     @GET
     @RolesAllowed({ Constants.EVI_WS })
@@ -488,7 +492,7 @@ public class EvidenciesRestService extends RestUtils {
 
         try {
 
-            return this.evidenciaLogicaEjb.getBasicPropertiesOfEvidence(encryptedEvidenceID);
+            return this.evidenciaFrontLogicaEjb.getBasicPropertiesOfEvidence(encryptedEvidenceID);
             
         } catch (Throwable th) {
 

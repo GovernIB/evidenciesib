@@ -1,26 +1,19 @@
 package es.caib.evidenciesib.back.controller.all;
 
-import org.apache.log4j.Logger;
-import org.fundaciobit.genapp.common.web.HtmlUtils;
-import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import es.caib.evidenciesib.back.controller.user.EvidenciaUserController;
-import es.caib.evidenciesib.commons.utils.Constants;
-import es.caib.evidenciesib.commons.utils.Version;
-import es.caib.evidenciesib.hibernate.HibernateFileUtil;
-import es.caib.evidenciesib.logic.EvidenciesFrontLogicaService;
-import es.caib.evidenciesib.persistence.EvidenciaJPA;
-
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import es.caib.evidenciesib.commons.utils.Version;
+import es.caib.evidenciesib.logic.EvidenciesFrontLogicaService;
 
 /**
  * 
@@ -53,42 +46,7 @@ public class PublicController {
         }
     }
 
-    @RequestMapping(value = Constants.MAPPING_BACK_LOGIN_END + "/{encryptedEvidenciaID}")
-    public String postLoginFront(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("encryptedEvidenciaID") String encryptedEvidenciaID) throws Exception {
-        
-        Long evidenciaID = HibernateFileUtil.decryptFileID(encryptedEvidenciaID);
-
-        log.info("Entra a postLoginFront[EviID:" + evidenciaID + "]");
-
-        EvidenciaJPA evi = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
-        
-        if (evi.getEstatCodi() == Constants.EVIDENCIA_ESTAT_CODI_ERROR) {
-            final String redirect = evi.getCallBackUrl().replace("{0}", String.valueOf(evi.getEvidenciaID()));
-
-            log.warn(" Error en el front ... [" + evi.getEvidenciaID() + "]  => " + redirect);
-            
-            if (evi.getUsuariAplicacio() == null) {
-                // ES BACK
-                HtmlUtils.deleteMessages(request);
-                HtmlUtils.saveMessageError(request, I18NUtils.tradueix("evidencia.error", evi.getEstatError()));
-            }
-
-            return "redirect:" + redirect;
-        }
-        
-
-        // L'origen de l'evidència és REST o BACK
-        if (evi.getUsuariAplicacio() == null) {
-            // ES BACK
-            return "redirect:" + EvidenciaUserController.CONTEXT_WEB
-                    + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + evidenciaID;
-        } else {
-            // ES REST
-            return "redirect:" + Constants.MAPPING_BACK_PUBLIC_EVIDENCE
-                    + Constants.MAPPING_BACK_PUBLIC_EVIDENCE_SIGN_OPERATION + evidenciaID;
-        }
-    }
+    
     
     @RequestMapping(value = "/public/versio")
     public void versio(HttpServletResponse response) throws Exception {

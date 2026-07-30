@@ -249,6 +249,9 @@ public class EvidenciesApiTest  {
     public void startTest(EvidenciesApi api, Properties props) throws Exception, ApiException {
 
         int port = 1989 + (int) (Math.random() * 100.0);
+        
+        
+        // NOTA: La cadena {0} serà substituida pel codi de l'evidència generat per la cridada a api.start()
         final String returnUrl = "http://localhost:" + port + "/returnurl/{0}";
 
         final String language = props.getProperty("test.language");
