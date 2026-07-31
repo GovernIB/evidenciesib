@@ -97,8 +97,15 @@ public class EvidenciaLoginController {
             throw new Exception(msg, e);
         }
         if (evidencia == null) {
-            throw new Exception("No es troba evidenciaID amb ID ]" + evidenciaID + "[");
+            throw new Exception("No es troba evidenciaID amb ID ]" + encryptedEvidenciaID + "[");
         }
+        
+        
+        if (evidencia.getEstatCodi() != Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO) {
+            throw new Exception("L'evidència amb ID ]" + encryptedEvidenciaID + "[ ja ha sigut processada.");
+        }
+        
+        
 
         ModelAndView mav = new ModelAndView("norepudi");
         mav.addObject("evidenciaID", evidenciaID);

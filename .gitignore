@@ -110,3 +110,4 @@ replay_pid*
 /scripts/target
 /evidenciesib-api-externa-client-evidencies-v1/src/test/java/es/caib/evidenciesib/api/externa/client/evidencies/v1/api/MyEvidenciesApiTest.java
 /evidenciesib-api-externa-client-evidencies-v1/testresults
+/evidenciesib-persistence/src/test/java/es/caib/evidenciesib/persistence/test/MyTest.java
