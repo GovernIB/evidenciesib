@@ -1,19 +1,10 @@
 package es.caib.evidenciesib.logic.scheduler;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
-
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
-import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.UpdateItemValue;
-import org.fundaciobit.genapp.common.query.Where;
-
-import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.logic.EvidenciaLogicaService;
-import es.caib.evidenciesib.model.fields.EvidenciaFields;
 
 /**
  * 
@@ -67,5 +58,4 @@ public class TancadorDePeticionsObertesScheduler extends AbstractScheduler {
         }
     }
 
-   
 }

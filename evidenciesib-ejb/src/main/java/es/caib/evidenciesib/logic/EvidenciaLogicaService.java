@@ -1,17 +1,10 @@
 package es.caib.evidenciesib.logic;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
-
 import javax.ejb.Local;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.UpdateItemValue;
-import org.fundaciobit.genapp.common.query.Where;
 
-import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.model.entity.Evidencia;
-import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 
 /**

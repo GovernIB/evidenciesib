@@ -34,7 +34,6 @@ import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
 import es.caib.evidenciesib.commons.utils.StaticVersion;
 import es.caib.evidenciesib.ejb.EvidenciaEJB;
-import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.firmaviaapi.IPluginFirmaEnServidorViaApi;
 import es.caib.evidenciesib.logic.utils.I18NLogicUtils;
 import es.caib.evidenciesib.logic.utils.LogicUtils;
@@ -319,7 +318,7 @@ public class EvidenciesFrontLogicaEJB extends EvidenciaEJB implements Evidencies
      * @throws DocumentException
      */
     private String generarAnnexJsonDeLesEvidencies(Evidencia evi, PdfReader reader, PdfStamper stamper,
-            PdfWriter writer) throws IOException, I18NException, DocumentException {
+            PdfWriter writer) throws Exception {
 
         // Attach JSON  to PDF
 
@@ -391,7 +390,16 @@ public class EvidenciesFrontLogicaEJB extends EvidenciaEJB implements Evidencies
                     new I18NArgumentString("'ID encriptat'"), new I18NArgumentString(encryptedEvidenceID));
         }
 
-        Map<String, String> map = getBasicPropertiesOfEvidence(evi);
+        Map<String, String> map;
+        try {
+            map = getBasicPropertiesOfEvidence(evi);
+        } catch (Exception e) {
+            // XYZ ZZZ TRA
+            String msg = "Error obtenint les propietats bàsiques de l'evidència(" + encryptedEvidenceID + "): "
+                    + e.getMessage();
+            log.error(msg, e);
+            throw new I18NException(e, "genapp.comodi", msg);
+        }
 
         return map;
     }
@@ -503,15 +511,16 @@ public class EvidenciesFrontLogicaEJB extends EvidenciaEJB implements Evidencies
      * 
      * @param evi
      * @return
+     * @throws Exception 
      */
-    protected Map<String, String> getBasicPropertiesOfEvidence(Evidencia evi) {
+    protected Map<String, String> getBasicPropertiesOfEvidence(Evidencia evi) throws Exception {
         Map<String, String> map = new TreeMap<String, String>();
 
         map.put("EvidenciaID", String.valueOf(evi.getEvidenciaID()));
-        map.put("EvidenciaID.encrypted", HibernateFileUtil.encryptFileID(evi.getEvidenciaID()));
+        map.put("EvidenciaID.encrypted", LogicUtils.encryptEvidenciaID(evi.getEvidenciaID()));
 
         final String encryptedEvidenciaIdForUrl = URLEncoder
-                .encode(HibernateFileUtil.encryptFileID(evi.getEvidenciaID()), StandardCharsets.UTF_8);
+                .encode(LogicUtils.encryptEvidenciaID(evi.getEvidenciaID()), StandardCharsets.UTF_8);
 
         final String urlWeb;
         urlWeb = Configuracio.getFrontUrl() + Constants.MAPPING_FRONT_FULL_PUBLIC_EVIDENCE_INFO + encryptedEvidenciaIdForUrl;

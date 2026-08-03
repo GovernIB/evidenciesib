@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
-import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.EvidenciaLogicaService;
 import es.caib.evidenciesib.logic.FitxerLogicaService;
+import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
 import es.caib.evidenciesib.persistence.EvidenciaJPA;
 import es.caib.evidenciesib.persistence.FitxerJPA;
@@ -48,7 +50,6 @@ public class EvidenciaPublicController {
     @EJB(mappedName = EvidenciaLogicaService.JNDI_NAME)
     private EvidenciaLogicaService evidenciaLogicaEjb;
 
-    @ResponseBody
     @RequestMapping(
             value = Constants.MAPPING_FRONT_FULL_PUBLIC_EVIDENCE_INFO + "{encriptedEvidenciaID}",
             method = RequestMethod.GET)
@@ -56,8 +57,22 @@ public class EvidenciaPublicController {
     String encriptedEvidenciaID, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         // Desencriptam l'ID i recuperam l'evidència
-        Long evidenciaID = HibernateFileUtil.decryptFileID(encriptedEvidenciaID);
+        Long evidenciaID;
+        try {
+            evidenciaID = LogicUtils.decryptEvidenciaID(encriptedEvidenciaID);
+        } catch (I18NException e) {
+            String msg = I18NUtils.getMessage(e);
+            log.error(msg, e);
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, msg);
+            return null;
+        }
         EvidenciaJPA evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
+        if (evidencia == null) {
+            String msg = "No s'ha trobat l'evidència amb ID=" + evidenciaID;
+            log.error(msg);
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, msg);
+            return null;
+        }
 
         // Vista amb la taula d'informació de l'evidència
         ModelAndView mav = new ModelAndView("infoevidencia");
@@ -78,24 +93,24 @@ public class EvidenciaPublicController {
 
         // Capçalera d'entitat (perquè entityheader.jsp la pugui mostrar)
         boolean headerEnabled = Configuracio.isSignatureHeaderEnabled();
-        
+
         mav.addObject("headerEnabled", headerEnabled);
-        
+
         if (headerEnabled) {
-            
+
             EvidenciaLoginController.configurarEntityHeader(request, mav, log);
         }
-            
-            /*
-            
-            final String onlyHeader = Configuracio.getFrontUrl() + ENTITY_HEADER_CONTEXTWEB;
 
-            RestTemplate restTemplate = new RestTemplate();
-            final String header = restTemplate.getForObject(onlyHeader, String.class);
-
-            mav.addObject("header", header);
+        /*
+        
+        final String onlyHeader = Configuracio.getFrontUrl() + ENTITY_HEADER_CONTEXTWEB;
+        
+        RestTemplate restTemplate = new RestTemplate();
+        final String header = restTemplate.getForObject(onlyHeader, String.class);
+        
+        mav.addObject("header", header);
         } else {
-            mav.addObject("header", "");
+        mav.addObject("header", "");
         }
         */
 
@@ -174,7 +189,7 @@ public class EvidenciaPublicController {
     String encriptedEvidenciaID, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
-            Long evidenciaID = HibernateFileUtil.decryptFileID(encriptedEvidenciaID);
+            Long evidenciaID = LogicUtils.decryptEvidenciaID(encriptedEvidenciaID);
 
             Long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERSIGNATID,
                     EvidenciaFields.EVIDENCIAID.equal(evidenciaID));
@@ -183,9 +198,19 @@ public class EvidenciaPublicController {
 
             fullDownload(fitxerID, fitxer.getNom(), fitxer.getMime(), response, log);
 
-        } catch (Exception e) {
-            log.error("Error desencriptando el ID del archivo: " + encriptedEvidenciaID, e);
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de archivo no válido: " + e.getMessage());
+        } catch (Throwable e) {
+
+            String msg;
+            if (e instanceof I18NException) {
+                I18NException i18n = (I18NException) e;
+                msg = I18NUtils.getMessage(i18n);
+            } else {
+                msg = "Error descarregant fitxer amb encriptedEvidenciaID " + encriptedEvidenciaID + ": "
+                        + e.getMessage();
+            }
+
+            log.error(msg, e);
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, msg);
             return;
         }
 

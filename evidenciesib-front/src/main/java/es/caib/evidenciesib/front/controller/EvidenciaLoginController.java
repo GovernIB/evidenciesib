@@ -45,7 +45,6 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import es.caib.evidenciesib.commons.utils.Configuracio;
 import es.caib.evidenciesib.commons.utils.Constants;
-import es.caib.evidenciesib.hibernate.HibernateFileUtil;
 import es.caib.evidenciesib.logic.EvidenciesFrontLogicaService;
 import es.caib.evidenciesib.logic.utils.LogicUtils;
 import es.caib.evidenciesib.model.fields.EvidenciaFields;
@@ -75,13 +74,15 @@ public class EvidenciaLoginController {
             @PathVariable("encryptedEvidenciaID")
             String encryptedEvidenciaID) throws Exception {
 
-        log.info("frontLoginStart =>  encryptedEvidenciaID=" + encryptedEvidenciaID);
-
-        Long evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
-
         // mirar si existeix ID
         EvidenciaJPA evidencia;
+        Long evidenciaID;
         try {
+
+            log.info("frontLoginStart =>  encryptedEvidenciaID=" + encryptedEvidenciaID);
+
+            evidenciaID = LogicUtils.decryptEvidenciaID(encryptedEvidenciaID);
+
             evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
         } catch (Throwable e) {
 
@@ -92,20 +93,17 @@ public class EvidenciaLoginController {
                 msg = e.getMessage();
             }
 
-            msg = "Error intentant esbrinar si existeix l'evidencia amb ID " + evidenciaID + ": " + msg;
+            msg = "Error intentant esbrinar si existeix l'evidencia amb ID encriptat " + encryptedEvidenciaID + ": " + msg;
             log.error(msg, e);
             throw new Exception(msg, e);
         }
         if (evidencia == null) {
-            throw new Exception("No es troba evidenciaID amb ID ]" + encryptedEvidenciaID + "[");
+            throw new Exception("No es troba evidenciaID amb ID ]" + evidenciaID + "[");
         }
-        
-        
+
         if (evidencia.getEstatCodi() != Constants.EVIDENCIA_ESTAT_CODI_EN_PROCES_DE_CREACIO) {
             throw new Exception("L'evidència amb ID ]" + encryptedEvidenciaID + "[ ja ha sigut processada.");
         }
-        
-        
 
         ModelAndView mav = new ModelAndView("norepudi");
         mav.addObject("evidenciaID", evidenciaID);
@@ -257,7 +255,6 @@ public class EvidenciaLoginController {
 
         EvidenciaJPA evidencia;
         evidencia = evidenciaLogicaEjb.findByPrimaryKey(evidenciaID);
-
 
         evidencia.setClickProperties(request.getParameter("clickInfo"));
 
@@ -584,14 +581,15 @@ public class EvidenciaLoginController {
     }
 
     protected void returnPdf(HttpServletRequest request, HttpServletResponse response, String evidenciaIDEncrypted,
-            boolean isDownload) throws Exception, I18NException {
-
-        Long evidenciaID = HibernateFileUtil.decryptFileID(evidenciaIDEncrypted);
-
-        long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERORIGINALID,
-                EvidenciaFields.EVIDENCIAID.equal(evidenciaID));
+            boolean isDownload) throws I18NException {
 
         try {
+
+            Long evidenciaID = LogicUtils.decryptEvidenciaID(evidenciaIDEncrypted);
+
+            long fitxerID = evidenciaLogicaEjb.executeQueryOne(EvidenciaFields.FITXERORIGINALID,
+                    EvidenciaFields.EVIDENCIAID.equal(evidenciaID));
+
             File file = FileSystemManager.getFile(fitxerID);
 
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
@@ -608,8 +606,15 @@ public class EvidenciaLoginController {
             out.flush();
 
         } catch (Throwable th) {
-            log.error("Error descarregant PDF: " + th.getMessage(), th);
-            throw th;
+
+            if (th instanceof I18NException) {
+                log.error("Error descarregant PDF: " + I18NUtils.getMessage((I18NException) th), th);
+                throw (I18NException) th;
+            } else {
+                String msg = "Error descarregant PDF: " + th.getMessage();
+                log.error(msg, th);
+                throw new I18NException(th, "genapp.comodi", msg);
+            }
         }
     }
 

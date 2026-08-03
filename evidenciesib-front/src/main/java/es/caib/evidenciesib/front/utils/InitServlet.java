@@ -28,8 +28,8 @@ public class InitServlet extends HttpServlet {
         // Sistema de Traduccions WEB
         try {
             ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
-            String[] basenames = { "classpath:/missatges", "classpath:/evidenciesib_genapp", // /WEB-INF/classes/
-                    // "logicmissatges", "genapp", "evidenciesib_genapp" 
+            String[] basenames = { "classpath:/missatges", "classpath:/evidenciesib_genapp",
+                     "classpath:/logicmissatges", "classpath:/genapp",  
             };
             ms.setDefaultEncoding("UTF-8");
             ms.setBasenames(basenames);
@@ -38,10 +38,6 @@ public class InitServlet extends HttpServlet {
             log.error("Error inicialitzant el sistema de traduccions web: " + th.getMessage(), th);
         }
 
-        /*
-        IPluginLogin pl = (IPluginLogin) getPluginLogin();
-        PluginLoginManager.setPluginLogin(pl);
-        */
 
     }
 
