@@ -110,8 +110,8 @@
                             <contextId>Comanda</contextId>
                             <outputFileName>openapi_comanda</outputFileName>
                             <resourcePackages>
-                                <package>es.caib.evidenciesib.api.externa.config</package>
-                                <package>es.caib.evidenciesib.api.externa.secure.comanda.v1</package>
+                                <package>es.caib.evidenciesib.api.interna.config</package>
+                                <package>es.caib.evidenciesib.api.interna.secure.comanda.v1</package>
                             </resourcePackages>
                         </configuration>
                     </execution>

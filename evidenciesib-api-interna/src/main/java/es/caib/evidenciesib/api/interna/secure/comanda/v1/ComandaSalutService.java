@@ -125,15 +125,12 @@ public class ComandaSalutService extends RestUtils implements es.caib.comanda.ap
         Version version = new Version();
         {
 
+            // IMPORTANT: Requereix afegir el plugin de git-commit-id-maven-plugin al pom.xml arrel
+            // Veure documentació integració comanda.
             BuildInfo infoTmp = SalutHelper.getBuildInfo();
 
-            a.setJdkVersion(version.getJdkVersion());
-            a.setRevisio(version.getScmRevision());
-
-            // NO funciona 
-            //a.revisio(infoTmp.getCommitId());            
-            //a.jdkVersion(infoTmp.getBuildJDK());
-
+            a.setJdkVersion(infoTmp.getBuildJDK());
+            a.setRevisio(infoTmp.getCommitId());
             a.setData(infoTmp.getBuildDate());
 
         }
@@ -167,8 +164,8 @@ public class ComandaSalutService extends RestUtils implements es.caib.comanda.ap
 
             {
                 ContextInfo apiinterna = new ContextInfo();
-                apiinterna.setApi(urlBase + "/evidenciesibapi/externa");
-                apiinterna.setCodi("EVI_API_EXTERNA");
+                apiinterna.setApi(urlBase + "/evidenciesibapi/interna");
+                apiinterna.setCodi("EVI_API_INTERNA");
 
                 // TODO Falta Manual
                 /*
@@ -180,7 +177,7 @@ public class ComandaSalutService extends RestUtils implements es.caib.comanda.ap
                 */
 
                 apiinterna.setNom("Utilitats de Firma Api Externa Swagger");
-                apiinterna.setPath(urlBase + "/evidenciesibapi/externa");
+                apiinterna.setPath(urlBase + "/evidenciesibapi/interna");
 
                 contexts.add(apiinterna);
             }

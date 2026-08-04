@@ -1,16 +1,836 @@
 {
   "openapi" : "3.0.1",
   "servers" : [ {
-    "url" : "/evidenciesibapi/externa"
+    "url" : "/evidenciesibapi/interna"
   }, {
-    "url" : "http://localhost:8080/evidenciesibapi/externa"
+    "url" : "http://localhost:8080/evidenciesibapi/interna"
   }, {
-    "url" : "https://dev.caib.es/evidenciesibapi/externa"
+    "url" : "https://dev.caib.es/evidenciesibapi/interna"
   }, {
-    "url" : "https://proves.caib.es/evidenciesibapi/externa"
+    "url" : "https://proves.caib.es/evidenciesibapi/interna"
   }, {
-    "url" : "https://se.caib.es/evidenciesibapi/externa"
+    "url" : "https://se.caib.es/evidenciesibapi/interna"
   }, {
-    "url" : "https://www.caib.es/evidenciesibapi/externa"
-  } ]
+    "url" : "https://www.caib.es/evidenciesibapi/interna"
+  } ],
+  "paths" : {
+    "/secure/estadistiques/v1" : {
+      "get" : {
+        "operationId" : "estadistiques",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RegistresEstadistics"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/estadistiques/v1/info" : {
+      "get" : {
+        "operationId" : "estadistiquesInfo",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EstadistiquesInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/estadistiques/v1/of/{data}" : {
+      "get" : {
+        "operationId" : "estadistiquesPerData",
+        "parameters" : [ {
+          "name" : "data",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RegistresEstadistics"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/estadistiques/v1/from/{dataInici}/to/{dataFi}" : {
+      "get" : {
+        "operationId" : "estadistiquesPerRang",
+        "parameters" : [ {
+          "name" : "dataInici",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "dataFi",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RegistresEstadistics"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/logs/v1/{nomFitxer}/directe" : {
+      "get" : {
+        "operationId" : "descarregarFitxerDirecte",
+        "parameters" : [ {
+          "name" : "nomFitxer",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/octet-stream" : { }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/logs/v1/{nomFitxer}" : {
+      "get" : {
+        "operationId" : "getFitxerByNom",
+        "parameters" : [ {
+          "name" : "nomFitxer",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FitxerContingut"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/logs/v1/{nomFitxer}/linies/{nLinies}" : {
+      "get" : {
+        "operationId" : "llegitUltimesLinies",
+        "parameters" : [ {
+          "name" : "nomFitxer",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "nLinies",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/logs/v1" : {
+      "get" : {
+        "operationId" : "llistarFitxers",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/FitxerInfo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/salut/v1" : {
+      "get" : {
+        "operationId" : "salut",
+        "parameters" : [ {
+          "name" : "dataPeriode",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }, {
+          "name" : "dataTotal",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SalutInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/secure/salut/v1/info" : {
+      "get" : {
+        "operationId" : "salutInfo",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AppInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Dimensio" : {
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "type" : "string"
+          },
+          "valor" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Fet" : {
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "type" : "string"
+          },
+          "valor" : {
+            "type" : "number",
+            "format" : "double"
+          }
+        }
+      },
+      "RegistreEstadistic" : {
+        "type" : "object",
+        "properties" : {
+          "dimensions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Dimensio"
+            }
+          },
+          "fets" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Fet"
+            }
+          }
+        }
+      },
+      "RegistresEstadistics" : {
+        "required" : [ "temps" ],
+        "type" : "object",
+        "properties" : {
+          "temps" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "fets" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/RegistreEstadistic"
+            }
+          }
+        }
+      },
+      "DimensioDesc" : {
+        "required" : [ "codi", "nom" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 32,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "nom" : {
+            "maxLength" : 64,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "descripcio" : {
+            "type" : "string"
+          },
+          "valors" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "EstadistiquesInfo" : {
+        "required" : [ "codi", "dimensions", "indicadors" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "dimensions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DimensioDesc"
+            }
+          },
+          "indicadors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/IndicadorDesc"
+            }
+          },
+          "versio" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "IndicadorDesc" : {
+        "required" : [ "codi", "nom" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 32,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "nom" : {
+            "maxLength" : 64,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "descripcio" : {
+            "type" : "string"
+          },
+          "format" : {
+            "type" : "string",
+            "enum" : [ "LONG", "DECIMAL", "PERCENTAGE", "CURRENCY", "DATE", "DATETIME", "BOOLEAN" ]
+          }
+        }
+      },
+      "FitxerContingut" : {
+        "type" : "object",
+        "properties" : {
+          "nom" : {
+            "type" : "string"
+          },
+          "mida" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "mimeType" : {
+            "type" : "string"
+          },
+          "dataCreacio" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "dataModificacio" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "contingut" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "format" : "byte"
+            }
+          }
+        }
+      },
+      "FitxerInfo" : {
+        "type" : "object",
+        "properties" : {
+          "nom" : {
+            "type" : "string"
+          },
+          "mida" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "mimeType" : {
+            "type" : "string"
+          },
+          "dataCreacio" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "dataModificacio" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "EstatSalut" : {
+        "type" : "object",
+        "properties" : {
+          "estat" : {
+            "type" : "string",
+            "enum" : [ "UP", "WARN", "DEGRADED", "DOWN", "MAINTENANCE", "UNKNOWN", "ERROR" ]
+          },
+          "latencia" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "InformacioSistema" : {
+        "type" : "object",
+        "properties" : {
+          "processadors" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "carregaSistema" : {
+            "type" : "string"
+          },
+          "cpuSistema" : {
+            "type" : "string"
+          },
+          "memoriaTotal" : {
+            "type" : "string"
+          },
+          "memoriaDisponible" : {
+            "type" : "string"
+          },
+          "espaiDiscTotal" : {
+            "type" : "string"
+          },
+          "espaiDiscLliure" : {
+            "type" : "string"
+          },
+          "sistemaOperatiu" : {
+            "type" : "string"
+          },
+          "dataArrencada" : {
+            "type" : "string"
+          },
+          "tempsFuncionant" : {
+            "type" : "string"
+          }
+        }
+      },
+      "IntegracioPeticions" : {
+        "required" : [ "peticionsErrorUltimPeriode", "peticionsOkUltimPeriode", "tempsMigUltimPeriode", "totalError", "totalOk", "totalTempsMig" ],
+        "type" : "object",
+        "properties" : {
+          "totalOk" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalError" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalTempsMig" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "peticionsOkUltimPeriode" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "peticionsErrorUltimPeriode" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "tempsMigUltimPeriode" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "endpoint" : {
+            "maxLength" : 255,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "peticionsPerEntorn" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "$ref" : "#/components/schemas/IntegracioPeticions"
+            }
+          }
+        }
+      },
+      "IntegracioSalut" : {
+        "required" : [ "codi" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "estat" : {
+            "type" : "string",
+            "enum" : [ "UP", "WARN", "DEGRADED", "DOWN", "MAINTENANCE", "UNKNOWN", "ERROR" ]
+          },
+          "latencia" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "peticions" : {
+            "$ref" : "#/components/schemas/IntegracioPeticions"
+          }
+        }
+      },
+      "MissatgeSalut" : {
+        "required" : [ "data", "missatge", "nivell" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "nivell" : {
+            "type" : "string",
+            "enum" : [ "ERROR", "WARN", "INFO" ]
+          },
+          "missatge" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          }
+        }
+      },
+      "SalutInfo" : {
+        "required" : [ "codi", "data", "estatBaseDeDades", "estatGlobal" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "estatGlobal" : {
+            "$ref" : "#/components/schemas/EstatSalut"
+          },
+          "estatBaseDeDades" : {
+            "$ref" : "#/components/schemas/EstatSalut"
+          },
+          "integracions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/IntegracioSalut"
+            }
+          },
+          "informacioSistema" : {
+            "$ref" : "#/components/schemas/InformacioSistema"
+          },
+          "missatges" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MissatgeSalut"
+            }
+          },
+          "versio" : {
+            "type" : "string"
+          },
+          "subsistemes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SubsistemaSalut"
+            }
+          }
+        }
+      },
+      "SubsistemaSalut" : {
+        "required" : [ "codi", "peticionsErrorUltimPeriode", "peticionsOkUltimPeriode", "tempsMigUltimPeriode", "totalError", "totalOk", "totalTempsMig" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "totalOk" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalError" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "totalTempsMig" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "peticionsOkUltimPeriode" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "peticionsErrorUltimPeriode" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "tempsMigUltimPeriode" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "estat" : {
+            "type" : "string",
+            "enum" : [ "UP", "WARN", "DEGRADED", "DOWN", "MAINTENANCE", "UNKNOWN", "ERROR" ]
+          },
+          "latencia" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "AppInfo" : {
+        "required" : [ "codi", "data", "nom", "versio" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "nom" : {
+            "maxLength" : 100,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "versio" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "revisio" : {
+            "type" : "string"
+          },
+          "jdkVersion" : {
+            "type" : "string"
+          },
+          "versioJboss" : {
+            "type" : "string"
+          },
+          "integracions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/IntegracioInfo"
+            }
+          },
+          "subsistemes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SubsistemaInfo"
+            }
+          },
+          "contexts" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ContextInfo"
+            }
+          }
+        }
+      },
+      "ContextInfo" : {
+        "required" : [ "codi", "nom", "path" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "nom" : {
+            "maxLength" : 255,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "path" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "manuals" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Manual"
+            }
+          },
+          "api" : {
+            "type" : "string"
+          }
+        }
+      },
+      "IntegracioInfo" : {
+        "required" : [ "codi", "nom" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 2147483647,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "nom" : {
+            "maxLength" : 255,
+            "minLength" : 1,
+            "type" : "string"
+          }
+        }
+      },
+      "Manual" : {
+        "required" : [ "nom", "path" ],
+        "type" : "object",
+        "properties" : {
+          "nom" : {
+            "maxLength" : 128,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "path" : {
+            "maxLength" : 255,
+            "minLength" : 1,
+            "type" : "string"
+          }
+        }
+      },
+      "SubsistemaInfo" : {
+        "required" : [ "codi", "nom" ],
+        "type" : "object",
+        "properties" : {
+          "codi" : {
+            "maxLength" : 64,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "nom" : {
+            "maxLength" : 255,
+            "minLength" : 1,
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "BasicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
 }
